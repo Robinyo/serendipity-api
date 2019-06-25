@@ -11,6 +11,7 @@ The REST API for Serendipity CRM built using TypeScript, Node.js, Express and Ty
 ### Node.js
 
 * GitHub: [Node.js Best Pactices](https://github.com/i0natan/nodebestpractices)
+* GitHub: [A starter template for TypeScript and Node.js](https://github.com/microsoft/TypeScript-Node-Starter)
 
 ### ORM Resources
 
