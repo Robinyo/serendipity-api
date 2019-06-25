@@ -1,16 +1,16 @@
 {
    "name": "serendipity-api",
-   "description": "Serendipity API developed with TypeORM",
    "version": "1.0.0-beta.1",
+   "description": "Serendipity API developed with TypeORM",
+   "repository": {
+      "type": "git",
+      "url": "https://github.com/Robinyo/serendipity-api"
+   },
    "author": "Rob Ferguson",
    "homepage": "https://github.com/Robinyo/serendipity",
    "license": "MIT",
-   "repository": {
-      "type": "git",
-      "url": "git+ssh://github.com/Robinyo/serendipity-api"
-   },
    "scripts": {
-      "start": "ts-node src/index.ts"
+      "start": "ts-node src/server.ts"
    },
    "dependencies": {
       "body-parser": "^1.19.0",

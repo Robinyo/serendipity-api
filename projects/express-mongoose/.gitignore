@@ -11,6 +11,7 @@ lib-cov
 pids
 logs
 results
+temp
 tmp
 
 # Build
@@ -39,3 +40,5 @@ dist/**/*
 
 # ignore yarn.lock
 yarn.lock
+
+TODO.txt
