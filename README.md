@@ -6,7 +6,7 @@ You can use it to transform your organisation by connecting your customers, prod
 
 ## Roadmap
 
-* Use TypeScript, Node.js, Express and TypeORM to build a MVP REST API for Serendipity CRM.
+* Use TypeScript, Node.js, Express and TypeORM to build a REST API for Serendipity CRM.
 
 ## Quick Links
 
