@@ -4,13 +4,12 @@ Serendipity is an open source customer relationship management (CRM) solution.
 
 You can use it to transform your organisation by connecting your customers, products, people and operations.
 
-## Demo
+## Roadmap
 
-Firebase Hosting: [Serendipity](https://serendipity-f7626.firebaseapp.com)
+* Use Express and TypeORM to build a MVP REST API for Serendipity CRM.
 
 ## Quick Links
 
-* [Express Mongoose](https://github.com/Robinyo/serendipity-api/tree/master/projects/express-mongoose)
 * [Express TypeORM](https://github.com/Robinyo/serendipity-api/tree/master/projects/express-typeorm)
 
 ## Resources 

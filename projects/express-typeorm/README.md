@@ -1,7 +1,14 @@
-# Awesome Project Build with TypeORM
+# Serendipity API
 
-Steps to run this project:
+The REST API for Serendipity CRM built using Express and TypeORM.
 
-1. Run `npm i` command
-2. Setup database settings inside `ormconfig.json` file
-3. Run `npm start` command
+## Quick Links
+
+* [Express TypeORM](https://github.com/Robinyo/serendipity-api/tree/master/projects/express-typeorm)
+
+## Resources 
+
+### ORM Resources
+
+* GitHub: [TypeORM - ORM for TypeScript and JavaScript](https://github.com/typeorm/typeorm)
+* TypeORM.io: [Getting Started Guide](https://typeorm.io/#/)
