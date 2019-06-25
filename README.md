@@ -10,8 +10,8 @@ Firebase Hosting: [Serendipity](https://serendipity-f7626.firebaseapp.com)
 
 ## Quick Links
 
-* Express Mongoose
-* Express TypeORM
+* [Express Mongoose](https://github.com/Robinyo/serendipity-api/tree/master/projects/express-mongoose)
+* [Express TypeORM](https://github.com/Robinyo/serendipity-api/tree/master/projects/express-typeorm)
 
 ## Resources 
 
