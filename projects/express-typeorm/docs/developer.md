@@ -26,7 +26,7 @@ Clone the project by running the following command:
 git clone https://github.com/Robinyo/serendipity-api
 ```
 
-### Step 4: Serve the application 
+### Step 3: Serve the application 
 
 Go to the project directory, install the project's dependencies and launch the server:
 
