@@ -1,6 +1,6 @@
 # Serendipity API
 
-The REST API for Serendipity CRM built using TypeScript, Node.js, Express and TypeORM.
+The RESTful API for Serendipity CRM built using TypeScript, Node.js, Express and TypeORM.
 
 ## Resources
 
