@@ -38,3 +38,51 @@ npm start
 ```
 
 Open your browser and try `http://localhost:3001/api/contacts`
+
+## TypeORM
+
+Most of the times you want to store your connection options in a separate configuration file. 
+It makes it convenient and easy to manage. TypeORM supports multiple configuration sources.
+
+During **development** we use [ormconfig.json](https://typeorm.io/#/using-ormconfig):
+
+```
+{
+  "type": "sqlite",
+  "database": "serendipity.db",
+  "synchronize": true,
+  "logging": false,
+  "entities": [
+    "src/entitys/**/*.ts"
+  ],
+  "migrations": [
+    "src/migrations/**/*.ts"
+  ],
+  "subscribers": [
+    "src/subscribers/**/*.ts"
+  ],
+  "cli": {
+    "entitiesDir": "src/entitys",
+    "migrationsDir": "src/migrations",
+    "subscribersDir": "src/subscribers"
+  }
+}
+```
+
+### Node.js Resources
+
+## Resources
+
+### Node.js Resources
+
+* GitHub: [Node.js Best Pactices](https://github.com/i0natan/nodebestpractices)
+* GitHub: [A starter template for TypeScript and Node.js](https://github.com/microsoft/TypeScript-Node-Starter)
+
+### ORM Resources
+
+* GitHub: [TypeORM - ORM for TypeScript and JavaScript](https://github.com/typeorm/typeorm)
+* TypeORM.io: [Getting Started Guide](https://typeorm.io/#/)
+
+
+
+

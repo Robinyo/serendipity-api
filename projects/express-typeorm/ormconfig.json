@@ -1,6 +1,6 @@
 {
   "type": "sqlite",
-  "database": "database.sqlite",
+  "database": "serendipity.db",
   "synchronize": true,
   "logging": false,
   "entities": [
