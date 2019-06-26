@@ -41,8 +41,7 @@ Open your browser and try `http://localhost:3001/api/contacts`
 
 ## TypeORM
 
-Most of the times you want to store your connection options in a separate configuration file. 
-It makes it convenient and easy to manage. TypeORM supports multiple configuration sources.
+TypeORM supports multiple configuration sources. 
 
 During **development** we use [ormconfig.json](https://typeorm.io/#/using-ormconfig):
 
