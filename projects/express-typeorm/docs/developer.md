@@ -39,11 +39,13 @@ npm start
 
 Open your browser and try `http://localhost:3001/api/contacts`
 
-## TypeORM
+## Build Management
+
+### TypeORM
 
 TypeORM supports multiple configuration sources. 
 
-During **development** we use [ormconfig.json](https://typeorm.io/#/using-ormconfig):
+For example, [ormconfig.json](https://typeorm.io/#/using-ormconfig):
 
 ```
 {
@@ -67,8 +69,6 @@ During **development** we use [ormconfig.json](https://typeorm.io/#/using-ormcon
   }
 }
 ```
-
-### Node.js Resources
 
 ## Resources
 
