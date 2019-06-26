@@ -14,23 +14,19 @@ import routes from './routes';
 
 createConnection().then(async connection => {
 
-  logger.info('Express initialised');
-
   const app = express();
+
+  logger.info('Express was successfully initialised');
 
   // app.use(cors());
   // app.use(helmet());
   app.use(bodyParser.json());
 
-  app.use('/', routes);
+  app.use('/api/', routes);
 
   app.listen(3001, () => {
-    console.log('Server started on port 3001');
+    console.log('Server started on port 3001, try http://localhost:3001/api/contacts');
   });
-
-  // const contact = new Contact();
-  // contact.displayName = 'Abetz, Senator the Hon Eric';
-  // await connection.manager.save(connection.manager.create(contact));
 
   // @ts-ignore
   await connection.manager.save(connection.manager.create(Contact, {
@@ -53,3 +49,7 @@ createConnection().then(async connection => {
   }));
 
 }).catch(error => { logger.error(error); });
+
+// const contact = new Contact();
+// contact.displayName = 'Abetz, Senator the Hon Eric';
+// await connection.manager.save(connection.manager.create(contact));
