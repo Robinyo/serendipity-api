@@ -16,7 +16,7 @@ createConnection().then(async connection => {
 
   const app = express();
 
-  logger.info('Express was successfully initialised');
+  // logger.info('Express was successfully initialised');
 
   //
   // https://expressjs.com/en/resources/middleware/cors.html
@@ -34,8 +34,8 @@ createConnection().then(async connection => {
     }
   };
 
-  app.use(cors(corsOptions));
-  // app.use(cors());
+  // app.use(cors(corsOptions));
+  app.use(cors());
 
   //
   // https://expressjs.com/en/advanced/best-practice-security.html
