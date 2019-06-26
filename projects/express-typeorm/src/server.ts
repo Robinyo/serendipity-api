@@ -1,56 +1,55 @@
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 
-// import * as express from 'express';
 import express from 'express';
-
-// import * as bodyParser from 'body-parser';
 import bodyParser from 'body-parser';
-import { Request, Response } from 'express';
+// import * as helmet from 'helmet';
+// import * as cors from 'cors';
 
-import { Routes } from './routes';
-import { User } from './models/user';
+import { Contact } from './entitys/contact';
+
+import { logger } from './utils/logger';
+
+import routes from './routes';
 
 createConnection().then(async connection => {
 
-  // create express app
+  logger.info('Express initialised');
+
   const app = express();
+
+  // app.use(cors());
+  // app.use(helmet());
   app.use(bodyParser.json());
 
-  // register express routes from defined application routes
-  Routes.forEach(route => {
-    (app as any)[route.method](route.route, (req: Request, res: Response, next: Function) => {
-      const result = (new (route.controller as any))[route.action](req, res, next);
-      if (result instanceof Promise) {
-        result.then(response => result !== null && result !== undefined ? res.send(result) : undefined);
+  app.use('/', routes);
 
-      } else if (result !== null && result !== undefined) {
-        res.json(result);
-      }
-    });
+  app.listen(3001, () => {
+    console.log('Server started on port 3001');
   });
 
-  // setup express app here
-  // ...
+  // const contact = new Contact();
+  // contact.displayName = 'Abetz, Senator the Hon Eric';
+  // await connection.manager.save(connection.manager.create(contact));
 
-  // start express server
-  app.listen(3000);
+  // @ts-ignore
+  await connection.manager.save(connection.manager.create(Contact, {
 
-  // insert new users for test
-  await connection.manager.save(connection.manager.create(User, {
     id: 1,
-    firstName: 'Timber',
-    lastName: 'Saw',
-    age: 27
+    displayName: 'Abetz, Senator the Hon Eric',
+    title: 'Senator the Hon',
+    givenName: 'Eric',
+    middleName: '',
+    familyName: 'Abetz',
+    honorific: '',
+    salutation: 'Senator',
+    preferredName: 'Eric',
+    initials: 'E.',
+    gender: 'MALE',
+    email: 'eric.abetz@aph.gov.au',
+    phoneNumber: '',
+    photoUrl: ''
+
   }));
 
-  await connection.manager.save(connection.manager.create(User, {
-    id: 2,
-    firstName: 'Phantom',
-    lastName: 'Assassin',
-    age: 24
-  }));
-
-  console.log('Express server has started on port 3000. Open http://localhost:3000/users to see results');
-
-}).catch(error => console.log(error));
+}).catch(error => { logger.error(error); });
