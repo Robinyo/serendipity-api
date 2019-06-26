@@ -48,6 +48,27 @@ createConnection().then(async connection => {
 
   }));
 
+
+  // @ts-ignore
+  await connection.manager.save(connection.manager.create(Contact, {
+
+    id: 2,
+    displayName: 'Anning, Senator Fraser',
+    title: 'Senator',
+    givenName: 'Fraser',
+    middleName: '',
+    familyName: 'Anning',
+    honorific: '',
+    salutation: 'Senator',
+    preferredName: 'Fraser',
+    initials: 'F.',
+    gender: 'MALE',
+    email: 'fraser.anning@aph.gov.au',
+    phoneNumber: '',
+    photoUrl: ''
+
+  }));
+
 }).catch(error => { logger.error(error); });
 
 // const contact = new Contact();
