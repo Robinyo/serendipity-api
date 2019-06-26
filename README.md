@@ -18,3 +18,7 @@ Use TypeScript, Node.js, Express and TypeORM to build a RESTful API for Serendip
 
 * GitHub: [RESTful API Design Guidelines](https://github.com/Robinyo/restful-api-design-guidelines)
 
+### Sample Data
+
+* Wikipedia: [List of political parties in Australia](https://en.wikipedia.org/wiki/List_of_political_parties_in_Australia)
+* Australian Parliament: [Mail Labels for Australian Senators](https://www.aph.gov.au/Senators_and_Members/Guidelines_for_Contacting_Senators_and_Members/Address_labels_and_CSV_files)
