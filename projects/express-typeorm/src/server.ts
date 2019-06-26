@@ -54,7 +54,7 @@ createConnection().then(async connection => {
   // @ts-ignore
   await connection.manager.save(connection.manager.create(Contact, {
 
-    id: 1,
+    // id: 1,
     displayName: 'Abetz, Senator the Hon Eric',
     title: 'Senator the Hon',
     givenName: 'Eric',
@@ -75,7 +75,7 @@ createConnection().then(async connection => {
   // @ts-ignore
   await connection.manager.save(connection.manager.create(Contact, {
 
-    id: 2,
+    // id: 2,
     displayName: 'Anning, Senator Fraser',
     title: 'Senator',
     givenName: 'Fraser',

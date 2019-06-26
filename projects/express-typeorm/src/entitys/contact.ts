@@ -1,7 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('Contact')
 export class Contact {
+
+  // @PrimaryColumn()
+
+  // @PrimaryGeneratedColumn('uuid')
+  // id: string;
 
   @PrimaryGeneratedColumn()
   id: number;
@@ -44,6 +49,13 @@ export class Contact {
 
   @Column()
   photoUrl?: string;
+
+
+  // @CreateDateColumn
+  // @UpdateDateColumn
+  // @VersionColumn
+
+  // https://typeorm.io/#/relations-faq
 
 }
 

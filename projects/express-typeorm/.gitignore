@@ -41,4 +41,6 @@ dist/**/*
 # ignore yarn.lock
 yarn.lock
 
+serendipity.db
+
 TODO.txt
