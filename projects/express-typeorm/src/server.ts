@@ -8,7 +8,7 @@ import bodyParser from 'body-parser';
 
 import { Contact } from './entitys/contact';
 
-import { logger } from './utils/logger';
+import { logger } from './utils/logger/logger';
 
 import routes from './routes';
 
