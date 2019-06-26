@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
+import { validate } from 'class-validator';
 
 import { Contact } from '../entitys/contact';
 
-// import { logger } from '../utils/logger/logger';
+import { logger } from '../utils/logger/logger';
 
 // Standard Request Methods
 //
@@ -56,6 +57,43 @@ class ContactController {
     }
 
   };
+
+  static newContact = async(req: Request, res: Response) => {
+
+    const contact = new Contact();
+
+    Object.assign(contact, req.body);
+
+    // logger.info('contact: ' + JSON.stringify(contact));
+
+    const errors = await validate(contact);
+
+    if (errors.length > 0) {
+      res.status(400).send(errors);
+      return;
+    }
+
+    const contactRepository = getRepository(Contact);
+
+    try {
+
+      await contactRepository.save(contact);
+
+    } catch (error) {
+
+      res.status(409).send({
+        'error': {
+          'code': 409,
+          'message': 'The specified resource already exists',
+          'status': 'ALREADY_EXISTS'
+        }
+      });
+
+    }
+
+    res.status(201).send('Contact created');
+
+  }
 
 }
 

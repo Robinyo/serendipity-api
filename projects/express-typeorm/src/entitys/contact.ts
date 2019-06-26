@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity('Contact')
 export class Contact {
@@ -50,9 +50,14 @@ export class Contact {
   @Column()
   photoUrl?: string;
 
+  @Column()
+  @CreateDateColumn()
+  createdAt: Date;
 
-  // @CreateDateColumn
-  // @UpdateDateColumn
+  @Column()
+  @UpdateDateColumn()
+  updatedAt: Date;
+
   // @VersionColumn
 
   // https://typeorm.io/#/relations-faq

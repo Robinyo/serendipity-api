@@ -14,6 +14,7 @@
    },
    "dependencies": {
       "body-parser": "^1.19.0",
+      "class-validator": "^0.9.1",
       "cors": "^2.8.5",
       "express": "^4.17.1",
       "helmet": "^3.18.0",
