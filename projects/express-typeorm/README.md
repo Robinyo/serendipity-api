@@ -13,7 +13,7 @@ The RESTful API for Serendipity CRM built using TypeScript, Node.js, Express and
 
 * ExpressJS.com: [Security Best Practices](https://expressjs.com/en/advanced/best-practice-security.html)
 
-### ORM Resources
+### TypeORM Resources
 
 * GitHub: [TypeORM - ORM for TypeScript and JavaScript](https://github.com/typeorm/typeorm)
 * TypeORM.io: [Getting Started Guide](https://typeorm.io/#/)
