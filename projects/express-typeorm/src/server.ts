@@ -6,7 +6,7 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import cors from 'cors';
 
-import { Contact } from './entitys/contact';
+import SampleData from './utils/sample-data';
 
 import { logger } from './utils/logger/logger';
 
@@ -19,6 +19,7 @@ createConnection().then(async connection => {
   // logger.info('Express was successfully initialised');
 
   //
+  // https://expressjs.com/en/advanced/best-practice-security.html
   // https://expressjs.com/en/resources/middleware/cors.html
   //
 
@@ -36,106 +37,15 @@ createConnection().then(async connection => {
 
   // app.use(cors(corsOptions));
   app.use(cors());
-
-  //
-  // https://expressjs.com/en/advanced/best-practice-security.html
-  //
-
   app.use(helmet());
-
   app.use(bodyParser.json());
 
   app.use('/api/', routes);
+
+  SampleData.load(connection);
 
   app.listen(3001, () => {
     console.log('Server started on port 3001, try http://localhost:3001/api/contacts');
   });
 
-
 }).catch(error => { logger.error(error); });
-
-/*
-
-{
-  "displayName":"Abetz, Senator the Hon Eric",
-  "title":"Senator the Hon",
-  "givenName":"Eric",
-  "middleName":"",
-  "familyName":"Abetz",
-  "honorific":"",
-  "salutation":"Senator",
-  "preferredName":"Eric",
-  "initials":"E.",
-  "gender":"MALE",
-  "email":"eric.abetz@aph.gov.au",
-  "phoneNumber":"",
-  "photoUrl":""
-}
-
-{
-  "displayName":"Anning, Senator Fraser",
-  "title":"Senator",
-  "givenName":"Fraser",
-  "middleName":"",
-  "familyName":"Anning",
-  "honorific":"",
-  "salutation":"Senator",
-  "preferredName":"Fraser",
-  "initials":"F.",
-  "gender":"MALE",
-  "email":"fraser.anning@aph.gov.au",
-  "phoneNumber":"",
-  "photoUrl":""
-}
-
-*/
-
-/*
-
-
-  // @ts-ignore
-  await connection.manager.save(connection.manager.create(Contact, {
-
-    // id: 1,
-    displayName: 'Abetz, Senator the Hon Eric',
-    title: 'Senator the Hon',
-    givenName: 'Eric',
-    middleName: '',
-    familyName: 'Abetz',
-    honorific: '',
-    salutation: 'Senator',
-    preferredName: 'Eric',
-    initials: 'E.',
-    gender: 'MALE',
-    email: 'eric.abetz@aph.gov.au',
-    phoneNumber: '',
-    photoUrl: ''
-
-  }));
-
-
-  // @ts-ignore
-  await connection.manager.save(connection.manager.create(Contact, {
-
-    // id: 2,
-    displayName: 'Anning, Senator Fraser',
-    title: 'Senator',
-    givenName: 'Fraser',
-    middleName: '',
-    familyName: 'Anning',
-    honorific: '',
-    salutation: 'Senator',
-    preferredName: 'Fraser',
-    initials: 'F.',
-    gender: 'MALE',
-    email: 'fraser.anning@aph.gov.au',
-    phoneNumber: '',
-    photoUrl: ''
-
-  }));
-
-*/
-
-// const contact = new Contact();
-// contact.displayName = 'Abetz, Senator the Hon Eric';
-// await connection.manager.save(connection.manager.create(contact));
