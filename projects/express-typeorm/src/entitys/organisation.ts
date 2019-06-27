@@ -16,12 +16,6 @@ export class Organisation {
 
 /*
 
-  'organisation': {
-    id?: string;
-    name?: string;
-    phoneNumber?: string;
-  };
-
   'address': {
     id?: string;
     line1?: string;

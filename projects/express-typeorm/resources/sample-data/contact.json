@@ -1,4 +1,5 @@
 {
+
   "displayName":"Abetz, Senator the Hon Eric",
   "title":"Senator the Hon",
   "givenName":"Eric",
@@ -11,5 +12,11 @@
   "gender":"MALE",
   "email":"eric.abetz@aph.gov.au",
   "phoneNumber":"",
-  "photoUrl":""
+  "photoUrl":"",
+
+  "organisation":{
+    "name":"Liberal Party",
+    "phoneNumber":"(03) 6224 3707"
+  }
+
 }

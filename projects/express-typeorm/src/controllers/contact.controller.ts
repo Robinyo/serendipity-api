@@ -64,7 +64,7 @@ class ContactController {
 
     Object.assign(contact, req.body);
 
-    // logger.info('contact: ' + JSON.stringify(contact));
+    logger.info('contact: ' + JSON.stringify(contact));
 
     const errors = await validate(contact);
 
@@ -77,10 +77,7 @@ class ContactController {
 
     try {
 
-      await contactRepository.save(contact).then(party => {
-
-        logger.info('contact id: ' + contact.id);
-      });
+      await contactRepository.save(contact);
 
     } catch (error) {
 
@@ -94,6 +91,8 @@ class ContactController {
 
     }
 
+    logger.info('contact id: ' + contact.id);
+
     res.status(201).send('Contact created');
 
   }
@@ -105,6 +104,11 @@ export default ContactController;
 // https://github.com/Robinyo/restful-api-design-guidelines
 
 /*
+
+      await contactRepository.save(contact).then(party => {
+
+        logger.info('contact id: ' + contact.id);
+      });
 
       res.status(404).send({
         'error': {

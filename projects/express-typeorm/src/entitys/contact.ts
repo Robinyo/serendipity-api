@@ -1,5 +1,7 @@
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
+import { IsNotEmpty } from 'class-validator';
+
 import { Organisation } from './organisation';
 
 @Entity('Contact')
@@ -15,12 +17,14 @@ export class Contact {
   title: string;
 
   @Column()
+  @IsNotEmpty()
   givenName: string;
 
   @Column()
   middleName: string;     // otherNames
 
   @Column()
+  @IsNotEmpty()
   familyName: string;
 
   @Column()
@@ -47,7 +51,9 @@ export class Contact {
   @Column()
   photoUrl: string;
 
-  @OneToOne(type => Organisation)
+  @OneToOne(type => Organisation, {
+    cascade: true,
+  })
   @JoinColumn()
   organisation: Organisation;
 

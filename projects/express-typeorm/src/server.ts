@@ -42,7 +42,7 @@ createConnection().then(async connection => {
 
   app.use('/api/', routes);
 
-  // SampleData.load(connection);
+  SampleData.load(connection);
 
   app.listen(3001, () => {
     console.log('Server started on port 3001, try http://localhost:3001/api/contacts');

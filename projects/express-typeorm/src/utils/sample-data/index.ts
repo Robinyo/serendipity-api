@@ -180,7 +180,7 @@ class SampleData {
       organisation.name = party.organisation.name;
       organisation.phoneNumber = party.organisation.phoneNumber;
 
-      await connection.manager.save(organisation);
+      // await connection.manager.save(organisation);
       
       const contact = connection.manager.create(Contact, party);
       contact.organisation = organisation;
