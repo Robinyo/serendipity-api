@@ -77,7 +77,10 @@ class ContactController {
 
     try {
 
-      await contactRepository.save(contact);
+      await contactRepository.save(contact).then(party => {
+
+        logger.info('contact id: ' + contact.id);
+      });
 
     } catch (error) {
 
