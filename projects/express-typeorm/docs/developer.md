@@ -52,7 +52,7 @@ For example, [ormconfig.json](https://typeorm.io/#/using-ormconfig):
   "type": "sqlite",
   "database": "serendipity.db",
   "synchronize": true,
-  "logging": true,
+  "logging": false,
   "entities": [
     "src/entitys/**/*.ts"
   ],
