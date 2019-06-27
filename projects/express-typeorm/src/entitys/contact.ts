@@ -1,12 +1,9 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+
+import { Organisation } from './organisation';
 
 @Entity('Contact')
 export class Contact {
-
-  // @PrimaryColumn()
-
-  // @PrimaryGeneratedColumn('uuid')
-  // id: string;
 
   @PrimaryGeneratedColumn()
   id: number;
@@ -18,37 +15,50 @@ export class Contact {
   title: string;
 
   @Column()
-  givenName?: string;
+  givenName: string;
 
   @Column()
-  middleName?: string;     // otherNames
+  middleName: string;     // otherNames
 
   @Column()
-  familyName?: string;
+  familyName: string;
 
   @Column()
-  honorific?: string;
+  honorific: string;
 
   @Column()
-  salutation?: string;     // formalSalutation
+  salutation: string;     // formalSalutation
 
   @Column()
-  preferredName?: string;  // informalSalutation
+  preferredName: string;  // informalSalutation
 
   @Column()
-  initials?: string;
+  initials: string;
 
   @Column()
-  gender?: string;
+  gender: string;
 
   @Column()
-  email?: string;
+  email: string;
 
   @Column()
-  phoneNumber?: string;
+  phoneNumber: string;
 
   @Column()
-  photoUrl?: string;
+  photoUrl: string;
+
+  @OneToOne(type => Organisation)
+  @JoinColumn()
+  organisation: Organisation;
+
+}
+
+/*
+
+  // @PrimaryColumn()
+
+  // @PrimaryGeneratedColumn('uuid')
+  // id: string;
 
   @Column()
   @CreateDateColumn()
@@ -61,25 +71,5 @@ export class Contact {
   // @VersionColumn
 
   // https://typeorm.io/#/relations-faq
-
-}
-
-/*
-
-  'organisation': {
-    id?: string;
-    name?: string;
-    phoneNumber?: string;
-  };
-
-  'address': {
-    id?: string;
-    line1?: string;
-    line2?: string;
-    city?: string;
-    state?: string;
-    postalCode?: string;
-    // country?: string;
-  };
 
 */

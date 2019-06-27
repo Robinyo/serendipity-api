@@ -2,7 +2,7 @@
   "type": "sqlite",
   "database": "serendipity.db",
   "synchronize": true,
-  "logging": true,
+  "logging": false,
   "entities": [
     "src/entitys/**/*.ts"
   ],
