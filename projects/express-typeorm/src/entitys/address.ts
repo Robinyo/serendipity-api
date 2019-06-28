@@ -1,9 +1,13 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-import { SurrogateKey } from './surrogate-key';
+// import { SurrogateKey } from './surrogate-key';
+// export class Address extends SurrogateKey {
 
 @Entity('Address')
-export class Address extends SurrogateKey {
+export class Address {
+
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column()
   line1: string;

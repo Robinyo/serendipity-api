@@ -4,10 +4,15 @@ import { IsNotEmpty } from 'class-validator';
 
 import { Address } from './address';
 import { Organisation } from './organisation';
-import { SurrogateKey } from './surrogate-key';
+
+// import { SurrogateKey } from './surrogate-key';
+// export class Contact extends SurrogateKey {
 
 @Entity('Contact')
-export class Contact extends SurrogateKey {
+export class Contact {
+
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column()
   displayName: string;
