@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-import { Address } from '../../entitys/address';
-import { Contact } from '../../entitys/contact';
-import { Organisation } from '../../entitys/organisation';
+import { Address } from '../../entitys/address.entity';
+import { Individual } from '../../entitys/individual.entity';
+import { Organisation } from '../../entitys/organisation.entity';
 
 import { logger } from '../logger/logger';
 
@@ -17,30 +17,30 @@ class SampleData {
       axios.defaults.baseURL = 'http://localhost:3001';
 
       const response = await axios.get(url);
-      const partys = response.data;
+      const items = response.data;
 
-      // logger.info('contacts: ' + JSON.stringify(contacts));
+      // logger.info('items: ' + JSON.stringify(items));
 
-      for (const party of partys) {
+      for (const item of items) {
 
         const organisation = new Organisation();
-        organisation.name = party.organisation.name;
-        organisation.phoneNumber = party.organisation.phoneNumber;
+        organisation.name = item.organisation.name;
+        organisation.phoneNumber = item.organisation.phoneNumber;
 
         // cascade: true
         // await connection.manager.save(organisation);
 
         const address = new Address();
-        address.line1 = party.address.line1;
-        address.line2 = party.address.line2;
-        address.city = party.address.city;
-        address.state = party.address.state;
-        address.postalCode = party.address.postalCode;
+        address.line1 = item.address.line1;
+        address.line2 = item.address.line2;
+        address.city = item.address.city;
+        address.state = item.address.state;
+        address.postalCode = item.address.postalCode;
 
         // cascade: true
         // await connection.manager.save(address);
 
-        const contact = connection.manager.create(Contact, party);
+        const contact = connection.manager.create(Individual, item);
         contact.organisation = organisation;
         contact.address = address;
 

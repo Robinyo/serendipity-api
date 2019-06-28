@@ -1,18 +1,14 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 
 import { IsNotEmpty } from 'class-validator';
 
-import { Address } from './address';
-import { Organisation } from './organisation';
+import { Address } from './address.entity';
+import { Organisation } from './organisation.entity';
 
-// import { SurrogateKey } from './surrogate-key';
-// export class Contact extends SurrogateKey {
+import { SurrogateKey } from './surrogate-key';
 
-@Entity('Contact')
-export class Contact {
-
-  @PrimaryGeneratedColumn()
-  id: number;
+@Entity('Individual')
+export class Individual extends SurrogateKey {
 
   @Column()
   displayName: string;
