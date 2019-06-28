@@ -99,7 +99,7 @@ robinyo/serendipity-api   latest              b0b3042f59ab        12 seconds ago
 
 ### Run the Image
 
-Run the image, for example:
+For example:
 
 ```
 docker run --name serendipity-api -p 3001:3001 robinyo/serendipity-api
@@ -117,7 +117,7 @@ To list all running containers:
 docker container ls
 ```
 
-You can stop a container using the following command:
+To stop a container:
 
 ```
 docker container stop [name]
