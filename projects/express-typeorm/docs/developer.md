@@ -70,6 +70,83 @@ For example, [ormconfig.json](https://typeorm.io/#/using-ormconfig):
 }
 ```
 
+## Docker
+
+### Build an Image
+
+You can use the sample 
+[Dockerfile](https://github.com/Robinyo/serendipity-api/tree/master/projects/express-typeorm/Dockerfile) to build an 
+application image:
+
+```
+docker build -t robinyo/serendipity-api .
+```
+
+**Note:** Replace `robinyo` with your Docker Hub username.
+
+Where is your image? It’s in your machine’s local Docker image registry:
+
+```
+docker image ls
+```
+
+You should see output like:
+
+```
+REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
+robinyo/serendipity-api   latest              b0b3042f59ab        12 seconds ago      1.01GB
+```
+
+### Run the Image
+
+Run the image, for example:
+
+```
+docker run --name serendipity-api -p 3001:3001 robinyo/serendipity-api
+```
+
+or
+
+```
+docker start --interactive serendipity-api
+```
+
+To list all running containers:
+
+```
+docker container ls
+```
+
+You can stop a container using the following command:
+
+```
+docker container stop [name]
+```
+
+For example:
+
+```
+docker container stop serendipity-api
+```
+
+To remove a container:
+
+```
+docker container rm CONTAINER_ID
+```
+
+To delete an image:
+
+```
+docker image rm IMAGE_ID --force
+```
+
+To remove all unused objects:
+
+```
+docker system prune
+```
+
 ## Resources
 
 ### Node.js Resources

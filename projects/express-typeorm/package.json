@@ -12,6 +12,12 @@
    "scripts": {
       "start": "ts-node src/server.ts"
    },
+   "keywords": [
+      "typescript",
+      "nodejs",
+      "express",
+      "typeorm"
+   ],
    "dependencies": {
       "axios": "^0.19.0",
       "body-parser": "^1.19.0",
