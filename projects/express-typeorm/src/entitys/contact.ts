@@ -2,13 +2,12 @@ import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'ty
 
 import { IsNotEmpty } from 'class-validator';
 
+import { Address } from './address';
 import { Organisation } from './organisation';
+import { SurrogateKey } from './surrogate-key';
 
 @Entity('Contact')
-export class Contact {
-
-  @PrimaryGeneratedColumn()
-  id: number;
+export class Contact extends SurrogateKey {
 
   @Column()
   displayName: string;
@@ -57,25 +56,13 @@ export class Contact {
   @JoinColumn()
   organisation: Organisation;
 
+  @OneToOne(type => Address, {
+    cascade: true,
+  })
+  @JoinColumn()
+  address: Address;
+
 }
 
-/*
-
-  // @PrimaryColumn()
-
-  // @PrimaryGeneratedColumn('uuid')
-  // id: string;
-
-  @Column()
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @Column()
-  @UpdateDateColumn()
-  updatedAt: Date;
-
-  // @VersionColumn
-
-  // https://typeorm.io/#/relations-faq
-
-*/
+// https://github.com/typeorm/typeorm/blob/master/docs/decorator-reference.md
+// https://typeorm.io/#/relations-faq

@@ -1,0 +1,29 @@
+{
+  "id": 1,
+  "displayName": "Abetz, Senator the Hon Eric",
+  "title": "Senator the Hon",
+  "givenName": "Eric",
+  "middleName": "",
+  "familyName": "Abetz",
+  "honorific": "",
+  "salutation": "Senator",
+  "preferredName": "Eric",
+  "initials": "E.",
+  "gender": "MALE",
+  "email": "eric.abetz@aph.gov.au",
+  "phoneNumber": "",
+  "photoUrl": "",
+  "organisation": {
+    "id": 1,
+    "name": "Liberal Party",
+    "phoneNumber": "(03) 6224 3707"
+  },
+  "address": {
+    "id": 1,
+    "line1": "Highbury House",
+    "line2": "136 Davey Street",
+    "city": "Hobart",
+    "state": "TAS",
+    "postalCode": "7001"
+  }
+}

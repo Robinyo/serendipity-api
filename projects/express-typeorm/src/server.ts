@@ -40,12 +40,15 @@ createConnection().then(async connection => {
   app.use(helmet());
   app.use(bodyParser.json());
 
+  app.use('/assets', express.static(__dirname + '/assets'));
   app.use('/api/', routes);
-
-  SampleData.load(connection);
 
   app.listen(3001, () => {
     console.log('Server started on port 3001, try http://localhost:3001/api/contacts');
   });
 
+  SampleData.load(connection, 'assets/data/contacts.json');
+
 }).catch(error => { logger.error(error); });
+
+// SampleData.load(connection)

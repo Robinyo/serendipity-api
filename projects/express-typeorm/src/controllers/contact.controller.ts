@@ -22,7 +22,7 @@ class ContactController {
 
     const contactRepository = getRepository(Contact);
 
-    const contacts = await contactRepository.find({ relations: ['organisation'] });
+    const contacts = await contactRepository.find({ relations: ['organisation', 'address'] });
 
     // logger.info('contacts: ' + JSON.stringify(contacts));
 
@@ -38,7 +38,7 @@ class ContactController {
 
     try {
 
-      const contact = await contactRepository.findOneOrFail(id, { relations: ['organisation'] });
+      const contact = await contactRepository.findOneOrFail(id, { relations: ['organisation', 'address'] });
 
       // logger.info('contact: ' + JSON.stringify(contact));
 
@@ -76,6 +76,10 @@ class ContactController {
     const contactRepository = getRepository(Contact);
 
     try {
+
+      //
+      // Will insert or update
+      //
 
       await contactRepository.save(contact);
 
