@@ -37,7 +37,7 @@ npm install
 npm start
 ```
 
-Open your browser and try `http://localhost:3001/api/contacts`
+Open your browser and try `http://localhost:3001/docs`
 
 ## Build Management
 

@@ -4,6 +4,15 @@ Serendipity is an open source customer relationship management (CRM) solution.
 
 You can use it to transform your organisation by connecting your customers, products, people and operations.
 
+## OpenAPI (Swagger)
+
+Login:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/screen-shots/redoc.png">
+</p>
+
+
 ## Roadmap
 
 Use TypeScript, Node.js, Express and TypeORM to build a RESTful API for Serendipity CRM.

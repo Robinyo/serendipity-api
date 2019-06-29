@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 
 import express from 'express';
+import path from 'path';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import cors from 'cors';
@@ -40,11 +41,13 @@ createConnection().then(async connection => {
   app.use(helmet());
   app.use(bodyParser.json());
 
-  app.use('/assets', express.static(__dirname + '/assets'));
+  app.use('/assets', express.static(path.join(__dirname, 'assets')));
+  app.use('/docs', express.static(path.join(__dirname, 'docs')));
+
   app.use('/api/', routes);
 
   app.listen(3001, () => {
-    console.log('Server started on port 3001, try http://localhost:3001/api/contacts');
+    console.log('Server started on port 3001, try http://localhost:3001/docs');
   });
 
   SampleData.load(connection, 'assets/data/contacts.json');
