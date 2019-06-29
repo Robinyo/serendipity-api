@@ -6,12 +6,9 @@ You can use it to transform your organisation by connecting your customers, prod
 
 ## OpenAPI (Swagger)
 
-Login:
-
 <p align="center">
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/screen-shots/redoc.png">
 </p>
-
 
 ## Roadmap
 
