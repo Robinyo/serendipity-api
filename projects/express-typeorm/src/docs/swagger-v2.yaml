@@ -346,7 +346,7 @@ parameters:
     name: identifier
     in: query
     description: 'The identifier, for example, `123456789`.'
-    type: string
+    type: number
     required: false
 responses:
   InvalidArgument:
@@ -2962,17 +2962,19 @@ definitions:
   addressId:
     allOf:
       - $ref: '#/definitions/resourceId'
-      - type: string
+      - type: number
+      - example: 101
   partyId:
     allOf:
       - $ref: '#/definitions/resourceId'
-      - type: string
+      - type: number
+      - example: 101
   resourceId:
-    type: string
-    description: The resource ID. Defaults to UUID v4
-    maxLength: 36
-    example: 123e4567-e89b-12d3-a456-426655440000
+    type: number
+    description: The resource ID.
+    example: 101
   roleId:
     allOf:
       - $ref: '#/definitions/resourceId'
-      - type: string
+      - type: number
+      - example: 101
