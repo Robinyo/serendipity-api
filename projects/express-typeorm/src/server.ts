@@ -1,3 +1,5 @@
+import { config } from './config/config';
+
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 
@@ -19,7 +21,7 @@ createConnection().then(async connection => {
 
   const app = express();
 
-  logger.info('API Initialised :)');
+  // logger.info('Serendipity CRM REST API successfully initialised');
   // logger.warn('Warn');
   // logger.error('Error');
 
@@ -50,12 +52,19 @@ createConnection().then(async connection => {
 
   app.use('/api/', routes);
 
-  app.listen(3001, () => {
-    console.log(chalk.blueBright('Server started on port 3001, try ') + chalk.blueBright.underline('http://localhost:3001/docs'));
+  app.listen(config.get('port'), () => {
+
+    console.log(chalk.blueBright('Server started on port ' + config.get('port')  + ' try ') +
+      chalk.blueBright.underline('http://' + config.get('ip') + ':' + config.get('port') + '/docs'));
+
   });
 
+  //
   // TODO: Use a Database Migration
-  // SampleData.load(connection, 'assets/data/contacts.json');
+  // See: http://typeorm.io/#/migrations
+  //
+
+  SampleData.load(connection, 'assets/data/contacts.json');
 
 }).catch(error => { logger.error(error); });
 

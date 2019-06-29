@@ -1,3 +1,5 @@
+import { config } from '../../config/config';
+
 import axios from 'axios';
 
 import { Address } from '../../entitys/address.entity';
@@ -12,11 +14,14 @@ class SampleData {
 
   static load = async (connection: any, url: string) => {
 
-    logger.info('SampleData: load()');
+    logger.info('SampleData load()');
 
     try {
 
-      axios.defaults.baseURL = 'http://localhost:3001';
+      // axios.defaults.baseURL = 'http://127.0.0.1:3001';
+      axios.defaults.baseURL = config.get('protocol') + '://' + config.get('ip') + ':' + config.get('port');
+
+      logger.info('SampleData load() - baseURL: ' + axios.defaults.baseURL);
 
       const response = await axios.get(url);
       const items = response.data;
