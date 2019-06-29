@@ -1,3 +1,9 @@
+import chalk from 'chalk';
+
+const info = chalk.gray;
+const warn = chalk.keyword('orange');
+const error = chalk.bold.red;
+
 abstract class LoggerInterface {
 
   public info: any;
@@ -15,7 +21,7 @@ class Logger implements LoggerInterface {
 
   get info() {
     if (this.config.isDebugMode) {
-      return console.info.bind(console);
+      return console.info.bind(console, info('%s'));
     } else {
       return noop;
     }
@@ -23,7 +29,7 @@ class Logger implements LoggerInterface {
 
   get warn() {
     if (this.config.isDebugMode) {
-      return console.warn.bind(console);
+      return console.warn.bind(console, warn('%s'));
     } else {
       return noop;
     }
@@ -31,7 +37,7 @@ class Logger implements LoggerInterface {
 
   get error() {
     if (this.config.isDebugMode) {
-      return console.error.bind(console);
+      return console.error.bind(console, error('%s'));
     } else {
       return noop;
     }
@@ -40,3 +46,8 @@ class Logger implements LoggerInterface {
 }
 
 export const logger: Logger = new Logger();
+
+// https://www.tjvantoll.com/2015/12/29/console-error-bind/
+// https://nodejs.org/docs/latest/api/console.html#console_console_log_data_args
+// https://github.com/chalk/chalk
+

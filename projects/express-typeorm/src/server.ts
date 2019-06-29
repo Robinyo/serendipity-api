@@ -7,6 +7,8 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import cors from 'cors';
 
+import chalk from 'chalk';
+
 import SampleData from './utils/sample-data';
 
 import { logger } from './utils/logger/logger';
@@ -17,7 +19,9 @@ createConnection().then(async connection => {
 
   const app = express();
 
-  // logger.info('Express was successfully initialised');
+  // logger.info('Info');
+  // logger.warn('Warn');
+  // logger.error('Error');
 
   //
   // https://expressjs.com/en/advanced/best-practice-security.html
@@ -47,10 +51,11 @@ createConnection().then(async connection => {
   app.use('/api/', routes);
 
   app.listen(3001, () => {
-    console.log('Server started on port 3001, try http://localhost:3001/docs');
+    console.log(chalk.blueBright('Server started on port 3001, try ') + chalk.blueBright.underline('http://localhost:3001/docs'));
   });
 
-  SampleData.load(connection, 'assets/data/contacts.json');
+  // TODO: Use a Database Migration
+  // SampleData.load(connection, 'assets/data/contacts.json');
 
 }).catch(error => { logger.error(error); });
 
