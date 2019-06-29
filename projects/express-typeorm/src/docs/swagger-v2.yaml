@@ -70,7 +70,7 @@ info:
 
         [
           {
-            "id": "1",
+            "id": 1,
             "role": "Director",
             "roleDescription": "An individual responsible for managing a ...",
             "relationship": "Directorship",
@@ -427,10 +427,10 @@ paths:
             items:
               $ref: '#/definitions/address-type'
             example:
-              - id: 123e4567-e89b-12d3-a456-426655440001
+              - id: 1
                 name: Mailing
                 description: The address at which an individual or organisation receives letters or packages.
-              - id: 123e4567-e89b-12d3-a456-426655440002
+              - id: 2
                 name: Principal Place of Business
                 description: The main location where work is conducted.
         '401':
@@ -463,19 +463,19 @@ paths:
             items:
               $ref: '#/definitions/business-name-lifecycle-state'
             example:
-              - id: 123e4567-e89b-12d3-a456-426655440001
+              - id: 1
                 name: Approved
                 description: The Business Name has been approved.
-              - id: 123e4567-e89b-12d3-a456-426655440002
+              - id: 2
                 name: Expired
                 description: The Business Name has expired.
-              - id: 123e4567-e89b-12d3-a456-426655440003
+              - id: 3
                 name: Issued
                 description: The Business Name has been issued.
-              - id: 123e4567-e89b-12d3-a456-426655440004
+              - id: 4
                 name: Pending Approval
                 description: The Business Name is pending approval.
-              - id: 123e4567-e89b-12d3-a456-426655440005
+              - id: 5
                 name: Suspended
                 description: The Business Name has been suspended.
         '401':
@@ -508,10 +508,10 @@ paths:
             items:
               $ref: '#/definitions/electronic-address-type'
             example:
-              - id: 123e4567-e89b-12d3-a456-426655440001
+              - id: 1
                 name: Email
                 description: An address used to send and receive emails.
-              - id: 123e4567-e89b-12d3-a456-426655440002
+              - id: 2
                 name: Fax
                 description: A number used to send and receive faxes.
         '401':
@@ -544,13 +544,13 @@ paths:
             items:
               $ref: '#/definitions/gender'
             example:
-              - id: 123e4567-e89b-12d3-a456-426655440001
+              - id: 1
                 gender: Not Known
-              - id: 123e4567-e89b-12d3-a456-426655440002
+              - id: 2
                 gender: Male
-              - id: 123e4567-e89b-12d3-a456-426655440003
+              - id: 3
                 gender: Female
-              - id: 123e4567-e89b-12d3-a456-426655440004
+              - id: 4
                 gender: Not Applicable
         '401':
           $ref: '#/responses/Unauthenticated'
@@ -582,10 +582,10 @@ paths:
             items:
               $ref: '#/definitions/legal-entity-type'
             example:
-              - id: 123e4567-e89b-12d3-a456-426655440001
+              - id: 1
                 name: Alias
                 description: An alternate name used by a party.
-              - id: 123e4567-e89b-12d3-a456-426655440002
+              - id: 2
                 name: Principal Name
                 description: The primary name used by a party.
         '401':
@@ -618,19 +618,19 @@ paths:
             items:
               $ref: '#/definitions/license-lifecycle-state'
             example:
-              - id: 123e4567-e89b-12d3-a456-426655440001
+              - id: 1
                 name: Approved
                 description: The License has been approved.
-              - id: 123e4567-e89b-12d3-a456-426655440002
+              - id: 2
                 name: Expired
                 description: The License has expired.
-              - id: 123e4567-e89b-12d3-a456-426655440003
+              - id: 3
                 name: Issued
                 description: The License has been issued.
-              - id: 123e4567-e89b-12d3-a456-426655440004
+              - id: 4
                 name: Pending Approval
                 description: The License is pending approval.
-              - id: 123e4567-e89b-12d3-a456-426655440005
+              - id: 5
                 name: Suspended
                 description: The License has been suspended.
         '401':
@@ -663,10 +663,10 @@ paths:
             items:
               $ref: '#/definitions/license-type'
             example:
-              - id: 123e4567-e89b-12d3-a456-426655440001
+              - id: 1
                 name: Australian Financial Services License
                 description: 'To conduct a financial services business in Australia, you must have an Australian Financial Services (AFS) licence.'
-              - id: 123e4567-e89b-12d3-a456-426655440002
+              - id: 2
                 name: 2B License
                 description: To conduct a <insert-name-here> business you must have a 2B licence.
         '401':
@@ -699,10 +699,10 @@ paths:
             items:
               $ref: '#/definitions/name-direction'
             example:
-              - id: 123e4567-e89b-12d3-a456-426655440001
+              - id: 1
                 name: left-to-right
                 description: The full name or formal salutation is rendered left to right.
-              - id: 123e4567-e89b-12d3-a456-426655440002
+              - id: 2
                 name: right-to-left
                 description: The full name or formal salutation is rendered right to left.
         '401':
@@ -735,10 +735,10 @@ paths:
             items:
               $ref: '#/definitions/name-prefix'
             example:
-              - id: 123e4567-e89b-12d3-a456-426655440001
+              - id: 1
                 name: Mr
                 description: A title used before a family name or formal salutation to address a man.
-              - id: 123e4567-e89b-12d3-a456-426655440002
+              - id: 2
                 name: Ms
                 description: A title used before a family name or formal salutation to address a woman.
         '401':
@@ -771,10 +771,10 @@ paths:
             items:
               $ref: '#/definitions/name-type'
             example:
-              - id: 123e4567-e89b-12d3-a456-426655440001
+              - id: 1
                 name: Alias
                 description: An alternate name used by a party.
-              - id: 123e4567-e89b-12d3-a456-426655440002
+              - id: 2
                 name: Principal Name
                 description: The primary name used by a party.
         '401':
@@ -807,10 +807,10 @@ paths:
             items:
               $ref: '#/definitions/registered-identifier-type'
             example:
-              - id: 123e4567-e89b-12d3-a456-426655440001
+              - id: 1
                 name: ABN
                 description: An Australian Business Number (ABN) is a unique eleven-character number issued by the Australian Business Register (ABR).
-              - id: 123e4567-e89b-12d3-a456-426655440002
+              - id: 2
                 name: ACN
                 description: An Australian Company Number (ACN) is a unique nine-character number issued by the Australian Securities and Investments Commission (ASIC).
         '401':
@@ -843,13 +843,13 @@ paths:
             items:
               $ref: '#/definitions/role'
             example:
-              - id: 123e4567-e89b-12d3-a456-426655440001
+              - id: 1
                 role: Director
                 roleDescription: An individual responsible for managing a company's business activities.
                 relationship: Directorship
                 reciprocalRole: Company
                 reciprocalRoleDescription: An incorporated legal entity.
-              - id: 123e4567-e89b-12d3-a456-426655440002
+              - id: 102
                 role: Employee
                 roleDescription: An individual employed for wages or salary.
                 relationship: Employment
