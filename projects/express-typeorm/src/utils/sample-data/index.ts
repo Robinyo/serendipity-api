@@ -10,8 +10,6 @@ import { logger } from '../logger/logger';
 
 class SampleData {
 
-  // private readonly URL = 'assets/data/contacts.json';
-
   static load = async (connection: any, url: string) => {
 
     logger.info('SampleData load()');

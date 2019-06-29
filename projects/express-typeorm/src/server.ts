@@ -30,7 +30,7 @@ createConnection().then(async connection => {
   // https://expressjs.com/en/resources/middleware/cors.html
   //
 
-  const whitelist = ['http://localhost', 'https://serendipity.io'];
+  const whitelist = ['http://localhost', 'https://serendipity.org.au'];
 
   const corsOptions = {
     origin: function(origin: any, callback: any) {
