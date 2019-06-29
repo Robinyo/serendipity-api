@@ -12,6 +12,8 @@ class SampleData {
 
   static load = async (connection: any, url: string) => {
 
+    logger.info('SampleData: load()');
+
     try {
 
       axios.defaults.baseURL = 'http://localhost:3001';

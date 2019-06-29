@@ -19,7 +19,7 @@ createConnection().then(async connection => {
 
   const app = express();
 
-  // logger.info('Info');
+  logger.info('API Initialised :)');
   // logger.warn('Warn');
   // logger.error('Error');
 
