@@ -19,7 +19,7 @@ class SampleData {
       // axios.defaults.baseURL = 'http://127.0.0.1:3001';
       axios.defaults.baseURL = config.get('protocol') + '://' + config.get('ip') + ':' + config.get('port');
 
-      logger.info('SampleData load() - baseURL: ' + axios.defaults.baseURL);
+      logger.info('SampleData load() baseURL: ' + axios.defaults.baseURL);
 
       const response = await axios.get(url);
       const items = response.data;

@@ -41,6 +41,9 @@ dist/**/*
 # ignore yarn.lock
 yarn.lock
 
+requirements
+secrets
+
 serendipity.db
 
 TODO.txt
