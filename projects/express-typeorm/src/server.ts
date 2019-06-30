@@ -7,7 +7,7 @@ import errorHandler from 'errorhandler';
 import { config } from './config/config';
 import { app } from './app';
 
-import { logger } from './utils/logger/logger';
+import { logger } from './lib/logger';
 
 import SampleData from './utils/sample-data';
 
@@ -24,7 +24,7 @@ createConnection().then(async connection => {
   // See: http://typeorm.io/#/migrations
   //
 
-  SampleData.load(connection, 'assets/data/contacts.json');
+  SampleData.load(connection, 'public/data/contacts.json');
 
   const server = app.listen(config.get('port'), () => {
 

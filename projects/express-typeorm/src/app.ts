@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import cors from 'cors';
 
-import routes from './routes';
+import routes from './api/routes';
 
 // const app = express();
 export const app = express();
@@ -35,7 +35,7 @@ app.use(cors());
 app.use(helmet());
 app.use(bodyParser.json());
 
-app.use('/assets', express.static(path.join(__dirname, 'assets')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/docs', express.static(path.join(__dirname, 'docs')));
 
 app.use('/api/', routes);

@@ -74,6 +74,9 @@ export const logger: Logger = new Logger();
 // https://github.com/felixge/node-stack-trace
 // https://stackoverflow.com/questions/14172455/get-name-and-line-of-calling-function-in-node-js/14172822
 
+// https://github.com/stritti/log4js
+// https://github.com/trentm/node-bunyan
+
 /*
 
       if (lineNumber) {

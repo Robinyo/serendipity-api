@@ -2,8 +2,8 @@ import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 
 import { IsNotEmpty } from 'class-validator';
 
-import { Address } from './address.entity';
-import { Organisation } from './organisation.entity';
+import { Address } from './address';
+import { Organisation } from './organisation';
 
 import { SurrogateKey } from './surrogate-key';
 

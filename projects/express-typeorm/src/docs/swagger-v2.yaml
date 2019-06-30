@@ -7,7 +7,7 @@ info:
     url: 'https://opensource.org/licenses/MIT'
   termsOfService: 'https://serendipity.org.au/terms-of-service/'
   x-logo:
-    url: 'http://localhost:3001/assets/images/icons/serendipity-logo.svg'
+    url: 'http://localhost:3001/public/images/icons/serendipity-logo.svg'
   description: |
     # Introduction
     Serendipity's REST API is built on HTTP. The API is RESTful. It has predictable resource URIs.

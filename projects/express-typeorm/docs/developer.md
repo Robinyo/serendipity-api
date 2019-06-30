@@ -37,7 +37,13 @@ npm install
 npm start
 ```
 
-Open your browser and try `http://localhost:3001/docs`
+Open your browser and try:
+
+```
+http://localhost:3001/docs
+http://localhost:3001/api/contacts
+http://localhost:3001/api/contacts/7
+```
 
 ## Build Management
 

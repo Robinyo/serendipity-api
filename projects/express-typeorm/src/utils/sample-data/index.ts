@@ -2,11 +2,11 @@ import { config } from '../../config/config';
 
 import axios from 'axios';
 
-import { Address } from '../../entitys/address.entity';
-import { Individual } from '../../entitys/individual.entity';
-import { Organisation } from '../../entitys/organisation.entity';
+import { Address } from '../../api/models/address';
+import { Individual } from '../../api/models/individual';
+import { Organisation } from '../../api/models/organisation';
 
-import { logger } from '../logger/logger';
+import { logger } from '../../lib/logger';
 
 class SampleData {
 

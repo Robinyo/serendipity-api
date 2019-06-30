@@ -2,9 +2,9 @@ import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 import { validate } from 'class-validator';
 
-import { Individual } from '../entitys/individual.entity';
+import { Individual } from '../models/individual';
 
-import { logger } from '../utils/logger/logger';
+import { logger } from '../../lib/logger';
 
 // Standard Request Methods
 //
