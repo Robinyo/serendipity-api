@@ -1,8 +1,8 @@
 import stackTrace from 'stack-trace';
-
 import path from 'path';
-
 import chalk from 'chalk';
+
+import { config } from '../../config/config';
 
 const info = chalk.gray;
 const warn = chalk.keyword('orange');
@@ -16,16 +16,15 @@ abstract class LoggerInterface {
 
 }
 
+const isDebugMode = config.get('isDebugMode');
+
 const noop = (): any => undefined;
 
 class Logger implements LoggerInterface {
 
-  private config = { isDebugMode: true };
-  // private config = { isDebugMode: false };
-
   get info() {
 
-    if (this.config.isDebugMode) {
+    if (isDebugMode) {
 
       const frame = stackTrace.get()[1];
       const fileName = path.basename(frame.getFileName());
@@ -43,7 +42,7 @@ class Logger implements LoggerInterface {
 
   get warn() {
 
-    if (this.config.isDebugMode) {
+    if (isDebugMode) {
 
       const frame = stackTrace.get()[1];
       const fileName = path.basename(frame.getFileName());
@@ -57,7 +56,7 @@ class Logger implements LoggerInterface {
   }
 
   get error() {
-    if (this.config.isDebugMode) {
+    if (isDebugMode) {
       return console.error.bind(console, error('%s'));
     } else {
       return noop;

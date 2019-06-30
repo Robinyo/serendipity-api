@@ -11,6 +11,11 @@ export const config = convict({
     env: 'NODE_ENV'
   },
 
+  isDebugMode: {
+    format: 'Boolean',
+    default: true
+  },
+
   protocol: {
     doc: 'The protocol to use.',
     format: ['http', 'https'],
