@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
-import individual from './individual';
+import contacts from './contacts';
+import individuals from './individuals';
 
 const routes = Router();
 
@@ -14,7 +15,10 @@ const routes = Router();
 //
 // See: https://github.com/Robinyo/restful-api-design-guidelines
 
-routes.use('/contacts', individual);
-routes.use('/individuals', individual);
+// routes.use('/contacts', individual);
+// routes.use('/individuals', individual);
+
+routes.use(individuals);
+routes.use(contacts);
 
 export default routes;

@@ -36,6 +36,16 @@ export const config = convict({
     default: 8080,
     env: 'PORT',
     arg: 'port'
+  },
+
+  clientId: {
+    format: String,
+    default: ''
+  },
+
+  issuer: {
+    format: String,
+    default: ''
   }
 
 });

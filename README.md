@@ -23,6 +23,7 @@ Use TypeScript, Node.js, Express and TypeORM to build a RESTful API for Serendip
 ### REST API Resources
 
 * GitHub: [RESTful API Design Guidelines](https://github.com/Robinyo/restful-api-design-guidelines)
+* JSON API: [A Specficiation for Building API's in JSON](https://jsonapi.org/)
 
 ### OpenAPI Resources
 

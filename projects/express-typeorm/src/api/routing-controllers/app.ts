@@ -1,12 +1,22 @@
+// import 'reflect-metadata';
+import { createExpressServer } from 'routing-controllers';
+
 import express from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import cors from 'cors';
 
-import routes from './api/routes';
+// import routes from './api/routes';
 
-export const app = express();
+import { IndividualController } from './api/routing-controllers/individual.controller';
+
+// export const app = express();
+
+export const app = createExpressServer({
+  defaultErrorHandler: false,
+  controllers: [ IndividualController ]
+});
 
 // logger.info('Serendipity CRM REST API successfully initialised');
 // logger.warn('Warn');
@@ -37,7 +47,11 @@ app.use(bodyParser.json());
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/docs', express.static(path.join(__dirname, 'docs')));
 
-app.use('/api/', routes);
+// app.use('/api/', routes);
 
 // const app = express();
 // export default app;
+
+// https://github.com/typestack/routing-controllers/issues/266 -> Error: Can't set headers after they are sent.
+
+
