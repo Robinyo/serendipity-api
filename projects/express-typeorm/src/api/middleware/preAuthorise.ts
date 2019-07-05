@@ -49,15 +49,17 @@ export const preAuthorise = (req: Request, res: Response, next: NextFunction) =>
 
   return oktaJwtVerifier.verifyAccessToken(accessToken, expectedAudience).then((jwt: any) => {
 
-    logger.info('jwt.claims: ' + JSON.stringify(jwt.claims));
+    // logger.info('jwt.claims: ' + JSON.stringify(jwt.claims));
 
     const roles = Policy.getRoles(path, method);
 
+    logger.info('groups: ' + JSON.stringify(jwt.claims.groups));
+
     if (Policy.hasRole(roles, jwt.claims.groups)) {
 
-    }
+      // TODO
 
-    // Policy.hasRole(jwt.claims.groups);
+    }
 
     next();
   })
