@@ -3,14 +3,6 @@ import { Router } from 'express';
 import contacts from './contacts';
 import individuals from './individuals';
 
-//
-// Load Policies
-//
-
-// import Policy from '../utils/policy';
-
-// Policy.load();
-
 const routes = Router();
 
 // URI Path Design Guidelines
