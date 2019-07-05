@@ -35,9 +35,8 @@ class Policy {
 
       logger.info('items: ' + JSON.stringify(Policy.items));
 
-      const roles = Policy.getRoles('/contacts', 'DELETE');
-
-      Policy.hasRole(roles, ['Everyone', 'User', 'Administrator']);
+      // const roles = Policy.getRoles('/contacts', 'DELETE');
+      // Policy.hasRole(roles, ['Everyone', 'User', 'Administrator']);
 
     } catch (error) {
       logger.error(error);

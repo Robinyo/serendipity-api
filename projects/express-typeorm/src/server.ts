@@ -28,6 +28,10 @@ createConnection().then(async connection => {
 
   SampleData.load(connection, 'public/data/contacts.json');
 
+  //
+  // Load Policy config (e.g., RBAC)
+  //
+
   Policy.load();
 
   const server = app.listen(config.get('port'), () => {
