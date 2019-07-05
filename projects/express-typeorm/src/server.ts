@@ -7,6 +7,8 @@ import errorHandler from 'errorhandler';
 import { config } from './config/config';
 import { app } from './app';
 
+import Policy from './api/utils/policy';
+
 import { logger } from './lib/logger';
 
 import SampleData from './utils/sample-data';
@@ -25,6 +27,8 @@ createConnection().then(async connection => {
   //
 
   SampleData.load(connection, 'public/data/contacts.json');
+
+  Policy.load();
 
   const server = app.listen(config.get('port'), () => {
 
