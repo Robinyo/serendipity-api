@@ -18,7 +18,7 @@ const oktaJwtVerifier = new OktaJwtVerifier({
 // logger.info('checkJwt issuer: ' + config.get('issuer'));
 // logger.info('checkJwt clientId: ' + config.get('clientId'));
 
-export const preAuthorise = (req: Request, res: Response, next: NextFunction) => {
+export const preAuthorise = (req: Request, res: Response, next: NextFunction): void => {
 
   const authHeader = req.headers.authorization || '';
   const match = authHeader.match(/Bearer (.+)/);
@@ -43,22 +43,17 @@ export const preAuthorise = (req: Request, res: Response, next: NextFunction) =>
 
   logger.info(method + ' ' + path + 'HTTP/1.1');
 
-
   const accessToken = match[1];
   const expectedAudience = 'api://default';
 
   return oktaJwtVerifier.verifyAccessToken(accessToken, expectedAudience).then((jwt: any) => {
 
-    // logger.info('jwt.claims: ' + JSON.stringify(jwt.claims));
-
     const roles = Policy.getRoles(path, method);
 
-    logger.info('groups: ' + JSON.stringify(jwt.claims.groups));
+    if (Policy.hasRole(roles[0], jwt.claims.groups)) {
 
-    if (Policy.hasRole(roles, jwt.claims.groups)) {
-
-      // TODO
-
+      logger.error('Not authorised');
+      return res.status(401).end();
     }
 
     next();
@@ -72,45 +67,9 @@ export const preAuthorise = (req: Request, res: Response, next: NextFunction) =>
 
 // export default preAuthorise;
 
-// logger.info('preAuthorise req.route: ' + JSON.stringify(req.route));
+// logger.info('jwt.claims: ' + JSON.stringify(jwt.claims));
+// logger.info('groups: ' + JSON.stringify(jwt.claims.groups));
 
 // https://developer.okta.com/docs/guides/validate-access-tokens/overview/
 
 // https://github.com/okta/okta-oidc-js/tree/master/packages/jwt-verifier
-
-/*
-
-const oktaJwtVerifier = new OktaJwtVerifier({
-  issuer: config.get('issuer'),
-  clientId: config.get('clientId'),
-  assertClaims: {
-    aud: 'api://default',
-  },
-});
-
-*/
-
-/*
-
-const authHeader = req.headers.authorization || '';
-const match = authHeader.match(/Bearer (.+)/);
-
-if (!match) {
-  logger.error('preAuthorise !match');
-  return res.status(401).end();
-}
-
-const accessToken = match[1];
-const expectedAudience = 'api://default';
-
-return oktaJwtVerifier.verifyAccessToken(accessToken, expectedAudience).then((jwt: any) => {
-  // req.jwt = jwt;
-  logger.info('preAuthorise jwt.claims: ' + JSON.stringify(jwt.claims));
-  next();
-})
-.catch((error: any) => {
-  logger.error('preAuthorise error: ' + error.message);
-  res.status(401).send(error.message);
-});
-
-*/

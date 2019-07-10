@@ -21,23 +21,23 @@ createConnection().then(async connection => {
 
   app.use(errorHandler());
 
-  //
-  // TODO: Use a Database Migration
-  // See: http://typeorm.io/#/migrations
-  //
-
-  SampleData.load(connection, 'public/data/contacts.json');
-
-  //
-  // Load Policy config (e.g., RBAC)
-  //
-
-  Policy.load();
-
   const server = app.listen(config.get('port'), () => {
 
     console.log(chalk.blueBright('Server started on port ' + config.get('port')  + ' try ') +
         chalk.blueBright.underline('http://' + config.get('ip') + ':' + config.get('port') + '/docs'));
+
+    //
+    // TODO: Use a Database Migration
+    // See: http://typeorm.io/#/migrations
+    //
+
+    SampleData.load(connection, 'public/data/contacts.json');
+
+    //
+    // Load Policy config (e.g., routes, methods and required roles)
+    //
+
+    Policy.load();
 
     console.log('\nPress CTRL-C to stop');
 

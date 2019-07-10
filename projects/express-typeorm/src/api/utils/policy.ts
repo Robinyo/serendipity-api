@@ -35,8 +35,8 @@ class Policy {
 
       logger.info('items: ' + JSON.stringify(Policy.items));
 
-      // const roles = Policy.getRoles('/contacts', 'DELETE');
-      // Policy.hasRole(roles, ['Everyone', 'User', 'Administrator']);
+      const roles = Policy.getRoles('/contacts', 'DELETE');
+      Policy.hasRole(roles[0], ['Everyone', 'User', 'Administrator']);
 
     } catch (error) {
       logger.error(error);
@@ -44,9 +44,9 @@ class Policy {
 
   };
 
-  static getRoles = (path: string, method: string) => {
+  static getRoles = (path: string, method: string): string[] => {
 
-    logger.info('Policy: getRoles()');
+    // logger.info('Policy: getRoles()');
 
     let roles: string[] = [];
 
@@ -58,14 +58,14 @@ class Policy {
 
       if (item !== undefined) {
 
-        logger.info('Policy getRoles() item !== undefined');
+        // logger.info('Policy getRoles() item !== undefined');
 
         const policy = item.methods.find((element) => {
           return element.method === method;
         });
 
         if (policy !== undefined) {
-          logger.info('Policy getRoles() policy !== undefined');
+          // logger.info('Policy getRoles() policy !== undefined');
           roles = [policy.role];
         }
 
@@ -81,21 +81,25 @@ class Policy {
 
   };
 
-  static hasRole = (roles: string[], groups: string[]): Boolean => {
+  static hasRole = (role: string, groups: string[]): Boolean => {
 
-    logger.info('Policy: hasRole()');
+    // logger.info('Policy: hasRole()');
 
     let hasRole = false;
 
+    if (role === '') {
+      return hasRole;
+    }
+
     try {
 
-      hasRole = groups.includes(roles[0]);
+      hasRole = groups.includes(role);
 
     } catch (error) {
       logger.error(error);
     }
 
-    logger.info('Policy: hasRole() hasRole: ' + hasRole);
+    logger.info('hasRole: ' + hasRole);
 
     return hasRole;
 
@@ -104,6 +108,8 @@ class Policy {
 }
 
 export default Policy;
+
+// static hasRole = (roles: string[], groups: string[]): Boolean => {
 
 // https://github.com/axios/axios
 
