@@ -1,18 +1,18 @@
 import { Router } from 'express';
 
-// import { checkJwt } from '../middleware/check-jwt';
-import { preAuthorise } from '../middleware/preAuthorise';
+import { preAuthorise } from '../middleware/pre-authorise';
 
 import IndividualController from '../controllers/individual.controller';
 
 const router = Router();
 
+router.get('/individuals', [preAuthorise], IndividualController.getAll);
+// router.get('/individuals/:id([0-9]+)', [preAuthorise], IndividualController.getOneById);
+router.get('/individuals/:id', [preAuthorise], IndividualController.getOneById);
+router.post('/individuals', [preAuthorise], IndividualController.new);
+
+export default router;
+
 // router.get('/', [preAuthorise], IndividualController.getAll);
 // router.get('/:id([0-9]+)', [preAuthorise], IndividualController.getOneById);
 // router.post('/', [preAuthorise], IndividualController.new);
-
-router.get('/contacts', [preAuthorise], IndividualController.getAll);
-router.get('/contacts/:id([0-9]+)', [preAuthorise], IndividualController.getOneById);
-router.post('/contacts', [preAuthorise], IndividualController.new);
-
-export default router;

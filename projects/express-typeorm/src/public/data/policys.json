@@ -23,7 +23,51 @@
   },
 
   {
+    "path": "/contacts/:id",
+    "methods": [
+      {
+        "method": "POST",
+        "role": "Administrator"
+      },
+      {
+        "method": "GET",
+        "role": "User"
+      },
+      {
+        "method": "PUT",
+        "role": "Administrator"
+      },
+      {
+        "method": "DELETE",
+        "role": "Administrator"
+      }
+    ]
+  },
+
+  {
     "path": "/individuals",
+    "methods": [
+      {
+        "method": "POST",
+        "role": "Administrator"
+      },
+      {
+        "method": "GET",
+        "role": "User"
+      },
+      {
+        "method": "PUT",
+        "role": "Administrator"
+      },
+      {
+        "method": "DELETE",
+        "role": "Administrator"
+      }
+    ]
+  },
+
+  {
+    "path": "/individuals/:id",
     "methods": [
       {
         "method": "POST",

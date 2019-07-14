@@ -41,16 +41,20 @@ export const preAuthorise = (req: Request, res: Response, next: NextFunction): v
 
   const method = req.route.stack[0].method.toUpperCase() || 'GET';
 
-  logger.info(method + ' ' + path + 'HTTP/1.1');
+  logger.info(method + ' ' + path + ' HTTP/1.1');
 
   const accessToken = match[1];
   const expectedAudience = 'api://default';
 
   return oktaJwtVerifier.verifyAccessToken(accessToken, expectedAudience).then((jwt: any) => {
 
+    //
+    // See: https://en.wikipedia.org/wiki/XACML
+    //
+
     const roles = Policy.getRoles(path, method);
 
-    if (Policy.hasRole(roles[0], jwt.claims.groups)) {
+    if (! Policy.hasRole(roles[0], jwt.claims.groups)) {
 
       logger.error('Not authorised');
       return res.status(401).end();

@@ -33,10 +33,10 @@ class Policy {
       const response = await axios.get(Policy.url);
       Policy.items = response.data;
 
-      logger.info('items: ' + JSON.stringify(Policy.items));
+      // logger.info('items: ' + JSON.stringify(Policy.items));
 
-      const roles = Policy.getRoles('/contacts', 'DELETE');
-      Policy.hasRole(roles[0], ['Everyone', 'User', 'Administrator']);
+      // const roles = Policy.getRoles('/contacts', 'DELETE');
+      // Policy.hasRole(roles[0], ['Everyone', 'User', 'Administrator']);
 
     } catch (error) {
       logger.error(error);

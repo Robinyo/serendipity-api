@@ -15,10 +15,10 @@ const routes = Router();
 //
 // See: https://github.com/Robinyo/restful-api-design-guidelines
 
-// routes.use('/contacts', individual);
-// routes.use('/individuals', individual);
-
-routes.use(individuals);
 routes.use(contacts);
+routes.use(individuals);
 
 export default routes;
+
+// routes.use('/contacts', individual);
+// routes.use('/individuals', individual);
