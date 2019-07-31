@@ -2,6 +2,16 @@
 
 The OpenAPI Specification for the RESTful API for Serendipity CRM.
 
+## Development
+
+To build the specification:
+
+```
+npm run yamlinc
+```
+
+Which will build: `serendipity-api.yaml` in the `/docs/v3` directory.
+
 ## Resources
 
 ### OpenAPI Resources

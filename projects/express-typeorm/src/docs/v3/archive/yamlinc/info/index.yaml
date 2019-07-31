@@ -90,17 +90,11 @@ description: |
       ]
 
   ## Root Endpoint
-  You can issue a GET request to the root endpoint (also known as the service root) to get all the endpoint categories
-  that the REST API supports:
+  You can issue a GET request to the root endpoint (also known as the service root) to get all the endpoint categories that the REST API supports:
 
       curl https://localhost:3001/api
 
+  You can issue ...
+
   ## Authentication
-  The API supports API Key authentication.
-
-  When you sign up for an account, you are given your first API key. You can generate additional API keys, and delete
-  API keys (as you may need to rotate your keys in the future). You authenticate to the API by
-  providing your secret key in the request header.
-
-  **Note:** Some requests will return `404 Not Found`, instead of `403 Permission Denied`. This is to prevent the
-  accidental leakage of information to unauthorised users.
+  The API ...

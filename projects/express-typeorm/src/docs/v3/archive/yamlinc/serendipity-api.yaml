@@ -1,45 +1,28 @@
-## --------------------
-## DON'T EDIT THIS FILE
-## --------------------
-## Engine: yamlinc@0.1.9
-## Source: ./src/docs/v3/index.yaml
-
-openapi: 3.0.0
+openapi: '3.0.0'
 info:
   version: 1.0.0
   title: Serendipity CRM REST API
   license:
-    name: The MIT License
+    name: 'The MIT License'
     url: 'https://opensource.org/licenses/MIT'
   termsOfService: 'https://serendipity.org.au/terms-of-service/'
   x-logo:
     url: 'http://localhost:3001/public/images/icons/serendipity-logo.svg'
-  description: >
+  description: |
     # Introduction
-
-    Serendipity's REST API is built on HTTP. The API is RESTful. It has
-    predictable resource URIs.
+    Serendipity's REST API is built on HTTP. The API is RESTful. It has predictable resource URIs.
 
       The API is documented in <a target="_blank" href="https://github.com/OAI/OpenAPI-Specification">OpenAPI</a> format.
 
     # Overview
-
-    The following sections describe the resources that comprise Serendipity's
-    REST API.
-
+    The following sections describe the resources that comprise Serendipity's REST API.
 
     ## Current Version
-
-    By default, all requests to https://localhost:3001/api receive the `v1`
-    version of the REST API.
-
+    By default, all requests to https://localhost:3001/api receive the `v1` version of the REST API.
     We encourage you to explicitly request this version via the `Accept` header.
 
-
     ## Schema
-
     All API access is over HTTPS and accessed from https://localhost:3001/api.
-
     All data is sent and received as JSON. Blank fields are included.
 
       All dates use the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format:
@@ -55,60 +38,37 @@ info:
       For example: `2017-07-01T11:05:06+10:00`
 
     ## Timezones
-
-    Some requests allow for specifying timestamps or generate timestamps with
-    time zone information.
-
-    We apply the following rules, in order of priority, to determine timezone
-    information for API calls.
-
+    Some requests allow for specifying timestamps or generate timestamps with time zone information.
+    We apply the following rules, in order of priority, to determine timezone information for API calls.
 
     ### Explicitly provide an ISO 8601 timestamp with timezone information
-
-    For API calls that allow for a timestamp to be specified, we use that exact
-    timestamp.
+    For API calls that allow for a timestamp to be specified, we use that exact timestamp.
 
       For example: `2017-07-01T11:05:06+10:00`
 
     ## Pagination
-
-    Information about pagination is provided in the
-    [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+    Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
       For example:
 
         Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
               <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-    `rel="next"` states that the next page is `page=2`. This makes sense, since
-    by default, all paginated queries start
-
-    at page `1`. `rel="last"` provides some more information, stating that the
-    last page of results is on `page 34`.
-
+    `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start
+    at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`.
     Accordingly, we have 33 more pages of information that we can consume.
 
-
     ## Parameters
-
     Many API methods take optional parameters:
 
         GET /individuals/1234/addresses/?addressType='Mailing'
 
-    In this example, the '1234' value is provided for the `:partyId` parameter
-    in the path while `:addressType` is passed
-
-    in the query string. For POST, PATCH, PUT, and DELETE requests, parameters
-    not included in the URL should be encoded
-
+    In this example, the '1234' value is provided for the `:partyId` parameter in the path while `:addressType` is passed
+    in the query string. For POST, PATCH, PUT, and DELETE requests, parameters not included in the URL should be encoded
     as JSON with a Content-Type of 'application/json'.
 
-
     ## Metadata
-
-    The API provides **metadata services** that you can use to discover
-    information about the classifcation schemes and
-
+    The API provides **metadata services** that you can use to discover information about the classifcation schemes and
     values used by the application.
 
       For example:
@@ -132,32 +92,14 @@ info:
         ]
 
     ## Root Endpoint
-
-    You can issue a GET request to the root endpoint (also known as the service
-    root) to get all the endpoint categories
-
+    You can issue a GET request to the root endpoint (also known as the service root) to get all the endpoint categories
     that the REST API supports:
 
         curl https://localhost:3001/api
 
     ## Authentication
+    The API ...
 
-    The API supports API Key authentication.
-
-
-    When you sign up for an account, you are given your first API key. You can
-    generate additional API keys, and delete
-
-    API keys (as you may need to rotate your keys in the future). You
-    authenticate to the API by
-
-    providing your secret key in the request header.
-
-
-    **Note:** Some requests will return `404 Not Found`, instead of `403
-    Permission Denied`. This is to prevent the
-
-    accidental leakage of information to unauthorised users.
 servers:
   - url: '{protocol}://localhost:3001/api'
     description: Development API Server
@@ -167,6 +109,7 @@ servers:
           - http
           - https
         default: http
+
 paths:
   /business-names:
     get:
@@ -182,20 +125,14 @@ paths:
           description: A list of business names was retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -217,20 +154,14 @@ paths:
           description: Address types were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -239,9 +170,7 @@ paths:
             example:
               - id: 1
                 name: Mailing
-                description: >-
-                  The address at which an individual or organisation receives
-                  letters or packages.
+                description: The address at which an individual or organisation receives letters or packages.
               - id: 2
                 name: Principal Place of Business
                 description: The main location where work is conducted.
@@ -261,20 +190,14 @@ paths:
           description: Business name lifecycle states were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -312,20 +235,14 @@ paths:
           description: Electronic address types were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -354,20 +271,14 @@ paths:
           description: Genders were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -398,20 +309,14 @@ paths:
           description: Legal entity types were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -440,20 +345,14 @@ paths:
           description: License lifecycle states were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -491,20 +390,14 @@ paths:
           description: License types were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -513,14 +406,10 @@ paths:
             example:
               - id: 1
                 name: Australian Financial Services License
-                description: >-
-                  To conduct a financial services business in Australia, you
-                  must have an Australian Financial Services (AFS) licence.
+                description: 'To conduct a financial services business in Australia, you must have an Australian Financial Services (AFS) licence.'
               - id: 2
                 name: 2B License
-                description: >-
-                  To conduct a <insert-name-here> business you must have a 2B
-                  licence.
+                description: To conduct a <insert-name-here> business you must have a 2B licence.
         '401':
           $ref: '#/components/responses/Unauthenticated'
         '404':
@@ -537,20 +426,14 @@ paths:
           description: Name directions were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -579,20 +462,14 @@ paths:
           description: Name prefixes were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -601,14 +478,10 @@ paths:
             example:
               - id: 1
                 name: Mr
-                description: >-
-                  A title used before a family name or formal salutation to
-                  address a man.
+                description: A title used before a family name or formal salutation to address a man.
               - id: 2
                 name: Ms
-                description: >-
-                  A title used before a family name or formal salutation to
-                  address a woman.
+                description: A title used before a family name or formal salutation to address a woman.
         '401':
           $ref: '#/components/responses/Unauthenticated'
         '404':
@@ -625,20 +498,14 @@ paths:
           description: Name types were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -667,20 +534,14 @@ paths:
           description: Registered identifier types were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -689,16 +550,10 @@ paths:
             example:
               - id: 1
                 name: ABN
-                description: >-
-                  An Australian Business Number (ABN) is a unique
-                  eleven-character number issued by the Australian Business
-                  Register (ABR).
+                description: An Australian Business Number (ABN) is a unique eleven-character number issued by the Australian Business Register (ABR).
               - id: 2
                 name: ACN
-                description: >-
-                  An Australian Company Number (ACN) is a unique nine-character
-                  number issued by the Australian Securities and Investments
-                  Commission (ASIC).
+                description: An Australian Company Number (ACN) is a unique nine-character number issued by the Australian Securities and Investments Commission (ASIC).
         '401':
           $ref: '#/components/responses/Unauthenticated'
         '404':
@@ -715,20 +570,14 @@ paths:
           description: Roles were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -737,9 +586,7 @@ paths:
             example:
               - id: 1
                 role: Director
-                roleDescription: >-
-                  An individual responsible for managing a company's business
-                  activities.
+                roleDescription: An individual responsible for managing a company's business activities.
                 relationship: Directorship
                 reciprocalRole: Company
                 reciprocalRoleDescription: An incorporated legal entity.
@@ -769,20 +616,14 @@ paths:
           description: A list of individuals was retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -811,10 +652,8 @@ paths:
           description: Individual was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: '#/components/schemas/individual'
@@ -894,20 +733,14 @@ paths:
           description: Addresses were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -935,10 +768,8 @@ paths:
           description: Address was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: '#/components/schemas/address'
@@ -1016,20 +847,14 @@ paths:
           description: Business Names were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -1057,10 +882,8 @@ paths:
           description: Business Name was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: '#/components/schemas/business-name'
@@ -1138,20 +961,14 @@ paths:
           description: Electronic addresses were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -1179,10 +996,8 @@ paths:
           description: Electronic Address was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: '#/components/schemas/electronic-address'
@@ -1260,20 +1075,14 @@ paths:
           description: Licenses were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -1301,10 +1110,8 @@ paths:
           description: License was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: '#/components/schemas/license'
@@ -1382,20 +1189,14 @@ paths:
           description: Roles were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -1423,10 +1224,8 @@ paths:
           description: Role was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: '#/components/schemas/party-role'
@@ -1505,20 +1304,14 @@ paths:
           description: A list of licenses was retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -1544,20 +1337,14 @@ paths:
           description: A list of organisations was retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -1586,10 +1373,8 @@ paths:
           description: Organisation was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: '#/components/schemas/organisation'
@@ -1669,20 +1454,14 @@ paths:
           description: Addresses were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -1710,10 +1489,8 @@ paths:
           description: Address was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: '#/components/schemas/address'
@@ -1791,20 +1568,14 @@ paths:
           description: Business Names were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -1832,10 +1603,8 @@ paths:
           description: Business Name was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: '#/components/schemas/business-name'
@@ -1913,20 +1682,14 @@ paths:
           description: Electronic addresses were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -1954,10 +1717,8 @@ paths:
           description: Electronic Address was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: '#/components/schemas/electronic-address'
@@ -2035,20 +1796,14 @@ paths:
           description: Licenses were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -2076,10 +1831,8 @@ paths:
           description: License was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: '#/components/schemas/license'
@@ -2157,20 +1910,14 @@ paths:
           description: Roles were retrieved successfully
           headers:
             Link:
-              description: >
-                Information about pagination is provided in the
-                [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
-
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
                 For example:
 
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes
-                sense, since by default, all paginated queries start at page
-                `1`. `rel="last"` provides some more information, stating that
-                the last page of results is on `page 34`. Accordingly, we have
-                33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
               type: string
           schema:
             type: array
@@ -2198,10 +1945,8 @@ paths:
           description: Role was created
           headers:
             Location:
-              description: >
-                A
-                [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)
-                header pointing to the location of the new resource.
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
             $ref: '#/components/schemas/party-role'
@@ -2266,6 +2011,7 @@ paths:
           $ref: '#/components/responses/Unauthenticated'
         '404':
           $ref: '#/components/responses/NotFound'
+
 components:
   parameters:
     apiKey:
@@ -2301,9 +2047,7 @@ components:
     dateOfBirth:
       name: dateOfBirth
       in: query
-      description: >-
-        The individual's date of birth, for example, `1979-01-13` (in [ISO
-        8601](https://en.wikipedia.org/wiki/ISO_8601) format).
+      description: 'The individual''s date of birth, for example, `1979-01-13` (in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).'
       type: string
       required: false
     placeOfBirth:
@@ -2324,6 +2068,7 @@ components:
       description: 'The identifier, for example, `123456789`.'
       type: number
       required: false
+
   responses:
     InvalidArgument:
       description: The client specified an invalid argument
@@ -2345,6 +2090,7 @@ components:
       description: The specified resource was not found
       schema:
         $ref: '#/components/schemas/not-found'
+
   securitySchemes:
     oauth2:
       type: oauth2
@@ -2352,6 +2098,7 @@ components:
         authorizationCode:
           authorizationUrl: /oauth2/authorize
           tokenUrl: /oauth2/token
+
   schemas:
     address-type:
       allOf:
@@ -2486,16 +2233,12 @@ components:
           type: string
           example: Australia
         fromDate:
-          description: >-
-            The date and time the resource became active in the format defined
-            by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
           readOnly: true
           type: string
           example: '1979-01-13T09:05:06+10:00'
         toDate:
-          description: >-
-            The date and time the resource became inactive in the format defined
-            by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
           readOnly: true
           type: string
           example: ''
@@ -2513,16 +2256,12 @@ components:
                 - Principal Place of Business
                 - Principal Place of Residence
             fromDate:
-              description: >-
-                The date and time the resource became active in the format
-                defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+              description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
               readOnly: true
               type: string
               example: '1979-01-13T09:05:06+10:00'
             toDate:
-              description: >-
-                The date and time the resource became inactive in the format
-                defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+              description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
               readOnly: true
               type: string
               example: ''
@@ -2539,16 +2278,12 @@ components:
                 - Mailing
                 - Principal Place of Business
             fromDate:
-              description: >-
-                The date and time the resource became active in the format
-                defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+              description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
               readOnly: true
               type: string
               example: '1979-01-13T09:05:06+10:00'
             toDate:
-              description: >-
-                The date and time the resource became inactive in the format
-                defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+              description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
               readOnly: true
               type: string
               example: ''
@@ -2596,16 +2331,12 @@ components:
             - Mobile
             - Website
         fromDate:
-          description: >-
-            The date and time the resource became active in the format defined
-            by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
           readOnly: true
           type: string
           example: '1979-01-13T09:05:06+10:00'
         toDate:
-          description: >-
-            The date and time the resource became inactive in the format defined
-            by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
           readOnly: true
           type: string
           example: ''
@@ -2664,16 +2395,12 @@ components:
             - Alias
             - Principal Name
         fromDate:
-          description: >-
-            The date and time the resource became active in the format defined
-            by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
           readOnly: true
           type: string
           example: '1979-01-13T09:05:06+10:00'
         toDate:
-          description: >-
-            The date and time the resource became inactive in the format defined
-            by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
           readOnly: true
           type: string
           example: ''
@@ -2690,9 +2417,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/partyId'
         dateOfBirth:
-          description: >-
-            The individual's date of birth, for example, `1979-01-13` (in [ISO
-            8601](https://en.wikipedia.org/wiki/ISO_8601) format).
+          description: 'The individual''s date of birth, for example, `1979-01-13` (in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).'
           type: string
           example: '1979-01-13'
         placeOfBirth:
@@ -2721,16 +2446,12 @@ components:
           items:
             $ref: '#/components/schemas/electronic-address'
         fromDate:
-          description: >-
-            The date and time the resource became active in the format defined
-            by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
           readOnly: true
           type: string
           example: '1979-01-13T09:05:06+10:00'
         toDate:
-          description: >-
-            The date and time the resource became inactive in the format defined
-            by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
           readOnly: true
           type: string
           example: ''
@@ -2748,16 +2469,12 @@ components:
           type: string
           example: 321 Technology Ventures
         fromDate:
-          description: >-
-            The date and time the resource became active in the format defined
-            by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
           readOnly: true
           type: string
           example: '1928-03-03T09:05:06+10:00'
         toDate:
-          description: >-
-            The date and time the resource became inactive in the format defined
-            by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
           readOnly: true
           type: string
           example: ''
@@ -2783,9 +2500,7 @@ components:
             - Trust
             - Joint Venture
         establishmentDate:
-          description: >-
-            The organisation's establishment date, for example, `1928-03-03` (in
-            [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).
+          description: 'The organisation''s establishment date, for example, `1928-03-03` (in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).'
           type: string
           example: '1928-03-03'
         registeredIdentifiers:
@@ -2805,16 +2520,12 @@ components:
           items:
             $ref: '#/components/schemas/electronic-address'
         fromDate:
-          description: >-
-            The date and time the resource became active in the format defined
-            by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
           readOnly: true
           type: string
           example: '1979-01-13T09:05:06+10:00'
         toDate:
-          description: >-
-            The date and time the resource became inactive in the format defined
-            by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
           readOnly: true
           type: string
           example: ''
@@ -2861,16 +2572,12 @@ components:
             - Membership
             - Partnership
         fromDate:
-          description: >-
-            The date and time the resource became active in the format defined
-            by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
           readOnly: true
           type: string
           example: '2016-01-13T09:05:06+10:00'
         toDate:
-          description: >-
-            The date and time the resource became inactive in the format defined
-            by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
           readOnly: true
           type: string
           example: ''
@@ -2895,16 +2602,12 @@ components:
             - ACN
             - ABN
         fromDate:
-          description: >-
-            The date and time the resource became active in the format defined
-            by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
           readOnly: true
           type: string
           example: '1979-01-13T09:05:06+10:00'
         toDate:
-          description: >-
-            The date and time the resource became inactive in the format defined
-            by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
           readOnly: true
           type: string
           example: ''
@@ -2932,16 +2635,12 @@ components:
             - Pending Approval
             - Suspended
         fromDate:
-          description: >-
-            The date and time the resource became active in the format defined
-            by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
           readOnly: true
           type: string
           example: '1979-01-13T09:05:06+10:00'
         toDate:
-          description: >-
-            The date and time the resource became inactive in the format defined
-            by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
           readOnly: true
           type: string
           example: ''
@@ -2972,16 +2671,12 @@ components:
             - Pending Approval
             - Suspended
         fromDate:
-          description: >-
-            The date and time the resource became active in the format defined
-            by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
           readOnly: true
           type: string
           example: '1979-01-13T09:05:06+10:00'
         toDate:
-          description: >-
-            The date and time the resource became inactive in the format defined
-            by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
           readOnly: true
           type: string
           example: ''

@@ -10,8 +10,10 @@ servers:
           - http
           - https
         default: http
+
 paths:
   $include: ./paths/index.yaml
+
 components:
   $include: ./components/index.yaml
 
