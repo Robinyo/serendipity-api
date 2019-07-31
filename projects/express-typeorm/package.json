@@ -10,7 +10,10 @@
    "homepage": "https://github.com/Robinyo/serendipity",
    "license": "MIT",
    "scripts": {
-      "start": "ts-node src/server.ts"
+      "start": "ts-node src/server.ts",
+      "compodoc": "./node_modules/.bin/compodoc -p src/tsconfig.app.json --theme vagrant",
+      "yamlinc": "./node_modules/.bin/yamlinc ./src/docs/v3/index.yaml && npm run yamlinc-mv",
+      "yamlinc-mv": "mv ./index.inc.yaml ./src/docs/v3/serendipity-api.yaml"
    },
    "keywords": [
       "typescript",
@@ -53,6 +56,7 @@
       "@types/winston": "^2.4.4",
       "ts-node": "^8.3.0",
       "tslint": "^5.18.0",
-      "typescript": "^3.5.2"
+      "typescript": "^3.5.2",
+      "yamlinc": "^0.1.9"
    }
 }

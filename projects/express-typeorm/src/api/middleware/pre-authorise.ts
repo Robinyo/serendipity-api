@@ -48,6 +48,8 @@ export const preAuthorise = (req: Request, res: Response, next: NextFunction): v
 
   return oktaJwtVerifier.verifyAccessToken(accessToken, expectedAudience).then((jwt: any) => {
 
+    logger.info('jwt.claims: ' + JSON.stringify(jwt.claims));
+
     //
     // See: https://en.wikipedia.org/wiki/XACML
     //

@@ -1,0 +1,88 @@
+parameters:
+  apiKey:
+    name: apiKey
+    in: header
+    description: The API key.
+    type: string
+    required: true
+  partyId:
+    name: partyId
+    in: path
+    description: The party identifier.
+    type: number
+    required: true
+  addressId:
+    name: addressId
+    in: path
+    description: The address identifier.
+    type: number
+    required: true
+  productId:
+    name: productId
+    in: path
+    description: The product identifier.
+    type: number
+    required: true
+  roleId:
+    name: roleId
+    in: path
+    description: The role identifier.
+    type: number
+    required: true
+  dateOfBirth:
+    name: dateOfBirth
+    in: query
+    description: 'The individual''s date of birth, for example, `1979-01-13` (in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).'
+    type: string
+    required: false
+  placeOfBirth:
+    name: placeOfBirth
+    in: query
+    description: 'The individual''s place of birth, for example, `Tamworth`.'
+    type: string
+    required: false
+  registeredIdentifier:
+    name: registeredIdentifier
+    in: query
+    description: 'The registered identifier, for example, `ACN` or `ABN`.'
+    type: string
+    required: false
+  identifier:
+    name: identifier
+    in: query
+    description: 'The identifier, for example, `123456789`.'
+    type: number
+    required: false
+
+responses:
+  InvalidArgument:
+    description: The client specified an invalid argument
+    schema:
+      $ref: '#/components/schemas/invalid-argument'
+  FailedPrecondition:
+    description: Request can not be executed in the current system state
+    schema:
+      $ref: '#/components/schemas/failed-precondition'
+  Unauthenticated:
+    description: 'Request not authenticated due to missing, invalid, or expired token'
+    schema:
+      $ref: '#/components/schemas/unauthenticated'
+  PermissionDenied:
+    description: The client does not have sufficient permission
+    schema:
+      $ref: '#/components/schemas/permission-denied'
+  NotFound:
+    description: The specified resource was not found
+    schema:
+      $ref: '#/components/schemas/not-found'
+
+securitySchemes:
+  oauth2:
+    type: oauth2
+    flows:
+      authorizationCode:
+        authorizationUrl: /oauth2/authorize
+        tokenUrl: /oauth2/token
+
+schemas:
+  $include: ./schemas.yaml

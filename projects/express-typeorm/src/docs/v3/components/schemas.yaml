@@ -1,0 +1,707 @@
+address-type:
+  allOf:
+    - $ref: '#/components/schemas/type'
+    - type: object
+business-name-lifecycle-state:
+  allOf:
+    - $ref: '#/components/schemas/type'
+    - type: object
+electronic-address-type:
+  allOf:
+    - $ref: '#/components/schemas/type'
+    - type: object
+gender:
+  description: The Gender resource.
+  type: object
+  properties:
+    id:
+      description: The resource's unique identifier.
+      readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/resourceId'
+    gender:
+      description: The gender.
+      type: string
+legal-entity-type:
+  allOf:
+    - $ref: '#/components/schemas/type'
+    - type: object
+license-lifecycle-state:
+  allOf:
+    - $ref: '#/components/schemas/type'
+    - type: object
+license-type:
+  allOf:
+    - $ref: '#/components/schemas/type'
+    - type: object
+name-direction:
+  allOf:
+    - $ref: '#/components/schemas/type'
+    - type: object
+name-prefix:
+  allOf:
+    - $ref: '#/components/schemas/type'
+    - type: object
+name-type:
+  allOf:
+    - $ref: '#/components/schemas/type'
+    - type: object
+registered-identifier-type:
+  allOf:
+    - $ref: '#/components/schemas/type'
+    - type: object
+role:
+  description: The Role Type resource.
+  type: object
+  properties:
+    id:
+      description: The resource's unique identifier.
+      readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/resourceId'
+    role:
+      description: The role name.
+      type: string
+    roleDescription:
+      description: The role description.
+      type: string
+    relationship:
+      description: The relationship name.
+      type: string
+    reciprocalRole:
+      description: The reciprocal role name.
+      type: string
+    reciprocalRoleDescription:
+      description: The reciprocal role description.
+      type: string
+type:
+  description: The Type resource.
+  type: object
+  properties:
+    id:
+      description: The resource's unique identifier.
+      readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/resourceId'
+    name:
+      description: The scheme value.
+      type: string
+    description:
+      description: The scheme value description.
+      type: string
+address:
+  description: The Address resource.
+  type: object
+  properties:
+    id:
+      description: The resource's unique identifier.
+      readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/addressId'
+    name:
+      description: The address name.
+      type: string
+      example: Kembery Building
+    line1:
+      description: The address line 1.
+      type: string
+      example: Level 7
+    line2:
+      description: The address line 2.
+      type: string
+      example: 21 Genge Street
+    line3:
+      description: The address line 3.
+      type: string
+      example: ''
+    suburb:
+      description: The suburb.
+      type: string
+      example: Civic
+    city:
+      description: The city.
+      type: string
+      example: Canberra
+    postalCode:
+      description: The postal code.
+      type: string
+      example: '2601'
+    country:
+      description: The country.
+      type: string
+      example: Australia
+    fromDate:
+      description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+      readOnly: true
+      type: string
+      example: '1979-01-13T09:05:06+10:00'
+    toDate:
+      description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+      readOnly: true
+      type: string
+      example: ''
+individual-address:
+  allOf:
+    - $ref: '#/components/schemas/address'
+    - type: object
+      properties:
+        addressType:
+          description: The address type.
+          type: string
+          default: Principal Place of Residence
+          enum:
+            - Mailing
+            - Principal Place of Business
+            - Principal Place of Residence
+        fromDate:
+          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+          readOnly: true
+          type: string
+          example: '1979-01-13T09:05:06+10:00'
+        toDate:
+          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+          readOnly: true
+          type: string
+          example: ''
+organisation-address:
+  allOf:
+    - $ref: '#/components/schemas/address'
+    - type: object
+      properties:
+        addressType:
+          description: The address type.
+          type: string
+          default: Principal Place of Business
+          enum:
+            - Mailing
+            - Principal Place of Business
+        fromDate:
+          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+          readOnly: true
+          type: string
+          example: '1979-01-13T09:05:06+10:00'
+        toDate:
+          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+          readOnly: true
+          type: string
+          example: ''
+electronic-address:
+  description: The Electronic Address resource.
+  type: object
+  properties:
+    id:
+      description: The resource's unique identifier.
+      readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/addressId'
+    countryPrefix:
+      description: 'The country prefix, for example, "61".'
+      type: string
+      example: '61'
+    areaCode:
+      description: 'The area code, for example, "02".'
+      type: string
+      example: '02'
+    number:
+      description: 'The number, for example, "62164453".'
+      type: string
+      example: '62164453'
+    extension:
+      description: 'The extension number, for example, "4453".'
+      type: string
+      example: ''
+    email:
+      description: 'The email address, for example, "robert.ferguson@ato.gov.au".'
+      type: string
+      example: ''
+    url:
+      description: 'The website address, for example, "https://ato.gov.au".'
+      type: string
+      example: ''
+    electronicAddressType:
+      description: The electronic address type.
+      type: string
+      default: Landline
+      enum:
+        - Email
+        - Fax
+        - Landline
+        - Mobile
+        - Website
+    fromDate:
+      description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+      readOnly: true
+      type: string
+      example: '1979-01-13T09:05:06+10:00'
+    toDate:
+      description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+      readOnly: true
+      type: string
+      example: ''
+individual-name:
+  description: The Individual Name resource.
+  type: object
+  properties:
+    id:
+      description: The resource's unique identifier.
+      readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/resourceId'
+    namePrefix:
+      description: The individual's name prefix.
+      type: string
+      default: Mr
+      enum:
+        - Mr
+        - Ms
+    givenName:
+      description: The individual's given name.
+      type: string
+      example: Robert
+    middleName:
+      description: The individual's middle name.
+      type: string
+      example: James
+    familyName:
+      description: The individual's family name.
+      type: string
+      example: Ferguson
+    nameSuffix:
+      description: 'The individual''s name suffix, for example, "Jr" or "Sr".'
+      type: string
+      example: ''
+    direction:
+      description: The direction used to render the individual's name.
+      type: string
+      default: left-to-right
+      enum:
+        - left-to-right
+        - right-to-left
+    formalSalutation:
+      description: 'The individual''s formal salutation, for example, "Mr William Smith".'
+      type: string
+      example: Mr Robert Ferguson
+    informalSalutation:
+      description: 'The individual''s informal salutation, for example, "Bill".'
+      type: string
+      example: Rob
+    nameType:
+      description: The name type.
+      type: string
+      default: Principal Name
+      enum:
+        - Alias
+        - Principal Name
+    fromDate:
+      description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+      readOnly: true
+      type: string
+      example: '1979-01-13T09:05:06+10:00'
+    toDate:
+      description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+      readOnly: true
+      type: string
+      example: ''
+individual:
+  description: The Individual resource.
+  type: object
+  required:
+    - dateOfBirth
+    - placeOfBirth
+  properties:
+    id:
+      description: The party's unique identifier.
+      readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/partyId'
+    dateOfBirth:
+      description: 'The individual''s date of birth, for example, `1979-01-13` (in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).'
+      type: string
+      example: '1979-01-13'
+    placeOfBirth:
+      description: 'The individual''s place of birth, for example, `Tamworth`.'
+      type: string
+      example: Tamworth
+    gender:
+      description: The individual's gender.
+      type: string
+      default: Male
+      enum:
+        - Female
+        - Male
+        - Not Applicable
+        - Not Known
+    names:
+      type: array
+      items:
+        $ref: '#/components/schemas/individual-name'
+    addresses:
+      type: array
+      items:
+        $ref: '#/components/schemas/individual-address'
+    electronicAddresses:
+      type: array
+      items:
+        $ref: '#/components/schemas/electronic-address'
+    fromDate:
+      description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+      readOnly: true
+      type: string
+      example: '1979-01-13T09:05:06+10:00'
+    toDate:
+      description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+      readOnly: true
+      type: string
+      example: ''
+organisation-name:
+  description: The Organisation Name resource.
+  type: object
+  properties:
+    id:
+      description: The resource's unique identifier.
+      readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/resourceId'
+    name:
+      description: The organisation's name.
+      type: string
+      example: 321 Technology Ventures
+    fromDate:
+      description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+      readOnly: true
+      type: string
+      example: '1928-03-03T09:05:06+10:00'
+    toDate:
+      description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+      readOnly: true
+      type: string
+      example: ''
+organisation:
+  description: The Organisation resource.
+  type: object
+  required:
+    - legalEntityType
+    - establishmentDate
+  properties:
+    id:
+      description: The party's unique identifier.
+      readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/partyId'
+    legalEntityType:
+      description: The organisation's legal entity type.
+      type: string
+      default: Company
+      enum:
+        - Company
+        - Partnership
+        - Trust
+        - Joint Venture
+    establishmentDate:
+      description: 'The organisation''s establishment date, for example, `1928-03-03` (in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).'
+      type: string
+      example: '1928-03-03'
+    registeredIdentifiers:
+      type: array
+      items:
+        $ref: '#/components/schemas/registered-identifier'
+    names:
+      type: array
+      items:
+        $ref: '#/components/schemas/organisation-name'
+    addresses:
+      type: array
+      items:
+        $ref: '#/components/schemas/organisation-address'
+    electronicAddresses:
+      type: array
+      items:
+        $ref: '#/components/schemas/electronic-address'
+    fromDate:
+      description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+      readOnly: true
+      type: string
+      example: '1979-01-13T09:05:06+10:00'
+    toDate:
+      description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+      readOnly: true
+      type: string
+      example: ''
+party-role:
+  description: The Party Role resource.
+  type: object
+  required:
+    - relatedPartyId
+    - relationshipType
+  properties:
+    id:
+      description: The resource's unique identifier.
+      readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/roleId'
+    partyRoleType:
+      description: The party's role type.
+      type: string
+      default: Employee
+      enum:
+        - Director
+        - Employee
+        - Member
+        - Partner
+    relatedPartyId:
+      description: The related party's unique identifier.
+      allOf:
+        - $ref: '#/components/schemas/partyId'
+    relatedPartyRoleType:
+      description: The related party's role type.
+      type: string
+      default: Employer
+      enum:
+        - Accountant
+        - Auditor
+        - Employer
+    relationshipType:
+      description: The relationship type.
+      type: string
+      default: Employment
+      enum:
+        - Commerce
+        - Employment
+        - Membership
+        - Partnership
+    fromDate:
+      description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+      readOnly: true
+      type: string
+      example: '2016-01-13T09:05:06+10:00'
+    toDate:
+      description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+      readOnly: true
+      type: string
+      example: ''
+registered-identifier:
+  description: The Registered Identifier resource.
+  type: object
+  properties:
+    id:
+      description: The resource's unique identifier.
+      readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/resourceId'
+    identifier:
+      description: The registered identifier.
+      type: string
+      example: '123456789'
+    identifierType:
+      description: The registered identifier type.
+      type: string
+      default: ACN
+      enum:
+        - ACN
+        - ABN
+    fromDate:
+      description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+      readOnly: true
+      type: string
+      example: '1979-01-13T09:05:06+10:00'
+    toDate:
+      description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+      readOnly: true
+      type: string
+      example: ''
+business-name:
+  description: The Business Name resource.
+  type: object
+  properties:
+    id:
+      description: The resource's unique identifier.
+      readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/resourceId'
+    name:
+      description: The business name.
+      type: string
+      example: XYZ Technology Ventures
+    lifecycleState:
+      description: The business name's lifecycle state.
+      type: string
+      default: Pending Approval
+      enum:
+        - Approved
+        - Expired
+        - Issued
+        - Pending Approval
+        - Suspended
+    fromDate:
+      description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+      readOnly: true
+      type: string
+      example: '1979-01-13T09:05:06+10:00'
+    toDate:
+      description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+      readOnly: true
+      type: string
+      example: ''
+license:
+  description: The License resource.
+  type: object
+  properties:
+    id:
+      description: The resource's unique identifier.
+      readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/resourceId'
+    licenseType:
+      description: The license type.
+      type: string
+      default: Australian Financial Services License
+      enum:
+        - Australian Financial Services License
+        - License 2B
+    lifecycleState:
+      description: The business name's lifecycle state.
+      type: string
+      default: Pending Approval
+      enum:
+        - Approved
+        - Expired
+        - Issued
+        - Pending Approval
+        - Suspended
+    fromDate:
+      description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+      readOnly: true
+      type: string
+      example: '1979-01-13T09:05:06+10:00'
+    toDate:
+      description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+      readOnly: true
+      type: string
+      example: ''
+error-details:
+  type: object
+  properties:
+    code:
+      description: The error code.
+      type: string
+      example: NullValue
+    target:
+      description: The error target.
+      type: string
+      example: familyName
+    message:
+      description: The error message.
+      type: string
+      example: Family name must not be null
+failed-precondition:
+  type: object
+  properties:
+    code:
+      description: The error code.
+      type: string
+      example: '400'
+    message:
+      description: The error message.
+      type: string
+      example: Request can not be executed in the current system state
+    status:
+      description: The error status.
+      type: string
+      example: FAILED_PRECONDITION
+    details:
+      type: array
+      items:
+        $ref: '#/components/schemas/error-details'
+invalid-argument:
+  type: object
+  properties:
+    code:
+      description: The error code.
+      type: string
+      example: '400'
+    message:
+      description: The error message.
+      type: string
+      example: The client specified an invalid argument
+    status:
+      description: The error status.
+      type: string
+      example: INVALID_ARGUMENT
+    details:
+      type: array
+      items:
+        $ref: '#/components/schemas/error-details'
+not-found:
+  type: object
+  properties:
+    code:
+      description: The error code.
+      type: string
+      example: '404'
+    message:
+      description: The error message.
+      type: string
+      example: The specified resource was not found
+    status:
+      description: The error status.
+      type: string
+      example: NOT_FOUND
+    details:
+      type: array
+      items:
+        $ref: '#/components/schemas/error-details'
+permission-denied:
+  type: object
+  properties:
+    code:
+      description: The error code.
+      type: string
+      example: '403'
+    message:
+      description: The error message.
+      type: string
+      example: The client does not have sufficient permission
+    status:
+      description: The error status.
+      type: string
+      example: PERMISSION_DENIED
+    details:
+      type: array
+      items:
+        $ref: '#/components/schemas/error-details'
+unauthenticated:
+  type: object
+  properties:
+    code:
+      description: The error code.
+      type: string
+      example: '401'
+    message:
+      description: The error message.
+      type: string
+      example: 'Request not authenticated due to missing, invalid, or expired token'
+    status:
+      description: The error status.
+      type: string
+      example: UNAUTHENTICATED
+    details:
+      $ref: '#/components/schemas/error-details'
+addressId:
+  allOf:
+    - $ref: '#/components/schemas/resourceId'
+    - type: number
+    - example: 101
+partyId:
+  allOf:
+    - $ref: '#/components/schemas/resourceId'
+    - type: number
+    - example: 101
+resourceId:
+  type: number
+  description: The resource ID.
+  example: 101
+roleId:
+  allOf:
+    - $ref: '#/components/schemas/resourceId'
+    - type: number
+    - example: 101

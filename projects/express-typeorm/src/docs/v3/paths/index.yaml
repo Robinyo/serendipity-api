@@ -1,0 +1,1900 @@
+/business-names:
+  get:
+    tags:
+      - Business Names
+    summary: Retrieve a list of business names
+    description: |
+      Retrieve a list of business names
+    parameters:
+      - $ref: '#/components/parameters/apiKey'
+    responses:
+      '200':
+        description: A list of business names was retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/business-name'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+/classifications/address-types:
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+  get:
+    tags:
+      - Address Types
+    summary: Retrieve a list of address types
+    responses:
+      '200':
+        description: Address types were retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/address-type'
+          example:
+            - id: 1
+              name: Mailing
+              description: The address at which an individual or organisation receives letters or packages.
+            - id: 2
+              name: Principal Place of Business
+              description: The main location where work is conducted.
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+/classifications/business-name-lifecycle-states:
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+  get:
+    tags:
+      - Business Name Lifecycle States
+    summary: Retrieve a list of business name lifecycle states
+    responses:
+      '200':
+        description: Business name lifecycle states were retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/business-name-lifecycle-state'
+          example:
+            - id: 1
+              name: Approved
+              description: The Business Name has been approved.
+            - id: 2
+              name: Expired
+              description: The Business Name has expired.
+            - id: 3
+              name: Issued
+              description: The Business Name has been issued.
+            - id: 4
+              name: Pending Approval
+              description: The Business Name is pending approval.
+            - id: 5
+              name: Suspended
+              description: The Business Name has been suspended.
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+/classifications/electronic-address-types:
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+  get:
+    tags:
+      - Electronic Address Types
+    summary: Retrieve a list of electronic address types
+    responses:
+      '200':
+        description: Electronic address types were retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/electronic-address-type'
+          example:
+            - id: 1
+              name: Email
+              description: An address used to send and receive emails.
+            - id: 2
+              name: Fax
+              description: A number used to send and receive faxes.
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+/classifications/genders:
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+  get:
+    tags:
+      - Genders
+    summary: Retrieve a list of genders
+    responses:
+      '200':
+        description: Genders were retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/gender'
+          example:
+            - id: 1
+              gender: Not Known
+            - id: 2
+              gender: Male
+            - id: 3
+              gender: Female
+            - id: 4
+              gender: Not Applicable
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+/classifications/legal-entity-types:
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+  get:
+    tags:
+      - Legal Entity Types
+    summary: Retrieve a list of legal entity types
+    responses:
+      '200':
+        description: Legal entity types were retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/legal-entity-type'
+          example:
+            - id: 1
+              name: Alias
+              description: An alternate name used by a party.
+            - id: 2
+              name: Principal Name
+              description: The primary name used by a party.
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+/classifications/license-lifecycle-states:
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+  get:
+    tags:
+      - License Lifecycle States
+    summary: Retrieve a list of license lifecycle states
+    responses:
+      '200':
+        description: License lifecycle states were retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/license-lifecycle-state'
+          example:
+            - id: 1
+              name: Approved
+              description: The License has been approved.
+            - id: 2
+              name: Expired
+              description: The License has expired.
+            - id: 3
+              name: Issued
+              description: The License has been issued.
+            - id: 4
+              name: Pending Approval
+              description: The License is pending approval.
+            - id: 5
+              name: Suspended
+              description: The License has been suspended.
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+/classifications/license-types:
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+  get:
+    tags:
+      - License Types
+    summary: Retrieve a list of license types
+    responses:
+      '200':
+        description: License types were retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/license-type'
+          example:
+            - id: 1
+              name: Australian Financial Services License
+              description: 'To conduct a financial services business in Australia, you must have an Australian Financial Services (AFS) licence.'
+            - id: 2
+              name: 2B License
+              description: To conduct a <insert-name-here> business you must have a 2B licence.
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+/classifications/name-directions:
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+  get:
+    tags:
+      - Name Directions
+    summary: Retrieve a list of name directions
+    responses:
+      '200':
+        description: Name directions were retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/name-direction'
+          example:
+            - id: 1
+              name: left-to-right
+              description: The full name or formal salutation is rendered left to right.
+            - id: 2
+              name: right-to-left
+              description: The full name or formal salutation is rendered right to left.
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+/classifications/name-prefixes:
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+  get:
+    tags:
+      - Name Prefixes
+    summary: Retrieve a list of name prefixes
+    responses:
+      '200':
+        description: Name prefixes were retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/name-prefix'
+          example:
+            - id: 1
+              name: Mr
+              description: A title used before a family name or formal salutation to address a man.
+            - id: 2
+              name: Ms
+              description: A title used before a family name or formal salutation to address a woman.
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+/classifications/name-types:
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+  get:
+    tags:
+      - Name Types
+    summary: Retrieve a list of name types
+    responses:
+      '200':
+        description: Name types were retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/name-type'
+          example:
+            - id: 1
+              name: Alias
+              description: An alternate name used by a party.
+            - id: 2
+              name: Principal Name
+              description: The primary name used by a party.
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+/classifications/registered-identifier-types:
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+  get:
+    tags:
+      - Registered Identifier Types
+    summary: Retrieve a list of registered identifier types
+    responses:
+      '200':
+        description: Registered identifier types were retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/registered-identifier-type'
+          example:
+            - id: 1
+              name: ABN
+              description: An Australian Business Number (ABN) is a unique eleven-character number issued by the Australian Business Register (ABR).
+            - id: 2
+              name: ACN
+              description: An Australian Company Number (ACN) is a unique nine-character number issued by the Australian Securities and Investments Commission (ASIC).
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+/classifications/roles:
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+  get:
+    tags:
+      - Roles
+    summary: Retrieve a list of roles
+    responses:
+      '200':
+        description: Roles were retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/role'
+          example:
+            - id: 1
+              role: Director
+              roleDescription: An individual responsible for managing a company's business activities.
+              relationship: Directorship
+              reciprocalRole: Company
+              reciprocalRoleDescription: An incorporated legal entity.
+            - id: 102
+              role: Employee
+              roleDescription: An individual employed for wages or salary.
+              relationship: Employment
+              reciprocalRole: Employer
+              reciprocalRoleDescription: An individual or organisation that employs people.
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+/individuals:
+  get:
+    tags:
+      - Individuals
+    summary: Retrieve a list of individuals
+    description: |
+      Retrieve a list of individuals
+    parameters:
+      - $ref: '#/components/parameters/apiKey'
+      - $ref: '#/components/parameters/dateOfBirth'
+      - $ref: '#/components/parameters/placeOfBirth'
+    responses:
+      '200':
+        description: A list of individuals was retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/individual'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  post:
+    tags:
+      - Individuals
+    summary: Create an individual
+    description: |
+      Create an individual
+    parameters:
+      - $ref: '#/components/parameters/apiKey'
+      - name: body
+        in: body
+        description: Individual resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/individual'
+    responses:
+      '201':
+        description: Individual was created
+        headers:
+          Location:
+            description: |
+              A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+            type: string
+        schema:
+          $ref: '#/components/schemas/individual'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+'/individuals/{partyId}':
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+    - $ref: '#/components/parameters/partyId'
+  get:
+    tags:
+      - Individuals
+    summary: Retrieve an individual
+    description: |
+      Retrieve an individual with the specified identifier
+    responses:
+      '200':
+        description: Individual was retrieved successfully
+        schema:
+          $ref: '#/components/schemas/individual'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  put:
+    tags:
+      - Individuals
+    summary: Update an individual
+    description: |
+      Update an individual
+    parameters:
+      - name: body
+        in: body
+        description: Individual resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/individual'
+    responses:
+      '200':
+        description: Individual was updated
+        schema:
+          $ref: '#/components/schemas/individual'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  delete:
+    tags:
+      - Individuals
+    summary: Delete an individual
+    description: |
+      Delete an individual with the specified identifier
+    responses:
+      '204':
+        description: Individual was deleted
+      '400':
+        description: Individual has related resources and cannot be deleted
+        $ref: '#/components/responses/FailedPrecondition'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+'/individuals/{partyId}/addresses':
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+    - $ref: '#/components/parameters/partyId'
+  get:
+    tags:
+      - Individuals Addresses
+    summary: Retrieve a list of addresses
+    responses:
+      '200':
+        description: Addresses were retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/address'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  post:
+    tags:
+      - Individuals Addresses
+    summary: Create an address
+    description: |
+      Create an address
+    parameters:
+      - name: body
+        in: body
+        description: Address resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/address'
+    responses:
+      '201':
+        description: Address was created
+        headers:
+          Location:
+            description: |
+              A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+            type: string
+        schema:
+          $ref: '#/components/schemas/address'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+'/individuals/{partyId}/addresses/{addressId}':
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+    - $ref: '#/components/parameters/partyId'
+    - $ref: '#/components/parameters/addressId'
+  get:
+    tags:
+      - Individuals Addresses
+    summary: Retrieve an address
+    description: |
+      Retrieve an address
+    responses:
+      '200':
+        description: Address was retrieved successfully
+        schema:
+          $ref: '#/components/schemas/address'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  put:
+    tags:
+      - Individuals Addresses
+    summary: Update an address
+    description: |
+      Update an address
+    parameters:
+      - name: body
+        in: body
+        description: Address resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/address'
+    responses:
+      '200':
+        description: Address was updated
+        schema:
+          $ref: '#/components/schemas/address'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  delete:
+    tags:
+      - Individuals Addresses
+    summary: Delete an address
+    description: |
+      Delete an address
+    responses:
+      '204':
+        description: Address was deleted
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+'/individuals/{partyId}/business-names':
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+    - $ref: '#/components/parameters/partyId'
+  get:
+    tags:
+      - Individuals Business Names
+    summary: Retrieve a list of business names
+    responses:
+      '200':
+        description: Business Names were retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/business-name'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  post:
+    tags:
+      - Individuals Business Names
+    summary: Create a business name
+    description: |
+      Create a business name
+    parameters:
+      - name: body
+        in: body
+        description: Business Name resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/business-name'
+    responses:
+      '201':
+        description: Business Name was created
+        headers:
+          Location:
+            description: |
+              A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+            type: string
+        schema:
+          $ref: '#/components/schemas/business-name'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+'/individuals/{partyId}/business-names/{productId}':
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+    - $ref: '#/components/parameters/partyId'
+    - $ref: '#/components/parameters/productId'
+  get:
+    tags:
+      - Individuals Business Names
+    summary: Retrieve a business name
+    description: |
+      Retrieve a business name
+    responses:
+      '200':
+        description: Business Name was retrieved successfully
+        schema:
+          $ref: '#/components/schemas/business-name'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  put:
+    tags:
+      - Individuals Business Names
+    summary: Update a business name
+    description: |
+      Update a business name
+    parameters:
+      - name: body
+        in: body
+        description: Business Name resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/business-name'
+    responses:
+      '200':
+        description: Address was updated
+        schema:
+          $ref: '#/components/schemas/business-name'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  delete:
+    tags:
+      - Individuals Business Names
+    summary: Delete a business name
+    description: |
+      Delete a business name
+    responses:
+      '204':
+        description: Address was deleted
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+'/individuals/{partyId}/electronic-addresses':
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+    - $ref: '#/components/parameters/partyId'
+  get:
+    tags:
+      - Individuals Electronic Addresses
+    summary: Retrieve a list of electronic addresses
+    responses:
+      '200':
+        description: Electronic addresses were retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/electronic-address'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  post:
+    tags:
+      - Individuals Electronic Addresses
+    summary: Create an electronic address
+    description: |
+      Create an electronic address
+    parameters:
+      - name: body
+        in: body
+        description: Electronic Address resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/electronic-address'
+    responses:
+      '201':
+        description: Electronic Address was created
+        headers:
+          Location:
+            description: |
+              A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+            type: string
+        schema:
+          $ref: '#/components/schemas/electronic-address'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+'/individuals/{partyId}/electronic-addresses/{addressId}':
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+    - $ref: '#/components/parameters/partyId'
+    - $ref: '#/components/parameters/addressId'
+  get:
+    tags:
+      - Individuals Electronic Addresses
+    summary: Retrieve an electronic address
+    description: |
+      Retrieve an electronic address
+    responses:
+      '200':
+        description: Electronic Address was retrieved successfully
+        schema:
+          $ref: '#/components/schemas/electronic-address'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  put:
+    tags:
+      - Individuals Electronic Addresses
+    summary: Update an electronic address
+    description: |
+      Update an electronic address
+    parameters:
+      - name: body
+        in: body
+        description: Electronic Address resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/electronic-address'
+    responses:
+      '200':
+        description: Electronic Address was updated
+        schema:
+          $ref: '#/components/schemas/electronic-address'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  delete:
+    tags:
+      - Individuals Electronic Addresses
+    summary: Delete an electronic address
+    description: |
+      Delete an electronic address
+    responses:
+      '204':
+        description: Electronic Address was deleted
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+'/individuals/{partyId}/licenses':
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+    - $ref: '#/components/parameters/partyId'
+  get:
+    tags:
+      - Individuals Licenses
+    summary: Retrieve a list of licenses
+    responses:
+      '200':
+        description: Licenses were retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/license'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  post:
+    tags:
+      - Individuals Licenses
+    summary: Create a license
+    description: |
+      Create a license
+    parameters:
+      - name: body
+        in: body
+        description: License resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/license'
+    responses:
+      '201':
+        description: License was created
+        headers:
+          Location:
+            description: |
+              A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+            type: string
+        schema:
+          $ref: '#/components/schemas/license'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+'/individuals/{partyId}/licenses/{productId}':
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+    - $ref: '#/components/parameters/partyId'
+    - $ref: '#/components/parameters/productId'
+  get:
+    tags:
+      - Individuals Licenses
+    summary: Retrieve a license
+    description: |
+      Retrieve a license
+    responses:
+      '200':
+        description: License was retrieved successfully
+        schema:
+          $ref: '#/components/schemas/license'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  put:
+    tags:
+      - Individuals Licenses
+    summary: Update a license
+    description: |
+      Update a license
+    parameters:
+      - name: body
+        in: body
+        description: License resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/license'
+    responses:
+      '200':
+        description: License was updated
+        schema:
+          $ref: '#/components/schemas/license'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  delete:
+    tags:
+      - Individuals Licenses
+    summary: Delete a license
+    description: |
+      Delete a license
+    responses:
+      '204':
+        description: License was deleted
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+'/individuals/{partyId}/roles':
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+    - $ref: '#/components/parameters/partyId'
+  get:
+    tags:
+      - Individuals Roles
+    summary: Retrieve a list of roles
+    responses:
+      '200':
+        description: Roles were retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/party-role'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  post:
+    tags:
+      - Individuals Roles
+    summary: Create a role
+    description: |
+      Create a role
+    parameters:
+      - name: body
+        in: body
+        description: Role resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/party-role'
+    responses:
+      '201':
+        description: Role was created
+        headers:
+          Location:
+            description: |
+              A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+            type: string
+        schema:
+          $ref: '#/components/schemas/party-role'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+'/individuals/{partyId}/roles/{roleId}':
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+    - $ref: '#/components/parameters/partyId'
+    - $ref: '#/components/parameters/roleId'
+  get:
+    tags:
+      - Individuals Roles
+    summary: Retrieve a role
+    description: |
+      Retrieve a role
+    responses:
+      '200':
+        description: Role was retrieved successfully
+        schema:
+          $ref: '#/components/schemas/party-role'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  put:
+    tags:
+      - Individuals Roles
+    summary: Update a role
+    description: |
+      Update a role
+    parameters:
+      - name: body
+        in: body
+        description: Role resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/party-role'
+    responses:
+      '200':
+        description: Role was updated
+        schema:
+          $ref: '#/components/schemas/party-role'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  delete:
+    tags:
+      - Individuals Roles
+    summary: Delete a role
+    description: |
+      Delete a role
+    responses:
+      '204':
+        description: Role was deleted
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+/licenses:
+  get:
+    tags:
+      - Licenses
+    summary: Retrieve a list of licenses
+    description: |
+      Retrieve a list of licenses
+    parameters:
+      - $ref: '#/components/parameters/apiKey'
+    responses:
+      '200':
+        description: A list of licenses was retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/license'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+/organisations:
+  get:
+    tags:
+      - Organisations
+    summary: Retrieve a list of organisations
+    description: |
+      Retrieve a list of organisations
+    parameters:
+      - $ref: '#/components/parameters/apiKey'
+      - $ref: '#/components/parameters/registeredIdentifier'
+      - $ref: '#/components/parameters/identifier'
+    responses:
+      '200':
+        description: A list of organisations was retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/organisation'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  post:
+    tags:
+      - Organisations
+    summary: Create an organisation
+    description: |
+      Create an organisation
+    parameters:
+      - $ref: '#/components/parameters/apiKey'
+      - name: body
+        in: body
+        description: Organisation resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/organisation'
+    responses:
+      '201':
+        description: Organisation was created
+        headers:
+          Location:
+            description: |
+              A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+            type: string
+        schema:
+          $ref: '#/components/schemas/organisation'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+'/organisations/{partyId}':
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+    - $ref: '#/components/parameters/partyId'
+  get:
+    tags:
+      - Organisations
+    summary: Retrieve an organisation
+    description: |
+      Retrieve an organisation with the specified identifier
+    responses:
+      '200':
+        description: Individual was retrieved successfully
+        schema:
+          $ref: '#/components/schemas/organisation'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  put:
+    tags:
+      - Organisations
+    summary: Update an organisation
+    description: |
+      Update an organisation
+    parameters:
+      - name: body
+        in: body
+        description: Organisation resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/organisation'
+    responses:
+      '200':
+        description: Organisation was updated
+        schema:
+          $ref: '#/components/schemas/organisation'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  delete:
+    tags:
+      - Organisations
+    summary: Delete an organisation
+    description: |
+      Delete an organisation with the specified identifier
+    responses:
+      '204':
+        description: Organisation was deleted
+      '400':
+        description: Organisation has related resources and cannot be deleted
+        $ref: '#/components/responses/FailedPrecondition'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+'/organisations/{partyId}/addresses':
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+    - $ref: '#/components/parameters/partyId'
+  get:
+    tags:
+      - Organisations Addresses
+    summary: Retrieve a list of addresses
+    responses:
+      '200':
+        description: Addresses were retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/address'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  post:
+    tags:
+      - Organisations Addresses
+    summary: Create an address
+    description: |
+      Create an address
+    parameters:
+      - name: body
+        in: body
+        description: Address resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/address'
+    responses:
+      '201':
+        description: Address was created
+        headers:
+          Location:
+            description: |
+              A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+            type: string
+        schema:
+          $ref: '#/components/schemas/address'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+'/organisations/{partyId}/addresses/{addressId}':
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+    - $ref: '#/components/parameters/partyId'
+    - $ref: '#/components/parameters/addressId'
+  get:
+    tags:
+      - Organisations Addresses
+    summary: Retrieve an address
+    description: |
+      Retrieve an address
+    responses:
+      '200':
+        description: Address was retrieved successfully
+        schema:
+          $ref: '#/components/schemas/address'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  put:
+    tags:
+      - Organisations Addresses
+    summary: Update an address
+    description: |
+      Update an address
+    parameters:
+      - name: body
+        in: body
+        description: Address resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/address'
+    responses:
+      '200':
+        description: Address was updated
+        schema:
+          $ref: '#/components/schemas/address'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  delete:
+    tags:
+      - Organisations Addresses
+    summary: Delete an address
+    description: |
+      Delete an address
+    responses:
+      '204':
+        description: Address was deleted
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+'/organisations/{partyId}/business-names':
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+    - $ref: '#/components/parameters/partyId'
+  get:
+    tags:
+      - Organisations Business Names
+    summary: Retrieve a list of business names
+    responses:
+      '200':
+        description: Business Names were retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/business-name'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  post:
+    tags:
+      - Organisations Business Names
+    summary: Create a business name
+    description: |
+      Create a business name
+    parameters:
+      - name: body
+        in: body
+        description: Business Name resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/business-name'
+    responses:
+      '201':
+        description: Business Name was created
+        headers:
+          Location:
+            description: |
+              A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+            type: string
+        schema:
+          $ref: '#/components/schemas/business-name'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+'/organisations/{partyId}/business-names/{productId}':
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+    - $ref: '#/components/parameters/partyId'
+    - $ref: '#/components/parameters/productId'
+  get:
+    tags:
+      - Organisations Business Names
+    summary: Retrieve a business name
+    description: |
+      Retrieve a business name
+    responses:
+      '200':
+        description: Business Name was retrieved successfully
+        schema:
+          $ref: '#/components/schemas/business-name'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  put:
+    tags:
+      - Organisations Business Names
+    summary: Update a business name
+    description: |
+      Update a business name
+    parameters:
+      - name: body
+        in: body
+        description: Business Name resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/business-name'
+    responses:
+      '200':
+        description: Address was updated
+        schema:
+          $ref: '#/components/schemas/business-name'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  delete:
+    tags:
+      - Organisations Business Names
+    summary: Delete a business name
+    description: |
+      Delete a business name
+    responses:
+      '204':
+        description: Address was deleted
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+'/organisations/{partyId}/electronic-addresses':
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+    - $ref: '#/components/parameters/partyId'
+  get:
+    tags:
+      - Organisations Electronic Addresses
+    summary: Retrieve a list of electronic addresses
+    responses:
+      '200':
+        description: Electronic addresses were retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/electronic-address'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  post:
+    tags:
+      - Organisations Electronic Addresses
+    summary: Create an electronic address
+    description: |
+      Create an electronic address
+    parameters:
+      - name: body
+        in: body
+        description: Electronic Address resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/electronic-address'
+    responses:
+      '201':
+        description: Electronic Address was created
+        headers:
+          Location:
+            description: |
+              A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+            type: string
+        schema:
+          $ref: '#/components/schemas/electronic-address'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+'/organisations/{partyId}/electronic-addresses/{addressId}':
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+    - $ref: '#/components/parameters/partyId'
+    - $ref: '#/components/parameters/addressId'
+  get:
+    tags:
+      - Organisations Electronic Addresses
+    summary: Retrieve an electronic address
+    description: |
+      Retrieve an electronic address
+    responses:
+      '200':
+        description: Electronic address was retrieved successfully
+        schema:
+          $ref: '#/components/schemas/electronic-address'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  put:
+    tags:
+      - Organisations Electronic Addresses
+    summary: Update an electronic address
+    description: |
+      Update an electronic address
+    parameters:
+      - name: body
+        in: body
+        description: Electronic Address resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/electronic-address'
+    responses:
+      '200':
+        description: Electronic Address was updated
+        schema:
+          $ref: '#/components/schemas/electronic-address'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  delete:
+    tags:
+      - Organisations Electronic Addresses
+    summary: Delete an electronic address
+    description: |
+      Delete an electronic address
+    responses:
+      '204':
+        description: Electronic Address was deleted
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+'/organisations/{partyId}/licenses':
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+    - $ref: '#/components/parameters/partyId'
+  get:
+    tags:
+      - Organisations Licenses
+    summary: Retrieve a list of licenses
+    responses:
+      '200':
+        description: Licenses were retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/license'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  post:
+    tags:
+      - Organisations Licenses
+    summary: Create a license
+    description: |
+      Create a license
+    parameters:
+      - name: body
+        in: body
+        description: License resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/license'
+    responses:
+      '201':
+        description: License was created
+        headers:
+          Location:
+            description: |
+              A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+            type: string
+        schema:
+          $ref: '#/components/schemas/license'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+'/organisations/{partyId}/licenses/{productId}':
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+    - $ref: '#/components/parameters/partyId'
+    - $ref: '#/components/parameters/productId'
+  get:
+    tags:
+      - Organisations Licenses
+    summary: Retrieve a license
+    description: |
+      Retrieve a license
+    responses:
+      '200':
+        description: License was retrieved successfully
+        schema:
+          $ref: '#/components/schemas/license'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  put:
+    tags:
+      - Organisations Licenses
+    summary: Update a license
+    description: |
+      Update a license
+    parameters:
+      - name: body
+        in: body
+        description: License resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/license'
+    responses:
+      '200':
+        description: License was updated
+        schema:
+          $ref: '#/components/schemas/license'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  delete:
+    tags:
+      - Organisations Licenses
+    summary: Delete a license
+    description: |
+      Delete a license
+    responses:
+      '204':
+        description: License was deleted
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+'/organisations/{partyId}/roles':
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+    - $ref: '#/components/parameters/partyId'
+  get:
+    tags:
+      - Organisations Roles
+    summary: Retrieve a list of roles
+    responses:
+      '200':
+        description: Roles were retrieved successfully
+        headers:
+          Link:
+            description: |
+              Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+              For example:
+
+                  Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                        <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+              `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+            type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/party-role'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  post:
+    tags:
+      - Organisations Roles
+    summary: Create a role
+    description: |
+      Create a role
+    parameters:
+      - name: body
+        in: body
+        description: Role resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/party-role'
+    responses:
+      '201':
+        description: Role was created
+        headers:
+          Location:
+            description: |
+              A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+            type: string
+        schema:
+          $ref: '#/components/schemas/party-role'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+'/organisations/{partyId}/roles/{roleId}':
+  parameters:
+    - $ref: '#/components/parameters/apiKey'
+    - $ref: '#/components/parameters/partyId'
+    - $ref: '#/components/parameters/roleId'
+  get:
+    tags:
+      - Organisations Roles
+    summary: Retrieve a role
+    description: |
+      Retrieve a role
+    responses:
+      '200':
+        description: Role was retrieved successfully
+        schema:
+          $ref: '#/components/schemas/party-role'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  put:
+    tags:
+      - Organisations Roles
+    summary: Update a role
+    description: |
+      Update a role
+    parameters:
+      - name: body
+        in: body
+        description: Role resource
+        required: true
+        schema:
+          $ref: '#/components/schemas/party-role'
+    responses:
+      '200':
+        description: Role was updated
+        schema:
+          $ref: '#/components/schemas/party-role'
+      '400':
+        $ref: '#/components/responses/InvalidArgument'
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
+  delete:
+    tags:
+      - Organisations Roles
+    summary: Delete a role
+    description: |
+      Delete a role
+    responses:
+      '204':
+        description: Role was deleted
+      '401':
+        $ref: '#/components/responses/Unauthenticated'
+      '404':
+        $ref: '#/components/responses/NotFound'
