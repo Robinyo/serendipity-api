@@ -108,11 +108,14 @@ components:
 
             GET /individuals
 
-        The user must have been granted the `individual:read` scope.
+        The user must have been granted the `individual:read` scope:
+
+            security:
+              - oauth: [ individual:read ]
       flows:
         authorizationCode:
-          authorizationUrl: /oauth/authorize
-          tokenUrl: /oauth.access
+          authorizationUrl: /oauth2/authorize
+          tokenUrl: /oauth2/access
           scopes:
             classification:read: Read access to the Classification schemes collection
             classification:write: Write access to the Classification schemes collection
