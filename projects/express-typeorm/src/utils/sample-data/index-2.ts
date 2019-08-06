@@ -1,12 +1,10 @@
-import { config } from '../../config/config';
-
 import axios from 'axios';
 
-import { Address } from '../../api/models/address';
-import { Individual } from '../../api/models/individual';
-import { Organisation } from '../../api/models/organisation';
+import { plainToClass } from 'class-transformer';
 
+import { Individual } from '../../api/models/individual';
 import { logger } from '../../lib/logger';
+import { config } from '../../config/config';
 
 class SampleData {
 
@@ -28,29 +26,11 @@ class SampleData {
 
       for (const item of items) {
 
-        const organisation = new Organisation();
-        organisation.name = item.organisation.name;
-        organisation.phoneNumber = item.organisation.phoneNumber;
+        const individual = plainToClass(Individual, item);
 
-        // cascade: true
-        // await connection.manager.save(organisation);
+        // logger.info('individual: ' + JSON.stringify(individual));
 
-        const address = new Address();
-        address.line1 = item.address.line1;
-        address.line2 = item.address.line2;
-        address.city = item.address.city;
-        address.state = item.address.state;
-        address.postalCode = item.address.postalCode;
-
-        // cascade: true
-        // await connection.manager.save(address);
-
-        const contact = connection.manager.create(Individual, item);
-        contact.organisation = organisation;
-        contact.address = address;
-
-        await connection.manager.save(contact);
-
+        await connection.manager.save(individual);
       }
 
     } catch (error) {
@@ -71,3 +51,6 @@ export default SampleData;
 
 // https://github.com/typestack/class-transformer
 // Proper decorator-based transformation / serialization / deserialization of plain javascript objects to class constructors
+
+// https://github.com/typeorm/typeorm/issues/3444
+// Hydration of Embedded (json) types into proper class instances

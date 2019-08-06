@@ -1,14 +1,16 @@
-import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
+import { Type } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
 
 import { Address } from './address';
 import { Organisation } from './organisation';
 
-import { SurrogateKey } from './surrogate-key';
-
 @Entity('Individual')
-export class Individual extends SurrogateKey {
+export class Individual {
+
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column()
   displayName: string;
@@ -51,12 +53,14 @@ export class Individual extends SurrogateKey {
   @Column()
   photoUrl: string;
 
+  @Type(() => Organisation)
   @OneToOne(type => Organisation, {
     cascade: true,
   })
   @JoinColumn()
   organisation: Organisation;
 
+  @Type(() => Address)
   @OneToOne(type => Address, {
     cascade: true,
   })
@@ -67,3 +71,6 @@ export class Individual extends SurrogateKey {
 
 // https://github.com/typeorm/typeorm/blob/master/docs/decorator-reference.md
 // https://typeorm.io/#/relations-faq
+
+// import { SurrogateKey } from './surrogate-key';
+// export class Individual extends SurrogateKey {

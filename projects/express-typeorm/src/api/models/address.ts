@@ -1,8 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-// import { SurrogateKey } from './surrogate-key';
-// export class Address extends SurrogateKey {
-
 @Entity('Address')
 export class Address {
 
@@ -28,3 +25,6 @@ export class Address {
   // country: string;
 
 }
+
+// import { SurrogateKey } from './surrogate-key';
+// export class Address extends SurrogateKey {

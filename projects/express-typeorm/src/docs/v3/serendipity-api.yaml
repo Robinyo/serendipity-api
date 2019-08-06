@@ -859,7 +859,10 @@ paths:
                     Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
                           <https://localhost:3001/api/individuals?page=34>; rel="last"
 
-                `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+                `rel="next"` states that the next page is `page=2`.
+                 This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides
+                 some more information, stating that the last page of results is on `page 34`.
+                 Accordingly, we have 33 more pages of information that we can consume.
               schema:
                 type: string
           content:

@@ -11,7 +11,8 @@ import Policy from './api/utils/policy';
 
 import { logger } from './lib/logger';
 
-import SampleData from './utils/sample-data';
+// import SampleData from './utils/sample-data/index-1';
+import SampleData from './utils/sample-data/index-2';
 
 createConnection().then(async connection => {
 
