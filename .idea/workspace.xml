@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68c89dfc-590d-4e05-a7a9-58b45093b746" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/projects/express-typeorm/src/utils/sample-data/index-2.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/express-typeorm/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/express-typeorm/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/express-typeorm/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/express-typeorm/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/express-typeorm/src/api/models/address.ts" beforeDir="false" afterPath="$PROJECT_DIR$/projects/express-typeorm/src/api/models/address.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/express-typeorm/src/api/models/individual.ts" beforeDir="false" afterPath="$PROJECT_DIR$/projects/express-typeorm/src/api/models/individual.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/express-typeorm/src/api/models/organisation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/projects/express-typeorm/src/api/models/organisation.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/express-typeorm/src/config/development.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/express-typeorm/src/config/development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/express-typeorm/src/docs/v3/serendipity-api.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/projects/express-typeorm/src/docs/v3/serendipity-api.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/express-typeorm/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/projects/express-typeorm/src/server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/express-typeorm/src/utils/sample-data/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/projects/express-typeorm/src/utils/sample-data/index-1.ts" afterDir="false" />
-    </list>
+    <list default="true" id="68c89dfc-590d-4e05-a7a9-58b45093b746" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -25,38 +13,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/projects/express-typeorm/TODO.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="644">
-              <caret line="1013" selection-start-line="1013" selection-end-line="1013" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/projects/express-typeorm/src/public/data/contacts.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/projects/express-typeorm/src/api/models/individual.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="915">
-              <caret line="61" selection-start-line="61" selection-end-line="61" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/projects/express-typeorm/src/server.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+            <state relative-caret-position="532">
+              <caret line="863" selection-start-line="863" selection-end-line="863" selection-end-column="70" />
             </state>
           </provider>
         </entry>
@@ -64,17 +25,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/projects/express-typeorm/src/utils/sample-data/index-1.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="64" selection-start-line="64" selection-end-line="67" selection-end-column="99" />
+            <state relative-caret-position="339">
+              <caret line="37" column="43" lean-forward="true" selection-start-line="37" selection-start-column="43" selection-end-line="37" selection-end-column="43" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/projects/express-typeorm/src/utils/sample-data/index-2.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="472">
-              <caret line="50" selection-start-line="50" selection-end-line="50" />
+            <state relative-caret-position="282">
+              <caret line="19" column="29" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -176,16 +137,16 @@
         <option value="$PROJECT_DIR$/projects/express-typeorm/src/docs/v2/serendipity-api.yaml" />
         <option value="$PROJECT_DIR$/projects/express-typeorm/src/docs/v3/petstore.yaml" />
         <option value="$PROJECT_DIR$/projects/express-typeorm/src/docs/index.html" />
-        <option value="$PROJECT_DIR$/projects/express-typeorm/src/config/development.json" />
         <option value="$PROJECT_DIR$/projects/express-typeorm/src/docs/v3/serendipity-api.yaml" />
         <option value="$PROJECT_DIR$/projects/express-typeorm/src/api/models/organisation.ts" />
         <option value="$PROJECT_DIR$/projects/express-typeorm/src/api/models/address.ts" />
         <option value="$PROJECT_DIR$/projects/express-typeorm/src/api/models/individual.ts" />
         <option value="$PROJECT_DIR$/out.txt" />
-        <option value="$PROJECT_DIR$/projects/express-typeorm/TODO.txt" />
         <option value="$PROJECT_DIR$/projects/express-typeorm/src/server.ts" />
         <option value="$PROJECT_DIR$/projects/express-typeorm/src/utils/sample-data/index-1.ts" />
         <option value="$PROJECT_DIR$/projects/express-typeorm/src/utils/sample-data/index-2.ts" />
+        <option value="$PROJECT_DIR$/projects/express-typeorm/src/config/development.json" />
+        <option value="$PROJECT_DIR$/projects/express-typeorm/TODO.txt" />
       </list>
     </option>
   </component>
@@ -196,8 +157,8 @@
     <auto-save>true</auto-save>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1619" />
-    <option name="y" value="176" />
+    <option name="x" value="1618" />
+    <option name="y" value="175" />
     <option name="width" value="1440" />
     <option name="height" value="794" />
   </component>
@@ -227,55 +188,6 @@
               <item name="projects" type="462c0819:PsiDirectoryNode" />
               <item name="express-typeorm" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="serendipity-api" type="b2602c69:ProjectViewProjectNode" />
-              <item name="serendipity-api" type="462c0819:PsiDirectoryNode" />
-              <item name="projects" type="462c0819:PsiDirectoryNode" />
-              <item name="express-typeorm" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="serendipity-api" type="b2602c69:ProjectViewProjectNode" />
-              <item name="serendipity-api" type="462c0819:PsiDirectoryNode" />
-              <item name="projects" type="462c0819:PsiDirectoryNode" />
-              <item name="express-typeorm" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="serendipity-api" type="b2602c69:ProjectViewProjectNode" />
-              <item name="serendipity-api" type="462c0819:PsiDirectoryNode" />
-              <item name="projects" type="462c0819:PsiDirectoryNode" />
-              <item name="express-typeorm" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="serendipity-api" type="b2602c69:ProjectViewProjectNode" />
-              <item name="serendipity-api" type="462c0819:PsiDirectoryNode" />
-              <item name="projects" type="462c0819:PsiDirectoryNode" />
-              <item name="express-typeorm" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="serendipity-api" type="b2602c69:ProjectViewProjectNode" />
-              <item name="serendipity-api" type="462c0819:PsiDirectoryNode" />
-              <item name="projects" type="462c0819:PsiDirectoryNode" />
-              <item name="express-typeorm" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="serendipity-api" type="b2602c69:ProjectViewProjectNode" />
-              <item name="serendipity-api" type="462c0819:PsiDirectoryNode" />
-              <item name="projects" type="462c0819:PsiDirectoryNode" />
-              <item name="express-typeorm" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-              <item name="sample-data" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -288,7 +200,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.last.introduce.type" value="CONST" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/projects/express-typeorm/src/docs/v3/archive/yamlinc" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
@@ -301,11 +213,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/projects/express-typeorm/src/docs/v3/archive/yamlinc" />
       <recent name="$PROJECT_DIR$/projects/express-typeorm/tmp" />
       <recent name="$PROJECT_DIR$/projects/express-typeorm/src/docs" />
       <recent name="$PROJECT_DIR$/projects/express-typeorm/src/api" />
-      <recent name="$PROJECT_DIR$/temp/routing-controllers" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/projects/express-typeorm/tmp" />
@@ -352,16 +264,15 @@
       <workItem from="1561846078494" duration="4254000" />
       <workItem from="1561851945696" duration="24963000" />
       <workItem from="1562119435681" duration="119613000" />
-      <workItem from="1564978640275" duration="7382000" />
+      <workItem from="1564978640275" duration="7643000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="253568000" />
+    <option name="totallyTimeSpent" value="253829000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1619" y="176" width="1440" height="794" extended-state="0" />
-    <editor active="true" />
+    <frame x="1618" y="175" width="1440" height="794" extended-state="0" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4993481" visible="true" weight="0.2868217" />
       <window_info id="Structure" order="1" sideWeight="0.5006519" side_tool="true" weight="0.27025232" />
@@ -396,7 +307,6 @@
     </ignored-roots>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/projects/express-typeorm/src/api/utils/has-role.ts" />
     <entry file="file://$PROJECT_DIR$/projects/express-typeorm/tmp/get-attributes.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -601,13 +511,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/projects/express-typeorm/secrets/github/config/without-credentials/development.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" selection-start-line="6" selection-end-line="7" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/projects/express-typeorm/src/docs/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="397">
@@ -629,13 +532,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" selection-start-line="5" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/express-typeorm/src/config/development.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="54" lean-forward="true" selection-start-line="7" selection-start-column="54" selection-end-line="7" selection-end-column="54" />
         </state>
       </provider>
     </entry>
@@ -681,20 +577,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/projects/express-typeorm/src/public/data/contacts.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/projects/express-typeorm/TODO.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="644">
-          <caret line="1013" selection-start-line="1013" selection-end-line="1013" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/out.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -716,17 +598,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/projects/express-typeorm/src/public/data/contacts.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/express-typeorm/secrets/github/config/without-credentials/development.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="7" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/express-typeorm/src/config/development.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="14" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/projects/express-typeorm/src/utils/sample-data/index-1.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="64" selection-start-line="64" selection-end-line="67" selection-end-column="99" />
+        <state relative-caret-position="339">
+          <caret line="37" column="43" lean-forward="true" selection-start-line="37" selection-start-column="43" selection-end-line="37" selection-end-column="43" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/projects/express-typeorm/src/utils/sample-data/index-2.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="50" selection-start-line="50" selection-end-line="50" />
+        <state relative-caret-position="282">
+          <caret line="19" column="29" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/express-typeorm/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/projects/express-typeorm/TODO.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="863" selection-start-line="863" selection-end-line="863" selection-end-column="70" />
         </state>
       </provider>
     </entry>
