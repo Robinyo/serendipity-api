@@ -15,7 +15,7 @@ The RESTful API for Serendipity CRM built using TypeScript, Node.js, Express and
 
 ### Dependency Injection Resources
 
-* GitHub: [njection-js (Angular DI)](https://github.com/mgechev/injection-js)
+* GitHub: [injection-js (Angular DI)](https://github.com/mgechev/injection-js)
 
 ### Express.js Resources
 
