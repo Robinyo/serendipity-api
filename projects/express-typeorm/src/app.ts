@@ -76,7 +76,7 @@ export class App {
   private initialiseControllers(controllers: Controller[]) {
 
     controllers.forEach((controller) => {
-      this.app.use('/api/', controller.router);
+      this.app.use('/api/', controller.getRoutes());
     });
 
   }

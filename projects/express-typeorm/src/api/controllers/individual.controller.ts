@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express';
+import { Request, Response } from 'express';
 
 import { preAuthorise } from '../middleware/pre-authorise';
 
@@ -8,12 +8,13 @@ import { IndividualService } from '../services/individual.service';
 
 import { logger } from '../../lib/logger';
 
-export class IndividualController implements Controller {
-
-  public path = '/individuals';
-  public router = Router();
+export class IndividualController extends Controller {
 
   constructor() {
+
+    super();
+
+    this.path = '/individuals';
 
     this.initialiseRoutes();
   }
@@ -30,16 +31,11 @@ export class IndividualController implements Controller {
 
     const data = await IndividualService.find();
 
-    // logger.info('IndividualController find() data: ' + JSON.stringify(data));
-
-    // response.send(data);
     response.json(data);
 
   };
 
   private findOne = async (request: Request, response: Response) => {
-
-    // logger.info('IndividualController: findOne()');
 
     logger.info('IndividualController findOne() id: ' + request.params.id);
 
@@ -49,9 +45,6 @@ export class IndividualController implements Controller {
 
       const data = await IndividualService.findOne(id);
 
-      // logger.info('IndividualController findOne() data: ' + JSON.stringify(data));
-
-      // response.send(data);
       response.json(data);
 
     } catch (error) {
@@ -75,3 +68,6 @@ export class IndividualController implements Controller {
 // You can achieve the same result by calling  this.router.get(this.path, this.find.bind(this))
 
 // export default IndividualController;
+
+// logger.info('IndividualController find() data: ' + JSON.stringify(data));
+// logger.info('IndividualController findOne() data: ' + JSON.stringify(data));
