@@ -6,7 +6,7 @@ import { Individual } from '../../api/models/individual';
 import { logger } from '../../lib/logger';
 import { config } from '../../config/config';
 
-class SampleData {
+export class SampleData {
 
   static load = async (connection: any, url: string) => {
 
@@ -42,7 +42,7 @@ class SampleData {
 
 }
 
-export default SampleData;
+// export default SampleData;
 
 // https://github.com/axios/axios
 

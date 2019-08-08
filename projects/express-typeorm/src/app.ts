@@ -1,43 +1,86 @@
-import express from 'express';
-import path from 'path';
+import 'reflect-metadata';
+
 import bodyParser from 'body-parser';
-import helmet from 'helmet';
 import cors from 'cors';
+import chalk from 'chalk';
+import express from 'express';
+import helmet from 'helmet';
+import path from 'path';
 
-import routes from './api/routes';
+import { createConnection } from 'typeorm';
 
-export const app = express();
+import { Controller } from './api/interfaces/controller.interface';
 
-// logger.info('Serendipity CRM REST API successfully initialised');
-// logger.warn('Warn');
-// logger.error('Error');
+import { Policy } from './api/utils/policy';
+import { SampleData } from './utils/sample-data/index-2';
 
-//
-// https://expressjs.com/en/advanced/best-practice-security.html
-// https://expressjs.com/en/resources/middleware/cors.html
-//
+import { config } from './config/config';
+import { logger } from './lib/logger';
 
-const whitelist = ['http://localhost', 'https://serendipity.org.au'];
+export class App {
 
-const corsOptions = {
-  origin: function(origin: any, callback: any) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
+  public app: express.Application;
+
+  constructor(controllers: Controller[]) {
+
+    this.app = express();
+
+    this.initialiseMiddleware();
+    this.initialiseStaticRoutes();
+    this.initialiseControllers(controllers);
   }
-};
 
-// app.use(cors(corsOptions));
-app.use(cors());
-app.use(helmet());
-app.use(bodyParser.json());
+  public listen() {
 
-app.use('/public', express.static(path.join(__dirname, 'public')));
-app.use('/docs', express.static(path.join(__dirname, 'docs')));
+    createConnection().then(async connection => {
 
-app.use('/api/', routes);
+      this.app.listen(config.get('port'), () => {
 
-// const app = express();
-// export default app;
+        console.log(chalk.blueBright('Server started on port ' + config.get('port')  + ' try ') +
+            chalk.blueBright.underline('http://' + config.get('ip') + ':' + config.get('port') + '/docs'));
+
+        //
+        // TODO: Use a Database Migration
+        // See: http://typeorm.io/#/migrations
+        //
+
+        SampleData.load(connection, 'public/data/contacts.json');
+
+        //
+        // Load Policy config (e.g., routes, methods and required roles)
+        //
+
+        Policy.load();
+
+        console.log('\nPress CTRL-C to stop');
+
+      });
+
+    }).catch(error => { logger.error(error); });
+
+  }
+
+  private initialiseMiddleware() {
+
+    this.app.use(cors());
+    this.app.use(helmet());
+    this.app.use(bodyParser.json());
+  }
+
+  private initialiseStaticRoutes() {
+
+    this.app.use('/public', express.static(path.join(__dirname, 'public')));
+    this.app.use('/docs', express.static(path.join(__dirname, 'docs')));
+  }
+
+  private initialiseControllers(controllers: Controller[]) {
+
+    controllers.forEach((controller) => {
+      this.app.use('/api/', controller.router);
+    });
+
+  }
+
+}
+
+// export default App;

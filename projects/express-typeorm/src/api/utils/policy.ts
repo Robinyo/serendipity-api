@@ -14,7 +14,7 @@ export interface PolicyDef {
   'methods': Array<MethodDef>;
 }
 
-class Policy {
+export class Policy {
 
   private static readonly url = 'public/data/policys.json';
   private static items: PolicyDef[];
@@ -107,7 +107,7 @@ class Policy {
 
 }
 
-export default Policy;
+// export default Policy;
 
 // static hasRole = (roles: string[], groups: string[]): Boolean => {
 

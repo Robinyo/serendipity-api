@@ -6,7 +6,7 @@ import { config } from '../../config/config';
 
 // import { getAttributes } from '../utils/get-attributes';
 
-import Policy from '../utils/policy';
+import { Policy } from '../utils/policy';
 
 import { logger } from '../../lib/logger';
 

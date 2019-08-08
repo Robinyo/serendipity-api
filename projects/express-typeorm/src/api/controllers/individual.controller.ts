@@ -1,52 +1,62 @@
-import { Request, Response } from 'express';
-import { getRepository } from 'typeorm';
-import { validate } from 'class-validator';
+import { Request, Response, Router } from 'express';
 
-import { Individual } from '../models/individual';
+import { preAuthorise } from '../middleware/pre-authorise';
+
+import { Controller } from '../interfaces/controller.interface';
+
+import { IndividualService } from '../services/individual.service';
 
 import { logger } from '../../lib/logger';
 
-// Standard Request Methods
-//
-// Each HTTP method has specific, well-defined semantics within the context of a REST API’s resource model.
-// POST should be used to create a new resource within a collection and execute controllers. GET is used to retrieve a
-// representation of a resource’s state. PUT should be used to add a new resource to a store or update a resource (within a
-// collection). DELETE removes a resource from its parent. HEAD is used to retrieve the metadata associated with the resource’s state
-//
-// See: https://github.com/Robinyo/restful-api-design-guidelines
+export class IndividualController implements Controller {
 
+  public path = '/individuals';
+  public router = Router();
 
-class IndividualController {
+  constructor() {
 
-  static getAll = async (req: Request, res: Response) => {
+    this.initialiseRoutes();
+  }
 
-    const repository = getRepository(Individual);
+  private initialiseRoutes() {
 
-    const data = await repository.find({ relations: ['organisation', 'address'] });
+    this.router.get(this.path, [preAuthorise], this.find);
+    this.router.get(`${this.path}/:id`, [preAuthorise], this.findOne);
+  }
 
-    // logger.info('contacts: ' + JSON.stringify(data));
+  private find = async (request: Request, response: Response) => {
 
-    res.send(data);
+    logger.info('IndividualController: find()');
+
+    const data = await IndividualService.find();
+
+    // logger.info('IndividualController find() data: ' + JSON.stringify(data));
+
+    // response.send(data);
+    response.json(data);
 
   };
 
-  static getOneById = async (req: Request, res: Response) => {
+  private findOne = async (request: Request, response: Response) => {
 
-    const id: number = req.params.id;
+    // logger.info('IndividualController: findOne()');
 
-    const repository = getRepository(Individual);
+    logger.info('IndividualController findOne() id: ' + request.params.id);
+
+    const id: number = request.params.id;
 
     try {
 
-      const data = await repository.findOneOrFail(id, { relations: ['organisation', 'address'] });
+      const data = await IndividualService.findOne(id);
 
-      // logger.info('contact: ' + JSON.stringify(data));
+      // logger.info('IndividualController findOne() data: ' + JSON.stringify(data));
 
-      res.send(data);
+      // response.send(data);
+      response.json(data);
 
     } catch (error) {
 
-      res.status(404).send({
+      response.status(404).send({
         'error': {
           'code': 404,
           'message': 'The specified resource was not found',
@@ -58,51 +68,10 @@ class IndividualController {
 
   };
 
-  static new = async (req: Request, res: Response) => {
-
-    const individual = new Individual();
-
-    Object.assign(individual, req.body);
-
-    logger.info('individual: ' + JSON.stringify(individual));
-
-    const errors = await validate(individual);
-
-    if (errors.length > 0) {
-      res.status(400).send(errors);
-      return;
-    }
-
-    const repository = getRepository(Individual);
-
-    try {
-
-      //
-      // Will insert or update
-      //
-
-      await repository.save(individual);
-
-    } catch (error) {
-
-      res.status(409).send({
-        'error': {
-          'code': 409,
-          'message': 'The specified resource already exists',
-          'status': 'ALREADY_EXISTS'
-        }
-      });
-
-    }
-
-    logger.info('id: ' + individual.id);
-
-    res.status(201).send('Resource created');
-
-  }
-
 }
 
-export default IndividualController;
+// find() and findOne() are arrow functions because they access properties of an instance of the class.
+// Since they are passed to the router and not called directly, the context changes.
+// You can achieve the same result by calling  this.router.get(this.path, this.find.bind(this))
 
-// https://github.com/Robinyo/restful-api-design-guidelines
+// export default IndividualController;
