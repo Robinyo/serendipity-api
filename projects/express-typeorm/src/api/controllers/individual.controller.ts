@@ -1,3 +1,6 @@
+import 'reflect-metadata';
+import { Inject, Injectable } from 'injection-js';
+
 import { Request, Response } from 'express';
 
 import { preAuthorise } from '../middleware/pre-authorise';
@@ -8,9 +11,18 @@ import { IndividualService } from '../services/individual.service';
 
 import { logger } from '../../lib/logger';
 
+// https://github.com/mgechev/injection-js
+// https://v4.angular.io/guide/dependency-injection#why-injectable
+// @Injectable() marks a class as available to an injector for instantiation.
+
+@Injectable()
 export class IndividualController extends Controller {
 
-  constructor() {
+  static get parameters() {
+    return [new Inject(IndividualService)];
+  }
+
+  constructor(private individualService: IndividualService) {
 
     super();
 
@@ -29,7 +41,7 @@ export class IndividualController extends Controller {
 
     logger.info('IndividualController: find()');
 
-    const data = await IndividualService.find();
+    const data = await this.individualService.find();
 
     response.json(data);
 
@@ -43,7 +55,7 @@ export class IndividualController extends Controller {
 
     try {
 
-      const data = await IndividualService.findOne(id);
+      const data = await this.individualService.findOne(id);
 
       response.json(data);
 
@@ -71,3 +83,15 @@ export class IndividualController extends Controller {
 
 // logger.info('IndividualController find() data: ' + JSON.stringify(data));
 // logger.info('IndividualController findOne() data: ' + JSON.stringify(data));
+
+/*
+
+  // private individualService: IndividualService;
+  // constructor(individualService) {
+
+    // this.individualService = individualService;
+
+    // const injector: Injector = ReflectiveInjector.resolveAndCreate([IndividualService]);
+    // this.individualService = injector.get(IndividualService);
+
+*/

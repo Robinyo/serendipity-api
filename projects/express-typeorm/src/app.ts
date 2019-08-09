@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import { Injectable, ReflectiveInjector } from 'injection-js';
 
 import bodyParser from 'body-parser';
 import cors from 'cors';
@@ -10,6 +11,8 @@ import path from 'path';
 import { createConnection } from 'typeorm';
 
 import { Controller } from './api/interfaces/controller.interface';
+import { IndividualController } from './api/controllers/individual.controller';
+import { IndividualService } from './api/services/individual.service';
 
 import { Policy } from './api/utils/policy';
 import { SampleData } from './utils/sample-data/index-2';
@@ -17,11 +20,20 @@ import { SampleData } from './utils/sample-data/index-2';
 import { config } from './config/config';
 import { logger } from './lib/logger';
 
+// https://github.com/mgechev/injection-js
+// https://v4.angular.io/guide/dependency-injection#implicit-injector-creation
+
+const injector = ReflectiveInjector.resolveAndCreate([IndividualController, IndividualService]);
+
+@Injectable()
 export class App {
 
   public app: express.Application;
 
-  constructor(controllers: Controller[]) {
+  constructor(controllers: Controller[] = [
+    // If you need a something, ask the injector to get it for you :)
+    injector.get(IndividualController)
+  ]) {
 
     this.app = express();
 

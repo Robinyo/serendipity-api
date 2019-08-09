@@ -1,3 +1,6 @@
+import 'reflect-metadata';
+import { Injectable } from 'injection-js';
+
 import { getRepository } from 'typeorm';
 
 import { Individual } from '../models/individual';
@@ -5,57 +8,54 @@ import { IndividualRepository } from '../repositorys/individual.repository';
 
 import { logger } from '../../lib/logger';
 
-// export class IndividualService {
+// https://github.com/mgechev/injection-js
+// https://v4.angular.io/guide/dependency-injection#why-injectable
+// @Injectable() marks a class as available to an injector for instantiation.
+
+@Injectable()
 export class IndividualService {
 
-  public static async find(): Promise<Individual[]> {
+  private repository: IndividualRepository;
+
+  public async find(): Promise<Individual[]> {
 
     logger.info('IndividualService: find()');
 
-    const repository: IndividualRepository = getRepository(Individual);
+    if (! this.repository) { this.init(); }
 
-    return repository.find({ relations: ['organisation', 'address'] });
+    return this.repository.find({ relations: ['organisation', 'address'] });
   }
 
-  public static async findOne(id: number): Promise<Individual | undefined> {
+  public async findOne(id: number): Promise<Individual | undefined> {
+
+    if (! this.repository) { this.init(); }
 
     logger.info('IndividualService: findOne()');
 
-    const repository: IndividualRepository = getRepository(Individual);
-
-    return repository.findOneOrFail(id, { relations: ['organisation', 'address'] });
+    return this.repository.findOneOrFail(id, { relations: ['organisation', 'address'] });
   }
 
-  public static async create(individual: Individual): Promise<Individual> {
+  public async create(individual: Individual): Promise<Individual> {
 
     logger.info('IndividualService: create()');
 
-    const repository: IndividualRepository = getRepository(Individual);
+    if (! this.repository) { this.init(); }
 
-    return repository.save(individual);
+    return this.repository.save(individual);
+  }
+
+  private init() {
+    this.repository = getRepository(Individual);
   }
 
 }
 
-// https://github.com/w3tecch/express-typescript-boilerplate
-// https://github.com/w3tecch/express-typescript-boilerplate/blob/develop/src/api/services/PetService.ts
-
 /*
-
-  private static repository: IndividualRepository = getRepository(Individual);
 
   constructor() {
 
-    logger.info('IndividualService: constructor()');
-
-    IndividualService.repository = getRepository(Individual);
+    // Error: Connection "default" was not found.: Error during instantiation of IndividualService!.
+    this.repository = getRepository(Individual);
   }
-
-// import { Service } from 'typedi';
-import { OrmRepository } from 'typeorm-typedi-extensions';
-
-  @OrmRepository()
-  private static readonly repository: IndividualRepository;
-  // constructor(@OrmRepository() private readonly repository: IndividualRepository) {}
 
 */
