@@ -10,9 +10,11 @@ import path from 'path';
 
 import { createConnection } from 'typeorm';
 
-import { Controller } from './api/interfaces/controller.interface';
-import { IndividualController } from './api/controllers/individual.controller';
-import { IndividualService } from './api/services/individual.service';
+import { Controller } from './api/controllers/controller';
+import {
+  FindIndividualController,
+  FindOneIndividualController
+} from './api/controllers/individual/individual.controller';
 
 import { Policy } from './api/utils/policy';
 import { SampleData } from './utils/sample-data/index-2';
@@ -23,7 +25,7 @@ import { logger } from './lib/logger';
 // https://github.com/mgechev/injection-js
 // https://v4.angular.io/guide/dependency-injection#implicit-injector-creation
 
-const injector = ReflectiveInjector.resolveAndCreate([IndividualController, IndividualService]);
+const injector = ReflectiveInjector.resolveAndCreate([FindIndividualController, FindOneIndividualController]);
 
 @Injectable()
 export class App {
@@ -31,15 +33,17 @@ export class App {
   public app: express.Application;
 
   constructor(controllers: Controller[] = [
+
     // If you need a something, ask the injector to get it for you :)
-    injector.get(IndividualController)
+    injector.get(FindIndividualController),
+    injector.get(FindOneIndividualController),
+
   ]) {
 
     this.app = express();
 
     this.initialiseMiddleware();
-    this.initialiseStaticRoutes();
-    this.initialiseControllers(controllers);
+    this.initialiseRoutes(controllers);
   }
 
   public listen() {
@@ -79,18 +83,20 @@ export class App {
     this.app.use(bodyParser.json());
   }
 
-  private initialiseStaticRoutes() {
+  private initialiseRoutes(controllers: Controller[]) {
 
-    this.app.use('/public', express.static(path.join(__dirname, 'public')));
-    this.app.use('/docs', express.static(path.join(__dirname, 'docs')));
-  }
-
-  private initialiseControllers(controllers: Controller[]) {
+    this.initialiseStaticRoutes();
 
     controllers.forEach((controller) => {
       this.app.use('/api/', controller.getRoutes());
     });
 
+  }
+
+  private initialiseStaticRoutes() {
+
+    this.app.use('/public', express.static(path.join(__dirname, 'public')));
+    this.app.use('/docs', express.static(path.join(__dirname, 'docs')));
   }
 
 }
