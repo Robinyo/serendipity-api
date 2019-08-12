@@ -1,10 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity } from 'typeorm';
+
+import { Party } from './party';
 
 @Entity('Organisation')
-export class Organisation {
-
-  @PrimaryGeneratedColumn()
-  id: number;
+export class Organisation extends Party {
 
   @Column()
   name: string;
@@ -13,6 +12,3 @@ export class Organisation {
   phoneNumber: string;
 
 }
-
-// import { SurrogateKey } from './surrogate-key';
-// export class Organisation extends SurrogateKey {

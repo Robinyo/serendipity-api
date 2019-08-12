@@ -58,20 +58,21 @@ For example, [ormconfig.json](https://typeorm.io/#/using-ormconfig):
   "type": "sqlite",
   "database": "serendipity.db",
   "synchronize": true,
+  "migrationsRun": false,
   "logging": false,
   "entities": [
-    "src/entitys/**/*.ts"
+    "src/api/models/**/*.ts"
   ],
   "migrations": [
-    "src/migrations/**/*.ts"
+    "src/database/migrations/**/*.ts"
   ],
   "subscribers": [
-    "src/subscribers/**/*.ts"
+    "src/api/subscribers/**/*.ts"
   ],
   "cli": {
-    "entitiesDir": "src/entitys",
-    "migrationsDir": "src/migrations",
-    "subscribersDir": "src/subscribers"
+    "entitiesDir": "src/api/models",
+    "migrationsDir": "src/database/migrations",
+    "subscribersDir": "src/api/subscribers"
   }
 }
 ```
@@ -164,6 +165,11 @@ docker system prune
 
 * GitHub: [TypeORM - ORM for TypeScript and JavaScript](https://github.com/typeorm/typeorm)
 * TypeORM.io: [Getting Started Guide](https://typeorm.io/#/)
+
+### Additional TypeORM Resources
+
+* GitHub: [W3Tech - Express TypeScript Boilerplate](https://github.com/w3tecch/express-typescript-boilerplate)
+* codeburst.io: [TypeORM By Example](https://codeburst.io/typeorm-by-example-part-1-6d6da04f9f23)
 
 ### Docker Resources
 

@@ -78,3 +78,14 @@ export class Individual extends Party {
 // https://github.com/typeorm/typeorm/blob/master/docs/decorator-reference.md
 // https://typeorm.io/#/relations-faq
 // https://typeorm.io/#/many-to-one-one-to-many-relations
+
+/*
+
+  @Type(() => Address)
+  @OneToOne(type => Address, {
+    cascade: true,
+  })
+  @JoinColumn()
+  address: Address;
+
+*/

@@ -2,6 +2,7 @@
   "type": "sqlite",
   "database": "serendipity.db",
   "synchronize": true,
+  "migrationsRun": false,
   "logging": false,
   "entities": [
     "src/api/models/**/*.ts"

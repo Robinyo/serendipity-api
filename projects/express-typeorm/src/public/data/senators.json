@@ -1,0 +1,76 @@
+[
+  {
+    "displayName": "Abetz, Senator the Hon Eric",
+    "title": "Senator the Hon",
+    "givenName": "Eric",
+    "middleName": "",
+    "familyName": "Abetz",
+    "honorific": "",
+    "salutation": "Senator",
+    "preferredName": "Eric",
+    "initials": "E.",
+    "gender": "MALE",
+    "email": "eric.abetz@aph.gov.au",
+    "phoneNumber": "(02) 6277 3019",
+    "photoUrl": "",
+    "organisation": {
+      "name": "Liberal Party",
+      "phoneNumber": "(03) 6224 3707"
+    },
+    "addresses": [
+      {
+        "line1": "Highbury House",
+        "line2": "136 Davey Street",
+        "city": "Hobart",
+        "state": "TAS",
+        "postalCode": "7000",
+        "addressType": "Electorate Office"
+      },
+      {
+        "line1": "The Senate",
+        "line2": "PO Box 6100 Parliament House",
+        "city": "Canberra",
+        "state": "ACT",
+        "postalCode": "2600",
+        "addressType": "Parliament House"
+      }
+    ]
+  },
+  {
+    "displayName": "Antic, Senator Alexander",
+    "title": "Senator",
+    "givenName": "Alexander",
+    "middleName": "",
+    "familyName": "Antic",
+    "honorific": "",
+    "salutation": "Senator",
+    "preferredName": "Alex",
+    "initials": "A.",
+    "gender": "MALE",
+    "email": "alexander.antic@aph.gov.au",
+    "phoneNumber": "(02) 6277 3464",
+    "photoUrl": "",
+    "organisation": {
+      "name": "Liberal Party",
+      "phoneNumber": "(08) 8205 1080"
+    },
+    "addresses": [
+      {
+        "line1": "Commonwealth Parliament Offices, Suite 8",
+        "line2": "Level 13, 100 King William Street",
+        "city": "Adelaide",
+        "state": "SA",
+        "postalCode": "5000",
+        "addressType": "Electorate Office"
+      },
+      {
+        "line1": "The Senate",
+        "line2": "PO Box 6100 Parliament House",
+        "city": "Canberra",
+        "state": "ACT",
+        "postalCode": "2600",
+        "addressType": "Parliament House"
+      }
+    ]
+  }
+]

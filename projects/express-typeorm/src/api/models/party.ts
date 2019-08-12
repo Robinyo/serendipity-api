@@ -1,12 +1,12 @@
 import { PrimaryGeneratedColumn } from 'typeorm';
 
 //
-// A surrogate key is any column or set of columns that can be declared as the primary key instead of a "real" or natural key.
-// Sometimes there can be several natural keys that could be declared as the primary key, and these are all called candidate keys.
-// So a surrogate is a candidate key.
+// A surrogate key is any column or set of columns that can be declared as the primary key instead of a "real" or
+// natural key. Sometimes there can be several natural keys that could be declared as the primary key, and these
+// are all called candidate keys. So a surrogate is a candidate key.
 //
 
-export abstract class SurrogateKey {
+export abstract class Party {
 
   @PrimaryGeneratedColumn()
   id: number;

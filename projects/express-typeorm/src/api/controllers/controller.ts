@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 
-import { preAuthorise } from '../middleware/pre-authorise';
+// import { preAuthorise } from '../middleware/pre-authorise';
 
 export abstract class Controller {
 
@@ -18,7 +18,8 @@ export abstract class Controller {
   }
 
   private initialiseRoutes() {
-    this.router.get(this.path, [preAuthorise], this.execute);
+    // this.router.get(this.path, [preAuthorise], this.execute);
+    this.router.get(this.path, this.execute);
   }
 
   public getRoutes() {

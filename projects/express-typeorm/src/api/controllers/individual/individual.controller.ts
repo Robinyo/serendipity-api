@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { Injectable } from 'injection-js';
+import { Injectable, ReflectiveInjector } from 'injection-js';
 
 import { getRepository } from 'typeorm';
 
@@ -31,7 +31,7 @@ export class FindIndividualController extends Controller {
 
       const repository: IndividualRepository = getRepository(Individual);
 
-      const data = await repository.find({ relations: ['organisation', 'address'] });
+      const data = await repository.find({ relations: ['organisation', 'addresses'] });
 
       return this.ok<Individual[]>(data);
 
@@ -60,7 +60,7 @@ export class FindOneIndividualController extends Controller {
 
       const repository: IndividualRepository = getRepository(Individual);
 
-      const data = await repository.findOneOrFail(id, { relations: ['organisation', 'address'] });
+      const data = await repository.findOneOrFail(id, { relations: ['organisation', 'addresses'] });
 
       return this.ok<Individual>(data);
 
@@ -72,3 +72,22 @@ export class FindOneIndividualController extends Controller {
 
 }
 
+const individualControllers = [
+  FindIndividualController,
+  FindOneIndividualController
+];
+
+const injector = ReflectiveInjector.resolveAndCreate(individualControllers);
+
+export function IndividualControllerFactory(controllers = individualControllers) {
+
+  const factory: Controller[] = [];
+
+  controllers.forEach((controller) => {
+
+    factory.push(injector.get(controller));
+  });
+
+  return factory;
+
+}

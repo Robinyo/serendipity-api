@@ -3,32 +3,31 @@ import axios from 'axios';
 import { plainToClass } from 'class-transformer';
 
 import { Individual } from '../../api/models/individual';
+
 import { logger } from '../../lib/logger';
 import { config } from '../../config/config';
 
-export class SampleData {
+export class Senators {
 
   static load = async (connection: any, url: string) => {
 
-    logger.info('SampleData load()');
+    logger.info('Senators load()');
 
     try {
 
       // axios.defaults.baseURL = 'http://127.0.0.1:3001';
       axios.defaults.baseURL = config.get('protocol') + '://' + config.get('ip') + ':' + config.get('port');
 
-      logger.info('SampleData load() baseURL: ' + axios.defaults.baseURL);
+      logger.info('Senators load() baseURL: ' + axios.defaults.baseURL);
 
       const response = await axios.get(url);
       const items = response.data;
-
-      // logger.info('items: ' + JSON.stringify(items));
 
       for (const item of items) {
 
         const individual = plainToClass(Individual, item);
 
-        // logger.info('individual: ' + JSON.stringify(individual));
+        // logger.info('individual: ' + JSON.stringify(individual, null, 2) + '\n');
 
         await connection.manager.save(individual);
       }
@@ -38,11 +37,11 @@ export class SampleData {
       logger.error(error);
     }
 
-  }
+  };
 
 }
 
-// export default SampleData;
+// export default Senators;
 
 // https://github.com/axios/axios
 
@@ -54,3 +53,5 @@ export class SampleData {
 
 // https://github.com/typeorm/typeorm/issues/3444
 // Hydration of Embedded (json) types into proper class instances
+
+// logger.info('items: ' + JSON.stringify(items, null, 2) + '\n' );

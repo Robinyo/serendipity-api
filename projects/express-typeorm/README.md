@@ -25,3 +25,12 @@ The RESTful API for Serendipity CRM built using TypeScript, Node.js, Express and
 
 * GitHub: [TypeORM - ORM for TypeScript and JavaScript](https://github.com/typeorm/typeorm)
 * TypeORM.io: [Getting Started Guide](https://typeorm.io/#/)
+
+### SQLite Resources
+
+* SQLite.org: [What Is SQLite?](https://www.sqlite.org/index.html)
+* SQLiteBrowser.org: [DB Browser for SQLite](https://sqlitebrowser.org/dl/)
+
+### Address Validation, Normalisation and Geocoding Resources
+
+* Smarty Streets blog: [What is an address API?](https://smartystreets.com/articles/address-apis)

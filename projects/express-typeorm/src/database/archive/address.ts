@@ -1,5 +1,6 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 
+import { AddressType } from './address-type';
 import { Location } from './location';
 
 @Entity('Address')
@@ -25,9 +26,14 @@ export class Address extends Location {
   })
   country: string;
 
-  @Column()
-  addressType: string;
+  @OneToOne(type => AddressType, {
+    cascade: true,
+  })
+  @JoinColumn()
+  addressType: AddressType;
 
 }
 
 // https://github.com/typeorm/typeorm/blob/master/docs/entities.md
+
+// Error: OneToOne FOREIGN KEY constraint

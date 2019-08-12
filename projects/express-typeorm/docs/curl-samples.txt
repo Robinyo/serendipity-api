@@ -1,0 +1,21 @@
+curl -X GET \
+  http://127.0.0.1:3001/api/individuals \
+  -H 'Accept: */*' \
+  -H 'Accept-Encoding: gzip, deflate' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Host: 127.0.0.1:3001' \
+  -H 'Postman-Token: eed7aabd-5c16-4f46-af58-9d2cf68ee40d,5cfba012-0b26-489d-8037-eef482e1b9bb' \
+  -H 'User-Agent: PostmanRuntime/7.15.2' \
+  -H 'cache-control: no-cache'
+
+curl -X GET \
+  http://127.0.0.1:3001/api/individuals/2 \
+  -H 'Accept: */*' \
+  -H 'Accept-Encoding: gzip, deflate' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Host: 127.0.0.1:3001' \
+  -H 'Postman-Token: f86eba18-2425-41f5-a615-be3754effbfc,cf3ec77d-3846-48e5-af43-9c77b3c8bff9' \
+  -H 'User-Agent: PostmanRuntime/7.15.2' \
+  -H 'cache-control: no-cache'
