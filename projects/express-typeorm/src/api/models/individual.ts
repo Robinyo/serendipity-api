@@ -1,18 +1,31 @@
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from 'typeorm';
 
 import { Type } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
 
 import { Party } from './party';
 
-import { Address } from './address';
-import { Organisation } from './organisation';
-
 @Entity('Individual')
-export class Individual extends Party {
+export class Individual {
 
-  @Column()
-  displayName: string;
+  @PrimaryColumn()
+  id: number;
+
+  // @BeforeInsert()
+  // setPrimaryKey() {
+  //   this.id = this.party.id;
+  // }
+
+  //
+  // https://typeorm.io/#/one-to-one-relations
+  //
+
+  @Type(() => Party)
+  @OneToOne(type => Party, {
+    cascade: true,
+  })
+  @JoinColumn({ name: 'partyId' })
+  party: Party;
 
   @Column()
   title: string;
@@ -52,9 +65,24 @@ export class Individual extends Party {
   @Column()
   photoUrl: string;
 
+}
+
+// https://github.com/typeorm/typeorm/blob/master/docs/decorator-reference.md
+// https://typeorm.io/#/relations-faq
+// https://typeorm.io/#/many-to-one-one-to-many-relations
+
+/*
+
   //
-  // https://typeorm.io/#/one-to-one-relations
+  // https://typeorm.io/#/many-to-many-relations
   //
+
+  @Type(() => Organisation)
+  @ManyToMany(type => Organisation, {
+    cascade: true,
+  })
+  @JoinTable({ name: 'IndividualOrganisation' })
+  organisations: Organisation[];
 
   @Type(() => Organisation)
   @OneToOne(type => Organisation, {
@@ -63,18 +91,45 @@ export class Individual extends Party {
   @JoinColumn()
   organisation: Organisation;
 
+*/
+
+/*
+
   //
-  // https://typeorm.io/#/many-to-many-relations
+  // https://typeorm.io/#/embedded-entities/
   //
 
-  @ManyToMany(type => Address, {
-    cascade: true,
+  @Column(type => SurrogateKey, { prefix: '' })
+  surrogateKey: SurrogateKey;
+
+*/
+
+/*
+
+  @PrimaryColumn({
+    default: () => setPrimaryKey()
   })
-  @JoinTable({name: 'IndividualAddress'})
-  addresses: Address[];
+  id: number;
 
-}
+  // @BeforeInsert()
+  setPrimaryKey() {
+    this.id = this.party.id;
+  }
 
-// https://github.com/typeorm/typeorm/blob/master/docs/decorator-reference.md
-// https://typeorm.io/#/relations-faq
-// https://typeorm.io/#/many-to-one-one-to-many-relations
+*/
+
+// export class Individual extends Party {
+
+// https://github.com/typeorm/typeorm/issues/150
+
+/*
+
+  // @PrimaryColumn('varchar', { length: <max shortId length>, default: () => `'${shortid.generate()}'` })
+  // @Column({ default: () => "pow(5)" })
+
+  @PrimaryColumn({
+    default: () => 'party.id'
+  })
+  id: number;
+
+*/

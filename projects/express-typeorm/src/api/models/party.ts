@@ -1,42 +1,58 @@
-import { PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-//
-// A surrogate key is any column or set of columns that can be declared as the primary key instead of a "real" or
-// natural key. Sometimes there can be several natural keys that could be declared as the primary key, and these
-// are all called candidate keys. So a surrogate is a candidate key.
-//
+import { Type } from 'class-transformer';
+// import { IsNotEmpty } from 'class-validator';
 
-export abstract class Party {
+import { Address } from './address';
+import { Role } from './role';
+import { SpecialColumns } from './special-columns';
+
+@Entity('Party')
+export class Party {
 
   @PrimaryGeneratedColumn()
-  id: number;
+  readonly id: number;
+
+  @Column(type => SpecialColumns, { prefix: '' })
+  specialColumns: SpecialColumns;
+
+  @Column()
+  partyType: string;
+
+  @Column()
+  displayName: string;
 
   //
-  // MongoDB
-  // See: https://typeorm.io/#/mongodb
+  // https://typeorm.io/#/many-to-many-relations
   //
 
-  // @PrimaryGeneratedColumn('uuid')
-  // id: string;
+  @Type(() => Address)
+
+  @ManyToMany(type => Address, {
+    cascade: true,
+  })
+  @JoinTable({ name: 'PartyAddress' })
+  // addresses: AddressCollection;
+  addresses: Address[];
+
+  @Type(() => Role)
+  // @Type(() => RoleCollection)
+  @ManyToMany(type => Role, {
+    cascade: true,
+  })
+  @JoinTable({ name: 'PartyRole' })
+  // roles: RoleCollection;
+  roles: Role[];
 
 }
 
-// import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+// https://github.com/typestack/class-transformer
 
-// https://github.com/typeorm/typeorm/blob/master/docs/decorator-reference.md
+// https://github.com/typestack/class-transformer/issues/5 -> nested array
 
-/*
+// Address[]
+// export class AddressCollection extends Array<Address> {}
+// Role[]
+// export class RoleCollection extends Array<Role> {}
 
-  // @PrimaryColumn()
-
-  @Column()
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @Column()
-  @UpdateDateColumn()
-  updatedAt: Date;
-
-  // @VersionColumn
-
-*/
+// @Type(() => AddressCollection)
