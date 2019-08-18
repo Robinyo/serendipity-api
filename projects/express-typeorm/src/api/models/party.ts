@@ -1,7 +1,7 @@
 import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Type } from 'class-transformer';
-// import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 
 import { Address } from './address';
 import { Role } from './role';
@@ -11,14 +11,18 @@ import { SpecialColumns } from './special-columns';
 export class Party {
 
   @PrimaryGeneratedColumn()
-  readonly id: number;
+  id: number;
 
   @Column(type => SpecialColumns, { prefix: '' })
   specialColumns: SpecialColumns;
 
+  @IsNotEmpty()
+  // @Column('varchar', { length: 50 })   // Type: VARCHAR(50)	Size: 2000000000,10
   @Column()
   partyType: string;
 
+  @IsNotEmpty()
+  // @Column('varchar', { length: 100 })  // Type: VARCHAR(100)	Size: 2000000000,10
   @Column()
   displayName: string;
 
@@ -27,32 +31,21 @@ export class Party {
   //
 
   @Type(() => Address)
-
   @ManyToMany(type => Address, {
     cascade: true,
   })
   @JoinTable({ name: 'PartyAddress' })
-  // addresses: AddressCollection;
   addresses: Address[];
 
   @Type(() => Role)
-  // @Type(() => RoleCollection)
   @ManyToMany(type => Role, {
     cascade: true,
   })
   @JoinTable({ name: 'PartyRole' })
-  // roles: RoleCollection;
   roles: Role[];
 
 }
 
+// https://typeorm.io/#/entities
+
 // https://github.com/typestack/class-transformer
-
-// https://github.com/typestack/class-transformer/issues/5 -> nested array
-
-// Address[]
-// export class AddressCollection extends Array<Address> {}
-// Role[]
-// export class RoleCollection extends Array<Role> {}
-
-// @Type(() => AddressCollection)

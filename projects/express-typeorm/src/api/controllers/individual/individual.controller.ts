@@ -31,7 +31,7 @@ export class FindIndividualController extends Controller {
 
       const repository: IndividualRepository = getRepository(Individual);
 
-      const data = await repository.find({ relations: ['organisation', 'addresses'] });
+      const data = await repository.find({ relations: ['party', 'party.addresses', 'party.roles'] });
 
       return this.ok<Individual[]>(data);
 
@@ -60,7 +60,7 @@ export class FindOneIndividualController extends Controller {
 
       const repository: IndividualRepository = getRepository(Individual);
 
-      const data = await repository.findOneOrFail(id, { relations: ['organisation', 'addresses'] });
+      const data = await repository.findOneOrFail(id, { relations: ['party', 'party.addresses', 'party.roles'] });
 
       return this.ok<Individual>(data);
 

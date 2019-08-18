@@ -10,7 +10,8 @@ export class Role {
   // surrogateKey: SurrogateKey;
 
   @PrimaryGeneratedColumn()
-  readonly id: number;
+  // readonly id: number;
+  id: number;
 
   @Column({
     default: 'Member'
@@ -19,6 +20,9 @@ export class Role {
 
   @Column()
   partyId: number;
+
+  @Column()
+  partyType: string;
 
   @Column()
   partyName: string;
@@ -35,6 +39,9 @@ export class Role {
 
   @Column()
   reciprocalPartyId: number;
+
+  @Column()
+  reciprocalPartyType: string;
 
   @Column()
   reciprocalPartyName: string;

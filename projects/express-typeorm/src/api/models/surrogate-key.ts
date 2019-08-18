@@ -9,7 +9,8 @@ import { PrimaryGeneratedColumn } from 'typeorm';
 export class SurrogateKey {
 
   @PrimaryGeneratedColumn()
-  readonly id: number;
+  // readonly id: number;
+  id: number;
 
   //
   // MongoDB

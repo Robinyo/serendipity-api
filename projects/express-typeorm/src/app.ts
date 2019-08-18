@@ -12,7 +12,7 @@ import { IndividualControllerFactory } from './api/controllers/individual/indivi
 
 import { Policy } from './api/utils/policy';
 
-import { Senators } from './database/seeds/senators';
+// import { Senators } from './database/seeds/senators';
 
 import { config } from './config/config';
 import { logger } from './lib/logger';
@@ -47,7 +47,7 @@ export class App {
         // See: http://typeorm.io/#/migrations
         //
 
-        Senators.load(connection, 'public/data/senators.json');
+        // Senators.load(connection, 'public/data/senators.json');
 
         //
         // Load Policy config (e.g., routes, methods and required roles)

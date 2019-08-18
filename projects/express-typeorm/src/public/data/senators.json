@@ -16,10 +16,12 @@
       "roles": [
         {
           "role": "Member",
+          "partyType": "Individual",
           "partyName": "Abetz, Senator the Hon Eric",
           "relationship": "Membership",
           "reciprocalRole": "Organisation",
-          "reciprocalPartyName": "Liberal"
+          "reciprocalPartyType": "Organisation",
+          "reciprocalPartyName": "Liberal Party"
         }
       ]
     },
@@ -54,10 +56,12 @@
       "roles": [
         {
           "role": "Member",
+          "partyType": "Individual",
           "partyName": "Antic, Senator Alexander",
           "relationship": "Membership",
           "reciprocalRole": "Organisation",
-          "reciprocalPartyName": "Liberal"
+          "reciprocalPartyType": "Organisation",
+          "reciprocalPartyName": "Liberal Party"
         }
       ]
     },

@@ -11,8 +11,8 @@ import { Party } from '../../api/models/party';
 import { logger } from '../../lib/logger';
 import { config } from '../../config/config';
 
-const LIBERAL = 'Liberal';
-const LABOR = 'Labor';
+const LIBERAL = 'Liberal Party';
+const LABOR = 'Labor Party';
 
 export class Senators {
 
@@ -28,7 +28,7 @@ export class Senators {
 
       const liberal = new Party();
       liberal.partyType = 'Organisation';
-      liberal.displayName = 'Liberal';
+      liberal.displayName = 'Liberal Party';
 
       const liberalOrg = new Organisation();
       liberalOrg.name = 'Liberal Party of Australia';
@@ -47,7 +47,7 @@ export class Senators {
 
       const labor = new Party();
       labor.partyType = 'Organisation';
-      labor.displayName = 'Labor';
+      labor.displayName = 'Labor Party';
 
       const laborOrg = new Organisation();
       laborOrg.name = 'Australian Labor Party';
@@ -92,7 +92,7 @@ export class Senators {
         const individual = plainToClass(Individual, item);
 
         //
-        // Create a 'relationship' from the Senator to their Political Party
+        // Create a 'relationship' from the Senator to a Political Party
         //
 
         const party = new Party();
@@ -106,11 +106,14 @@ export class Senators {
         "roles": [
           {
             "role": "Member",
+            "partyType": "Individual",
             "partyName": "Abetz, Senator the Hon Eric",
             "relationship": "Membership",
             "reciprocalRole": "Organisation",
-            "reciprocalPartyName": "Liberal"
+            "reciprocalPartyType": "Organisation",
+            "reciprocalPartyName": "Liberal Party"
           }
+        ]
 
         */
 
@@ -122,12 +125,13 @@ export class Senators {
 
         if (individual.party.roles.length) {
 
+          individual.party.roles[0].partyId = individual.id;
+
           switch (individual.party.roles[0].reciprocalPartyName) {
 
             case LIBERAL:
 
               logger.info(LIBERAL);
-              individual.party.roles[0].partyId = individual.id;
               individual.party.roles[0].reciprocalPartyId = liberalOrg.id;
 
               break;
@@ -135,7 +139,6 @@ export class Senators {
             case LABOR:
 
               logger.info(LABOR);
-              individual.party.roles[0].partyId = individual.id;
               individual.party.roles[0].reciprocalPartyId = laborOrg.id;
 
               break;
@@ -176,10 +179,3 @@ export class Senators {
 // Hydration of Embedded (json) types into proper class instances
 
 // logger.info('items: ' + JSON.stringify(items, null, 2) + '\n' );
-
-// See: individual.ts
-//
-// @BeforeInsert()
-// setPrimaryKey() {
-//   this.id = this.party.id;
-// }

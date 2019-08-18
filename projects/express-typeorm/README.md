@@ -25,6 +25,7 @@ The RESTful API for Serendipity CRM built using TypeScript, Node.js, Express and
 
 * GitHub: [TypeORM - ORM for TypeScript and JavaScript](https://github.com/typeorm/typeorm)
 * TypeORM.io: [Getting Started Guide](https://typeorm.io/#/)
+* GitHub: [Generate TypeORM models from an existing database](https://github.com/Kononnable/typeorm-model-generator)
 
 ### SQLite Resources
 
