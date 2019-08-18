@@ -19,3 +19,45 @@ curl -X GET \
   -H 'Postman-Token: f86eba18-2425-41f5-a615-be3754effbfc,cf3ec77d-3846-48e5-af43-9c77b3c8bff9' \
   -H 'User-Agent: PostmanRuntime/7.15.2' \
   -H 'cache-control: no-cache'
+
+curl -X POST \
+  http://127.0.0.1:3001/api/individuals \
+  -H 'Accept: */*' \
+  -H 'Accept-Encoding: gzip, deflate' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Length: 649' \
+  -H 'Content-Type: application/json' \
+  -H 'Host: 127.0.0.1:3001' \
+  -H 'Postman-Token: a5306c53-f8ef-495b-b71d-02f2f676e90c,73ca9303-da26-4602-adb0-6de66f4ea818' \
+  -H 'User-Agent: PostmanRuntime/7.15.2' \
+  -H 'cache-control: no-cache' \
+  -d '{
+  "party": {
+    "partyType": "Individual",
+    "displayName": "Askew, Senator Wendy",
+    "roles": [],
+    "addresses": [
+      {
+        "line1": "Suite 1",
+        "line2": "71 Paterson Street",
+        "city": "Launceston",
+        "state": "TAS",
+        "postalCode": "7250",
+        "addressType": "Electorate Office"
+      }
+    ]
+  },
+  "title": "Senator",
+  "givenName": "Wendy",
+  "middleName": "Anne",
+  "familyName": "Askew",
+  "honorific": "",
+  "salutation": "Senator",
+  "preferredName": "Wendy",
+  "initials": "W.A.",
+  "gender": "FEMALE",
+  "email": "wendy.askew@aph.gov.au",
+  "phoneNumber": "(03) 6331 8501",
+  "photoUrl": ""
+}'

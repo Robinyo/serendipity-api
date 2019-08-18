@@ -2,6 +2,11 @@ import { Request, Response, Router } from 'express';
 
 // import { preAuthorise } from '../middleware/pre-authorise';
 
+const UNAUTHORIZED = 'Unauthorized';
+const INVALID_ARGUMENT = 'Invalid Argument';
+const NOT_FOUND = 'The specified resource was not found';
+const PERMISSION_DENIED = 'Client does not have sufficient permission';
+
 export abstract class Controller {
 
   protected path = '/';
@@ -17,10 +22,7 @@ export abstract class Controller {
     this.initialiseRoutes();
   }
 
-  private initialiseRoutes() {
-    // this.router.get(this.path, [preAuthorise], this.execute);
-    this.router.get(this.path, this.execute);
-  }
+  protected abstract initialiseRoutes();
 
   public getRoutes() {
     return this.router;
@@ -54,8 +56,24 @@ export abstract class Controller {
 
   }
 
+  protected created(location: string) {
+    this.res.location(location).sendStatus(201);
+  }
+
+  protected clientError(message?: string) {
+    return this.jsonResponse(400, message ? message : INVALID_ARGUMENT);
+  }
+
+  protected unauthorized(message?: string) {
+    return this.jsonResponse(401, message ? message : UNAUTHORIZED);
+  }
+
+  protected forbidden (message?: string) {
+    return this.jsonResponse(403, message ? message : PERMISSION_DENIED);
+  }
+
   protected notFound(message?: string) {
-    return this.jsonResponse(404, message ? message : 'The specified resource was not found');
+    return this.jsonResponse(404, message ? message : NOT_FOUND);
   }
 
   protected fail(error: Error | string) {
@@ -69,6 +87,8 @@ export abstract class Controller {
 }
 
 // export default Controller;
+
+// https://khalilstemmler.com/articles/enterprise-typescript-nodejs/clean-consistent-expressjs-controllers/
 
 // https://github.com/Robinyo/restful-api-design-guidelines
 

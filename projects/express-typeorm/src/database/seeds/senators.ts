@@ -117,8 +117,9 @@ export class Senators {
 
         */
 
-        party.roles = [].concat(individual.party.roles);
         party.addresses = [].concat(individual.party.addresses);
+        party.addresses.push(parliamentHouse);
+        party.roles = [].concat(individual.party.roles);
         individual.party = party;
 
         individual.id = party.id;

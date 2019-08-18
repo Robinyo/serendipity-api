@@ -1,0 +1,29 @@
+{
+  "party": {
+    "partyType": "Individual",
+    "displayName": "Askew, Senator Wendy",
+    "roles": [],
+    "addresses": [
+      {
+        "line1": "Suite 1",
+        "line2": "71 Paterson Street",
+        "city": "Launceston",
+        "state": "TAS",
+        "postalCode": "7250",
+        "addressType": "Electorate Office"
+      }
+    ]
+  },
+  "title": "Senator",
+  "givenName": "Wendy",
+  "middleName": "Anne",
+  "familyName": "Askew",
+  "honorific": "",
+  "salutation": "Senator",
+  "preferredName": "Wendy",
+  "initials": "W.A.",
+  "gender": "FEMALE",
+  "email": "wendy.askew@aph.gov.au",
+  "phoneNumber": "(03) 6331 8501",
+  "photoUrl": ""
+}
