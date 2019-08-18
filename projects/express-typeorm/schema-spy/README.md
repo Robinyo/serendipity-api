@@ -17,7 +17,7 @@ driverPath=sqlite-jdbc-3.27.2.1.jar
 
 ### SchemaSpy
 
-SQLite properties file (`schemaspy.properties`):
+SchemaSpy properties file (`schemaspy.properties`):
 
 ```
 schemaspy.t=sqlite
