@@ -2,6 +2,7 @@ import { Request, Response, Router } from 'express';
 
 // import { preAuthorise } from '../middleware/pre-authorise';
 
+const CREATED = 'Created :)';
 const UNAUTHORIZED = 'Unauthorized';
 const INVALID_ARGUMENT = 'Invalid Argument';
 const NOT_FOUND = 'The specified resource was not found';
@@ -57,7 +58,8 @@ export abstract class Controller {
   }
 
   protected created(location: string) {
-    this.res.location(location).sendStatus(201);
+    // this.res.location(location).sendStatus(201);
+    return this.res.location(location).status(201).json({ CREATED });
   }
 
   protected clientError(message?: string) {
@@ -93,24 +95,6 @@ export abstract class Controller {
 // https://github.com/Robinyo/restful-api-design-guidelines
 
 /*
-
-public execute(req: Request, res: Response): void {
-
-  this.req = req;
-  this.res = res;
-
-  this.executeImpl();
-}
-
-protected abstract async executeImpl(): Promise<void | any>;
-
-*/
-
-/*
-
-  public getRoutes() {
-    return this.router;
-  }
 
       response.status(404).send({
         'error': {

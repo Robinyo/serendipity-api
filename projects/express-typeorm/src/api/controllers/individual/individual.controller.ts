@@ -1,10 +1,10 @@
 import 'reflect-metadata';
 
-import { Injectable, ReflectiveInjector } from 'injection-js';
-
 import { getRepository } from 'typeorm';
 import { plainToClass } from 'class-transformer';
 import { validate } from 'class-validator';
+
+import { Injectable, ReflectiveInjector } from 'injection-js';
 
 import { Individual } from '../../models/individual';
 import { IndividualRepository } from '../../repositorys/individual.repository';
