@@ -5,7 +5,7 @@
 <h1 align="center">Serendipity's RESTful API</h1>
 
 <p align="center">
-  <b>The RESTful API for [Serendipity CRM](https://github.com/Robinyo/serendipity) built using TypeScript, Node.js, Express and TypeORM.</b></br>
+  <b>The RESTful API for Serendipity CRM built using TypeScript, Node.js, Express and TypeORM.</b></br>
 </p>
 
 <br />
