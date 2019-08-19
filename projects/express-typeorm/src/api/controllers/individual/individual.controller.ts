@@ -35,9 +35,9 @@ export class FindIndividualController extends Controller {
 
   protected executeImpl = async () => {
 
-    try {
+    logger.info('FindIndividualController: executeImpl()');
 
-      logger.info('FindIndividualController: executeImpl()');
+    try {
 
       const repository: IndividualRepository = getRepository(Individual);
 
@@ -45,8 +45,8 @@ export class FindIndividualController extends Controller {
 
       return this.ok<Individual[]>(data);
 
-    } catch (err) {
-      return this.fail(err.toString())
+    } catch (error) {
+      return this.handleError(error);
     }
 
   };
@@ -67,20 +67,22 @@ export class FindOneIndividualController extends Controller {
 
   protected executeImpl = async () => {
 
+    const id: number = this.req.params.id;
+
+    logger.info('FindOneIndividualController executeImpl() id: ' + this.req.params.id);
+
+    let repository: IndividualRepository;
+
     try {
 
-      logger.info('FindOneIndividualController executeImpl() id: ' + this.req.params.id);
-
-      const id: number = this.req.params.id;
-
-      const repository: IndividualRepository = getRepository(Individual);
+      repository = getRepository(Individual);
 
       const data = await repository.findOneOrFail(id, { relations: ['party', 'party.addresses', 'party.roles'] });
 
       return this.ok<Individual>(data);
 
-    } catch (err) {
-      return this.fail(err.toString())
+    } catch (error) {
+      return this.handleError(error);
     }
 
   };
@@ -101,12 +103,9 @@ export class CreateIndividualController extends Controller {
 
   protected executeImpl = async () => {
 
+    logger.info('CreateIndividualController: executeImpl()');
+
     try {
-
-      logger.info('CreateIndividualController: executeImpl()');
-
-      // const individual = new Individual();
-      // Object.assign(individual, this.req.body);
 
       const individual = plainToClass(Individual, this.req.body);
 
@@ -137,8 +136,90 @@ export class CreateIndividualController extends Controller {
 
       return this.created(PATH + '/' + party.id);
 
-    } catch (err) {
-      return this.fail(err.toString())
+    } catch (error) {
+      return this.handleError(error);
+    }
+
+  };
+
+}
+
+@Injectable()
+export class UpdateIndividualController extends Controller {
+
+  constructor() {
+    super(`${PATH}/:id`);
+  }
+
+  protected initialiseRoutes() {
+    // this.router.post(this.path, [preAuthorise], this.execute);
+    this.router.patch(this.path, this.execute);
+  }
+
+  protected executeImpl = async () => {
+
+    const id: number = this.req.params.id;
+
+    logger.info('UpdateIndividualController executeImpl() id: ' + this.req.params.id);
+
+    try {
+
+      const individual = plainToClass(Individual, this.req.body);
+
+      logger.info('individual: ' + JSON.stringify(individual, null, 2) + '\n');
+
+      const errors = await validate(individual);
+
+      if (errors.length > 0) {
+        return this.clientError();
+      }
+
+      const repository = getRepository(Individual);
+
+      await repository.findOneOrFail(id, { relations: ['party', 'party.addresses', 'party.roles'] });
+
+      await repository.save(individual);
+
+      return this.success();
+
+    } catch (error) {
+      return this.handleError(error);
+    }
+
+  };
+
+}
+
+@Injectable()
+export class DeleteIndividualController extends Controller {
+
+  constructor() {
+    super(`${PATH}/:id`);
+  }
+
+  protected initialiseRoutes() {
+    // this.router.get(this.path, [preAuthorise], this.execute);
+    this.router.delete(this.path, this.execute);
+  }
+
+  protected executeImpl = async () => {
+
+    const id: number = this.req.params.id;
+
+    logger.info('DeleteIndividualController executeImpl() id: ' + this.req.params.id);
+
+    try {
+
+      const repository: IndividualRepository = getRepository(Individual);
+
+      await repository.findOneOrFail(id, { relations: ['party', 'party.addresses', 'party.roles'] });
+
+      await repository.delete(id);
+
+      return this.success();
+
+    } catch (error) {
+      return this.handleError(error);
     }
 
   };
@@ -148,7 +229,9 @@ export class CreateIndividualController extends Controller {
 const individualControllers = [
   FindIndividualController,
   FindOneIndividualController,
-  CreateIndividualController
+  CreateIndividualController,
+  UpdateIndividualController,
+  DeleteIndividualController
 ];
 
 const injector = ReflectiveInjector.resolveAndCreate(individualControllers);
@@ -165,3 +248,33 @@ export function IndividualControllerFactory(controllers = individualControllers)
   return factory;
 
 }
+
+// logger.info('error: ' + JSON.stringify(error, null, 2) + '\n');
+
+// const individual = new Individual();
+// Object.assign(individual, this.req.body);
+
+/*
+
+try {
+
+  const individual = plainToClass(Individual, this.req.body);
+
+  logger.info('individual: ' + JSON.stringify(individual, null, 2) + '\n');
+
+  const errors = await validate(individual);
+
+  if (errors.length > 0) {
+    return this.clientError();
+  }
+
+  await repository.save(individual);
+
+  // The server successfully processed the request and is not returning any content
+  return this.res.sendStatus(204);
+
+} catch (error) {
+  return this.handleError(error);
+}
+
+*/

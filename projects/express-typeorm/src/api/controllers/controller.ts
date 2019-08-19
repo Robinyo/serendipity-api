@@ -2,11 +2,15 @@ import { Request, Response, Router } from 'express';
 
 // import { preAuthorise } from '../middleware/pre-authorise';
 
+// import { logger } from '../../lib/logger';
+
 const CREATED = 'Created :)';
-const UNAUTHORIZED = 'Unauthorized';
 const INVALID_ARGUMENT = 'Invalid Argument';
 const NOT_FOUND = 'The specified resource was not found';
-const PERMISSION_DENIED = 'Client does not have sufficient permission';
+
+// const INTERNAL = 'Internal server error';
+// const UNAUTHORIZED = 'Unauthorized';
+// const PERMISSION_DENIED = 'Client does not have sufficient permission';
 
 export abstract class Controller {
 
@@ -40,12 +44,10 @@ export abstract class Controller {
     this.req = req;
     this.res = res;
 
+    // logger.info('req.body: ' + JSON.stringify(this.req.body, null, 2) + '\n');
+
     this.executeImpl();
   };
-
-  protected jsonResponse(code: number, message: string) {
-    return this.res.status(code).json({ message });
-  }
 
   protected ok<T>(dto?: T) {
 
@@ -57,9 +59,94 @@ export abstract class Controller {
 
   }
 
+  protected success() {
+    return this.res.sendStatus(204);
+  }
+
   protected created(location: string) {
-    // this.res.location(location).sendStatus(201);
-    return this.res.location(location).status(201).json({ CREATED });
+    return this.res.location(location).status(201).json({
+      'code': 201,
+      'message': CREATED
+    });
+  }
+
+  protected clientError() {
+
+    const message = {
+      'error': {
+        'code': 400,
+        'message': INVALID_ARGUMENT,
+        'status': 'INVALID_ARGUMENT'
+      }};
+
+    return this.res.status(message.error.code).json(message);
+  }
+
+  //
+  // https://github.com/typeorm/typeorm/tree/master/src/error
+  //
+
+  protected handleError(error: Error) {
+
+    const message = {
+      'error': {
+        'code': 500,
+        'message': error.message,
+        'status': error.name
+      }};
+
+    switch (error.name) {
+
+      case 'InsertValuesMissingError':
+
+        message.error.code = 400;
+        break;
+
+      case 'EntityNotFound':
+
+        message.error.code = 404;
+        message.error.message = NOT_FOUND;
+        message.error.status = 'NOT_FOUND';
+        break;
+
+      default:
+        break;
+
+    }
+
+    return this.res.status(message.error.code).json(message);
+  }
+
+}
+
+// export default Controller;
+
+// https://github.com/typeorm/typeorm/tree/master/src/error
+
+// https://khalilstemmler.com/articles/enterprise-typescript-nodejs/clean-consistent-expressjs-controllers/
+
+// https://github.com/Robinyo/restful-api-design-guidelines
+
+/*
+
+  protected jsonResponse(code: number, message: string) {
+    return this.res.status(code).json({ message });
+  }
+
+  protected clientError(message?: string) {
+    return this.jsonResponse(400, message ? message : INVALID_ARGUMENT);
+  }
+
+  protected fail(error: Error) {
+
+    return this.res.status(500).json({
+      'error': {
+        'code': 500,
+        'message': error.message,
+        'status': error.name
+      }
+    });
+
   }
 
   protected clientError(message?: string) {
@@ -78,23 +165,18 @@ export abstract class Controller {
     return this.jsonResponse(404, message ? message : NOT_FOUND);
   }
 
-  protected fail(error: Error | string) {
+*/
+
+/*
+
+error: {
+  "name": "EntityNotFound",
+  "message": "Could not find any entity of type \"Individual\" matching: \"12\""
+}
 
     return this.res.status(500).json({
       message: error.toString()
     })
-
-  }
-
-}
-
-// export default Controller;
-
-// https://khalilstemmler.com/articles/enterprise-typescript-nodejs/clean-consistent-expressjs-controllers/
-
-// https://github.com/Robinyo/restful-api-design-guidelines
-
-/*
 
       response.status(404).send({
         'error': {
