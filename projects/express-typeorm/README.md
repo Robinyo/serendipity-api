@@ -47,3 +47,5 @@
 ### Address Validation, Normalisation and Geocoding Resources
 
 * Smarty Streets blog: [What is an address API?](https://smartystreets.com/articles/address-apis)
+
+![divider](./divider.png)
