@@ -1,12 +1,24 @@
-# Serendipity API
+<p align="center">
+  <img src="./serendipity-logo.svg" alt="Serendipity" width="400" />
+</p>
 
-The RESTful API for Serendipity CRM built using TypeScript, Node.js, Express and TypeORM.
+<h1 align="center">Serendipity API</h1>
 
-## Quick Links
+<p align="center">
+  <b>The RESTful API for Serendipity CRM built using TypeScript, Node.js, Express and TypeORM.</b></br>
+</p>
+
+<br />
+
+![divider](./divider.png)
+
+## ❯ Quick Links
 
 [Documentation, demos, and guides](docs/README.md)
 
-## Resources
+![divider](./divider.png)
+
+## ❯ Resources
 
 ### Node.js Resources
 
