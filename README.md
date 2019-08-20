@@ -1,24 +1,32 @@
-# Serendipity API
+<p align="center">
+  <img src="./serendipity-logo.svg" alt="Serendipity" width="400"/>
+</p>
 
-Serendipity is an open source customer relationship management (CRM) solution.
+<h1 align="center">Serendipity CRM RESTful API</h1>
 
-You can use it to transform your organisation by connecting your customers, products, people and operations.
+![divider](./divider.png)
 
-## OpenAPI (Swagger)
+## ❯ OpenAPI (Swagger)
 
 <p align="center">
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/screen-shots/redoc.png">
 </p>
 
-## Roadmap
+![divider](./divider.png)
+
+## ❯ Roadmap
 
 Use TypeScript, Node.js, Express and TypeORM to build a RESTful API for Serendipity CRM.
 
-## Quick Links
+![divider](./divider.png)
+
+## ❯ Quick Links
 
 * [Express TypeORM](https://github.com/Robinyo/serendipity-api/tree/master/projects/express-typeorm)
 
-## Resources
+![divider](./divider.png)
+
+## ❯ Resources
 
 ### REST API Resources
 
@@ -33,3 +41,5 @@ Use TypeScript, Node.js, Express and TypeORM to build a RESTful API for Serendip
 
 * Wikipedia: [List of political parties in Australia](https://en.wikipedia.org/wiki/List_of_political_parties_in_Australia)
 * Australian Parliament: [Mail Labels for Australian Senators](https://www.aph.gov.au/Senators_and_Members/Guidelines_for_Contacting_Senators_and_Members/Address_labels_and_CSV_files)
+
+![divider](./divider.png)
