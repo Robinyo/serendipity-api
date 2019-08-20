@@ -1,14 +1,12 @@
 <p align="center">
-  <img src="./serendipity-logo.svg" alt="Serendipity" width="400" />
+  <img src="./serendipity-logo.svg" alt="Serendipity" width="400"/>
 </p>
 
-<h1 align="center">Serendipity's RESTful API</h1>
+<h1 align="center">Serendipity CRM RESTful API</h1>
 
 <p align="center">
   <b>The RESTful API for Serendipity CRM built using TypeScript, Node.js, Express and TypeORM.</b></br>
 </p>
-
-<br />
 
 ![divider](./divider.png)
 
