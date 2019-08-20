@@ -4,6 +4,11 @@
 
 <h1 align="center">Serendipity CRM RESTful API</h1>
 
+<p align="center">
+  <b>Serendipity is an open source customer relationship management (CRM) solution.</b></br>
+  <b>You can use it to transform your organisation by connecting your customers, products, people and operations.</b></br>
+</p>
+
 ![divider](./divider.png)
 
 ## ❯ OpenAPI (Swagger)
