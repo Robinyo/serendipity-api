@@ -2,19 +2,17 @@ import { Request, Response, Router } from 'express';
 
 // import { preAuthorise } from '../middleware/pre-authorise';
 
+import { config } from '../../config/config';
+
 // import { logger } from '../../lib/logger';
 
-const CREATED = 'Created :)';
 const INVALID_ARGUMENT = 'Invalid Argument';
 const NOT_FOUND = 'The specified resource was not found';
 
-// const INTERNAL = 'Internal server error';
-// const UNAUTHORIZED = 'Unauthorized';
-// const PERMISSION_DENIED = 'Client does not have sufficient permission';
-
 export abstract class Controller {
 
-  protected path = '/';
+  protected basePath;
+  protected path;
   protected router = Router();
 
   protected req: Request;
@@ -22,6 +20,8 @@ export abstract class Controller {
 
   constructor(path: string) {
 
+    // this.basePath = 'http://127.0.0.1:3001';
+    this.basePath = config.get('protocol') + '://' + config.get('ip') + ':' + config.get('port');
     this.path = path;
 
     this.initialiseRoutes();
@@ -63,11 +63,8 @@ export abstract class Controller {
     return this.res.sendStatus(204);
   }
 
-  protected created(location: string) {
-    return this.res.location(location).status(201).json({
-      'code': 201,
-      'message': CREATED
-    });
+  protected created<T>(location: string, dto?: T) {
+    return this.res.location(location).status(201).json(dto);
   }
 
   protected clientError() {
@@ -127,7 +124,20 @@ export abstract class Controller {
 
 // https://github.com/Robinyo/restful-api-design-guidelines
 
+// const INTERNAL = 'Internal server error';
+// const UNAUTHORIZED = 'Unauthorized';
+// const PERMISSION_DENIED = 'Client does not have sufficient permission';
+
 /*
+
+const CREATED = 'Created :)';
+
+  protected created(location: string) {
+    return this.res.location(location).status(201).json({
+      'code': 201,
+      'message': CREATED
+    });
+  }
 
   protected jsonResponse(code: number, message: string) {
     return this.res.status(code).json({ message });

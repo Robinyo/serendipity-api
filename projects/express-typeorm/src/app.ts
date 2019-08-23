@@ -65,7 +65,10 @@ export class App {
 
   private initialiseMiddleware() {
 
-    this.app.use(cors());
+    this.app.use(cors({
+        exposedHeaders: ['Location'],
+      }
+    ));
     this.app.use(helmet());
     this.app.use(bodyParser.json());
   }

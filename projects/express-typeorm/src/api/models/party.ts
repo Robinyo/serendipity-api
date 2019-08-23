@@ -33,6 +33,7 @@ export class Party {
   @Type(() => Address)
   @ManyToMany(type => Address, {
     cascade: true,
+    onDelete: 'CASCADE'
   })
   @JoinTable({ name: 'PartyAddress' })
   addresses: Address[];
@@ -40,6 +41,7 @@ export class Party {
   @Type(() => Role)
   @ManyToMany(type => Role, {
     cascade: true,
+    onDelete: 'CASCADE'
   })
   @JoinTable({ name: 'PartyRole' })
   roles: Role[];

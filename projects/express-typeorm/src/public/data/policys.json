@@ -1,50 +1,6 @@
 [
 
   {
-    "path": "/contacts",
-    "methods": [
-      {
-        "method": "POST",
-        "role": "Administrator"
-      },
-      {
-        "method": "GET",
-        "role": "User"
-      },
-      {
-        "method": "PUT",
-        "role": "Administrator"
-      },
-      {
-        "method": "DELETE",
-        "role": "Administrator"
-      }
-    ]
-  },
-
-  {
-    "path": "/contacts/:id",
-    "methods": [
-      {
-        "method": "POST",
-        "role": "Administrator"
-      },
-      {
-        "method": "GET",
-        "role": "User"
-      },
-      {
-        "method": "PUT",
-        "role": "Administrator"
-      },
-      {
-        "method": "DELETE",
-        "role": "Administrator"
-      }
-    ]
-  },
-
-  {
     "path": "/individuals",
     "methods": [
       {
@@ -56,7 +12,7 @@
         "role": "User"
       },
       {
-        "method": "PUT",
+        "method": "PATCH",
         "role": "Administrator"
       },
       {
@@ -78,7 +34,7 @@
         "role": "User"
       },
       {
-        "method": "PUT",
+        "method": "PATCH",
         "role": "Administrator"
       },
       {

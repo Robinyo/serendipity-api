@@ -29,6 +29,7 @@ export class Organisation {
   @Type(() => Party)
   @OneToOne(type => Party, {
     cascade: true,
+    onDelete: 'CASCADE'
   })
   @JoinColumn({ name: 'partyId' })
   party: Party;

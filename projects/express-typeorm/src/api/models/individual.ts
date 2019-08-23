@@ -23,6 +23,7 @@ export class Individual {
   @Type(() => Party)
   @OneToOne(type => Party, {
     cascade: true,
+    onDelete: 'CASCADE'
   })
   @JoinColumn({ name: 'partyId' })
   party: Party;

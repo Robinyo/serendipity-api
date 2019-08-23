@@ -39,9 +39,9 @@ export class FindIndividualController extends Controller {
 
     try {
 
-      const repository: IndividualRepository = getRepository(Individual);
+      const individualRepository: IndividualRepository = getRepository(Individual);
 
-      const data = await repository.find({ relations: ['party', 'party.addresses', 'party.roles'] });
+      const data = await individualRepository.find({ relations: ['party', 'party.addresses', 'party.roles'] });
 
       return this.ok<Individual[]>(data);
 
@@ -71,13 +71,13 @@ export class FindOneIndividualController extends Controller {
 
     logger.info('FindOneIndividualController executeImpl() id: ' + this.req.params.id);
 
-    let repository: IndividualRepository;
+    let individualRepository: IndividualRepository;
 
     try {
 
-      repository = getRepository(Individual);
+      individualRepository = getRepository(Individual);
 
-      const data = await repository.findOneOrFail(id, { relations: ['party', 'party.addresses', 'party.roles'] });
+      const data = await individualRepository.findOneOrFail(id, { relations: ['party', 'party.addresses', 'party.roles'] });
 
       return this.ok<Individual>(data);
 
@@ -134,7 +134,8 @@ export class CreateIndividualController extends Controller {
 
       await individualRepository.save(individual);
 
-      return this.created(PATH + '/' + party.id);
+      // this.basePath = 'http://127.0.0.1:3001/individuals/7';
+      return this.created<Individual>(this.basePath + PATH + '/' + individual.id, individual);
 
     } catch (error) {
       return this.handleError(error);
@@ -174,11 +175,11 @@ export class UpdateIndividualController extends Controller {
         return this.clientError();
       }
 
-      const repository = getRepository(Individual);
+      const individualRepository = getRepository(Individual);
 
-      await repository.findOneOrFail(id, { relations: ['party', 'party.addresses', 'party.roles'] });
+      await individualRepository.findOneOrFail(id, { relations: ['party', 'party.addresses', 'party.roles'] });
 
-      await repository.save(individual);
+      await individualRepository.save(individual);
 
       return this.success();
 
@@ -210,11 +211,32 @@ export class DeleteIndividualController extends Controller {
 
     try {
 
-      const repository: IndividualRepository = getRepository(Individual);
+      /*
 
-      await repository.findOneOrFail(id, { relations: ['party', 'party.addresses', 'party.roles'] });
+      // https://github.com/typeorm/typeorm/issues/3218
+      // Deleting the Party deletes the Individual
 
-      await repository.delete(id);
+      // https://typeorm.io/#/one-to-one-relations
+
+      @Type(() => Party)
+      @OneToOne(type => Party, {
+        cascade: true,
+        onDelete: 'CASCADE'
+      })
+      @JoinColumn({ name: 'partyId' })
+      party: Party;
+
+      */
+
+      // const individualRepository: IndividualRepository = getRepository(Individual);
+      // await individualRepository.findOneOrFail(id, { relations: ['party', 'party.addresses', 'party.roles'] });
+      // await individualRepository.delete(id);
+
+      const partyRepository: PartyRepository = getRepository(Party);
+
+      await partyRepository.findOneOrFail(id, { relations: ['addresses', 'roles'] });
+
+      await partyRepository.delete(id);
 
       return this.success();
 
