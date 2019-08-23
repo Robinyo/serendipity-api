@@ -6,10 +6,12 @@ import { validate } from 'class-validator';
 
 import { Injectable, ReflectiveInjector } from 'injection-js';
 
+import { Address } from '../../models/address';
+import { AddressRepository } from '../../repositorys/address.repository';
 import { Individual } from '../../models/individual';
 import { IndividualRepository } from '../../repositorys/individual.repository';
 import { Party } from '../../models/party';
-import { PartyRepository } from '../../repositorys/Party.repository';
+import { PartyRepository } from '../../repositorys/party.repository';
 
 import { Controller } from '../controller';
 
@@ -77,7 +79,9 @@ export class FindOneIndividualController extends Controller {
 
       individualRepository = getRepository(Individual);
 
-      const data = await individualRepository.findOneOrFail(id, { relations: ['party', 'party.addresses', 'party.roles'] });
+      const data = await individualRepository.findOneOrFail(id, {
+        relations: ['party', 'party.addresses', 'party.roles']
+      });
 
       return this.ok<Individual>(data);
 
@@ -211,30 +215,23 @@ export class DeleteIndividualController extends Controller {
 
     try {
 
-      /*
-
-      // https://github.com/typeorm/typeorm/issues/3218
-      // Deleting the Party deletes the Individual
-
-      // https://typeorm.io/#/one-to-one-relations
-
-      @Type(() => Party)
-      @OneToOne(type => Party, {
-        cascade: true,
-        onDelete: 'CASCADE'
-      })
-      @JoinColumn({ name: 'partyId' })
-      party: Party;
-
-      */
-
-      // const individualRepository: IndividualRepository = getRepository(Individual);
-      // await individualRepository.findOneOrFail(id, { relations: ['party', 'party.addresses', 'party.roles'] });
-      // await individualRepository.delete(id);
-
+      const addressRepository: AddressRepository = getRepository(Address);
       const partyRepository: PartyRepository = getRepository(Party);
 
-      await partyRepository.findOneOrFail(id, { relations: ['addresses', 'roles'] });
+      const party: Party =  await partyRepository.findOneOrFail(id, { relations: ['addresses', 'roles'] });
+
+      // https://github.com/typeorm/typeorm/issues/1420
+
+      party.addresses.forEach(address => {
+        addressRepository.delete(address.id);
+      });
+
+      party.addresses = [];
+      party.roles = [];
+
+      await partyRepository.save(party);
+
+      // https://github.com/typeorm/typeorm/issues/3218
 
       await partyRepository.delete(id);
 
@@ -271,10 +268,76 @@ export function IndividualControllerFactory(controllers = individualControllers)
 
 }
 
+/*
+
+  protected executeImpl = async () => {
+
+    const id: number = this.req.params.id;
+
+    logger.info('DeleteIndividualController executeImpl() id: ' + this.req.params.id);
+
+    try {
+
+      const addressRepository: AddressRepository = getRepository(Address);
+      const partyRepository: PartyRepository = getRepository(Party);
+      const individualRepository: IndividualRepository = getRepository(Individual);
+
+      const individual: Individual = await individualRepository.findOneOrFail(id, {
+        relations: ['party', 'party.addresses', 'party.roles']
+      });
+
+      // https://github.com/typeorm/typeorm/issues/1420
+
+      individual.party.addresses.forEach(address => {
+        addressRepository.delete(address);
+      });
+
+      individual.party.addresses = [];
+      individual.party.roles = [];
+
+      await individualRepository.save(individual);
+
+      // await partyRepository.findOneOrFail(id, { relations: ['addresses', 'roles'] });
+
+      // https://github.com/typeorm/typeorm/issues/3218
+
+      await partyRepository.delete(id);
+
+      return this.success();
+
+    } catch (error) {
+      return this.handleError(error);
+    }
+
+  };
+
+*/
+
 // logger.info('error: ' + JSON.stringify(error, null, 2) + '\n');
 
 // const individual = new Individual();
 // Object.assign(individual, this.req.body);
+
+/*
+
+      const partyRepository: PartyRepository = getRepository(Party);
+      await partyRepository.findOneOrFail(id, { relations: ['addresses', 'roles'] });
+      await partyRepository.delete(id);
+
+// https://github.com/typeorm/typeorm/issues/3218
+// Deleting the Party deletes the Individual
+
+// https://typeorm.io/#/one-to-one-relations
+
+@Type(() => Party)
+@OneToOne(type => Party, {
+  cascade: true,
+  onDelete: 'CASCADE'
+})
+@JoinColumn({ name: 'partyId' })
+party: Party;
+
+*/
 
 /*
 
