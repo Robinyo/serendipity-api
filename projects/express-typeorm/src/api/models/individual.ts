@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from 'typeorm';
+import { Column, Entity, Index, JoinColumn, OneToOne } from 'typeorm';
 
 import { Type } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
@@ -8,129 +8,60 @@ import { Party } from './party';
 @Entity('Individual')
 export class Individual {
 
-  @PrimaryColumn()
-  id: number;
-
-  // @BeforeInsert()
-  // setPrimaryKey() {
-  //   this.id = this.party.id;
-  // }
-
-  //
-  // https://typeorm.io/#/one-to-one-relations
-  //
+  get id(): number {
+    return this.party.id;
+  }
 
   @Type(() => Party)
   @OneToOne(type => Party, {
     cascade: true,
-    onDelete: 'CASCADE'
+    onDelete: 'CASCADE',
+    primary: true,
+    nullable: false
   })
   @JoinColumn({ name: 'partyId' })
+  @Index()
   party: Party;
 
-  @Column()
+  @Column({ nullable: true })
   title: string;
 
   @Column()
   @IsNotEmpty()
   givenName: string;
 
-  @Column()
-  middleName: string;     // otherNames
+  @Column({ nullable: true })
+  middleName: string;            // otherNames
 
   @Column()
   @IsNotEmpty()
   familyName: string;
 
-  @Column()
+  @Column({ nullable: true })
   honorific: string;
 
-  @Column()
-  salutation: string;     // formalSalutation
+  @Column({ nullable: true })
+  salutation: string;            // formalSalutation
 
-  @Column()
-  preferredName: string;  // informalSalutation
+  @Column({ nullable: true })
+  preferredName: string;         // informalSalutation
 
-  @Column()
+  @Column({ nullable: true })
   initials: string;
 
-  @Column()
+  @Column({ nullable: true })
   gender: string;
 
-  @Column()
+  @Column({ nullable: true })
   email: string;
 
-  @Column()
+  @Column({ nullable: true })
   phoneNumber: string;
 
-  @Column()
+  @Column({ nullable: true })
   photoUrl: string;
 
 }
 
 // https://github.com/typeorm/typeorm/blob/master/docs/decorator-reference.md
-// https://typeorm.io/#/relations-faq
-// https://typeorm.io/#/many-to-one-one-to-many-relations
 
-/*
-
-  //
-  // https://typeorm.io/#/many-to-many-relations
-  //
-
-  @Type(() => Organisation)
-  @ManyToMany(type => Organisation, {
-    cascade: true,
-  })
-  @JoinTable({ name: 'IndividualOrganisation' })
-  organisations: Organisation[];
-
-  @Type(() => Organisation)
-  @OneToOne(type => Organisation, {
-    cascade: true,
-  })
-  @JoinColumn()
-  organisation: Organisation;
-
-*/
-
-/*
-
-  //
-  // https://typeorm.io/#/embedded-entities/
-  //
-
-  @Column(type => SurrogateKey, { prefix: '' })
-  surrogateKey: SurrogateKey;
-
-*/
-
-/*
-
-  @PrimaryColumn({
-    default: () => setPrimaryKey()
-  })
-  id: number;
-
-  // @BeforeInsert()
-  setPrimaryKey() {
-    this.id = this.party.id;
-  }
-
-*/
-
-// export class Individual extends Party {
-
-// https://github.com/typeorm/typeorm/issues/150
-
-/*
-
-  // @PrimaryColumn('varchar', { length: <max shortId length>, default: () => `'${shortid.generate()}'` })
-  // @Column({ default: () => "pow(5)" })
-
-  @PrimaryColumn({
-    default: () => 'party.id'
-  })
-  id: number;
-
-*/

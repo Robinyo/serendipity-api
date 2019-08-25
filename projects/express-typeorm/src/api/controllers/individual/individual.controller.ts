@@ -7,9 +7,11 @@ import { validate } from 'class-validator';
 import { Injectable, ReflectiveInjector } from 'injection-js';
 
 import { Address } from '../../models/address';
-import { AddressRepository } from '../../repositorys/address.repository';
+// import { AddressRepository } from '../../repositorys/address.repository';
 import { Individual } from '../../models/individual';
 import { IndividualRepository } from '../../repositorys/individual.repository';
+import { Location } from '../../models/location';
+import { LocationRepository } from '../../repositorys/location.repository';
 import { Party } from '../../models/party';
 import { PartyRepository } from '../../repositorys/party.repository';
 
@@ -113,7 +115,7 @@ export class CreateIndividualController extends Controller {
 
       const individual = plainToClass(Individual, this.req.body);
 
-      logger.info('individual: ' + JSON.stringify(individual, null, 2) + '\n');
+      // logger.info('individual: ' + JSON.stringify(individual, null, 2) + '\n');
 
       const errors = await validate(individual);
 
@@ -121,24 +123,14 @@ export class CreateIndividualController extends Controller {
         return this.clientError();
       }
 
-      const partyRepository: PartyRepository = getRepository(Party);
       const individualRepository: IndividualRepository = getRepository(Individual);
-
-      const party = new Party();
-
-      party.partyType = 'Individual';
-      party.displayName = individual.party.displayName;
-      party.addresses = [].concat(individual.party.addresses);
-      party.roles = [].concat(individual.party.roles);
-
-      await partyRepository.save(party);
-
-      individual.party = party;
-      individual.id = party.id;
 
       await individualRepository.save(individual);
 
-      // this.basePath = 'http://127.0.0.1:3001/individuals/7';
+      // logger.info('individual: ' + JSON.stringify(individual, null, 2) + '\n');
+
+      // E.g.: http://127.0.0.1:3001/individuals/7
+      // return this.created<Individual>(this.basePath + PATH + '/' + individual.party.id, individual);
       return this.created<Individual>(this.basePath + PATH + '/' + individual.id, individual);
 
     } catch (error) {
@@ -215,15 +207,20 @@ export class DeleteIndividualController extends Controller {
 
     try {
 
-      const addressRepository: AddressRepository = getRepository(Address);
+      const locationRepository: LocationRepository = getRepository(Location);
       const partyRepository: PartyRepository = getRepository(Party);
 
-      const party: Party =  await partyRepository.findOneOrFail(id, { relations: ['addresses', 'roles'] });
+      // https://github.com/typeorm/typeorm/issues/1270
+
+      const party: Party =  await partyRepository.findOneOrFail(id, { relations: ['addresses', 'addresses.location', 'roles'] });
 
       // https://github.com/typeorm/typeorm/issues/1420
 
-      party.addresses.forEach(address => {
-        addressRepository.delete(address.id);
+      party.addresses.forEach((address: Address) => {
+
+        // logger.info('address: ' + JSON.stringify(address, null, 2) + '\n');
+
+        locationRepository.delete(address.id);
       });
 
       party.addresses = [];
@@ -267,6 +264,66 @@ export function IndividualControllerFactory(controllers = individualControllers)
   return factory;
 
 }
+
+/*
+
+@Injectable()
+export class CreateIndividualController extends Controller {
+
+  constructor() {
+    super(PATH);
+  }
+
+  protected initialiseRoutes() {
+    // this.router.post(this.path, [preAuthorise], this.execute);
+    this.router.post(this.path, this.execute);
+  }
+
+  protected executeImpl = async () => {
+
+    logger.info('CreateIndividualController: executeImpl()');
+
+    try {
+
+      const individual = plainToClass(Individual, this.req.body);
+
+      logger.info('individual: ' + JSON.stringify(individual, null, 2) + '\n');
+
+      const errors = await validate(individual);
+
+      if (errors.length > 0) {
+        return this.clientError();
+      }
+
+      const partyRepository: PartyRepository = getRepository(Party);
+      const individualRepository: IndividualRepository = getRepository(Individual);
+
+      const party = new Party();
+
+      party.partyType = 'Individual';
+      party.displayName = individual.party.displayName;
+      party.addresses = [].concat(individual.party.addresses);
+      party.roles = [].concat(individual.party.roles);
+
+      await partyRepository.save(party);
+
+      individual.party = party;
+      individual.id = party.id;
+
+      await individualRepository.save(individual);
+
+      // this.basePath = 'http://127.0.0.1:3001/individuals/7';
+      return this.created<Individual>(this.basePath + PATH + '/' + individual.id, individual);
+
+    } catch (error) {
+      return this.handleError(error);
+    }
+
+  };
+
+}
+
+ */
 
 /*
 

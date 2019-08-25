@@ -42,6 +42,11 @@ Use TypeScript, Node.js, Express and TypeORM to build a RESTful API for Serendip
 
 * Swagger.io: [What Is OpenAPI?](https://swagger.io/docs/specification/about/)
 
+### Schema Resources
+
+* Schema.org: [A collaborative, community activity with a mission to create schemas for structured data](https://swagger.io/docs/specification/about/)
+* JSON-LD: [JSON for Linking Data](https://json-ld.org)
+
 ### Sample Data
 
 * Wikipedia: [List of political parties in Australia](https://en.wikipedia.org/wiki/List_of_political_parties_in_Australia)

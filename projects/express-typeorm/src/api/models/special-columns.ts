@@ -1,27 +1,16 @@
-import {
-  Column,
-  CreateDateColumn,
-  UpdateDateColumn,
-  VersionColumn
-} from 'typeorm';
+import { CreateDateColumn, UpdateDateColumn, VersionColumn } from 'typeorm';
 
 // import { Type } from 'class-transformer';
 // import { IsNotEmpty } from 'class-validator';
 
 export class SpecialColumns {
 
-  //
-  // https://typeorm.io/#/decorator-reference/column-decorators
-  //
-
-  @Column()
   @CreateDateColumn()
   createdAt: Date;
 
   // @Column()
   // createdBy: string
 
-  @Column()
   @UpdateDateColumn()
   updatedAt: Date;
 
@@ -34,6 +23,9 @@ export class SpecialColumns {
   // rowTimeStamp:
 
 }
+
+// https://github.com/typeorm/typeorm/blob/master/docs/decorator-reference.md
+// https://typeorm.io/#/decorator-reference/column-decorators
 
 /*
 

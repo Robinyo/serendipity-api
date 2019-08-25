@@ -4,9 +4,10 @@ import { plainToClass } from 'class-transformer';
 
 import { Address } from '../../api/models/address';
 import { Individual } from '../../api/models/individual';
+// import { Location } from '../../api/models/location';
 import { Organisation } from '../../api/models/organisation';
 import { Party } from '../../api/models/party';
-// import { Role } from '../../api/models/role';
+import { Role } from '../../api/models/role';
 
 import { logger } from '../../lib/logger';
 import { config } from '../../config/config';
@@ -34,9 +35,6 @@ export class Senators {
       liberalOrg.name = 'Liberal Party of Australia';
       liberalOrg.phoneNumber = '(03) 6224 3707';
 
-      await connection.manager.save(liberal);
-
-      liberalOrg.id = liberal.id;
       liberalOrg.party = liberal;
 
       await connection.manager.save(liberalOrg);
@@ -53,9 +51,6 @@ export class Senators {
       laborOrg.name = 'Australian Labor Party';
       laborOrg.phoneNumber = '(03) 9890 7022';
 
-      await connection.manager.save(labor);
-
-      laborOrg.id = labor.id;
       laborOrg.party = labor;
 
       await connection.manager.save(laborOrg);
@@ -64,14 +59,15 @@ export class Senators {
       // Parliament House Address
       //
 
-      const parliamentHouse = new Address();
-
-      parliamentHouse.line1 = 'The Senate';
-      parliamentHouse.line2 = 'PO Box 6100 Parliament House';
-      parliamentHouse.city = 'Canberra';
-      parliamentHouse.state = 'ACT';
-      parliamentHouse.postalCode = '2600';
-      parliamentHouse.addressType = 'Parliament House';
+      const parliamentHouse = new Address(
+        'The Senate',
+        'PO Box 6100 Parliament House',
+        'Canberra',
+        'ACT',
+        '2600',
+        'Australia',
+        'Parliament House'
+      );
 
       await connection.manager.save(parliamentHouse);
 
@@ -91,15 +87,22 @@ export class Senators {
 
         const individual = plainToClass(Individual, item);
 
+        individual.party.addresses.push(parliamentHouse);
+
+        let role: Role;
+
+        if (individual.party.roles.length) {
+
+          role = individual.party.roles[0];
+
+          individual.party.roles = [];
+        }
+
+        await connection.manager.save(individual);
+
         //
         // Create a 'relationship' from the Senator to a Political Party
         //
-
-        const party = new Party();
-        party.partyType = 'Individual';
-        party.displayName = individual.party.displayName;
-
-        await connection.manager.save(party);
 
         /*
 
@@ -117,38 +120,36 @@ export class Senators {
 
         */
 
-        party.addresses = [].concat(individual.party.addresses);
-        party.addresses.push(parliamentHouse);
-        party.roles = [].concat(individual.party.roles);
-        individual.party = party;
+        if (role) {
 
-        individual.id = party.id;
+          // role.partyId = individual.party.id;
+          role.partyId = individual.id;
 
-        if (individual.party.roles.length) {
-
-          individual.party.roles[0].partyId = individual.id;
-
-          switch (individual.party.roles[0].reciprocalPartyName) {
+          switch (role.reciprocalPartyName) {
 
             case LIBERAL:
 
               logger.info(LIBERAL);
-              individual.party.roles[0].reciprocalPartyId = liberalOrg.id;
+              // role.reciprocalPartyId = liberalOrg.party.id;
+              role.reciprocalPartyId = liberalOrg.id;
 
               break;
 
             case LABOR:
 
               logger.info(LABOR);
-              individual.party.roles[0].reciprocalPartyId = laborOrg.id;
+              // role.reciprocalPartyId = laborOrg.party.id;
+              role.reciprocalPartyId = laborOrg.id;
 
               break;
 
             default:
 
-              logger.error('individual.party.roles[0].reciprocalPartyName: default');
+              logger.error('role.reciprocalPartyName: default');
               break;
           }
+
+          individual.party.roles.push(role);
 
         }
 

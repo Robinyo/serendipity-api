@@ -11,24 +11,19 @@ import { SpecialColumns } from './special-columns';
 export class Party {
 
   @PrimaryGeneratedColumn()
+  // readonly id: number;
   id: number;
 
   @Column(type => SpecialColumns, { prefix: '' })
   specialColumns: SpecialColumns;
 
   @IsNotEmpty()
-  // @Column('varchar', { length: 50 })   // Type: VARCHAR(50)	Size: 2000000000,10
   @Column()
   partyType: string;
 
   @IsNotEmpty()
-  // @Column('varchar', { length: 100 })  // Type: VARCHAR(100)	Size: 2000000000,10
   @Column()
   displayName: string;
-
-  //
-  // https://typeorm.io/#/many-to-many-relations
-  //
 
   @Type(() => Address)
   @ManyToMany(type => Address, {
@@ -48,6 +43,4 @@ export class Party {
 
 }
 
-// https://typeorm.io/#/entities
-
-// https://github.com/typestack/class-transformer
+// https://github.com/typeorm/typeorm/blob/master/docs/decorator-reference.md

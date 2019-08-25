@@ -1,16 +1,12 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-// import { SpecialColumns } from './special-columns';
-// import { SurrogateKey } from './surrogate-key';
+// import { Type } from 'class-transformer';
+import { IsNotEmpty } from 'class-validator';
 
 @Entity('Role')
 export class Role {
 
-  // @Column(type => SurrogateKey, { prefix: '' })
-  // surrogateKey: SurrogateKey;
-
   @PrimaryGeneratedColumn()
-  // readonly id: number;
   id: number;
 
   @Column({
@@ -19,12 +15,15 @@ export class Role {
   role: string;
 
   @Column()
+  @IsNotEmpty()
   partyId: number;
 
   @Column()
+  @IsNotEmpty()
   partyType: string;
 
   @Column()
+  @IsNotEmpty()
   partyName: string;
 
   @Column({
@@ -38,15 +37,20 @@ export class Role {
   reciprocalRole: string;
 
   @Column()
+  @IsNotEmpty()
   reciprocalPartyId: number;
 
   @Column()
+  @IsNotEmpty()
   reciprocalPartyType: string;
 
   @Column()
+  @IsNotEmpty()
   reciprocalPartyName: string;
 
 }
+
+// https://github.com/typeorm/typeorm/blob/master/docs/decorator-reference.md
 
 // https://robferguson.org/blog/2017/08/18/parties-roles-and-relationships/
 

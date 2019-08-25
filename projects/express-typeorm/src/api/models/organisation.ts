@@ -1,10 +1,4 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  OneToOne,
-  PrimaryColumn
-} from 'typeorm';
+import { Column, Entity, Index, JoinColumn, OneToOne } from 'typeorm';
 
 import { Type } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
@@ -14,34 +8,28 @@ import { Party } from './party';
 @Entity('Organisation')
 export class Organisation {
 
-  @PrimaryColumn()
-  id: number;
-
-  // @BeforeInsert()
-  // setPrimaryKey() {
-  //   this.id = this.party.id;
-  // }
-
-  //
-  // https://typeorm.io/#/one-to-one-relations
-  //
+  get id(): number {
+    return this.party.id;
+  }
 
   @Type(() => Party)
   @OneToOne(type => Party, {
     cascade: true,
-    onDelete: 'CASCADE'
+    onDelete: 'CASCADE',
+    primary: true,
+    nullable: false
   })
   @JoinColumn({ name: 'partyId' })
+  @Index()
   party: Party;
 
   @Column()
   @IsNotEmpty()
   name: string;
 
-  @Column()
-  @IsNotEmpty()
+  @Column({ nullable: true })
   phoneNumber: string;
 
 }
 
-// https://en.wikipedia.org/wiki/List_of_political_parties_in_Australia
+// https://github.com/typeorm/typeorm/blob/master/docs/decorator-reference.md
