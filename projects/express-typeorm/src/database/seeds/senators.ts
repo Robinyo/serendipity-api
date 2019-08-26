@@ -4,7 +4,6 @@ import { plainToClass } from 'class-transformer';
 
 import { Address } from '../../api/models/address';
 import { Individual } from '../../api/models/individual';
-// import { Location } from '../../api/models/location';
 import { Organisation } from '../../api/models/organisation';
 import { Party } from '../../api/models/party';
 import { Role } from '../../api/models/role';
@@ -28,7 +27,7 @@ export class Senators {
       //
 
       const liberal = new Party();
-      liberal.partyType = 'Organisation';
+      liberal.type = 'Organisation';
       liberal.displayName = 'Liberal Party';
 
       const liberalOrg = new Organisation();
@@ -44,7 +43,7 @@ export class Senators {
       //
 
       const labor = new Party();
-      labor.partyType = 'Organisation';
+      labor.type = 'Organisation';
       labor.displayName = 'Labor Party';
 
       const laborOrg = new Organisation();
@@ -122,7 +121,6 @@ export class Senators {
 
         if (role) {
 
-          // role.partyId = individual.party.id;
           role.partyId = individual.id;
 
           switch (role.reciprocalPartyName) {
@@ -130,7 +128,6 @@ export class Senators {
             case LIBERAL:
 
               logger.info(LIBERAL);
-              // role.reciprocalPartyId = liberalOrg.party.id;
               role.reciprocalPartyId = liberalOrg.id;
 
               break;
@@ -138,7 +135,6 @@ export class Senators {
             case LABOR:
 
               logger.info(LABOR);
-              // role.reciprocalPartyId = laborOrg.party.id;
               role.reciprocalPartyId = laborOrg.id;
 
               break;

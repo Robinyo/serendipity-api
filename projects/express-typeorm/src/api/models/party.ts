@@ -14,12 +14,9 @@ export class Party {
   @Index()
   id: number;
 
-  @Column(type => SpecialColumns, { prefix: '' })
-  specialColumns: SpecialColumns;
-
   @IsNotEmpty()
   @Column()
-  partyType: string;
+  type: string;  // 'Individual' | 'Organisation'
 
   @IsNotEmpty()
   @Column()
@@ -40,6 +37,15 @@ export class Party {
   })
   @JoinTable({ name: 'PartyRole' })
   roles: Role[];
+
+  @Column(type => SpecialColumns, { prefix: '' })
+  specialColumns: SpecialColumns;
+
+  constructor(
+      type: string = 'Party'
+  ) {
+    this.type = type;
+  }
 
 }
 

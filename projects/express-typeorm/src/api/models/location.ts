@@ -3,6 +3,8 @@ import { Entity, Column, PrimaryGeneratedColumn, Index } from 'typeorm';
 // import { Type } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
 
+import { SpecialColumns } from './special-columns';
+
 @Entity('Location')
 export class Location {
 
@@ -12,7 +14,10 @@ export class Location {
 
   @IsNotEmpty()
   @Column()
-  type: string;
+  type: string;  // 'Address' | ???
+
+  @Column(type => SpecialColumns, { prefix: '' })
+  specialColumns: SpecialColumns;
 
   constructor(
     type: string = 'Location'
