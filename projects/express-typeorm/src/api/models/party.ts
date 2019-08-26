@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, Index, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Type } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
@@ -11,7 +11,7 @@ import { SpecialColumns } from './special-columns';
 export class Party {
 
   @PrimaryGeneratedColumn()
-  // readonly id: number;
+  @Index()
   id: number;
 
   @Column(type => SpecialColumns, { prefix: '' })
@@ -44,3 +44,5 @@ export class Party {
 }
 
 // https://github.com/typeorm/typeorm/blob/master/docs/decorator-reference.md
+
+// readonly id: number;

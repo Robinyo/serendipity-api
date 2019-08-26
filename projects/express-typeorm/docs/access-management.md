@@ -11,8 +11,8 @@ Claims. They can be returned either in the ID Token or the UserInfo response.
 
 ### Scopes
 
-Scope names follow a simple convention: <namespace>:<operation> where <namespace> refers to a resource (e.g., document,
-collection, store, or controller) and <operation> refers to the action to be performed on the resource.
+Scope names follow a simple convention: &lt;namespace&gt;:&lt;operation&gt; where <namespace> refers to a resource (e.g., document,
+collection, store, or controller) and &lt;operation&gt; refers to the action to be performed on the resource.
 
 ### Individual Scopes
 

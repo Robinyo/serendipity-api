@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, Index } from 'typeorm';
 
 // import { Type } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
@@ -7,6 +7,7 @@ import { IsNotEmpty } from 'class-validator';
 export class Location {
 
   @PrimaryGeneratedColumn()
+  @Index()
   id: number;
 
   @IsNotEmpty()

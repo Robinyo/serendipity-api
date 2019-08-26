@@ -1,4 +1,4 @@
-import { PrimaryGeneratedColumn } from 'typeorm';
+import { Index, PrimaryGeneratedColumn } from 'typeorm';
 
 //
 // A surrogate key is any column or set of columns that can be declared as the primary key instead of a "real" or
@@ -9,7 +9,7 @@ import { PrimaryGeneratedColumn } from 'typeorm';
 export class SurrogateKey {
 
   @PrimaryGeneratedColumn()
-  // readonly id: number;
+  @Index()
   id: number;
 
   //

@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
 
 // import { Type } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
@@ -7,6 +7,7 @@ import { IsNotEmpty } from 'class-validator';
 export class Role {
 
   @PrimaryGeneratedColumn()
+  @Index()
   id: number;
 
   @Column({

@@ -7,13 +7,14 @@ import { validate } from 'class-validator';
 import { Injectable, ReflectiveInjector } from 'injection-js';
 
 import { Address } from '../../models/address';
-// import { AddressRepository } from '../../repositorys/address.repository';
 import { Individual } from '../../models/individual';
 import { IndividualRepository } from '../../repositorys/individual.repository';
 import { Location } from '../../models/location';
 import { LocationRepository } from '../../repositorys/location.repository';
 import { Party } from '../../models/party';
 import { PartyRepository } from '../../repositorys/party.repository';
+import { Role } from '../../models/role';
+import { RoleRepository } from '../../repositorys/role.repository';
 
 import { Controller } from '../controller';
 
@@ -130,7 +131,6 @@ export class CreateIndividualController extends Controller {
       // logger.info('individual: ' + JSON.stringify(individual, null, 2) + '\n');
 
       // E.g.: http://127.0.0.1:3001/individuals/7
-      // return this.created<Individual>(this.basePath + PATH + '/' + individual.party.id, individual);
       return this.created<Individual>(this.basePath + PATH + '/' + individual.id, individual);
 
     } catch (error) {
@@ -209,6 +209,7 @@ export class DeleteIndividualController extends Controller {
 
       const locationRepository: LocationRepository = getRepository(Location);
       const partyRepository: PartyRepository = getRepository(Party);
+      const roleRepository: RoleRepository = getRepository(Role);
 
       // https://github.com/typeorm/typeorm/issues/1270
 
@@ -218,9 +219,16 @@ export class DeleteIndividualController extends Controller {
 
       party.addresses.forEach((address: Address) => {
 
-        // logger.info('address: ' + JSON.stringify(address, null, 2) + '\n');
+        logger.info('address: ' + JSON.stringify(address, null, 2) + '\n');
 
-        locationRepository.delete(address.id);
+        locationRepository.delete(address.location.id);
+      });
+
+      party.roles.forEach((role: Role) => {
+
+        logger.info('role: ' + JSON.stringify(role, null, 2) + '\n');
+
+        roleRepository.delete(role.id);
       });
 
       party.addresses = [];

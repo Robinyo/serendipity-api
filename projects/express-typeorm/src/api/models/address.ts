@@ -8,10 +8,6 @@ import { Location } from './location';
 @Entity('Address')
 export class Address {
 
-  get id(): number {
-    return this.location.id;
-  }
-
   @Type(() => Location)
   @OneToOne(type => Location, {
     cascade: true,
@@ -19,7 +15,7 @@ export class Address {
     primary: true,
     nullable: false
   })
-  @JoinColumn({ name: 'locationId' })
+  @JoinColumn({ name: 'id' })
   @Index()
   location: Location;
 
@@ -77,10 +73,8 @@ export class Address {
 
 // https://github.com/typeorm/typeorm/blob/master/docs/decorator-reference.md
 
-/*
-
-    this.location = {
-      type: 'Address'
-    } ;
-
-*/
+// get id(): number {
+//   return this.location.id;
+// }
+//
+// @JoinColumn({ name: 'locationId' })
