@@ -11,6 +11,18 @@
 
 ![divider](./divider.png)
 
+## ❯ Roadmap
+
+Use TypeScript, Node.js, Express and TypeORM to build a RESTful API for Serendipity CRM.
+
+![divider](./divider.png)
+
+## ❯ Quick Links
+
+* [Express TypeORM](https://github.com/Robinyo/serendipity-api/tree/master/projects/express-typeorm)
+
+![divider](./divider.png)
+
 ## ❯ OpenAPI (Swagger)
 
 <p align="center">
@@ -24,18 +36,6 @@
 <p align="center">
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/screen-shots/schema-spy-compact.png">
 </p>
-
-![divider](./divider.png)
-
-## ❯ Roadmap
-
-Use TypeScript, Node.js, Express and TypeORM to build a RESTful API for Serendipity CRM.
-
-![divider](./divider.png)
-
-## ❯ Quick Links
-
-* [Express TypeORM](https://github.com/Robinyo/serendipity-api/tree/master/projects/express-typeorm)
 
 ![divider](./divider.png)
 
