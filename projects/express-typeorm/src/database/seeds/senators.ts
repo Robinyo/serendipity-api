@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+import { createConnection } from 'typeorm';
 import { plainToClass } from 'class-transformer';
 
 import { Address } from '../../api/models/address';
@@ -13,12 +14,15 @@ import { config } from '../../config/config';
 
 const LIBERAL = 'Liberal Party';
 const LABOR = 'Labor Party';
+const URL = 'public/data/senators.json';
 
-export class Senators {
+// https://developer.mozilla.org/en-US/docs/Glossary/IIFE
 
-  static load = async (connection: any, url: string) => {
+(function () {
 
-    logger.info('Senators load()');
+  createConnection().then(async connection => {
+
+    logger.info('Australian Senators ...');
 
     try {
 
@@ -59,13 +63,13 @@ export class Senators {
       //
 
       const parliamentHouse = new Address(
-        'The Senate',
-        'PO Box 6100 Parliament House',
-        'Canberra',
-        'ACT',
-        '2600',
-        'Australia',
-        'Parliament House'
+          'The Senate',
+          'PO Box 6100 Parliament House',
+          'Canberra',
+          'ACT',
+          '2600',
+          'Australia',
+          'Parliament House'
       );
 
       await connection.manager.save(parliamentHouse);
@@ -75,7 +79,7 @@ export class Senators {
 
       logger.info('Senators load() baseURL: ' + axios.defaults.baseURL);
 
-      const response = await axios.get(url);
+      const response = await axios.get(URL);
       const items = response.data;
 
       //
@@ -149,7 +153,7 @@ export class Senators {
 
         }
 
-        logger.info('individual: ' + JSON.stringify(individual, null, 2) + '\n');
+        // logger.info('individual: ' + JSON.stringify(individual, null, 2) + '\n');
 
         await connection.manager.save(individual);
       }
@@ -159,11 +163,9 @@ export class Senators {
       logger.error(error);
     }
 
-  };
+  }).catch(error => { logger.error(error); });
 
-}
-
-// export default Senators;
+})();
 
 // https://github.com/axios/axios
 

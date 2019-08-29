@@ -12,8 +12,6 @@ import { IndividualControllerFactory } from './api/controllers/individual/indivi
 
 import { Policy } from './api/utils/policy';
 
-import { Senators } from './database/seeds/senators';
-
 import { config } from './config/config';
 import { logger } from './lib/logger';
 
@@ -41,13 +39,6 @@ export class App {
 
         console.log(chalk.blueBright('Server started on port ' + config.get('port')  + ' try ') +
             chalk.blueBright.underline('http://' + config.get('ip') + ':' + config.get('port') + '/docs'));
-
-        //
-        // TODO: Use a Database Migration
-        // See: http://typeorm.io/#/migrations
-        //
-
-        Senators.load(connection, 'public/data/senators.json');
 
         //
         // Load Policy config (e.g., routes, methods and required roles)
@@ -94,6 +85,10 @@ export class App {
 // export default App;
 
 /*
+
+// import { Senators } from './database/seeds/senators';
+
+// Senators.load(connection, 'public/data/senators.json');
 
 import 'reflect-metadata';
 import { Injectable, ReflectiveInjector } from 'injection-js';

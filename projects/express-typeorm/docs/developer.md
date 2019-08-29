@@ -33,16 +33,31 @@ Go to the project directory, install the project's dependencies and launch the s
 ```
 cd serendipity-api/projects/express-typeorm
 npm install
-
 npm start
+```
+
+### Step 4: Seed the Database
+
+In another terminal session: 
+
+```
+cd serendipity-api/projects/express-typeorm
+ts-node ./src/database/seeds/senators.ts
+```
+
+or
+
+```
+cd serendipity-api/projects/express-typeorm
+ts-node ./src/database/seeds/one-hundred-individuals.ts
 ```
 
 Open your browser and try:
 
 ```
+http://localhost:3001/api/individuals
+http://localhost:3001/api/individuals/4
 http://localhost:3001/docs
-http://localhost:3001/api/contacts
-http://localhost:3001/api/contacts/7
 ```
 
 ## Build Management

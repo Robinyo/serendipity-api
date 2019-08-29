@@ -4,6 +4,6 @@
   "ip": "127.0.0.1",
   "port": 3001,
 
-  "clientId": "",
-  "issuer": ""
+  "clientId": "0oatga8ebA4IkGg5U356",
+  "issuer": "https://dev-335467.okta.com/oauth2/default"
 }

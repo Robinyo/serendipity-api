@@ -40,13 +40,22 @@ export class FindIndividualController extends Controller {
 
   protected executeImpl = async () => {
 
+    // https://github.com/typeorm/typeorm/blob/master/docs/find-options.md
+
+    // const skip: number = this.req.params.skip;  // 0
+    // const take: number = this.req.params.take;  // 24
+
     logger.info('FindIndividualController: executeImpl()');
 
     try {
 
       const individualRepository: IndividualRepository = getRepository(Individual);
 
-      const data = await individualRepository.find({ relations: ['party', 'party.addresses', 'party.roles'] });
+      const data = await individualRepository.find({
+        skip: 0,
+        take: 24,
+        relations: ['party', 'party.addresses', 'party.roles']
+      });
 
       return this.ok<Individual[]>(data);
 
@@ -175,9 +184,9 @@ export class UpdateIndividualController extends Controller {
 
       await individualRepository.findOneOrFail(id, { relations: ['party', 'party.addresses', 'party.roles'] });
 
-      await individualRepository.save(individual);
+      const data = await individualRepository.save(individual);
 
-      return this.success();
+      return this.ok<Individual>(data);
 
     } catch (error) {
       return this.handleError(error);
@@ -272,3 +281,5 @@ export function IndividualControllerFactory(controllers = individualControllers)
   return factory;
 
 }
+
+// https://github.com/typeorm/typeorm/blob/master/docs/find-options.md

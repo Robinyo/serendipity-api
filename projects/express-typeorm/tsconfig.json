@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "types": ["reflect-metadata"],
+    "types": [
+      "node",
+      "reflect-metadata"
+    ],
     "module": "commonjs",
     "pretty": true,
     "sourceMap": true,
