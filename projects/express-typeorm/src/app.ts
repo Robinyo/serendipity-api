@@ -7,6 +7,8 @@ import path from 'path';
 
 import { createConnection } from 'typeorm';
 
+import { AuthControllerFactory } from './api/controllers/auth/auth.controller';
+
 import { Controller } from './api/controllers/controller';
 import { IndividualControllerFactory } from './api/controllers/individual/individual.controller';
 
@@ -28,7 +30,11 @@ export class App {
     this.app = express();
 
     this.initialiseMiddleware();
-    this.initialiseRoutes(this.controllers);
+
+    this.initialiseStaticRoutes();
+    this.initialiseAuthRoutes(AuthControllerFactory());
+    this.initialiseApiRoutes(this.controllers);
+
   }
 
   public listen() {
@@ -64,9 +70,15 @@ export class App {
     this.app.use(bodyParser.json());
   }
 
-  private initialiseRoutes(controllers: Controller[]) {
+  private initialiseAuthRoutes(controllers: Controller[]) {
 
-    this.initialiseStaticRoutes();
+    controllers.forEach((controller) => {
+      this.app.use('/', controller.getRoutes());
+    });
+
+  }
+
+  private initialiseApiRoutes(controllers: Controller[]) {
 
     controllers.forEach((controller) => {
       this.app.use('/api/', controller.getRoutes());
@@ -83,6 +95,17 @@ export class App {
 }
 
 // export default App;
+
+/*
+
+import passport from 'passport';
+// import './api/middleware/auth-local';
+
+this.app.use(passport.initialize());
+
+this.router.post(this.path, [passport.authenticate('register', { session : false })], this.execute);
+
+*/
 
 /*
 

@@ -6,7 +6,7 @@ import { config } from '../../config/config';
 
 // import { logger } from '../../lib/logger';
 
-const INVALID_ARGUMENT = 'Invalid Argument';
+const INVALID_ARGUMENT = 'Invalid argument';
 const NOT_FOUND = 'The specified resource was not found';
 
 export abstract class Controller {

@@ -85,11 +85,9 @@ export class FindOneIndividualController extends Controller {
 
     logger.info('FindOneIndividualController executeImpl() id: ' + this.req.params.id);
 
-    let individualRepository: IndividualRepository;
-
     try {
 
-      individualRepository = getRepository(Individual);
+      const individualRepository: IndividualRepository = getRepository(Individual);
 
       const data = await individualRepository.findOneOrFail(id, {
         relations: ['party', 'party.addresses', 'party.roles']
@@ -135,12 +133,12 @@ export class CreateIndividualController extends Controller {
 
       const individualRepository: IndividualRepository = getRepository(Individual);
 
-      await individualRepository.save(individual);
+      const data = await individualRepository.save(individual);
 
       // logger.info('individual: ' + JSON.stringify(individual, null, 2) + '\n');
 
       // E.g.: http://127.0.0.1:3001/individuals/7
-      return this.created<Individual>(this.basePath + PATH + '/' + individual.id, individual);
+      return this.created<Individual>(this.basePath + PATH + '/' + data.id, data);
 
     } catch (error) {
       return this.handleError(error);
@@ -180,7 +178,7 @@ export class UpdateIndividualController extends Controller {
         return this.clientError();
       }
 
-      const individualRepository = getRepository(Individual);
+      const individualRepository: IndividualRepository = getRepository(Individual);
 
       await individualRepository.findOneOrFail(id, { relations: ['party', 'party.addresses', 'party.roles'] });
 
