@@ -30,6 +30,9 @@
 ### Express.js Resources
 
 * ExpressJS.com: [Security Best Practices](https://expressjs.com/en/advanced/best-practice-security.html)
+* ExpressJS.com: [Production best practices: performance and reliability](https://expressjs.com/en/advanced/best-practice-performance.html)
+
+Production best practices: performance and reliability
 
 ### TypeORM Resources
 
