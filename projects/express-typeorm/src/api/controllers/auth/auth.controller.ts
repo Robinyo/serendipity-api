@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-// import * as jwt from 'jsonwebtoken';
+import * as jwt from 'jsonwebtoken';
 
 import { getRepository } from 'typeorm';
 import { plainToClass } from 'class-transformer';
@@ -13,6 +13,7 @@ import { UserRepository } from '../../repositorys/user.repository';
 
 import { Controller } from '../controller';
 
+import { config } from '../../../config/config';
 import { logger } from '../../../lib/logger';
 
 // https://github.com/mgechev/injection-js
@@ -20,7 +21,6 @@ import { logger } from '../../../lib/logger';
 // @Injectable() marks a class as available to an injector for instantiation.
 
 const LOGIN = '/login';
-const PATH = '/users';
 const REGISTER = '/register';
 
 @Injectable()
@@ -40,7 +40,7 @@ export class RegisterUserController extends Controller {
 
     try {
 
-      const user = plainToClass(User, this.req.body);
+      let user: User = plainToClass(User, this.req.body);
 
       // logger.info('user: ' + JSON.stringify(user, null, 2) + '\n');
 
@@ -54,12 +54,27 @@ export class RegisterUserController extends Controller {
 
       user.hashPassword();
 
-      const data = await userRepository.save(user);
+      user = await userRepository.save(user);
+
+      user.password = '';
+
+      const token = jwt.sign(
+        {
+          user: user,
+          groups: [ 'Everyone', 'User', 'Administrator']
+        },
+        config.get('jwtSecret'),
+        { expiresIn: '1h' }
+      );
+
+      // logger.info('token: ' + JSON.stringify(token, null, 2) + '\n');
+
+      return this.ok<any>(token);
 
       // logger.info('individual: ' + JSON.stringify(data, null, 2) + '\n');
 
       // E.g.: http://127.0.0.1:3001/users/7
-      return this.created<User>(this.basePath + PATH + '/' + data.id, data);
+      // return this.created<User>(this.basePath + PATH + '/' + data.id, data);
 
     } catch (error) {
       return this.handleError(error);
@@ -92,20 +107,32 @@ export class LoginUserController extends Controller {
         return this.clientError();
       }
 
-      logger.info('username: ' + username);
-      logger.info('password: ' + password);
-
       const userRepository: UserRepository = getRepository(User);
 
       const user: User = await userRepository.findOneOrFail({ where: { username } });
 
-      logger.info('user: ' + JSON.stringify(user, null, 2) + '\n');
+      // logger.info('user: ' + JSON.stringify(user, null, 2) + '\n');
 
       if (!user.checkIfUnencryptedPasswordIsValid(password)) {
         return this.clientError();
       }
 
-      return this.ok<User>(user);
+      user.password = '';
+
+      const token = jwt.sign(
+          {
+            user: user,
+            groups: [ 'Everyone', 'User', 'Administrator']
+          },
+          config.get('jwtSecret'),
+          { expiresIn: '1h' }
+      );
+
+      // logger.info('token: ' + JSON.stringify(token, null, 2) + '\n');
+
+      return this.ok<any>(token);
+
+      // return this.ok<User>(user);
 
     } catch (error) {
       return this.handleError(error);
@@ -134,3 +161,6 @@ export function AuthControllerFactory(controllers = authControllers) {
   return factory;
 
 }
+
+// logger.info('username: ' + username);
+// logger.info('password: ' + password);

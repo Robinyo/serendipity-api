@@ -2,9 +2,9 @@ import { Request, Response, NextFunction } from 'express';
 
 import OktaJwtVerifier from '@okta/jwt-verifier';
 
-import { config } from '../../config/config';
+import { config } from '../../../config/config';
 
-import { logger } from '../../lib/logger';
+import { logger } from '../../../lib/logger';
 
 const oktaJwtVerifier = new OktaJwtVerifier({
   issuer: config.get('issuer'),

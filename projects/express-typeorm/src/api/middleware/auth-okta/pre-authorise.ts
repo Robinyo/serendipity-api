@@ -2,13 +2,13 @@ import { Request, Response, NextFunction } from 'express';
 
 import OktaJwtVerifier from '@okta/jwt-verifier';
 
-import { config } from '../../config/config';
+import { config } from '../../../config/config';
 
 // import { getAttributes } from '../utils/get-attributes';
 
-import { Policy } from '../utils/policy';
+import { Policy } from '../../utils/policy';
 
-import { logger } from '../../lib/logger';
+import { logger } from '../../../lib/logger';
 
 const oktaJwtVerifier = new OktaJwtVerifier({
   clientId: config.get('clientId'),

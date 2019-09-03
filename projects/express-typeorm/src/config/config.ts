@@ -38,6 +38,11 @@ export const config = convict({
     arg: 'port'
   },
 
+  jwtSecret: {
+    format: String,
+    default: ''
+  },
+
   clientId: {
     format: String,
     default: ''

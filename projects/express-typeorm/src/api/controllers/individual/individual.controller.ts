@@ -18,6 +18,9 @@ import { RoleRepository } from '../../repositorys/role.repository';
 
 import { Controller } from '../controller';
 
+// import { checkJwt } from '../../middleware/auth-local/check-jwt';
+import { preAuthorise } from '../../middleware/auth-local/pre-authorise';
+
 import { logger } from '../../../lib/logger';
 
 // https://github.com/mgechev/injection-js
@@ -34,8 +37,8 @@ export class FindIndividualController extends Controller {
   }
 
   protected initialiseRoutes() {
-    // this.router.get(this.path, [preAuthorise], this.execute);
-    this.router.get(this.path, this.execute);
+    this.router.get(this.path, [preAuthorise], this.execute);
+    // this.router.get(this.path, this.execute);
   }
 
   protected executeImpl = async () => {
@@ -75,8 +78,8 @@ export class FindOneIndividualController extends Controller {
   }
 
   protected initialiseRoutes() {
-    // this.router.get(this.path, [preAuthorise], this.execute);
-    this.router.get(this.path, this.execute);
+    this.router.get(this.path, [preAuthorise], this.execute);
+    // this.router.get(this.path, this.execute);
   }
 
   protected executeImpl = async () => {
@@ -111,8 +114,8 @@ export class CreateIndividualController extends Controller {
   }
 
   protected initialiseRoutes() {
-    // this.router.post(this.path, [preAuthorise], this.execute);
-    this.router.post(this.path, this.execute);
+    this.router.post(this.path, [preAuthorise], this.execute);
+    // this.router.post(this.path, this.execute);
   }
 
   protected executeImpl = async () => {
@@ -156,8 +159,8 @@ export class UpdateIndividualController extends Controller {
   }
 
   protected initialiseRoutes() {
-    // this.router.post(this.path, [preAuthorise], this.execute);
-    this.router.patch(this.path, this.execute);
+    this.router.patch(this.path, [preAuthorise], this.execute);
+    // his.router.patch(this.path, this.execute);
   }
 
   protected executeImpl = async () => {
@@ -202,8 +205,8 @@ export class DeleteIndividualController extends Controller {
   }
 
   protected initialiseRoutes() {
-    // this.router.get(this.path, [preAuthorise], this.execute);
-    this.router.delete(this.path, this.execute);
+    this.router.delete(this.path, [preAuthorise], this.execute);
+    // this.router.delete(this.path, this.execute);
   }
 
   protected executeImpl = async () => {
