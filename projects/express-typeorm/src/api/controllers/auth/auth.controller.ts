@@ -60,6 +60,8 @@ export class RegisterUserController extends Controller {
 
       const token = jwt.sign(
         {
+          // operationType: 'register',
+          // provider: 'auth-local',
           user: user,
           groups: [ 'Everyone', 'User', 'Administrator']
         },
@@ -121,6 +123,8 @@ export class LoginUserController extends Controller {
 
       const token = jwt.sign(
           {
+            // operationType: 'login',
+            // provider: 'auth-local',
             user: user,
             groups: [ 'Everyone', 'User', 'Administrator']
           },

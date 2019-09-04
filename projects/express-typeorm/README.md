@@ -38,6 +38,21 @@
 * TypeORM.io: [Getting Started Guide](https://typeorm.io/#/)
 * GitHub: [Generate TypeORM models from an existing database](https://github.com/Kononnable/typeorm-model-generator)
 
+### Additional TypeORM Resources
+
+* GitHub: [Express, TypeScript boilerplate](https://github.com/w3tecch/express-typescript-boilerplate)
+
+### JWT Resources
+
+* jwt.io: [JSON Web Token (JWT)](https://jwt.io/)
+* GitHub: [JsonWebToken](https://github.com/auth0/node-jsonwebtoken)
+
+### Additional JWT Resources
+
+* Medium: [TypeScript Rest API with Express, JWT, Authorization Roles and TypeORM](https://medium.com/javascript-in-plain-english/creating-a-rest-api-with-jwt-authentication-and-role-based-authorization-using-typescript-fbfa3cab22a4)
+* GitHub: [JWT, Express and TypeORM](https://github.com/andregardi/jwt-express-typeorm)
+* Wanago.io: [Registering users and authenticating with JWT](https://wanago.io/2018/12/24/typescript-express-registering-authenticating-jwt/)
+
 ### SQLite Resources
 
 * SQLite.org: [What Is SQLite?](https://www.sqlite.org/index.html)
