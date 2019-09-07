@@ -117,12 +117,10 @@ components:
           authorizationUrl: /oauth2/authorize
           tokenUrl: /oauth2/access
           scopes:
-            classification:read: Read access to the Classification schemes collection
-            classification:write: Write access to the Classification schemes collection
-            individual:read: Read access to the Individuals collection
-            individual:write: Write access to the Individuals collection
-            organisation:read: Read access to the Organisations collection
-            organisation:write: Write access to the Organisations collection
+            individual.post: Create access to the Individuals collection
+            individual.get: Read access to the Individuals collection
+            individual.patch: Update access to the Individuals collection
+            individual.delete: Delete access to the Individuals collection
 
   schemas:
     address-type:

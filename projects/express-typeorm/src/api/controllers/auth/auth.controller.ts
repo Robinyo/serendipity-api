@@ -1,7 +1,5 @@
 import 'reflect-metadata';
 
-import * as jwt from 'jsonwebtoken';
-
 import { getRepository } from 'typeorm';
 import { plainToClass } from 'class-transformer';
 import { validate } from 'class-validator';
@@ -13,7 +11,8 @@ import { UserRepository } from '../../repositorys/user.repository';
 
 import { Controller } from '../controller';
 
-import { config } from '../../../config/config';
+import { createAccessToken } from './token';
+
 import { logger } from '../../../lib/logger';
 
 // https://github.com/mgechev/injection-js
@@ -58,25 +57,7 @@ export class RegisterUserController extends Controller {
 
       user.password = '';
 
-      const token = jwt.sign(
-        {
-          // operationType: 'register',
-          // provider: 'auth-local',
-          user: user,
-          groups: [ 'Everyone', 'User', 'Administrator']
-        },
-        config.get('jwtSecret'),
-        { expiresIn: '1h' }
-      );
-
-      // logger.info('token: ' + JSON.stringify(token, null, 2) + '\n');
-
-      return this.ok<any>(token);
-
-      // logger.info('individual: ' + JSON.stringify(data, null, 2) + '\n');
-
-      // E.g.: http://127.0.0.1:3001/users/7
-      // return this.created<User>(this.basePath + PATH + '/' + data.id, data);
+      return this.ok<any>(createAccessToken(user));
 
     } catch (error) {
       return this.handleError(error);
@@ -121,22 +102,7 @@ export class LoginUserController extends Controller {
 
       user.password = '';
 
-      const token = jwt.sign(
-          {
-            // operationType: 'login',
-            // provider: 'auth-local',
-            user: user,
-            groups: [ 'Everyone', 'User', 'Administrator']
-          },
-          config.get('jwtSecret'),
-          { expiresIn: '1h' }
-      );
-
-      // logger.info('token: ' + JSON.stringify(token, null, 2) + '\n');
-
-      return this.ok<any>(token);
-
-      // return this.ok<User>(user);
+      return this.ok<any>(createAccessToken(user));
 
     } catch (error) {
       return this.handleError(error);
@@ -168,3 +134,8 @@ export function AuthControllerFactory(controllers = authControllers) {
 
 // logger.info('username: ' + username);
 // logger.info('password: ' + password);
+
+// logger.info('individual: ' + JSON.stringify(data, null, 2) + '\n');
+
+// E.g.: http://127.0.0.1:3001/users/7
+// return this.created<User>(this.basePath + PATH + '/' + data.id, data);
