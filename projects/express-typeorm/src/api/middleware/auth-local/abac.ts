@@ -7,13 +7,13 @@ import { Policy } from '../../utils/policy';
 import { config } from '../../../config/config';
 import { logger } from '../../../lib/logger';
 
-export const preAuthorise = (req: Request, res: Response, next: NextFunction) => {
+export const authorise = (req: Request, res: Response, next: NextFunction) => {
 
   const authHeader = req.headers.authorization || '';
   const match = authHeader.match(/Bearer (.+)/);
 
   if (!match) {
-    logger.error('checkJwt !match');
+    logger.error('authorise(): Not a Bearer token)');
     return res.status(401).end();
   }
 
@@ -38,15 +38,15 @@ export const preAuthorise = (req: Request, res: Response, next: NextFunction) =>
 
     const jwtPayload = <any> jwt.verify(token, config.get('jwtSecret'));
 
-    logger.info('jwtPayload: ' + JSON.stringify(jwtPayload));
+    logger.info('jwtPayload: ' + JSON.stringify(jwtPayload, null, 2));
 
     //
     // See: https://en.wikipedia.org/wiki/XACML
     //
 
-    const roles = Policy.getRoles(path, method);
+    const scopes = Policy.getScopes(path, method);
 
-    if (! Policy.hasRole(roles[0], jwtPayload.groups)) {
+    if (! Policy.hasScope(scopes[0], jwtPayload.scp)) {
 
       logger.error('Not authorised');
       return res.status(401).end();
@@ -55,7 +55,7 @@ export const preAuthorise = (req: Request, res: Response, next: NextFunction) =>
     res.locals.jwtPayload = jwtPayload;
 
   } catch (error) {
-    logger.error('checkJwt error: ' + error.message);
+    logger.error(error.message);
     return res.status(401).send(error.message);
   }
 

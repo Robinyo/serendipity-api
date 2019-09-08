@@ -23,6 +23,26 @@ export class User {
   @Length(4, 50)
   password: string;
 
+  @Column({ nullable: true })
+  name: string;
+
+  @Column()
+  @IsNotEmpty()
+  givenName: string;
+
+  @Column({ nullable: true })
+  middleName: string;
+
+  @Column()
+  @IsNotEmpty()
+  familyName: string;
+
+  @Column({ nullable: true })
+  nickname: string;
+
+  @Column({ nullable: true })
+  preferredUsername: string;
+
   @Column()
   @IsNotEmpty()
   email: string;

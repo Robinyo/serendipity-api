@@ -6,22 +6,22 @@
       {
         "method": "POST",
         "role": "Administrator",
-        "scope": "individual.post"
+        "scope": "individual:post"
       },
       {
         "method": "GET",
         "role": "User",
-        "scope": "individual.get"
+        "scope": "individual:get"
       },
       {
         "method": "PATCH",
         "role": "Administrator",
-        "scope": "individual.patch"
+        "scope": "individual:patch"
       },
       {
         "method": "DELETE",
         "role": "Administrator",
-        "scope": "individual.delete"
+        "scope": "individual:delete"
       }
     ]
   },
@@ -32,22 +32,22 @@
       {
         "method": "POST",
         "role": "Administrator",
-        "scope": "individual.post"
+        "scope": "individual:post"
       },
       {
         "method": "GET",
         "role": "User",
-        "scope": "individual.get"
+        "scope": "individual:get"
       },
       {
         "method": "PATCH",
         "role": "Administrator",
-        "scope": "individual.patch"
+        "scope": "individual:patch"
       },
       {
         "method": "DELETE",
         "role": "Administrator",
-        "scope": "individual.delete"
+        "scope": "individual:delete"
       }
     ]
   }

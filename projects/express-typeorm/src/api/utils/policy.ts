@@ -7,6 +7,7 @@ import { logger } from '../../lib/logger';
 export interface MethodDef {
   'method': string;
   'role': string;
+  'scope': string;
 }
 
 export interface PolicyDef {
@@ -81,6 +82,43 @@ export class Policy {
 
   };
 
+  static getScopes = (path: string, method: string): string[] => {
+
+    // logger.info('Policy: getScopes()');
+
+    let scopes: string[] = [];
+
+    try {
+
+      const item = Policy.items.find((element) => {
+        return element.path === path;
+      });
+
+      if (item !== undefined) {
+
+        // logger.info('Policy getScopes() item !== undefined');
+
+        const policy = item.methods.find((element) => {
+          return element.method === method;
+        });
+
+        if (policy !== undefined) {
+          // logger.info('Policy getScopes() policy !== undefined');
+          scopes = [policy.scope];
+        }
+
+      }
+
+    } catch (error) {
+      logger.error(error);
+    }
+
+    logger.info('scopes: ' + scopes);
+
+    return scopes;
+
+  };
+
   static hasRole = (role: string, groups: string[]): Boolean => {
 
     // logger.info('Policy: hasRole()');
@@ -105,117 +143,33 @@ export class Policy {
 
   };
 
+  static hasScope = (scope: string, scopes: string[]): Boolean => {
+
+    // logger.info('Policy: hasScope()');
+
+    let hasScope = false;
+
+    if (scope === '') {
+      return hasScope;
+    }
+
+    try {
+
+      hasScope = scopes.includes(scope);
+
+    } catch (error) {
+      logger.error(error);
+    }
+
+    logger.info('hasScope: ' + hasScope);
+
+    return hasScope;
+
+  };
+
 }
-
-// export default Policy;
-
-// static hasRole = (roles: string[], groups: string[]): Boolean => {
-
-// https://github.com/axios/axios
 
 // https://www.valentinog.com/blog/http-requests-node-js-async-await/
 // https://stackoverflow.com/questions/50277504/is-there-any-reasons-to-use-axios-instead-es6-fetch
 
-// https://github.com/typestack/class-transformer
-// Proper decorator-based transformation / serialization / deserialization of plain javascript objects to class constructors
-
-/*
-
-
-  static getAll = async () => {
-
-    logger.info('Policy getAll()');
-
-    try {
-
-
-
-    } catch (error) {
-
-      logger.error(error);
-    }
-
-  };
-
-
-*/
-
-/*
-
-  static getRoles = (path: string, method: string) => {
-
-    logger.info('Policy: getRoles()');
-
-    let roles: Array<String> = [];
-
-    try {
-
-      for (const item of Policy.items) {
-
-        if (item.path === path) {
-
-          logger.info('Policy getRoles() item.path === path');
-
-          const policy = item.methods.find((element) => {
-            return element.method === method;
-          });
-
-          if (policy !== undefined) {
-            logger.info('Policy getRoles() policy !== undefined');
-            roles = [policy.role];
-          }
-
-          break;
-        }
-      }
-
-
-    } catch (error) {
-      logger.error(error);
-    }
-
-    logger.info('roles: ' + roles);
-
-    return roles;
-
-  };
-
-*/
-
-/*
-
-// import { logger } from '../../lib/logger';
-
-export const getRoles = (path: string, method: string): Array<String> => {
-
-  // path = '/contacts'
-  // method = 'GET' || 'POST' || 'PATCH' 'PUT' || 'DELETE'
-
-  let roles: string[];
-
-  switch (path) {
-
-    case '/contacts':
-
-      roles = ['User'];
-      break;
-
-    case '/individuals':
-
-      roles = ['User'];
-      break;
-
-    default:
-
-      roles = ['Administrator'];
-      break;
-
-  }
-
-  return roles;
-
-};
-
-// 'Guest', 'User, 'Administrator'
-
-*/
+// https://github.com/axios/axios

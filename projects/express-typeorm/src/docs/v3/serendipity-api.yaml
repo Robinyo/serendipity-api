@@ -117,10 +117,10 @@ components:
           authorizationUrl: /oauth2/authorize
           tokenUrl: /oauth2/access
           scopes:
-            individual.post: Create access to the Individuals collection
-            individual.get: Read access to the Individuals collection
-            individual.patch: Update access to the Individuals collection
-            individual.delete: Delete access to the Individuals collection
+            individual:post: Create access to the Individuals collection
+            individual:get: Read access to the Individuals collection
+            individual:patch: Update access to the Individuals collection
+            individual:delete: Delete access to the Individuals collection
 
   schemas:
     address-type:
