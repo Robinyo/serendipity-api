@@ -20,7 +20,7 @@ info:
     By default, all requests to http://localhost:3001/api receive the `v1` version of the REST API. We encourage you to explicitly request this version via the `Accept` header.
 
     ## Schema
-    All API access is over HTTP (HTTPS) and accessed from https://localhost:3001/api. All data is sent and received as JSON. Blank fields are included.
+    All API access is over HTTP and accessed from http://localhost:3001/api. All data is sent and received as JSON. Blank fields are included.
 
       All dates use the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format:
 
@@ -58,7 +58,7 @@ info:
         GET /individuals/1234/addresses/?addressType='Mailing'
 
     In this example, the '1234' value is provided for the `:partyId` parameter in the path while `:addressType` is passed in the query string.
-    For POST, PATCH, PUT, and DELETE requests, parameters not included in the URL should be encoded as JSON with a Content-Type of 'application/json'.
+    For POST, PATCH and DELETE requests, parameters not included in the URL should be encoded as JSON with a Content-Type of 'application/json'.
 
     ## Metadata
     The API provides **metadata services** that you can use to discover information about the classifcation schemes and values used by the application.
@@ -96,133 +96,114 @@ servers:
 components:
 
   securitySchemes:
-    oauth:
-      type: oauth2
+
+    Bearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
       description: |
-        The API supports:
-          - OAuth 2.0
+        You can create an account by posting a Username and Password (and a Given Name and Family Name) to:
+
+            POST /register
+
+        You can sign in by posting a Username and Password to:
+
+            POST /login
 
         To access an endpoint a user must have requested and been granted the appropriate scope.
+
+        | Scope             | Description                       |
+        | ----------------- | --------------------------------- |
+        | individual:post   | Required to create an Individual. |
+        | individual:get    | Required to view an Individual.   |
+        | individual:patch  | Required to update an Individual. |
+        | individual:delete | Required to delete an Individual. |
 
         For example, to access:
 
             GET /individuals
 
-        The user must have been granted the `individual:read` scope:
+        The user must have been granted the `individual:get` scope:
 
             security:
-              - oauth: [ individual:read ]
-      flows:
-        authorizationCode:
-          authorizationUrl: /oauth2/authorize
-          tokenUrl: /oauth2/access
-          scopes:
-            individual:post: Create access to the Individuals collection
-            individual:get: Read access to the Individuals collection
-            individual:patch: Update access to the Individuals collection
-            individual:delete: Delete access to the Individuals collection
+              - Bearer: [ individual:get ]
 
   schemas:
-    address-type:
+
+    resourceId:
+      type: number
+      example: 101
+    locationId:
       allOf:
-        - $ref: '#/components/schemas/type'
-        - type: object
-    business-name-lifecycle-state:
+        - $ref: '#/components/schemas/resourceId'
+        - type: number
+        - description: The resource's unique identifier.
+        - example: 101
+    partyId:
       allOf:
-        - $ref: '#/components/schemas/type'
-        - type: object
-    electronic-address-type:
-      allOf:
-        - $ref: '#/components/schemas/type'
-        - type: object
-    gender:
-      description: The Gender resource.
+        - $ref: '#/components/schemas/resourceId'
+        - type: number
+        - description: The resource's unique identifier.
+        - example: 101
+
+    party:
+      description: The Party resource.
       type: object
+      required:
+        - type
       properties:
         id:
-          description: The resource's unique identifier.
+          description: The Party's unique identifier.
           readOnly: true
           allOf:
-            - $ref: '#/components/schemas/resourceId'
-        gender:
-          description: The gender.
+            - $ref: '#/components/schemas/partyId'
+        type:
+          description: The Party type.
           type: string
-    legal-entity-type:
-      allOf:
-        - $ref: '#/components/schemas/type'
-        - type: object
-    license-lifecycle-state:
-      allOf:
-        - $ref: '#/components/schemas/type'
-        - type: object
-    license-type:
-      allOf:
-        - $ref: '#/components/schemas/type'
-        - type: object
-    name-direction:
-      allOf:
-        - $ref: '#/components/schemas/type'
-        - type: object
-    name-prefix:
-      allOf:
-        - $ref: '#/components/schemas/type'
-        - type: object
-    name-type:
-      allOf:
-        - $ref: '#/components/schemas/type'
-        - type: object
-    registered-identifier-type:
-      allOf:
-        - $ref: '#/components/schemas/type'
-        - type: object
-    role:
-      description: The Role Type resource.
-      type: object
-      properties:
-        id:
-          description: The resource's unique identifier.
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/resourceId'
-        role:
-          description: The role name.
-          type: string
-        roleDescription:
-          description: The role description.
-          type: string
-        relationship:
-          description: The relationship name.
-          type: string
-        reciprocalRole:
-          description: The reciprocal role name.
-          type: string
-        reciprocalRoleDescription:
-          description: The reciprocal role description.
-          type: string
-    type:
-      description: The Type resource.
-      type: object
-      properties:
-        id:
-          description: The resource's unique identifier.
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/resourceId'
+          default: Individual
+          enum:
+            - Individual
+            - Organisation
         name:
-          description: The scheme value.
+          description: The Party's display name.
           type: string
-        description:
-          description: The scheme value description.
+          example: 'Ferguson, Rob'
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/address'
+
+    location:
+      description: The Location resource.
+      type: object
+      properties:
+        id:
+          description: The Location's unique identifier.
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/locationId'
+        type:
+          description: The Location's type.
+          default: Address
+          enum:
+            - Address
+            - Electronic Adress
+        fromDate:
+          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
           type: string
+          example: '1979-01-13T09:05:06+10:00'
+        toDate:
+          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+          type: string
+          example: ''
+
     address:
       description: The Address resource.
       type: object
       properties:
-        id:
-          description: The resource's unique identifier.
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/addressId'
+        location:
+          type: object
+          $ref: '#/components/schemas/location'
         name:
           description: The address name.
           type: string
@@ -235,18 +216,14 @@ components:
           description: The address line 2.
           type: string
           example: 21 Genge Street
-        line3:
-          description: The address line 3.
-          type: string
-          example: ''
-        suburb:
-          description: The suburb.
-          type: string
-          example: Civic
         city:
           description: The city.
           type: string
           example: Canberra
+        state:
+          description: The state.
+          type: string
+          example: ACT
         postalCode:
           description: The postal code.
           type: string
@@ -255,130 +232,21 @@ components:
           description: The country.
           type: string
           example: Australia
-        fromDate:
-          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-          readOnly: true
-          type: string
-          example: '1979-01-13T09:05:06+10:00'
-        toDate:
-          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-          readOnly: true
-          type: string
-          example: ''
-    individual-address:
-      allOf:
-        - $ref: '#/components/schemas/address'
-        - type: object
-          properties:
-            addressType:
-              description: The address type.
-              type: string
-              default: Principal Place of Residence
-              enum:
-                - Mailing
-                - Principal Place of Business
-                - Principal Place of Residence
-            fromDate:
-              description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-              readOnly: true
-              type: string
-              example: '1979-01-13T09:05:06+10:00'
-            toDate:
-              description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-              readOnly: true
-              type: string
-              example: ''
-    organisation-address:
-      allOf:
-        - $ref: '#/components/schemas/address'
-        - type: object
-          properties:
-            addressType:
-              description: The address type.
-              type: string
-              default: Principal Place of Business
-              enum:
-                - Mailing
-                - Principal Place of Business
-            fromDate:
-              description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-              readOnly: true
-              type: string
-              example: '1979-01-13T09:05:06+10:00'
-            toDate:
-              description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-              readOnly: true
-              type: string
-              example: ''
-    electronic-address:
-      description: The Electronic Address resource.
+        addressType:
+          description: The Address type.
+          default: Mailing
+          enum:
+            - Mailing
+            - Principal Place of Business
+            - Principal Place of Residence
+
+    individual:
+      description: The Individual resource.
       type: object
       properties:
-        id:
-          description: The resource's unique identifier.
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/addressId'
-        countryPrefix:
-          description: 'The country prefix, for example, "61".'
-          type: string
-          example: '61'
-        areaCode:
-          description: 'The area code, for example, "02".'
-          type: string
-          example: '02'
-        number:
-          description: 'The number, for example, "62164453".'
-          type: string
-          example: '62164453'
-        extension:
-          description: 'The extension number, for example, "4453".'
-          type: string
-          example: ''
-        email:
-          description: 'The email address, for example, "robert.ferguson@ato.gov.au".'
-          type: string
-          example: ''
-        url:
-          description: 'The website address, for example, "https://ato.gov.au".'
-          type: string
-          example: ''
-        electronicAddressType:
-          description: The electronic address type.
-          type: string
-          default: Landline
-          enum:
-            - Email
-            - Fax
-            - Landline
-            - Mobile
-            - Website
-        fromDate:
-          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-          readOnly: true
-          type: string
-          example: '1979-01-13T09:05:06+10:00'
-        toDate:
-          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-          readOnly: true
-          type: string
-          example: ''
-    individual-name:
-      description: The Individual Name resource.
-      type: object
-      properties:
-        id:
-          description: The resource's unique identifier.
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/resourceId'
-        namePrefix:
-          description: The individual's name prefix.
-          type: string
-          default: Mr
-          enum:
-            - Mr
-            - Ms
+        party:
+          type: object
+          $ref: '#/components/schemas/party'
         givenName:
           description: The individual's given name.
           type: string
@@ -391,54 +259,6 @@ components:
           description: The individual's family name.
           type: string
           example: Ferguson
-        nameSuffix:
-          description: 'The individual''s name suffix, for example, "Jr" or "Sr".'
-          type: string
-          example: ''
-        direction:
-          description: The direction used to render the individual's name.
-          type: string
-          default: left-to-right
-          enum:
-            - left-to-right
-            - right-to-left
-        formalSalutation:
-          description: 'The individual''s formal salutation, for example, "Mr William Smith".'
-          type: string
-          example: Mr Robert Ferguson
-        informalSalutation:
-          description: 'The individual''s informal salutation, for example, "Bill".'
-          type: string
-          example: Rob
-        nameType:
-          description: The name type.
-          type: string
-          default: Principal Name
-          enum:
-            - Alias
-            - Principal Name
-        fromDate:
-          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-          readOnly: true
-          type: string
-          example: '1979-01-13T09:05:06+10:00'
-        toDate:
-          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-          readOnly: true
-          type: string
-          example: ''
-    individual:
-      description: The Individual resource.
-      type: object
-      required:
-        - dateOfBirth
-        - placeOfBirth
-      properties:
-        id:
-          description: The party's unique identifier.
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/partyId'
         dateOfBirth:
           description: 'The individual''s date of birth, for example, `1979-01-13` (in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).'
           type: string
@@ -456,253 +276,7 @@ components:
             - Male
             - Not Applicable
             - Not Known
-        names:
-          type: array
-          items:
-            $ref: '#/components/schemas/individual-name'
-        addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/individual-address'
-        electronicAddresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/electronic-address'
-        fromDate:
-          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-          readOnly: true
-          type: string
-          example: '1979-01-13T09:05:06+10:00'
-        toDate:
-          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-          readOnly: true
-          type: string
-          example: ''
-    organisation-name:
-      description: The Organisation Name resource.
-      type: object
-      properties:
-        id:
-          description: The resource's unique identifier.
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/resourceId'
-        name:
-          description: The organisation's name.
-          type: string
-          example: 321 Technology Ventures
-        fromDate:
-          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-          readOnly: true
-          type: string
-          example: '1928-03-03T09:05:06+10:00'
-        toDate:
-          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-          readOnly: true
-          type: string
-          example: ''
-    organisation:
-      description: The Organisation resource.
-      type: object
-      required:
-        - legalEntityType
-        - establishmentDate
-      properties:
-        id:
-          description: The party's unique identifier.
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/partyId'
-        legalEntityType:
-          description: The organisation's legal entity type.
-          type: string
-          default: Company
-          enum:
-            - Company
-            - Partnership
-            - Trust
-            - Joint Venture
-        establishmentDate:
-          description: 'The organisation''s establishment date, for example, `1928-03-03` (in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).'
-          type: string
-          example: '1928-03-03'
-        registeredIdentifiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/registered-identifier'
-        names:
-          type: array
-          items:
-            $ref: '#/components/schemas/organisation-name'
-        addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/organisation-address'
-        electronicAddresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/electronic-address'
-        fromDate:
-          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-          readOnly: true
-          type: string
-          example: '1979-01-13T09:05:06+10:00'
-        toDate:
-          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-          readOnly: true
-          type: string
-          example: ''
-    party-role:
-      description: The Party Role resource.
-      type: object
-      required:
-        - relatedPartyId
-        - relationshipType
-      properties:
-        id:
-          description: The resource's unique identifier.
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/roleId'
-        partyRoleType:
-          description: The party's role type.
-          type: string
-          default: Employee
-          enum:
-            - Director
-            - Employee
-            - Member
-            - Partner
-        relatedPartyId:
-          description: The related party's unique identifier.
-          allOf:
-            - $ref: '#/components/schemas/partyId'
-        relatedPartyRoleType:
-          description: The related party's role type.
-          type: string
-          default: Employer
-          enum:
-            - Accountant
-            - Auditor
-            - Employer
-        relationshipType:
-          description: The relationship type.
-          type: string
-          default: Employment
-          enum:
-            - Commerce
-            - Employment
-            - Membership
-            - Partnership
-        fromDate:
-          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-          readOnly: true
-          type: string
-          example: '2016-01-13T09:05:06+10:00'
-        toDate:
-          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-          readOnly: true
-          type: string
-          example: ''
-    registered-identifier:
-      description: The Registered Identifier resource.
-      type: object
-      properties:
-        id:
-          description: The resource's unique identifier.
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/resourceId'
-        identifier:
-          description: The registered identifier.
-          type: string
-          example: '123456789'
-        identifierType:
-          description: The registered identifier type.
-          type: string
-          default: ACN
-          enum:
-            - ACN
-            - ABN
-        fromDate:
-          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-          readOnly: true
-          type: string
-          example: '1979-01-13T09:05:06+10:00'
-        toDate:
-          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-          readOnly: true
-          type: string
-          example: ''
-    business-name:
-      description: The Business Name resource.
-      type: object
-      properties:
-        id:
-          description: The resource's unique identifier.
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/resourceId'
-        name:
-          description: The business name.
-          type: string
-          example: XYZ Technology Ventures
-        lifecycleState:
-          description: The business name's lifecycle state.
-          type: string
-          default: Pending Approval
-          enum:
-            - Approved
-            - Expired
-            - Issued
-            - Pending Approval
-            - Suspended
-        fromDate:
-          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-          readOnly: true
-          type: string
-          example: '1979-01-13T09:05:06+10:00'
-        toDate:
-          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-          readOnly: true
-          type: string
-          example: ''
-    license:
-      description: The License resource.
-      type: object
-      properties:
-        id:
-          description: The resource's unique identifier.
-          readOnly: true
-          allOf:
-            - $ref: '#/components/schemas/resourceId'
-        licenseType:
-          description: The license type.
-          type: string
-          default: Australian Financial Services License
-          enum:
-            - Australian Financial Services License
-            - License 2B
-        lifecycleState:
-          description: The business name's lifecycle state.
-          type: string
-          default: Pending Approval
-          enum:
-            - Approved
-            - Expired
-            - Issued
-            - Pending Approval
-            - Suspended
-        fromDate:
-          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-          readOnly: true
-          type: string
-          example: '1979-01-13T09:05:06+10:00'
-        toDate:
-          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-          readOnly: true
-          type: string
-          example: ''
+
     error-details:
       type: object
       properties:
@@ -811,26 +385,12 @@ components:
           example: UNAUTHORIZED
         details:
           $ref: '#/components/schemas/error-details'
-    addressId:
-      allOf:
-        - $ref: '#/components/schemas/resourceId'
-        - type: number
-        - example: 101
-    partyId:
-      allOf:
-        - $ref: '#/components/schemas/resourceId'
-        - type: number
-        - example: 101
-    resourceId:
-      type: number
-      description: The resource ID.
-      example: 101
-    roleId:
-      allOf:
-        - $ref: '#/components/schemas/resourceId'
-        - type: number
-        - example: 101
+
   responses:
+    InvalidArgument:
+      description: The client specified an invalid argument
+      schema:
+        $ref: '#/components/schemas/invalid-argument'
     NotFound:
       description: The specified resource was not found
       schema:
@@ -839,9 +399,13 @@ components:
       description: 'Request not authorised due to missing, invalid, or expired token'
       schema:
         $ref: '#/components/schemas/unauthorized'
+
 paths:
+
   /individuals:
     get:
+      tags:
+        - Individuals
       summary: Retrieve a list of individuals
       description: |
         Retrieve a list of individuals
@@ -874,4 +438,103 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
         security:
-          - oauth: [ individual:read ]
+          - Bearer: [ individual:get ]
+    post:
+      tags:
+        - Individuals
+      summary: Create an Individual
+      description: |
+        Create a new Individual.
+      requestBody:
+        description: The Individual to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/individual'
+      responses:
+        '201':
+          description: Individual was created
+          headers:
+            Location:
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+              type: string
+          schema:
+            $ref: '#/components/schemas/individual'
+        '400':
+          $ref: '#/components/responses/InvalidArgument'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        security:
+          - Bearer: [ individual:post ]
+
+  /individuals/{partyId}:
+    parameters:
+      - in: path
+        name: partyId
+        required: true
+        schema:
+          $ref: '#/components/schemas/partyId'
+    get:
+      tags:
+        - Individuals
+      summary: Retrieve an Individual
+      description: |
+        Retrieve an Individual with the specified identifier
+      responses:
+        '200':
+          description: A list of individuals was retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/individual'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        security:
+          - Bearer: [ individual:get ]
+    patch:
+      tags:
+        - Individuals
+      summary: Update an Individual
+      description: |
+        Update an existing Individual.
+      requestBody:
+        description: The Individual to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/individual'
+      responses:
+        '200':
+          description: The Individual was update
+          schema:
+            $ref: '#/components/schemas/individual'
+        '400':
+          $ref: '#/components/responses/InvalidArgument'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        security:
+          - Bearer: [ individual:patch ]
+    delete:
+      tags:
+        - Individuals
+      summary: Delete an Individual
+      description: |
+        Delete an existing Individual.
+      responses:
+        '204':
+          description: Individual was deleted
+        '400':
+          $ref: '#/components/responses/InvalidArgument'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        security:
+          - Bearer: [ individual:delete ]

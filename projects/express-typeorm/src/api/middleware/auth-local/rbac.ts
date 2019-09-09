@@ -2,6 +2,8 @@ import { Request, Response, NextFunction } from 'express';
 
 import * as jwt from 'jsonwebtoken';
 
+import { UNAUTHORIZED } from '../../models/http-status-messages';
+
 import { Policy } from '../../utils/policy';
 
 import { config } from '../../../config/config';
@@ -44,7 +46,7 @@ export const authorise = (req: Request, res: Response, next: NextFunction) => {
 
     if (! Policy.hasRole(roles[0], jwtPayload.groups)) {
 
-      logger.error('Not authorised');
+      logger.error(UNAUTHORIZED);
       return res.status(401).end();
     }
 

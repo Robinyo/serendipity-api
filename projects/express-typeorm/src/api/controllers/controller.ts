@@ -1,13 +1,8 @@
 import { Request, Response, Router } from 'express';
 
-// import { preAuthorise } from '../middleware/pre-authorise';
+import { INVALID_ARGUMENT, NOT_FOUND } from '../models/http-status-messages';
 
 import { config } from '../../config/config';
-
-// import { logger } from '../../lib/logger';
-
-const INVALID_ARGUMENT = 'Invalid argument';
-const NOT_FOUND = 'The specified resource was not found';
 
 export abstract class Controller {
 
@@ -74,6 +69,15 @@ export abstract class Controller {
         'code': 400,
         'message': INVALID_ARGUMENT,
         'status': 'INVALID_ARGUMENT'
+        /*
+        'details': [
+          {
+            'code': 'NullValue',
+            'target': 'familyName',
+            'message': 'Family name must not be null'
+          }
+        ]
+        */
       }};
 
     return this.res.status(message.error.code).json(message);
@@ -123,77 +127,3 @@ export abstract class Controller {
 // https://khalilstemmler.com/articles/enterprise-typescript-nodejs/clean-consistent-expressjs-controllers/
 
 // https://github.com/Robinyo/restful-api-design-guidelines
-
-// const INTERNAL = 'Internal server error';
-// const UNAUTHORIZED = 'Unauthorized';
-// const PERMISSION_DENIED = 'Client does not have sufficient permission';
-
-/*
-
-const CREATED = 'Created :)';
-
-  protected created(location: string) {
-    return this.res.location(location).status(201).json({
-      'code': 201,
-      'message': CREATED
-    });
-  }
-
-  protected jsonResponse(code: number, message: string) {
-    return this.res.status(code).json({ message });
-  }
-
-  protected clientError(message?: string) {
-    return this.jsonResponse(400, message ? message : INVALID_ARGUMENT);
-  }
-
-  protected fail(error: Error) {
-
-    return this.res.status(500).json({
-      'error': {
-        'code': 500,
-        'message': error.message,
-        'status': error.name
-      }
-    });
-
-  }
-
-  protected clientError(message?: string) {
-    return this.jsonResponse(400, message ? message : INVALID_ARGUMENT);
-  }
-
-  protected unauthorized(message?: string) {
-    return this.jsonResponse(401, message ? message : UNAUTHORIZED);
-  }
-
-  protected forbidden (message?: string) {
-    return this.jsonResponse(403, message ? message : PERMISSION_DENIED);
-  }
-
-  protected notFound(message?: string) {
-    return this.jsonResponse(404, message ? message : NOT_FOUND);
-  }
-
-*/
-
-/*
-
-error: {
-  "name": "EntityNotFound",
-  "message": "Could not find any entity of type \"Individual\" matching: \"12\""
-}
-
-    return this.res.status(500).json({
-      message: error.toString()
-    })
-
-      response.status(404).send({
-        'error': {
-          'code': 404,
-          'message': 'The specified resource was not found',
-          'status': 'NOT_FOUND'
-        }
-      });
-
-*/

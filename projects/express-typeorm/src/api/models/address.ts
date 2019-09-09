@@ -19,6 +19,9 @@ export class Address {
   @Index()
   location: Location;
 
+  @Column({ nullable: true })
+  name: string;
+
   @Column()
   @IsNotEmpty()
   line1: string;

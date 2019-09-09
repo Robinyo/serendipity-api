@@ -16,6 +16,12 @@ export class Location {
   @Column()
   type: string;  // 'Address' | ???
 
+  @Column({ nullable: true })
+  fromDate: Date;
+
+  @Column({ nullable: true })
+  toDate: Date;
+
   @Column(type => SpecialColumns, { prefix: '' })
   specialColumns: SpecialColumns;
 

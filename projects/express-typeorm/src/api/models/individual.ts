@@ -50,6 +50,12 @@ export class Individual {
   initials: string;
 
   @Column({ nullable: true })
+  dateOfBirth: Date;
+
+  @Column({ nullable: true })
+  placeOfBirth: string;
+
+  @Column({ nullable: true })
   gender: string;
 
   @Column({ nullable: true })
