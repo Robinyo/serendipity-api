@@ -406,12 +406,12 @@ paths:
     get:
       tags:
         - Individuals
-      summary: Retrieve a list of individuals
+      summary: Retrieve a list of Individuals
       description: |
-        Retrieve a list of individuals
+        Retrieve a list of Individuals
       responses:
         '200':
-          description: A list of individuals was retrieved successfully
+          description: A list of Individuals was retrieved successfully
           headers:
             Link:
               description: |
