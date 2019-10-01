@@ -1,5 +1,6 @@
 import { Request, Response, Router } from 'express';
 
+import { HttpErrorDetails, HttpErrorResponse } from '../models/http-error-response';
 import { INVALID_ARGUMENT, NOT_FOUND } from '../models/http-status-messages';
 
 import { config } from '../../config/config';
@@ -62,23 +63,18 @@ export abstract class Controller {
     return this.res.location(location).status(201).json(dto);
   }
 
-  protected clientError() {
+  protected clientError(details?: HttpErrorDetails) {
 
-    const message = {
-      'error': {
-        'code': 400,
-        'message': INVALID_ARGUMENT,
-        'status': 'INVALID_ARGUMENT'
-        /*
-        'details': [
-          {
-            'code': 'NullValue',
-            'target': 'familyName',
-            'message': 'Family name must not be null'
-          }
-        ]
-        */
+    const message: HttpErrorResponse = {
+      error: {
+        code: 400,
+        message: INVALID_ARGUMENT,
+        status: 'INVALID_ARGUMENT'
       }};
+
+    if (details) {
+      message.error.details = details;
+    }
 
     return this.res.status(message.error.code).json(message);
   }
@@ -89,11 +85,11 @@ export abstract class Controller {
 
   protected handleError(error: Error) {
 
-    const message = {
-      'error': {
-        'code': 500,
-        'message': error.message,
-        'status': error.name
+    const message: HttpErrorResponse = {
+      error: {
+        code: 500,
+        message: error.message,
+        status: error.name
       }};
 
     switch (error.name) {

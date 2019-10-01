@@ -6,14 +6,19 @@ import { config } from '../../../config/config';
 
 import { logger } from '../../../lib/logger';
 
+// const scopes = [ 'individual' ];
+// const scopes = [ 'individual:post-get-patch', 'individual:delete'];
+const scopes = [ 'individual:post', 'individual:get', 'individual:patch', 'individual:delete' ];
+
+// As a JWT is included in a HTTP Header, so we have an upper limit of 8K for most servers
+// 1 char === 1 byte so 1024 chars === 1k
+
 export function createAccessToken(user: User) {
 
   const token = jwt.sign(
     {
       groups: [ 'User', 'Administrator' ],
-      // scp: [ 'individual' ],
-      scp: [ 'individual:post', 'individual:get', 'individual:patch', 'individual:delete' ],
-      // scp: [ 'individual:post-get-patch', 'individual:delete'],
+      scp: scopes,
       username: user.username,
       // name: user.name,
       givenName: user.givenName,
@@ -39,12 +44,13 @@ export function createAccessToken(user: User) {
     {
       audience: 'http://localhost:3001/api',
       expiresIn: '1h',
-      issuer: 'http://localhost:3001/authorize',
+      issuer: 'http://localhost:3001/token',
       subject: user.username
     }
   );
 
   logger.info('token: ' + JSON.stringify(token, null, 2) + '\n');
+  logger.info('token length: ' + token.length + '\n');
 
   return token;
 

@@ -9,6 +9,8 @@ import { Injectable, ReflectiveInjector } from 'injection-js';
 import { User } from '../../models/user';
 import { UserRepository } from '../../repositorys/user.repository';
 
+import { HttpErrorDetails } from '../../models/http-error-response';
+
 import { Controller } from '../controller';
 
 import { createAccessToken } from './token';
@@ -97,7 +99,14 @@ export class LoginUserController extends Controller {
       // logger.info('user: ' + JSON.stringify(user, null, 2) + '\n');
 
       if (!user.checkIfUnencryptedPasswordIsValid(password)) {
-        return this.clientError();
+
+        const httpErrorDetails: HttpErrorDetails = {
+          code: 'BadValue',
+          target: 'username',
+          message: 'Invalid username or password'
+        };
+
+        return this.clientError(httpErrorDetails);
       }
 
       user.password = '';
