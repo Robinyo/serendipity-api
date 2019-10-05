@@ -168,6 +168,7 @@ To remove all unused objects:
 ```
 docker system prune
 ```
+
 ## Docker Compose
 
 ### Build an Image
