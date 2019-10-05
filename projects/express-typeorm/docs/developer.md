@@ -175,7 +175,7 @@ docker system prune
 
 You can use the sample 
 [Dockerfile](https://github.com/Robinyo/serendipity-api/tree/master/projects/express-typeorm/Dockerfile) and 
-[docker-compose.yml](https://github.com/Robinyo/serendipity-api/tree/master/projects/express-typeorm/Dockerfile) to build an 
+[docker-compose.yml](https://github.com/Robinyo/serendipity-api/tree/master/projects/express-typeorm/docker-compose.yml) to build an 
 application image:
 
 ```
