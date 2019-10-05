@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  serendipity-api:
+    build: .
+    command: npm start
+    ports:
+      - '3001:3001'
+    volumes:
+      - .:/srv/serendipity-api
+      - serendipity-api_node_modules:/srv/serendipity-api/node_modules
+
+volumes:
+  serendipity-api_node_modules:

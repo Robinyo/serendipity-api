@@ -168,6 +168,26 @@ To remove all unused objects:
 ```
 docker system prune
 ```
+## Docker Compose
+
+### Build an Image
+
+You can use the sample 
+[Dockerfile](https://github.com/Robinyo/serendipity-api/tree/master/projects/express-typeorm/Dockerfile) and 
+[docker-compose.yml](https://github.com/Robinyo/serendipity-api/tree/master/projects/express-typeorm/Dockerfile) to build an 
+application image:
+
+```
+docker-compose build
+```
+
+### Run the Image
+
+For example:
+
+```
+docker-compose up
+```
 
 ## Resources
 
@@ -189,3 +209,4 @@ docker system prune
 ### Docker Resources
 
 * GitHub: [Docker and Node.js Best Practices](https://github.com/nodejs/docker-node/blob/master/docs/BestPractices.md)
+* jdlm.info: [Lessons from Building Node Apps in Docker](https://jdlm.info/articles/2019/09/06/lessons-building-node-app-docker.html)

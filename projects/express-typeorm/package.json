@@ -4,15 +4,15 @@
   "description": "The REST API for Serendipity CRM built using TypeScript, Node.js, Express and TypeORM.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Robinyo/serendipity-api"
+    "url": "git+https://github.com/Robinyo/serendipity-api.git"
   },
   "author": "Rob Ferguson",
   "homepage": "https://github.com/Robinyo/serendipity",
   "license": "MIT",
   "scripts": {
     "start": "ts-node src/server.ts",
-    "compodoc": "./node_modules/.bin/compodoc -p src/tsconfig.app.json --theme vagrant",
-    "yamlinc": "./node_modules/.bin/yamlinc ./src/docs/v3/index.yaml && npm run yamlinc-mv",
+    "compodoc": "compodoc -p src/tsconfig.app.json --theme vagrant",
+    "yamlinc": "yamlinc ./src/docs/v3/index.yaml && npm run yamlinc-mv",
     "yamlinc-mv": "mv ./index.inc.yaml ./src/docs/v3/serendipity-api.yaml"
   },
   "keywords": [
@@ -62,5 +62,12 @@
     "tslint": "^5.18.0",
     "typescript": "^3.5.2",
     "yamlinc": "^0.1.9"
+  },
+  "bugs": {
+    "url": "https://github.com/Robinyo/serendipity-api/issues"
+  },
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
   }
 }

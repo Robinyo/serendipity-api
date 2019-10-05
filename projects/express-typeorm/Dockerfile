@@ -1,21 +1,18 @@
-FROM node:8
+# I prefer to name a specific version, rather than one of the ‘floating’ tags like node:lts or node:latest
+FROM node:12.8.1
 
-# Create app directory
-WORKDIR /usr/src/app
+# The only commands we need to run as root
+RUN mkdir /srv/serendipity-api && chown node:node /srv/serendipity-api
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
+# An unprivileged user that comes built into all of the official node images from Docker
+USER node
 
-# USER node
+# See: https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html
+WORKDIR /srv/serendipity-api
 
-RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
+# Install the App's dependencies
+COPY --chown=node:node package*.json ./
+RUN npm install --quiet
 
-# Bundle app source
-COPY . .
-
-EXPOSE 3001
-CMD [ "npm", "start" ]
+# Bundle the App's source
+COPY --chown=node:node . .
