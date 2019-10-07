@@ -13,7 +13,7 @@ import { HttpErrorDetails } from '../../models/http-error-response';
 
 import { Controller } from '../controller';
 
-import { createAccessToken } from './token';
+import { createAccessToken, createIdToken } from './token';
 
 import { logger } from '../../../lib/logger';
 
@@ -59,7 +59,13 @@ export class RegisterUserController extends Controller {
 
       user.password = '';
 
-      return this.ok<any>(createAccessToken(user));
+      return this.ok<any>({
+        access_token: createAccessToken(user),
+        token_type: 'Bearer',
+        // refresh_token: '',
+        // expires_in: 3600,
+        id_token: createIdToken(user),
+      });
 
     } catch (error) {
       return this.handleError(error);
@@ -111,7 +117,13 @@ export class LoginUserController extends Controller {
 
       user.password = '';
 
-      return this.ok<any>(createAccessToken(user));
+      return this.ok<any>({
+        access_token: createAccessToken(user),
+        token_type: 'Bearer',
+        // refresh_token: '',
+        // expires_in: 3600,
+        id_token: createIdToken(user),
+      });
 
     } catch (error) {
       return this.handleError(error);
