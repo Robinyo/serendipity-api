@@ -41,6 +41,12 @@ Use TypeScript, Node.js, Express and TypeORM to build a RESTful API for Serendip
 
 ## ❯ Resources
 
+### Digital Identity Resources
+
+* dta.gov.au: [Gatekeeper Public Key Infrastructure Framework](https://www.dta.gov.au/our-projects/digital-identity/gatekeeper-public-key-infrastructure-framework)
+* dta.gov.au: [The Trusted Digital Identity Framework](https://www.dta.gov.au/our-projects/digital-identity/trusted-digital-identity-framework)
+* dta.gov.au: [OpenID Connect 1.0 Profile](https://www.dta.gov.au/our-projects/digital-identity/trusted-digital-identity-framework/framework-documents#openid-connect-1-0-profile)
+
 ### REST API Resources
 
 * GitHub: [RESTful API Design Guidelines](https://github.com/Robinyo/restful-api-design-guidelines)
