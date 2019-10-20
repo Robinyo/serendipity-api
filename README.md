@@ -41,13 +41,6 @@ Use TypeScript, Node.js, Express and TypeORM to build a RESTful API for Serendip
 
 ## ❯ Resources
 
-### Digital Identity Resources
-
-* dta.gov.au: [Gatekeeper Public Key Infrastructure Framework](https://www.dta.gov.au/our-projects/digital-identity/gatekeeper-public-key-infrastructure-framework)
-* dta.gov.au: [The Trusted Digital Identity Framework (TDIF)](https://www.dta.gov.au/our-projects/digital-identity/trusted-digital-identity-framework)
-* dta.gov.au: [TDIF: OpenID Connect 1.0 Profile](https://www.dta.gov.au/our-projects/digital-identity/trusted-digital-identity-framework/framework-documents#openid-connect-1-0-profile)
-* dta.gov.au: [TDIF: Attribute Profile](https://www.dta.gov.au/our-projects/digital-identity/trusted-digital-identity-framework/framework-documents#openid-connect-1-0-profile)
-
 ### REST API Resources
 
 * GitHub: [RESTful API Design Guidelines](https://github.com/Robinyo/restful-api-design-guidelines)
@@ -66,5 +59,12 @@ Use TypeScript, Node.js, Express and TypeORM to build a RESTful API for Serendip
 
 * Wikipedia: [List of political parties in Australia](https://en.wikipedia.org/wiki/List_of_political_parties_in_Australia)
 * Australian Parliament: [Mail Labels for Australian Senators](https://www.aph.gov.au/Senators_and_Members/Guidelines_for_Contacting_Senators_and_Members/Address_labels_and_CSV_files)
+
+### Digital Identity Resources
+
+* dta.gov.au: [Gatekeeper Public Key Infrastructure Framework](https://www.dta.gov.au/our-projects/digital-identity/gatekeeper-public-key-infrastructure-framework)
+* dta.gov.au: [The Trusted Digital Identity Framework (TDIF)](https://www.dta.gov.au/our-projects/digital-identity/trusted-digital-identity-framework)
+* dta.gov.au: [TDIF: OpenID Connect 1.0 Profile](https://www.dta.gov.au/our-projects/digital-identity/trusted-digital-identity-framework/framework-documents#openid-connect-1-0-profile)
+* dta.gov.au: [TDIF: Attribute Profile](https://www.dta.gov.au/our-projects/digital-identity/trusted-digital-identity-framework/framework-documents#openid-connect-1-0-profile)
 
 ![divider](./divider.png)
