@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import csvtojson from 'csvtojson';
+
 import { createConnection } from 'typeorm';
 import { plainToClass } from 'class-transformer';
 
@@ -12,35 +14,20 @@ import { Role } from '../../api/models/role';
 import { logger } from '../../lib/logger';
 import { config } from '../../config/config';
 
-const LIBERAL = 'Liberal Party';
-const LABOR = 'Labor Party';
-const URL = 'public/data/senators.json';
+const LIBERAL_PARTY = 'LP';
+const LABOR_PARTY = 'ALP';
+
+const URL = 'public/data/allsenel.csv';
 
 // https://developer.mozilla.org/en-US/docs/Glossary/IIFE
 
 (function () {
 
-  createConnection().then(async connection => {
+  createConnection().then(async (connection) => {
 
-    logger.info('Australian Senators ...');
+    logger.info('Loading sample data...');
 
     try {
-
-      //
-      // Liberal Party
-      //
-
-      const liberal = new Party();
-      liberal.type = 'Organisation';
-      liberal.displayName = 'Liberal Party';
-
-      const liberalOrg = new Organisation();
-      liberalOrg.name = 'Liberal Party of Australia';
-      liberalOrg.phoneNumber = '(03) 6224 3707';
-
-      liberalOrg.party = liberal;
-
-      await connection.manager.save(liberalOrg);
 
       //
       // Labor Party
@@ -59,6 +46,28 @@ const URL = 'public/data/senators.json';
       await connection.manager.save(laborOrg);
 
       //
+      // Liberal Party
+      //
+
+      const liberal = new Party();
+      liberal.type = 'Organisation';
+      liberal.displayName = 'Liberal Party';
+
+      const liberalOrg = new Organisation();
+      liberalOrg.name = 'Liberal Party of Australia';
+      liberalOrg.phoneNumber = '(03) 6224 3707';
+
+      liberalOrg.party = liberal;
+
+      await connection.manager.save(liberalOrg);
+
+      //
+      // primaryGeneratedColumnId
+      //
+
+      const primaryGeneratedColumnId: number = liberalOrg.id + 1;
+
+      //
       // Parliament House Address
       //
 
@@ -74,89 +83,141 @@ const URL = 'public/data/senators.json';
 
       await connection.manager.save(parliamentHouse);
 
+      //
+      // baseUrl: if you specify a base URL, it’ll be prepended to any relative URL you use
+      //
+
       // axios.defaults.baseURL = 'http://127.0.0.1:3001';
       axios.defaults.baseURL = config.get('protocol') + '://' + config.get('ip') + ':' + config.get('port');
+      axios.defaults.responseType = 'stream';
 
-      logger.info('Senators load() baseURL: ' + axios.defaults.baseURL);
+      logger.info('baseURL: ' + axios.defaults.baseURL);
 
       const response = await axios.get(URL);
-      const items = response.data;
 
-      //
-      // For each Senator ...
-      //
+      const stream = response.data;
 
-      for (const item of items) {
+      const converter = csvtojson({
+        output: 'json',
+        delimiter: ',',
+        ignoreEmpty: true,
+        noheader: false,
+        trim: true,
+      });
 
-        const individual = plainToClass(Individual, item);
+      converter.fromStream(stream).subscribe((object: any, index: number) => {
+
+        object['party'] = {
+          'id': primaryGeneratedColumnId + index,
+          'type': 'Individual',
+          'displayName': object['Surname'] + ', ' + object['Title'] + ' ' + object['First Name'],
+          'addresses': [
+            {
+              'line1': object['ElectorateAddressLine1'],
+              'line2': object['ElectorateAddressLine2'] ? object['ElectorateAddressLine2'] : '',
+              'city': object['ElectorateSuburb'],
+              'state': object['ElectorateState'].toUpperCase(),
+              'postalCode': object['ElectoratePostCode'],
+              'country': 'Australia',
+              'addressType': 'Electorate Office'
+            }
+          ],
+          'roles': []
+        };
+
+        const email = object['email'] = object['First Name'].toLowerCase() + '.' +
+            object['Surname'].toLowerCase() + '@aph.gov.au';
+
+        const gender = object['Gender'].charAt(0).toUpperCase() + object['Gender'].substr(1).toLowerCase();
+
+        object['title'] = object['Title'];
+        object['givenName'] = object['First Name'];
+        object['middleName'] = object['Other Names'] ? object['Other Names'] : '';
+        object['familyName'] = object['Surname'];
+        object['honorific'] = object['Honorific'] ? object['Honorific'] : '';
+        object['salutation'] = object['Salutation'];
+        object['preferredName'] = object['Preferred Name'];
+        object['initials'] = object['Initials'];
+        object['gender'] = gender;
+        object['email'] = email;
+        object['phoneNumber'] = object['ElectorateTelephone'];
+        object['photoUrl'] = '';
+
+
+        const role = {
+          role: 'Member',
+          partyId: object.party.id,
+          partyType: object.party.type,
+          partyName: object.party.displayName,
+          relationship: 'Membership',
+          reciprocalRole: 'Organisation',
+          reciprocalPartyId: null,
+          reciprocalPartyType: 'Organisation',
+          reciprocalPartyName: ''
+        };
+
+        switch (object['Political Party']) {
+
+          case LABOR_PARTY:
+
+            logger.info(LABOR_PARTY);
+            role.reciprocalPartyId = laborOrg.id;
+            role.reciprocalPartyName = laborOrg.name;
+
+            break;
+
+          case LIBERAL_PARTY:
+
+            logger.info(LIBERAL_PARTY);
+            role.reciprocalPartyId = liberalOrg.id;
+            role.reciprocalPartyName = liberalOrg.name;
+
+            break;
+
+          default:
+
+            logger.error('Political Party: ' +  object['Political Party']);
+
+            role.reciprocalPartyId = liberalOrg.id;
+            role.reciprocalPartyName = liberalOrg.name;
+
+            break;
+        }
+
+        //
+        // Delete any unwanted properties
+        //
+
+        const columnNames = ['Title', 'Salutation', 'Surname', 'First Name', 'Other Names', 'Preferred Name',
+          'Initials', 'State', 'Political Party', 'Gender', 'Honorific', 'ElectorateAddressLine1',
+          'ElectorateAddressLine2', 'ElectorateSuburb', 'ElectorateState', 'ElectoratePostCode',
+          'ElectorateTelephone', 'ElectorateFax', 'ElectorateAddressLine1', 'ElectorateTollFree', 'LabelAddress',
+          'LabelSuburb', 'LabelState', 'LabelPostCode', 'Parliamentary Title'
+        ];
+
+        columnNames.forEach((columnName) => {
+          object[columnName] = undefined;
+        });
+
+        const individual = plainToClass(Individual, object);
 
         individual.party.addresses.push(parliamentHouse);
+        individual.party.roles.push(<Role>role);
 
-        let role: Role;
+        connection.manager.save(individual).then(() => {
 
-        if (individual.party.roles.length) {
+          // logger.info('individual: ' + JSON.stringify(individual, null, 2) + '\n');
 
-          role = individual.party.roles[0];
+          return new Promise((resolve) => {
+            resolve(object);
+          });
 
-          individual.party.roles = [];
-        }
+        });
 
-        await connection.manager.save(individual);
+      }).on('done', () => {
 
-        //
-        // Create a 'relationship' from the Senator to a Political Party
-        //
-
-        /*
-
-        "roles": [
-          {
-            "role": "Member",
-            "partyType": "Individual",
-            "partyName": "Abetz, Senator the Hon Eric",
-            "relationship": "Membership",
-            "reciprocalRole": "Organisation",
-            "reciprocalPartyType": "Organisation",
-            "reciprocalPartyName": "Liberal Party"
-          }
-        ]
-
-        */
-
-        if (role) {
-
-          role.partyId = individual.id;
-
-          switch (role.reciprocalPartyName) {
-
-            case LIBERAL:
-
-              logger.info(LIBERAL);
-              role.reciprocalPartyId = liberalOrg.id;
-
-              break;
-
-            case LABOR:
-
-              logger.info(LABOR);
-              role.reciprocalPartyId = laborOrg.id;
-
-              break;
-
-            default:
-
-              logger.error('role.reciprocalPartyName: default');
-              break;
-          }
-
-          individual.party.roles.push(role);
-
-        }
-
-        // logger.info('individual: ' + JSON.stringify(individual, null, 2) + '\n');
-
-        await connection.manager.save(individual);
-      }
+        logger.info('Loading complete!');
+      })
 
     } catch (error) {
 
@@ -168,6 +229,7 @@ const URL = 'public/data/senators.json';
 })();
 
 // https://github.com/axios/axios
+// https://github.com/Keyang/node-csvtojson
 
 // https://www.valentinog.com/blog/http-requests-node-js-async-await/
 // https://stackoverflow.com/questions/50277504/is-there-any-reasons-to-use-axios-instead-es6-fetch
@@ -179,3 +241,22 @@ const URL = 'public/data/senators.json';
 // Hydration of Embedded (json) types into proper class instances
 
 // logger.info('items: ' + JSON.stringify(items, null, 2) + '\n' );
+
+// https://stackoverflow.com/questions/208105/how-do-i-remove-a-property-from-a-javascript-object
+
+/*
+
+        let role: Role = {
+          role: 'Member',
+          partyId: object.id,
+          partyType: 'Individual',
+          partyName: object.displayName,
+          relationship: 'Membership',
+          // reciprocalPartyId
+          reciprocalRole: 'Organisation',
+          reciprocalPartyType: 'Organisation',
+          reciprocalPartyName: ''
+        };
+
+*/
+
