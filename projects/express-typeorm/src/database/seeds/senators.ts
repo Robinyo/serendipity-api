@@ -14,8 +14,9 @@ import { Role } from '../../api/models/role';
 import { logger } from '../../lib/logger';
 import { config } from '../../config/config';
 
-const LIBERAL_PARTY = 'LP';
 const LABOR_PARTY = 'ALP';
+const LIBERAL_PARTY = 'LP';
+const NATIONAL_AUSTRALIA_PARTY = 'NATS';
 
 const URL = 'public/data/allsenel.csv';
 
@@ -30,6 +31,22 @@ const URL = 'public/data/allsenel.csv';
     try {
 
       //
+      // National Party
+      //
+
+      const national = new Party();
+      national.type = 'Organisation';
+      national.displayName = 'National Party';
+
+      const nationalOrg = new Organisation();
+      nationalOrg.name = 'National Party of Australia';
+      nationalOrg.phoneNumber = '(02) 9999 9999';
+
+      nationalOrg.party = national;
+
+      await connection.manager.save(nationalOrg);
+
+      //
       // Labor Party
       //
 
@@ -39,7 +56,7 @@ const URL = 'public/data/allsenel.csv';
 
       const laborOrg = new Organisation();
       laborOrg.name = 'Australian Labor Party';
-      laborOrg.phoneNumber = '(03) 9890 7022';
+      laborOrg.phoneNumber = '(02) 9999 9999';
 
       laborOrg.party = labor;
 
@@ -55,7 +72,7 @@ const URL = 'public/data/allsenel.csv';
 
       const liberalOrg = new Organisation();
       liberalOrg.name = 'Liberal Party of Australia';
-      liberalOrg.phoneNumber = '(03) 6224 3707';
+      liberalOrg.phoneNumber = '(02) 9999 9999';
 
       liberalOrg.party = liberal;
 
@@ -156,7 +173,18 @@ const URL = 'public/data/allsenel.csv';
           reciprocalPartyName: ''
         };
 
-        switch (object['Political Party']) {
+        let membership = true;
+        const politicalParty: string = object['Political Party'].toUpperCase();
+
+        switch (politicalParty) {
+
+          case NATIONAL_AUSTRALIA_PARTY:
+
+            logger.info(NATIONAL_AUSTRALIA_PARTY);
+            role.reciprocalPartyId = nationalOrg.id;
+            role.reciprocalPartyName = nationalOrg.name;
+
+            break;
 
           case LABOR_PARTY:
 
@@ -176,11 +204,9 @@ const URL = 'public/data/allsenel.csv';
 
           default:
 
-            logger.error('Political Party: ' +  object['Political Party']);
+            logger.error('Political Party: ' +  politicalParty);
 
-            role.reciprocalPartyId = liberalOrg.id;
-            role.reciprocalPartyName = liberalOrg.name;
-
+            membership = false;
             break;
         }
 
@@ -202,7 +228,10 @@ const URL = 'public/data/allsenel.csv';
         const individual = plainToClass(Individual, object);
 
         individual.party.addresses.push(parliamentHouse);
-        individual.party.roles.push(<Role>role);
+
+        if (membership) {
+          individual.party.roles.push(<Role>role);
+        }
 
         connection.manager.save(individual).then(() => {
 
@@ -243,20 +272,3 @@ const URL = 'public/data/allsenel.csv';
 // logger.info('items: ' + JSON.stringify(items, null, 2) + '\n' );
 
 // https://stackoverflow.com/questions/208105/how-do-i-remove-a-property-from-a-javascript-object
-
-/*
-
-        let role: Role = {
-          role: 'Member',
-          partyId: object.id,
-          partyType: 'Individual',
-          partyName: object.displayName,
-          relationship: 'Membership',
-          // reciprocalPartyId
-          reciprocalRole: 'Organisation',
-          reciprocalPartyType: 'Organisation',
-          reciprocalPartyName: ''
-        };
-
-*/
-

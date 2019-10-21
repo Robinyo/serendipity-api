@@ -57,7 +57,7 @@ export class FindIndividualController extends Controller {
 
       const data = await individualRepository.find({
         skip: 0,
-        take: 24,
+        take: 100,
         relations: ['party', 'party.addresses', 'party.roles']
       });
 
