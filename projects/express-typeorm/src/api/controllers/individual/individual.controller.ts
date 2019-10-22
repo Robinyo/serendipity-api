@@ -44,14 +44,33 @@ export class FindIndividualController extends Controller {
 
   protected executeImpl = async () => {
 
-    // https://github.com/typeorm/typeorm/blob/master/docs/find-options.md
-
-    // const skip: number = this.req.params.skip;  // 0
-    // const take: number = this.req.params.take;  // 24
-
     logger.info('FindIndividualController: executeImpl()');
 
+    logger.info('this.req.query.offset: ' + this.req.query.offset);
+    logger.info('this.req.query.limit: ' + this.req.query.limit);
+
+    const offset = this.req.query.offset || 0;
+    const limit = this.req.query.limit || 100;
+
     try {
+
+      const individualRepository: IndividualRepository = getRepository(Individual);
+
+      const [ data, count ] = await individualRepository.findAndCount({
+        skip: offset,
+        take: limit,
+        relations: ['party', 'party.addresses', 'party.roles']
+      });
+
+      logger.info('count: ' + count);
+
+      return this.ok<Individual[]>(data);
+
+    } catch (error) {
+      return this.handleError(error);
+    }
+
+    /*
 
       const individualRepository: IndividualRepository = getRepository(Individual);
 
@@ -66,6 +85,8 @@ export class FindIndividualController extends Controller {
     } catch (error) {
       return this.handleError(error);
     }
+
+    */
 
   };
 
@@ -285,3 +306,9 @@ export function IndividualControllerFactory(controllers = individualControllers)
 }
 
 // https://github.com/typeorm/typeorm/blob/master/docs/find-options.md
+
+// https://jsonapi.org/format/#fetching-pagination
+// For example, a page-based strategy might use query parameters such as page[number] and page[size], an offset-based
+// strategy might use page[offset] and page[limit], while a cursor-based strategy might use page[cursor].
+
+// TypeORM uses an offset-based strategy: skip: 0, take: 100 -> offset & limit
