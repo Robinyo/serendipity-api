@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-import { getRepository } from 'typeorm';
+import { getRepository, Like } from 'typeorm';
 import { plainToClass } from 'class-transformer';
 import { validate } from 'class-validator';
 
@@ -46,21 +46,41 @@ export class FindIndividualController extends Controller {
 
     logger.info('FindIndividualController: executeImpl()');
 
-    logger.info('this.req.query.offset: ' + this.req.query.offset);
-    logger.info('this.req.query.limit: ' + this.req.query.limit);
+    logger.info('this.req.query: ' + JSON.stringify(this.req.query, null, 2));
 
-    const offset = this.req.query.offset || 0;
+    const filter = this.req.query.filter;
     const limit = this.req.query.limit || 100;
+    const offset = this.req.query.offset || 0;
+
+    const options = {
+      skip: offset,
+      take: limit,
+      relations: ['party', 'party.addresses', 'party.roles']
+    };
+
+    if (filter) {
+
+      options['where'] = [];
+
+      const columns = Object.keys(filter);
+      const column = {};
+
+      // options['where'] = [
+      //   { familyName: Like('C%') }
+      // ];
+
+      column[columns[0]] = Like(filter[columns[0]]);
+
+      options['where'].push(column);
+    }
+
+    logger.info('options: ' + JSON.stringify(options, null, 2));
 
     try {
 
       const individualRepository: IndividualRepository = getRepository(Individual);
 
-      const [ data, count ] = await individualRepository.findAndCount({
-        skip: offset,
-        take: limit,
-        relations: ['party', 'party.addresses', 'party.roles']
-      });
+      const [ data, count ] = await individualRepository.findAndCount(options);
 
       logger.info('count: ' + count);
 
@@ -69,24 +89,6 @@ export class FindIndividualController extends Controller {
     } catch (error) {
       return this.handleError(error);
     }
-
-    /*
-
-      const individualRepository: IndividualRepository = getRepository(Individual);
-
-      const data = await individualRepository.find({
-        skip: 0,
-        take: 100,
-        relations: ['party', 'party.addresses', 'party.roles']
-      });
-
-      return this.ok<Individual[]>(data);
-
-    } catch (error) {
-      return this.handleError(error);
-    }
-
-    */
 
   };
 
@@ -312,3 +314,21 @@ export function IndividualControllerFactory(controllers = individualControllers)
 // strategy might use page[offset] and page[limit], while a cursor-based strategy might use page[cursor].
 
 // TypeORM uses an offset-based strategy: skip: 0, take: 100 -> offset & limit
+
+/*
+
+  const individualRepository: IndividualRepository = getRepository(Individual);
+
+  const data = await individualRepository.find({
+    skip: 0,
+    take: 100,
+    relations: ['party', 'party.addresses', 'party.roles']
+  });
+
+  return this.ok<Individual[]>(data);
+
+} catch (error) {
+  return this.handleError(error);
+}
+
+*/
