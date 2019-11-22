@@ -82,9 +82,19 @@ export class FindIndividualController extends Controller {
 
       const [ data, count ] = await individualRepository.findAndCount(options);
 
-      logger.info('count: ' + count);
+      const response = {
+        data: data,
+        // links: {},
+        meta: {
+          count: count
+        }
+      };
 
-      return this.ok<Individual[]>(data);
+
+      // logger.info('response: ' + JSON.stringify(response, null, 2) + '\n');
+
+      // return this.ok<Individual[]>(data);
+      return this.ok(response);
 
     } catch (error) {
       return this.handleError(error);

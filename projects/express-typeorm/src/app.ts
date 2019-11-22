@@ -62,8 +62,20 @@ export class App {
 
   private initialiseMiddleware() {
 
+    //
+    // https://medium.com/@alexishevia/using-cors-in-express-cac7e29b005b
+    //
+    // By default, only 6 response headers are exposed over CORS:
+    // Cache-Control
+    // Content-Language
+    // Content-Type
+    // Expires
+    // Last-Modified
+    // Pragma
+
     this.app.use(cors({
-        exposedHeaders: ['Location'],
+        exposedHeaders: ['Location', 'Link'],
+        // origin: 'https://serendipity.org.au'
       }
     ));
     this.app.use(helmet());
