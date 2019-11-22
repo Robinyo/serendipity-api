@@ -90,7 +90,6 @@ export class FindIndividualController extends Controller {
         }
       };
 
-
       // logger.info('response: ' + JSON.stringify(response, null, 2) + '\n');
 
       // return this.ok<Individual[]>(data);

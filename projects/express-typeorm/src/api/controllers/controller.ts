@@ -7,9 +7,9 @@ import { config } from '../../config/config';
 
 export abstract class Controller {
 
-  protected basePath;
-  protected path;
-  protected router = Router();
+  protected basePath: string;
+  protected path: string;
+  protected router: Router = Router();
 
   protected req: Request;
   protected res: Response;

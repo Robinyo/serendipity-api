@@ -62,4 +62,9 @@
 
 * Smarty Streets blog: [What is an address API?](https://smartystreets.com/articles/address-apis)
 
+### Digital Identity Resources
+
+* dta.gov.au: [Gatekeeper Public Key Infrastructure Framework](https://www.dta.gov.au/our-projects/digital-identity/gatekeeper-public-key-infrastructure-framework)
+* dta.gov.au: [The Trusted Digital Identity Framework (TDIF)](https://www.dta.gov.au/our-projects/digital-identity/trusted-digital-identity-framework)
+
 ![divider](./divider.png)
