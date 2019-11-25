@@ -128,22 +128,17 @@ const URL = 'public/data/allsenel.csv';
           'id': primaryGeneratedColumnId + index,
           'type': 'Individual',
           'displayName': object['Surname'] + ', ' + object['Title'] + ' ' + object['First Name'],
-
-          'addresses': [],
-          /*
           'addresses': [
             {
-              'line1': object['Electorate Address Line 1'] ? object['Electorate Address Line 1'] : 'Line 1',
-              'line2': object['Electorate Address Line 2'] ? object['Electorate Address Line 2'] : 'Line 2',
-              'city': object['Electorate Suburb'] ? object['Electorate Suburb'] : 'Suburb',
-              'state': object['Electorate State'].toUpperCase() ? object['Electorate State'].toUpperCase() : 'ACT',
-              'postalCode': object['Electorate PostCode'] ? object['Electorate PostCode'] : '2600',
+              'line1': object['ElectorateAddressLine1'],
+              'line2': object['ElectorateAddressLine2'] ? object['ElectorateAddressLine2'] : '',
+              'city': object['ElectorateSuburb'],
+              'state': object['ElectorateState'].toUpperCase(),
+              'postalCode': object['ElectoratePostCode'],
               'country': 'Australia',
               'addressType': 'Electorate Office'
             }
           ],
-          */
-
           'roles': []
         };
 
@@ -152,18 +147,17 @@ const URL = 'public/data/allsenel.csv';
 
         const gender = object['Gender'].charAt(0).toUpperCase() + object['Gender'].substr(1).toLowerCase();
 
-        object['title'] = object['Title'] ? object['Title'] : 'Senator';
+        object['title'] = object['Title'];
         object['givenName'] = object['First Name'];
-        object['middleName'] = object['Other Name'] ? object['Other Name'] : '';
+        object['middleName'] = object['Other Names'] ? object['Other Names'] : '';
         object['familyName'] = object['Surname'];
-        // object['honorific'] = object['Honorific'] ? object['Honorific'] : '';
-        object['honorific'] = object['Post Nominals'] ? object['Post Nominals'] : '';
-        object['salutation'] = object['Salutation'] ? object['Salutation'] : 'Senator';
-        object['preferredName'] = object['Preferred Name'] ? object['Preferred Name'] : '';
+        object['honorific'] = object['Honorific'] ? object['Honorific'] : '';
+        object['salutation'] = object['Salutation'];
+        object['preferredName'] = object['Preferred Name'];
         object['initials'] = object['Initials'];
         object['gender'] = gender;
         object['email'] = email;
-        object['phoneNumber'] = object['Electorate Telephone'] ? object['Electorate Telephone'] : '';
+        object['phoneNumber'] = object['ElectorateTelephone'];
         object['photoUrl'] = '';
 
 
@@ -220,32 +214,11 @@ const URL = 'public/data/allsenel.csv';
         // Delete any unwanted properties
         //
 
-        const columnNames = [
-          'Title',
-          'Salutation',
-          'Surname',
-          'First Name',
-          'Other Name',
-          'Preferred Name',
-          'Initials',
-          'Post Nominals',
-          'State',
-          'Political Party',
-          'Gender',
-          // 'Honorific',
-          'Electorate Address Line 1',
-          'Electorate Address Line 2',
-          'Electorate Suburb',
-          'Electorate State',
-          'Electorate PostCode',
-          'Electorate Telephone',
-          'Electorate Fax',
-          'Electorate TollFree',
-          'Label Address',
-          'Label Suburb',
-          'Label State',
-          'Label postcode',
-          'Parliamentary Titles'
+        const columnNames = ['Title', 'Salutation', 'Surname', 'First Name', 'Other Names', 'Preferred Name',
+          'Initials', 'State', 'Political Party', 'Gender', 'Honorific', 'ElectorateAddressLine1',
+          'ElectorateAddressLine2', 'ElectorateSuburb', 'ElectorateState', 'ElectoratePostCode',
+          'ElectorateTelephone', 'ElectorateFax', 'ElectorateAddressLine1', 'ElectorateTollFree', 'LabelAddress',
+          'LabelSuburb', 'LabelState', 'LabelPostCode', 'Parliamentary Title'
         ];
 
         columnNames.forEach((columnName) => {
