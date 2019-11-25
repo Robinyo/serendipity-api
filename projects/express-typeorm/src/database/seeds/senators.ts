@@ -14,9 +14,13 @@ import { Role } from '../../api/models/role';
 import { logger } from '../../lib/logger';
 import { config } from '../../config/config';
 
+const AUSTRALIAN_GREENS = 'AG';
+const CENTRE_ALLIANCE = 'CA';
+const JACQUI_LAMBIE_NETWORK = 'JLN';
 const LABOR_PARTY = 'ALP';
 const LIBERAL_PARTY = 'LP';
 const NATIONAL_AUSTRALIA_PARTY = 'NATS';
+const PAULINE_HANSONS_ONE_NATION = 'PHON';
 
 const URL = 'public/data/allsenel.csv';
 
@@ -31,20 +35,52 @@ const URL = 'public/data/allsenel.csv';
     try {
 
       //
-      // National Party
+      // Australian Greens
       //
 
-      const national = new Party();
-      national.type = 'Organisation';
-      national.displayName = 'National Party';
+      const greens = new Party();
+      greens.type = 'Organisation';
+      greens.displayName = 'Greens';
 
-      const nationalOrg = new Organisation();
-      nationalOrg.name = 'National Party of Australia';
-      nationalOrg.phoneNumber = '(02) 9999 9999';
+      const greensOrg = new Organisation();
+      greensOrg.name = 'Australian Greens';
+      greensOrg.phoneNumber = '(02) 9999 9999';
 
-      nationalOrg.party = national;
+      greensOrg.party = greens;
 
-      await connection.manager.save(nationalOrg);
+      await connection.manager.save(greensOrg);
+
+      //
+      // Centre Alliance
+      //
+
+      const ca = new Party();
+      ca.type = 'Organisation';
+      ca.displayName = 'Centre Alliance';
+
+      const caOrg = new Organisation();
+      caOrg.name = 'Centre Alliance';
+      caOrg.phoneNumber = '(02) 9999 9999';
+
+      caOrg.party = ca;
+
+      await connection.manager.save(caOrg);
+
+      //
+      // Jacqui Lambie Network
+      //
+
+      const jln = new Party();
+      jln.type = 'Organisation';
+      jln.displayName = 'Jacqui Lambie Network';
+
+      const jlnOrg = new Organisation();
+      jlnOrg.name = 'Jacqui Lambie Network';
+      jlnOrg.phoneNumber = '(02) 9999 9999';
+
+      jlnOrg.party = jln;
+
+      await connection.manager.save(jlnOrg);
 
       //
       // Labor Party
@@ -77,6 +113,38 @@ const URL = 'public/data/allsenel.csv';
       liberalOrg.party = liberal;
 
       await connection.manager.save(liberalOrg);
+
+      //
+      // National Party
+      //
+
+      const national = new Party();
+      national.type = 'Organisation';
+      national.displayName = 'National Party';
+
+      const nationalOrg = new Organisation();
+      nationalOrg.name = 'National Party of Australia';
+      nationalOrg.phoneNumber = '(02) 9999 9999';
+
+      nationalOrg.party = national;
+
+      await connection.manager.save(nationalOrg);
+
+      //
+      // Pauline Hanson's One Nation
+      //
+
+      const phon = new Party();
+      phon.type = 'Organisation';
+      phon.displayName = 'One Nation';
+
+      const phonOrg = new Organisation();
+      phonOrg.name = 'Pauline Hanson\'s One Nation';
+      phonOrg.phoneNumber = '(02) 9999 9999';
+
+      phonOrg.party = phon;
+
+      await connection.manager.save(phonOrg);
 
       //
       // primaryGeneratedColumnId
@@ -184,11 +252,27 @@ const URL = 'public/data/allsenel.csv';
 
         switch (politicalParty) {
 
-          case NATIONAL_AUSTRALIA_PARTY:
+          case AUSTRALIAN_GREENS:
 
-            logger.info(NATIONAL_AUSTRALIA_PARTY);
-            role.reciprocalPartyId = nationalOrg.id;
-            role.reciprocalPartyName = nationalOrg.name;
+            logger.info(AUSTRALIAN_GREENS);
+            role.reciprocalPartyId = greensOrg.id;
+            role.reciprocalPartyName = greensOrg.name;
+
+            break;
+
+          case CENTRE_ALLIANCE:
+
+            logger.info(CENTRE_ALLIANCE);
+            role.reciprocalPartyId = caOrg.id;
+            role.reciprocalPartyName = caOrg.name;
+
+            break;
+
+          case JACQUI_LAMBIE_NETWORK:
+
+            logger.info(JACQUI_LAMBIE_NETWORK);
+            role.reciprocalPartyId = jlnOrg.id;
+            role.reciprocalPartyName = jlnOrg.name;
 
             break;
 
@@ -205,6 +289,22 @@ const URL = 'public/data/allsenel.csv';
             logger.info(LIBERAL_PARTY);
             role.reciprocalPartyId = liberalOrg.id;
             role.reciprocalPartyName = liberalOrg.name;
+
+            break;
+
+          case NATIONAL_AUSTRALIA_PARTY:
+
+            logger.info(NATIONAL_AUSTRALIA_PARTY);
+            role.reciprocalPartyId = nationalOrg.id;
+            role.reciprocalPartyName = nationalOrg.name;
+
+            break;
+
+          case PAULINE_HANSONS_ONE_NATION:
+
+            logger.info(PAULINE_HANSONS_ONE_NATION);
+            role.reciprocalPartyId = phonOrg.id;
+            role.reciprocalPartyName = phonOrg.name;
 
             break;
 
