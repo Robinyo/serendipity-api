@@ -50,6 +50,58 @@
         "scope": "individual:delete"
       }
     ]
+  },
+
+  {
+    "path": "/organisations",
+    "methods": [
+      {
+        "method": "POST",
+        "role": "Administrator",
+        "scope": "organisation:post"
+      },
+      {
+        "method": "GET",
+        "role": "User",
+        "scope": "organisation:get"
+      },
+      {
+        "method": "PATCH",
+        "role": "Administrator",
+        "scope": "organisation:patch"
+      },
+      {
+        "method": "DELETE",
+        "role": "Administrator",
+        "scope": "organisation:delete"
+      }
+    ]
+  },
+
+  {
+    "path": "/organisations/:id",
+    "methods": [
+      {
+        "method": "POST",
+        "role": "Administrator",
+        "scope": "organisation:post"
+      },
+      {
+        "method": "GET",
+        "role": "User",
+        "scope": "organisation:get"
+      },
+      {
+        "method": "PATCH",
+        "role": "Administrator",
+        "scope": "organisation:patch"
+      },
+      {
+        "method": "DELETE",
+        "role": "Administrator",
+        "scope": "organisation:delete"
+      }
+    ]
   }
 
 ]

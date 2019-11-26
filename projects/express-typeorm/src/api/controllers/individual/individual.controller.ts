@@ -78,9 +78,9 @@ export class FindIndividualController extends Controller {
 
     try {
 
-      const individualRepository: IndividualRepository = getRepository(Individual);
+      const repository: IndividualRepository = getRepository(Individual);
 
-      const [ data, count ] = await individualRepository.findAndCount(options);
+      const [ data, count ] = await repository.findAndCount(options);
 
       const response = {
         data: data,
@@ -123,9 +123,9 @@ export class FindOneIndividualController extends Controller {
 
     try {
 
-      const individualRepository: IndividualRepository = getRepository(Individual);
+      const repository: IndividualRepository = getRepository(Individual);
 
-      const data = await individualRepository.findOneOrFail(id, {
+      const data = await repository.findOneOrFail(id, {
         relations: ['party', 'party.addresses', 'party.roles']
       });
 
@@ -157,21 +157,21 @@ export class CreateIndividualController extends Controller {
 
     try {
 
-      const individual = plainToClass(Individual, this.req.body);
+      const entity = plainToClass(Individual, this.req.body);
 
-      // logger.info('individual: ' + JSON.stringify(individual, null, 2) + '\n');
+      // logger.info('entity: ' + JSON.stringify(entity, null, 2) + '\n');
 
-      const errors = await validate(individual);
+      const errors = await validate(entity);
 
       if (errors.length > 0) {
         return this.clientError();
       }
 
-      const individualRepository: IndividualRepository = getRepository(Individual);
+      const repository: IndividualRepository = getRepository(Individual);
 
-      const data = await individualRepository.save(individual);
+      const data = await repository.save(entity);
 
-      // logger.info('individual: ' + JSON.stringify(individual, null, 2) + '\n');
+      // logger.info('entity: ' + JSON.stringify(entity, null, 2) + '\n');
 
       // E.g.: http://127.0.0.1:3001/individuals/7
       return this.created<Individual>(this.basePath + PATH + '/' + data.id, data);
@@ -204,21 +204,21 @@ export class UpdateIndividualController extends Controller {
 
     try {
 
-      const individual = plainToClass(Individual, this.req.body);
+      const entity = plainToClass(Individual, this.req.body);
 
-      logger.info('individual: ' + JSON.stringify(individual, null, 2) + '\n');
+      logger.info('individual: ' + JSON.stringify(entity, null, 2) + '\n');
 
-      const errors = await validate(individual);
+      const errors = await validate(entity);
 
       if (errors.length > 0) {
         return this.clientError();
       }
 
-      const individualRepository: IndividualRepository = getRepository(Individual);
+      const repository: IndividualRepository = getRepository(Individual);
 
-      await individualRepository.findOneOrFail(id, { relations: ['party', 'party.addresses', 'party.roles'] });
+      await repository.findOneOrFail(id, { relations: ['party', 'party.addresses', 'party.roles'] });
 
-      const data = await individualRepository.save(individual);
+      const data = await repository.save(entity);
 
       return this.ok<Individual>(data);
 
@@ -323,21 +323,3 @@ export function IndividualControllerFactory(controllers = individualControllers)
 // strategy might use page[offset] and page[limit], while a cursor-based strategy might use page[cursor].
 
 // TypeORM uses an offset-based strategy: skip: 0, take: 100 -> offset & limit
-
-/*
-
-  const individualRepository: IndividualRepository = getRepository(Individual);
-
-  const data = await individualRepository.find({
-    skip: 0,
-    take: 100,
-    relations: ['party', 'party.addresses', 'party.roles']
-  });
-
-  return this.ok<Individual[]>(data);
-
-} catch (error) {
-  return this.handleError(error);
-}
-
-*/

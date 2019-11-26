@@ -18,9 +18,7 @@ import { RoleRepository } from '../../repositorys/role.repository';
 
 import { Controller } from '../controller';
 
-// import { checkJwt } from '../../middleware/auth-local/check-jwt';
-// import { authorise } from '../../middleware/auth-local/abac';
-// import { authorise } from '../../middleware/auth-local/rbac';
+import { authorise } from '../../middleware/auth-local/abac';
 
 import { logger } from '../../../lib/logger';
 
@@ -38,8 +36,8 @@ export class FindOrganisationController extends Controller {
   }
 
   protected initialiseRoutes() {
-    // this.router.get(this.path, [authorise], this.execute);
-    this.router.get(this.path, this.execute);
+    this.router.get(this.path, [authorise], this.execute);
+    // this.router.get(this.path, this.execute);
   }
 
   protected executeImpl = async () => {
@@ -106,8 +104,8 @@ export class FindOneOrganisationController extends Controller {
   }
 
   protected initialiseRoutes() {
-    // this.router.get(this.path, [authorise], this.execute);
-    this.router.get(this.path, this.execute);
+    this.router.get(this.path, [authorise], this.execute);
+    // this.router.get(this.path, this.execute);
   }
 
   protected executeImpl = async () => {
@@ -142,8 +140,8 @@ export class CreateOrganisationController extends Controller {
   }
 
   protected initialiseRoutes() {
-    // this.router.post(this.path, [authorise], this.execute);
-    this.router.post(this.path, this.execute);
+    this.router.post(this.path, [authorise], this.execute);
+    // this.router.post(this.path, this.execute);
   }
 
   protected executeImpl = async () => {
@@ -183,8 +181,8 @@ export class UpdateOrganisationController extends Controller {
   }
 
   protected initialiseRoutes() {
-    // this.router.patch(this.path, [authorise], this.execute);
-    this.router.patch(this.path, this.execute);
+    this.router.patch(this.path, [authorise], this.execute);
+    // this.router.patch(this.path, this.execute);
   }
 
   protected executeImpl = async () => {
@@ -227,8 +225,8 @@ export class DeleteOrganisationController extends Controller {
   }
 
   protected initialiseRoutes() {
-    // this.router.delete(this.path, [authorise], this.execute);
-    this.router.delete(this.path, this.execute);
+    this.router.delete(this.path, [authorise], this.execute);
+    // this.router.delete(this.path, this.execute);
   }
 
   protected executeImpl = async () => {

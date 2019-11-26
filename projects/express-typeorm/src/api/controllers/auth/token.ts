@@ -8,11 +8,14 @@ import { logger } from '../../../lib/logger';
 
 // const scopes = [ 'individual' ];
 // const scopes = [ 'individual:post-get-patch', 'individual:delete'];
-const scopes = [ 'individual:post', 'individual:get', 'individual:patch', 'individual:delete' ];
+const scopes = [
+  'individual:post', 'individual:get', 'individual:patch', 'individual:delete',
+  'organisation:post', 'organisation:get', 'organisation:patch', 'organisation:delete'
+];
 const AUDIENCE = 'http://localhost:3001/api';
 const ISSUER = 'http://localhost:3001/authorize';
 
-// As a JWT is included in a HTTP Header, so we have an upper limit of 8K for most servers
+// As a JWT is included in a HTTP Header, so we have an upper limit of 8K for most HTTP servers
 // 1 char === 1 byte so 1024 chars === 1k
 
 export function createIdToken(user: User) {
