@@ -57,6 +57,7 @@ Open your browser and try:
 ```
 http://localhost:3001/api/individuals
 http://localhost:3001/api/individuals/4
+http://localhost:3001/api/organisations
 http://localhost:3001/docs
 ```
 

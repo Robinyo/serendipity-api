@@ -15,7 +15,7 @@ export const authorise = (req: Request, res: Response, next: NextFunction) => {
   const match = authHeader.match(/Bearer (.+)/);
 
   if (!match) {
-    logger.error('authorise(): Not a Bearer token)');
+    logger.error('authorise(): Not a Bearer token');
     return res.status(401).end();
   }
 

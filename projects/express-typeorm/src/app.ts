@@ -11,6 +11,7 @@ import { AuthControllerFactory } from './api/controllers/auth/auth.controller';
 
 import { Controller } from './api/controllers/controller';
 import { IndividualControllerFactory } from './api/controllers/individual/individual.controller';
+import { OrganisationControllerFactory } from './api/controllers/organisation/organisation.controller';
 
 import { Policy } from './api/utils/policy';
 
@@ -26,6 +27,7 @@ export class App {
   constructor() {
 
     this.controllers = this.controllers.concat(IndividualControllerFactory());
+    this.controllers = this.controllers.concat(OrganisationControllerFactory());
 
     this.app = express();
 
