@@ -43,9 +43,11 @@ export class Party {
   specialColumns: SpecialColumns;
 
   constructor(
-      type: string = 'Party'
+      type: string = 'type',
+      displayName: string = 'displayName'
   ) {
     this.type = type;
+    this.displayName = displayName;
   }
 
 }

@@ -160,7 +160,9 @@ export class CreateOrganisationController extends Controller {
 
       const repository: OrganisationRepository = getRepository(Organisation);
 
-      const data = await repository.save(entity);
+      // https://github.com/typeorm/typeorm/issues/1583
+
+      const data = await repository.save(entity as Object);
 
       // E.g.: http://127.0.0.1:3001/organisations/7
       return this.created<Organisation>(this.basePath + PATH + '/' + data.id, data);
@@ -205,7 +207,9 @@ export class UpdateOrganisationController extends Controller {
 
       await repository.findOneOrFail(id, { relations: ['party', 'party.addresses', 'party.roles'] });
 
-      const data = await repository.save(entity);
+      // https://github.com/typeorm/typeorm/issues/1583
+
+      const data = await repository.save(entity as Object);
 
       return this.ok<Organisation>(data);
 

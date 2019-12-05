@@ -169,7 +169,9 @@ export class CreateIndividualController extends Controller {
 
       const repository: IndividualRepository = getRepository(Individual);
 
-      const data = await repository.save(entity);
+      // https://github.com/typeorm/typeorm/issues/1583
+
+      const data = await repository.save(entity as Object);
 
       // logger.info('entity: ' + JSON.stringify(entity, null, 2) + '\n');
 
@@ -218,7 +220,9 @@ export class UpdateIndividualController extends Controller {
 
       await repository.findOneOrFail(id, { relations: ['party', 'party.addresses', 'party.roles'] });
 
-      const data = await repository.save(entity);
+      // https://github.com/typeorm/typeorm/issues/1583
+
+      const data = await repository.save(entity as Object);
 
       return this.ok<Individual>(data);
 
