@@ -48,6 +48,13 @@ export class Party {
   ) {
     this.type = type;
     this.displayName = displayName;
+
+    // https://github.com/typeorm/typeorm/blob/master/docs/relations-faq.md
+
+    // Don't initialize arrays in your entities. Same rule applies to a constructor.
+
+    // this.addresses = [];
+    // this.roles = [];
   }
 
 }

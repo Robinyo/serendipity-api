@@ -34,7 +34,6 @@ const URL = 'public/data/allsenel.csv';
 
     try {
 
-
       // const primaryContact = new Individual();
 
       //
@@ -42,6 +41,20 @@ const URL = 'public/data/allsenel.csv';
       //
 
       const greensOrg = new Organisation('Australian Greens', '(02) 9999 9999');
+
+      greensOrg.party['addresses'] = [];
+      // greensOrg.party['roles'] = [];
+
+      greensOrg.party.addresses.push(new Address(
+          '',
+          '23/85 Northbourne Ave',
+          '',
+          'Turner',
+          'ACT',
+          '2612',
+          'Australia',
+          'Principle Place of Business'
+      ));
 
       await connection.manager.save(greensOrg);
 
@@ -106,6 +119,7 @@ const URL = 'public/data/allsenel.csv';
       const parliamentHouse = new Address(
           'The Senate',
           'PO Box 6100 Parliament House',
+          '',
           'Canberra',
           'ACT',
           '2600',

@@ -50,18 +50,18 @@ export class Address {
   @IsNotEmpty()
   addressType: string;
 
-  constructor(
-      line1: string = '',
-      line2: string = '',
-      city: string = '',
-      state: string = '',
-      postalCode: string = '',
-      country: string = '',
-      addressType: string = ''
-  ) {
+  constructor(name: string = '',
+              line1: string = '',
+              line2: string = '',
+              city: string = '',
+              state: string = '',
+              postalCode: string = '',
+              country: string = '',
+              addressType: string = '') {
 
     this.location = new Location('Address');
 
+    this.name = name;
     this.line1 = line1;
     this.line2 = line2;
     this.city = city;

@@ -25,9 +25,7 @@ export class Location {
   @Column(type => SpecialColumns, { prefix: '' })
   specialColumns: SpecialColumns;
 
-  constructor(
-    type: string = 'Location'
-  ) {
+  constructor(type: string = 'Location') {
     this.type = type;
   }
 
