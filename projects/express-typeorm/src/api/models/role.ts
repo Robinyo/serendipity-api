@@ -27,6 +27,12 @@ export class Role {
   @IsNotEmpty()
   partyName: string;
 
+  @Column({ nullable: true })
+  partyEmail: string;
+
+  @Column({ nullable: true })
+  partyPhoneNumber: string;
+
   @Column({
     default: 'Membership'
   })
@@ -48,6 +54,12 @@ export class Role {
   @Column()
   @IsNotEmpty()
   reciprocalPartyName: string;
+
+  @Column({ nullable: true })
+  reciprocalPartyEmail: string;
+
+  @Column({ nullable: true })
+  reciprocalPartyPhoneNumber: string;
 
 }
 

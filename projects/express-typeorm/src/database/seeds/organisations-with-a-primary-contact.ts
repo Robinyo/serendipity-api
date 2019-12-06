@@ -40,7 +40,7 @@ const URL = 'public/data/allsenel.csv';
       // Australian Greens
       //
 
-      const greensOrg = new Organisation('Australian Greens', '(02) 9999 9999');
+      const greensOrg = new Organisation('Australian Greens', 'greens@greens.org.au', '(02) 9999 9999');
 
       greensOrg.party['addresses'] = [];
       // greensOrg.party['roles'] = [];
@@ -62,7 +62,7 @@ const URL = 'public/data/allsenel.csv';
       // Centre Alliance
       //
 
-      const caOrg = new Organisation('Centre Alliance', '(02) 9999 9999');
+      const caOrg = new Organisation('Centre Alliance', 'hey@centrealliance.org.au', '(02) 9999 9999');
 
       await connection.manager.save(caOrg);
 
@@ -70,7 +70,7 @@ const URL = 'public/data/allsenel.csv';
       // Jacqui Lambie Network
       //
 
-      const jlnOrg = new Organisation('Jacqui Lambie Network', '(02) 9999 9999');
+      const jlnOrg = new Organisation('Jacqui Lambie Network', 'hey@lambienetwork.com.au', '(02) 9999 9999');
 
       await connection.manager.save(jlnOrg);
 
@@ -78,7 +78,7 @@ const URL = 'public/data/allsenel.csv';
       // Labor Party
       //
 
-      const laborOrg = new Organisation('Australian Labor Party', '(02) 9999 9999');
+      const laborOrg = new Organisation('Australian Labor Party', 'hey@alp.org.au', '(02) 9999 9999');
 
       await connection.manager.save(laborOrg);
 
@@ -86,7 +86,7 @@ const URL = 'public/data/allsenel.csv';
       // Liberal Party
       //
 
-      const liberalOrg = new Organisation('Liberal Party of Australia', '(02) 9999 9999');
+      const liberalOrg = new Organisation('Liberal Party of Australia', 'libadm@liberal.org.au', '(02) 9999 9999');
 
       await connection.manager.save(liberalOrg);
 
@@ -94,7 +94,7 @@ const URL = 'public/data/allsenel.csv';
       // National Party
       //
 
-      const nationalOrg = new Organisation('National Party of Australia', '(02) 9999 9999');
+      const nationalOrg = new Organisation('National Party of Australia', 'federal.nationals@nationals.org.au', '(02) 9999 9999');
 
       await connection.manager.save(nationalOrg);
 
@@ -102,7 +102,7 @@ const URL = 'public/data/allsenel.csv';
       // Pauline Hanson's One Nation
       //
 
-      const phonOrg = new Organisation('Pauline Hanson\'s One Nation', '(02) 9999 9999');
+      const phonOrg = new Organisation('Pauline Hanson\'s One Nation', 'hey@onenation.org.au', '(02) 9999 9999');
 
       await connection.manager.save(phonOrg);
 
@@ -195,17 +195,20 @@ const URL = 'public/data/allsenel.csv';
         object['phoneNumber'] = object['Electorate Telephone'] ? object['Electorate Telephone'] : '';
         object['photoUrl'] = '';
 
-
         const role = {
           role: 'Member',
           partyId: object.party.id,
           partyType: object.party.type,
           partyName: object.party.displayName,
+          partyEmail: object.email,
+          partyPhoneNumber: object.phoneNumber,
           relationship: 'Membership',
           reciprocalRole: 'Organisation',
           reciprocalPartyId: null,
           reciprocalPartyType: 'Organisation',
-          reciprocalPartyName: ''
+          reciprocalPartyName: '',
+          reciprocalPartyEmail: '',
+          reciprocalPartyPhoneNumber: ''
         };
 
         let membership = true;
@@ -218,6 +221,8 @@ const URL = 'public/data/allsenel.csv';
             logger.info(AUSTRALIAN_GREENS);
             role.reciprocalPartyId = greensOrg.id;
             role.reciprocalPartyName = greensOrg.name;
+            role.reciprocalPartyEmail = greensOrg.email;
+            role.reciprocalPartyPhoneNumber = greensOrg.phoneNumber;
 
             break;
 
@@ -226,6 +231,8 @@ const URL = 'public/data/allsenel.csv';
             logger.info(CENTRE_ALLIANCE);
             role.reciprocalPartyId = caOrg.id;
             role.reciprocalPartyName = caOrg.name;
+            role.reciprocalPartyEmail = caOrg.email;
+            role.reciprocalPartyPhoneNumber = caOrg.phoneNumber;
 
             break;
 
@@ -234,6 +241,8 @@ const URL = 'public/data/allsenel.csv';
             logger.info(JACQUI_LAMBIE_NETWORK);
             role.reciprocalPartyId = jlnOrg.id;
             role.reciprocalPartyName = jlnOrg.name;
+            role.reciprocalPartyEmail = jlnOrg.email;
+            role.reciprocalPartyPhoneNumber = jlnOrg.phoneNumber;
 
             break;
 
@@ -242,6 +251,8 @@ const URL = 'public/data/allsenel.csv';
             logger.info(LABOR_PARTY);
             role.reciprocalPartyId = laborOrg.id;
             role.reciprocalPartyName = laborOrg.name;
+            role.reciprocalPartyEmail = laborOrg.email;
+            role.reciprocalPartyPhoneNumber = laborOrg.phoneNumber;
 
             break;
 
@@ -250,6 +261,8 @@ const URL = 'public/data/allsenel.csv';
             logger.info(LIBERAL_PARTY);
             role.reciprocalPartyId = liberalOrg.id;
             role.reciprocalPartyName = liberalOrg.name;
+            role.reciprocalPartyEmail = liberalOrg.email;
+            role.reciprocalPartyPhoneNumber = liberalOrg.phoneNumber;
 
             break;
 
@@ -258,6 +271,8 @@ const URL = 'public/data/allsenel.csv';
             logger.info(NATIONAL_AUSTRALIA_PARTY);
             role.reciprocalPartyId = nationalOrg.id;
             role.reciprocalPartyName = nationalOrg.name;
+            role.reciprocalPartyEmail = nationalOrg.email;
+            role.reciprocalPartyPhoneNumber = nationalOrg.phoneNumber;
 
             break;
 
@@ -266,6 +281,8 @@ const URL = 'public/data/allsenel.csv';
             logger.info(PAULINE_HANSONS_ONE_NATION);
             role.reciprocalPartyId = phonOrg.id;
             role.reciprocalPartyName = phonOrg.name;
+            role.reciprocalPartyEmail = phonOrg.email;
+            role.reciprocalPartyPhoneNumber = phonOrg.phoneNumber;
 
             break;
 

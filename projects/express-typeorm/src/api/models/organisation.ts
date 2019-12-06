@@ -27,14 +27,19 @@ export class Organisation {
   name: string;
 
   @Column({ nullable: true })
+  email: string;
+
+  @Column({ nullable: true })
   phoneNumber: string;
 
   constructor(name: string,
+              email: string = '',
               phoneNumber: string = '') {
 
     this.party = new Party('Organisation', name);
 
     this.name = name;
+    this.email = email;
     this.phoneNumber = phoneNumber;
   }
 
