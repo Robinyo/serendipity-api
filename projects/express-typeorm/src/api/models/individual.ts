@@ -67,6 +67,23 @@ export class Individual {
   @Column({ nullable: true })
   photoUrl: string;
 
+  constructor(title: string,
+              givenName: string,
+              familyName: string,
+              email: string = '',
+              phoneNumber: string = '') {
+
+    const displayName = familyName + ', ' + title + ' ' + givenName;
+
+    this.party = new Party('Individual', displayName);
+
+    this.title = title;
+    this.givenName = givenName;
+    this.familyName = familyName;
+    this.email = email;
+    this.phoneNumber = phoneNumber;
+  }
+
 }
 
 // https://github.com/typeorm/typeorm/blob/master/docs/decorator-reference.md

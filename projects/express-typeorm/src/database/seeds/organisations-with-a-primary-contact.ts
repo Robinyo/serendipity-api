@@ -34,18 +34,19 @@ const URL = 'public/data/allsenel.csv';
 
     try {
 
-      // const primaryContact = new Individual();
+      //
+      // primaryGeneratedColumnId
+      //
+
+      let primaryGeneratedColumnId = 1;
 
       //
       // Australian Greens
       //
 
-      const greensOrg = new Organisation('Australian Greens', 'greens@greens.org.au', '(02) 9999 9999');
+      // Address
 
-      greensOrg.party['addresses'] = [];
-      // greensOrg.party['roles'] = [];
-
-      greensOrg.party.addresses.push(new Address(
+      const greensAddress = new Address(
           '',
           '23/85 Northbourne Ave',
           '',
@@ -54,9 +55,55 @@ const URL = 'public/data/allsenel.csv';
           '2612',
           'Australia',
           'Principle Place of Business'
+      );
+
+      await connection.manager.save(greensAddress);
+
+      // Primary Contact
+
+      const greensPrimaryContact = new Individual('Mr', 'Jordan', 'Hull', 'jordan.hull@greens.org.au', '(02) 6140 3220');
+
+      greensPrimaryContact.party['addresses'] = [];
+      // greensPrimaryContact.party['roles'] = [];
+
+      greensPrimaryContact.party.addresses.push(greensAddress);
+
+      await connection.manager.save(greensPrimaryContact);
+
+
+
+
+
+      primaryGeneratedColumnId = greensPrimaryContact.party.id + 1;
+
+      const greensOrg = new Organisation('Australian Greens', 'greens@greens.org.au', '(02) 6140 3220');
+
+      greensOrg.party.id = primaryGeneratedColumnId++;
+      greensOrg.party['addresses'] = [];
+      greensOrg.party['roles'] = [];
+
+      greensOrg.party.addresses.push(greensAddress);
+
+      greensOrg.party.roles.push(new Role(
+          'Organisation',
+          greensOrg.party.id,
+          greensOrg.party.type,
+          greensOrg.party.displayName,
+          greensOrg.email,
+          greensOrg.phoneNumber,
+          'Primary Contact',
+          'Member',
+          greensPrimaryContact.party.id,
+          greensPrimaryContact.party.type,
+          greensPrimaryContact.party.displayName,
+          greensPrimaryContact.email,
+          greensPrimaryContact.phoneNumber,
       ));
 
       await connection.manager.save(greensOrg);
+
+
+
 
       //
       // Centre Alliance
@@ -110,7 +157,7 @@ const URL = 'public/data/allsenel.csv';
       // primaryGeneratedColumnId
       //
 
-      const primaryGeneratedColumnId: number = phonOrg.id + 1;
+      primaryGeneratedColumnId = phonOrg.id + 1;
 
       //
       // Parliament House Address
@@ -330,7 +377,7 @@ const URL = 'public/data/allsenel.csv';
           object[columnName] = undefined;
         });
 
-        const individual = plainToClass(Individual, object);
+        const individual = plainToClass(Individual, object as Object);
 
         individual.party.addresses.push(parliamentHouse);
 

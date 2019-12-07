@@ -61,6 +61,36 @@ export class Role {
   @Column({ nullable: true })
   reciprocalPartyPhoneNumber: string;
 
+  constructor(role: string,
+              partyId: number,
+              partyType: string,
+              partyName: string,
+              partyEmail: string,
+              partyPhoneNumber: string,
+              relationship: string,
+              reciprocalRole: string,
+              reciprocalPartyId: number,
+              reciprocalPartyType: string,
+              reciprocalPartyName: string,
+              reciprocalPartyEmail: string,
+              reciprocalPartyPhoneNumber: string) {
+
+    this.role = role;
+    this.partyId = partyId;
+    this.partyType = partyType;
+    this.partyName = partyName;
+    this.partyEmail = partyEmail;
+    this.partyPhoneNumber = partyPhoneNumber;
+    this.relationship = relationship;
+    this.reciprocalRole = reciprocalRole;
+    this.reciprocalPartyId = reciprocalPartyId;
+    this.reciprocalPartyType = reciprocalPartyType;
+    this.reciprocalPartyName = reciprocalPartyName;
+    this.reciprocalPartyEmail = reciprocalPartyEmail;
+    this.reciprocalPartyPhoneNumber = reciprocalPartyPhoneNumber;
+
+  }
+
 }
 
 // https://github.com/typeorm/typeorm/blob/master/docs/decorator-reference.md
