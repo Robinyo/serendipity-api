@@ -5,14 +5,18 @@ import csvtojson from 'csvtojson';
 import { createConnection } from 'typeorm';
 import { plainToClass } from 'class-transformer';
 
-import { Address } from '../../api/models/address';
-import { Individual } from '../../api/models/individual';
-import { Organisation } from '../../api/models/organisation';
-// import { Party } from '../../api/models/party';
-import { Role } from '../../api/models/role';
+import { Address } from '../../../api/models/address';
+import { Individual } from '../../../api/models/individual';
+import { Organisation } from '../../../api/models/organisation';
+import { Role } from '../../../api/models/role';
 
-import { logger } from '../../lib/logger';
-import { config } from '../../config/config';
+import { createAustralianGreens } from './australian-greens';
+import { createCentreAlliance } from './centre-alliance';
+import { createJacquiLambieNetwork } from './jacqui-lambie-network';
+import { createAustralianLaborParty } from './australian-labor-party';
+
+import { logger } from '../../../lib/logger';
+import { config } from '../../../config/config';
 
 const AUSTRALIAN_GREENS = 'AG';
 const CENTRE_ALLIANCE = 'CA';
@@ -24,110 +28,33 @@ const PAULINE_HANSONS_ONE_NATION = 'PHON';
 
 const URL = 'public/data/allsenel.csv';
 
+const politicalParties = [];
+
+async function createPoliticalParties(connection) {
+
+  politicalParties[AUSTRALIAN_GREENS] = await createAustralianGreens(connection);
+  politicalParties[CENTRE_ALLIANCE] = await createCentreAlliance(connection);
+  politicalParties[JACQUI_LAMBIE_NETWORK] = await createJacquiLambieNetwork(connection);
+  politicalParties[LABOR_PARTY] = await createAustralianLaborParty(connection);
+
+}
+
 // https://developer.mozilla.org/en-US/docs/Glossary/IIFE
 
 (function () {
 
   createConnection().then(async (connection) => {
 
-    logger.info('Loading sample data...');
+    logger.info('Loading sample data ...');
 
     try {
 
-      //
-      // primaryGeneratedColumnId
-      //
-
       let primaryGeneratedColumnId = 1;
 
-      //
-      // Australian Greens
-      //
-
-      // Address
-
-      const greensAddress = new Address(
-          '',
-          '23/85 Northbourne Ave',
-          '',
-          'Turner',
-          'ACT',
-          '2612',
-          'Australia',
-          'Principle Place of Business'
-      );
-
-      await connection.manager.save(greensAddress);
-
-      // Primary Contact
-
-      const greensPrimaryContact = new Individual('Mr', 'Jordan', 'Hull', 'jordan.hull@greens.org.au', '(02) 6140 3220');
-
-      greensPrimaryContact.party['addresses'] = [];
-      // greensPrimaryContact.party['roles'] = [];
-
-      greensPrimaryContact.party.addresses.push(greensAddress);
-
-      await connection.manager.save(greensPrimaryContact);
+      await createPoliticalParties(connection);
 
 
 
-
-
-      primaryGeneratedColumnId = greensPrimaryContact.party.id + 1;
-
-      const greensOrg = new Organisation('Australian Greens', 'greens@greens.org.au', '(02) 6140 3220');
-
-      greensOrg.party.id = primaryGeneratedColumnId++;
-      greensOrg.party['addresses'] = [];
-      greensOrg.party['roles'] = [];
-
-      greensOrg.party.addresses.push(greensAddress);
-
-      greensOrg.party.roles.push(new Role(
-          'Organisation',
-          greensOrg.party.id,
-          greensOrg.party.type,
-          greensOrg.party.displayName,
-          greensOrg.email,
-          greensOrg.phoneNumber,
-          'Primary Contact',
-          'Member',
-          greensPrimaryContact.party.id,
-          greensPrimaryContact.party.type,
-          greensPrimaryContact.party.displayName,
-          greensPrimaryContact.email,
-          greensPrimaryContact.phoneNumber,
-      ));
-
-      await connection.manager.save(greensOrg);
-
-
-
-
-      //
-      // Centre Alliance
-      //
-
-      const caOrg = new Organisation('Centre Alliance', 'hey@centrealliance.org.au', '(02) 9999 9999');
-
-      await connection.manager.save(caOrg);
-
-      //
-      // Jacqui Lambie Network
-      //
-
-      const jlnOrg = new Organisation('Jacqui Lambie Network', 'hey@lambienetwork.com.au', '(02) 9999 9999');
-
-      await connection.manager.save(jlnOrg);
-
-      //
-      // Labor Party
-      //
-
-      const laborOrg = new Organisation('Australian Labor Party', 'hey@alp.org.au', '(02) 9999 9999');
-
-      await connection.manager.save(laborOrg);
 
       //
       // Liberal Party
@@ -137,6 +64,8 @@ const URL = 'public/data/allsenel.csv';
 
       await connection.manager.save(liberalOrg);
 
+      politicalParties[LIBERAL_PARTY] = liberalOrg;
+
       //
       // National Party
       //
@@ -145,6 +74,8 @@ const URL = 'public/data/allsenel.csv';
 
       await connection.manager.save(nationalOrg);
 
+      politicalParties[NATIONAL_AUSTRALIA_PARTY] = nationalOrg;
+
       //
       // Pauline Hanson's One Nation
       //
@@ -152,6 +83,8 @@ const URL = 'public/data/allsenel.csv';
       const phonOrg = new Organisation('Pauline Hanson\'s One Nation', 'hey@onenation.org.au', '(02) 9999 9999');
 
       await connection.manager.save(phonOrg);
+
+      politicalParties[PAULINE_HANSONS_ONE_NATION] = phonOrg;
 
       //
       // primaryGeneratedColumnId
@@ -259,77 +192,27 @@ const URL = 'public/data/allsenel.csv';
         };
 
         let membership = true;
+
         const politicalParty: string = object['Political Party'].toUpperCase();
 
         switch (politicalParty) {
 
           case AUSTRALIAN_GREENS:
-
-            logger.info(AUSTRALIAN_GREENS);
-            role.reciprocalPartyId = greensOrg.id;
-            role.reciprocalPartyName = greensOrg.name;
-            role.reciprocalPartyEmail = greensOrg.email;
-            role.reciprocalPartyPhoneNumber = greensOrg.phoneNumber;
-
-            break;
-
           case CENTRE_ALLIANCE:
-
-            logger.info(CENTRE_ALLIANCE);
-            role.reciprocalPartyId = caOrg.id;
-            role.reciprocalPartyName = caOrg.name;
-            role.reciprocalPartyEmail = caOrg.email;
-            role.reciprocalPartyPhoneNumber = caOrg.phoneNumber;
-
-            break;
-
           case JACQUI_LAMBIE_NETWORK:
-
-            logger.info(JACQUI_LAMBIE_NETWORK);
-            role.reciprocalPartyId = jlnOrg.id;
-            role.reciprocalPartyName = jlnOrg.name;
-            role.reciprocalPartyEmail = jlnOrg.email;
-            role.reciprocalPartyPhoneNumber = jlnOrg.phoneNumber;
-
-            break;
-
           case LABOR_PARTY:
-
-            logger.info(LABOR_PARTY);
-            role.reciprocalPartyId = laborOrg.id;
-            role.reciprocalPartyName = laborOrg.name;
-            role.reciprocalPartyEmail = laborOrg.email;
-            role.reciprocalPartyPhoneNumber = laborOrg.phoneNumber;
-
-            break;
-
           case LIBERAL_PARTY:
-
-            logger.info(LIBERAL_PARTY);
-            role.reciprocalPartyId = liberalOrg.id;
-            role.reciprocalPartyName = liberalOrg.name;
-            role.reciprocalPartyEmail = liberalOrg.email;
-            role.reciprocalPartyPhoneNumber = liberalOrg.phoneNumber;
-
-            break;
-
           case NATIONAL_AUSTRALIA_PARTY:
-
-            logger.info(NATIONAL_AUSTRALIA_PARTY);
-            role.reciprocalPartyId = nationalOrg.id;
-            role.reciprocalPartyName = nationalOrg.name;
-            role.reciprocalPartyEmail = nationalOrg.email;
-            role.reciprocalPartyPhoneNumber = nationalOrg.phoneNumber;
-
-            break;
-
           case PAULINE_HANSONS_ONE_NATION:
 
-            logger.info(PAULINE_HANSONS_ONE_NATION);
-            role.reciprocalPartyId = phonOrg.id;
-            role.reciprocalPartyName = phonOrg.name;
-            role.reciprocalPartyEmail = phonOrg.email;
-            role.reciprocalPartyPhoneNumber = phonOrg.phoneNumber;
+            logger.info('Political Party: ' +  politicalParty);
+
+            // logger.info('politicalParties: ' + JSON.stringify(politicalParties[politicalParty], null, 2) + '\n');
+
+            role.reciprocalPartyId = politicalParties[politicalParty].id;
+            role.reciprocalPartyName = politicalParties[politicalParty].name;
+            role.reciprocalPartyEmail = politicalParties[politicalParty].email;
+            role.reciprocalPartyPhoneNumber = politicalParties[politicalParty].phoneNumber;
 
             break;
 
@@ -397,7 +280,7 @@ const URL = 'public/data/allsenel.csv';
 
       }).on('done', () => {
 
-        logger.info('Loading complete!');
+        logger.info('Loading sample data complete!');
       })
 
     } catch (error) {

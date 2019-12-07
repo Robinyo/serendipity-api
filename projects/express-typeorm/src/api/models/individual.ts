@@ -67,17 +67,15 @@ export class Individual {
   @Column({ nullable: true })
   photoUrl: string;
 
-  constructor(title: string,
-              givenName: string,
+  constructor(givenName: string,
               familyName: string,
               email: string = '',
               phoneNumber: string = '') {
 
-    const displayName = familyName + ', ' + title + ' ' + givenName;
+    const displayName = familyName + ', ' + givenName;
 
     this.party = new Party('Individual', displayName);
 
-    this.title = title;
     this.givenName = givenName;
     this.familyName = familyName;
     this.email = email;

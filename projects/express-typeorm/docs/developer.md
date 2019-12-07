@@ -42,7 +42,7 @@ In another terminal session:
 
 ```
 cd serendipity-api/projects/express-typeorm
-ts-node ./src/database/seeds/senators.ts
+ts-node ./src/database/seeds/senators/senators.ts
 ```
 
 or
