@@ -66,8 +66,8 @@ async function createPoliticalParties(connection) {
 
       const parliamentHouse = new Address(
           'The Senate',
-          'PO Box 6100 Parliament House',
-          '',
+          'PO Box 6100',
+          'Parliament House',
           'Canberra',
           'ACT',
           '2600',
