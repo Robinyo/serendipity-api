@@ -7,23 +7,25 @@ import { plainToClass } from 'class-transformer';
 
 import { Address } from '../../../api/models/address';
 import { Individual } from '../../../api/models/individual';
-import { Organisation } from '../../../api/models/organisation';
 import { Role } from '../../../api/models/role';
 
 import { createAustralianGreens } from './australian-greens';
+import { createAustralianLaborParty } from './australian-labor-party';
 import { createCentreAlliance } from './centre-alliance';
 import { createJacquiLambieNetwork } from './jacqui-lambie-network';
-import { createAustralianLaborParty } from './australian-labor-party';
+import { createLiberalPartyOfAustralia } from './liberal-party-of-australia';
+import { createNationalPartyOfAustralia } from './national-party-of-australia';
+import { createPaulineHansonsOneNation } from './pauline-hansons-one-nation';
 
 import { logger } from '../../../lib/logger';
 import { config } from '../../../config/config';
 
 const AUSTRALIAN_GREENS = 'AG';
+const AUSTRALIAN_LABOR_PARTY = 'ALP';
 const CENTRE_ALLIANCE = 'CA';
 const JACQUI_LAMBIE_NETWORK = 'JLN';
-const LABOR_PARTY = 'ALP';
-const LIBERAL_PARTY = 'LP';
-const NATIONAL_AUSTRALIA_PARTY = 'NATS';
+const LIBERAL_PARTY_OF_AUSTRALIA = 'LP';
+const NATIONAL_PARTY_OF_AUSTRALIA = 'NATS';
 const PAULINE_HANSONS_ONE_NATION = 'PHON';
 
 const URL = 'public/data/allsenel.csv';
@@ -33,13 +35,14 @@ const politicalParties = [];
 async function createPoliticalParties(connection) {
 
   politicalParties[AUSTRALIAN_GREENS] = await createAustralianGreens(connection);
+  politicalParties[AUSTRALIAN_LABOR_PARTY] = await createAustralianLaborParty(connection);
   politicalParties[CENTRE_ALLIANCE] = await createCentreAlliance(connection);
   politicalParties[JACQUI_LAMBIE_NETWORK] = await createJacquiLambieNetwork(connection);
-  politicalParties[LABOR_PARTY] = await createAustralianLaborParty(connection);
+  politicalParties[LIBERAL_PARTY_OF_AUSTRALIA] = await createLiberalPartyOfAustralia(connection);
+  politicalParties[NATIONAL_PARTY_OF_AUSTRALIA] = await createNationalPartyOfAustralia(connection);
+  politicalParties[PAULINE_HANSONS_ONE_NATION] = await createPaulineHansonsOneNation(connection);
 
 }
-
-// https://developer.mozilla.org/en-US/docs/Glossary/IIFE
 
 (function () {
 
@@ -49,48 +52,13 @@ async function createPoliticalParties(connection) {
 
     try {
 
-      let primaryGeneratedColumnId = 1;
-
       await createPoliticalParties(connection);
-
-
-
-
-      //
-      // Liberal Party
-      //
-
-      const liberalOrg = new Organisation('Liberal Party of Australia', 'libadm@liberal.org.au', '(02) 9999 9999');
-
-      await connection.manager.save(liberalOrg);
-
-      politicalParties[LIBERAL_PARTY] = liberalOrg;
-
-      //
-      // National Party
-      //
-
-      const nationalOrg = new Organisation('National Party of Australia', 'federal.nationals@nationals.org.au', '(02) 9999 9999');
-
-      await connection.manager.save(nationalOrg);
-
-      politicalParties[NATIONAL_AUSTRALIA_PARTY] = nationalOrg;
-
-      //
-      // Pauline Hanson's One Nation
-      //
-
-      const phonOrg = new Organisation('Pauline Hanson\'s One Nation', 'hey@onenation.org.au', '(02) 9999 9999');
-
-      await connection.manager.save(phonOrg);
-
-      politicalParties[PAULINE_HANSONS_ONE_NATION] = phonOrg;
 
       //
       // primaryGeneratedColumnId
       //
 
-      primaryGeneratedColumnId = phonOrg.id + 1;
+      const primaryGeneratedColumnId = politicalParties[PAULINE_HANSONS_ONE_NATION].id + 1;
 
       //
       // Parliament House Address
@@ -198,11 +166,11 @@ async function createPoliticalParties(connection) {
         switch (politicalParty) {
 
           case AUSTRALIAN_GREENS:
+          case AUSTRALIAN_LABOR_PARTY:
           case CENTRE_ALLIANCE:
           case JACQUI_LAMBIE_NETWORK:
-          case LABOR_PARTY:
-          case LIBERAL_PARTY:
-          case NATIONAL_AUSTRALIA_PARTY:
+          case LIBERAL_PARTY_OF_AUSTRALIA:
+          case NATIONAL_PARTY_OF_AUSTRALIA:
           case PAULINE_HANSONS_ONE_NATION:
 
             logger.info('Political Party: ' +  politicalParty);
@@ -291,6 +259,8 @@ async function createPoliticalParties(connection) {
   }).catch(error => { logger.error(error); });
 
 })();
+
+// https://developer.mozilla.org/en-US/docs/Glossary/IIFE
 
 // https://github.com/axios/axios
 // https://github.com/Keyang/node-csvtojson

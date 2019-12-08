@@ -52,10 +52,15 @@ export class FindIndividualController extends Controller {
     const limit = this.req.query.limit || 100;
     const offset = this.req.query.offset || 0;
 
+    // https://github.com/typeorm/typeorm/blob/master/docs/find-options.md
+
     const options = {
+      order: {
+        familyName: 'ASC' // @Index()
+      },
+      relations: ['party', 'party.addresses', 'party.roles'],
       skip: offset,
-      take: limit,
-      relations: ['party', 'party.addresses', 'party.roles']
+      take: limit
     };
 
     if (filter) {
@@ -80,6 +85,7 @@ export class FindIndividualController extends Controller {
 
       const repository: IndividualRepository = getRepository(Individual);
 
+      // @ts-ignore
       const [ data, count ] = await repository.findAndCount(options);
 
       const response = {
@@ -321,6 +327,8 @@ export function IndividualControllerFactory(controllers = individualControllers)
 }
 
 // https://github.com/typeorm/typeorm/blob/master/docs/find-options.md
+
+// https://github.com/typeorm/typeorm/issues/3508 -> Find doesn't allow ordering by embedded entity properties
 
 // https://jsonapi.org/format/#fetching-pagination
 // For example, a page-based strategy might use query parameters such as page[number] and page[size], an offset-based

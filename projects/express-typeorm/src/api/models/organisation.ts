@@ -24,6 +24,7 @@ export class Organisation {
 
   @Column()
   @IsNotEmpty()
+  @Index()
   name: string;
 
   @Column({ nullable: true })

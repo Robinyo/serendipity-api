@@ -35,6 +35,7 @@ export class Individual {
 
   @Column()
   @IsNotEmpty()
+  @Index()
   familyName: string;
 
   @Column({ nullable: true })

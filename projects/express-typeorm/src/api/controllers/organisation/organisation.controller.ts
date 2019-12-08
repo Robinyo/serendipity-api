@@ -51,9 +51,12 @@ export class FindOrganisationController extends Controller {
     const offset = this.req.query.offset || 0;
 
     const options = {
+      order: {
+        name: 'ASC' // @Index()
+      },
+      relations: ['party', 'party.addresses', 'party.roles'],
       skip: offset,
       take: limit,
-      relations: ['party', 'party.addresses', 'party.roles']
     };
 
     if (filter) {
@@ -74,6 +77,7 @@ export class FindOrganisationController extends Controller {
 
       const repository: OrganisationRepository = getRepository(Organisation);
 
+      // @ts-ignore
       const [ data, count ] = await repository.findAndCount(options);
 
       const response = {

@@ -21,7 +21,6 @@ export class Party {
   @IsNotEmpty()
   @Column()
   displayName: string;
-  // name: string;
 
   @Type(() => Address)
   @ManyToMany(type => Address, {
