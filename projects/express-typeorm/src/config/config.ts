@@ -51,6 +51,16 @@ export const config = convict({
   issuer: {
     format: String,
     default: ''
+  },
+
+  user: {
+    format: String,
+    default: ''
+  },
+
+  pass: {
+    format: String,
+    default: ''
   }
 
 });

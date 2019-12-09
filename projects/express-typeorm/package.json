@@ -1,7 +1,7 @@
 {
   "name": "serendipity-api",
   "version": "1.0.0-beta.1",
-  "description": "The REST API for Serendipity CRM built using TypeScript, Node.js, Express and TypeORM.",
+  "description": "The REST API for Serendipity CEP built using TypeScript, Node.js, Express and TypeORM.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Robinyo/serendipity-api.git"
@@ -19,7 +19,11 @@
     "typescript",
     "nodejs",
     "express",
-    "typeorm"
+    "typeorm",
+    "openapi",
+    "swagger",
+    "schemaspy",
+    "nodemailer"
   ],
   "dependencies": {
     "@okta/jwt-verifier": "^1.0.0",
@@ -38,6 +42,7 @@
     "injection-js": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
     "next": "^9.1.4",
+    "nodemailer": "^6.4.1",
     "path": "^0.12.7",
     "reflect-metadata": "^0.1.13",
     "sqlite3": "^4.0.3",
@@ -59,6 +64,8 @@
     "@types/jsonwebtoken": "^8.3.3",
     "@types/multer": "^1.3.7",
     "@types/node": "^8.0.29",
+    "@types/nodemailer": "^6.2.2",
+    "@types/nodemailer-smtp-transport": "^2.7.4",
     "@types/stack-trace": "0.0.29",
     "@types/winston": "^2.4.4",
     "ts-node": "^8.3.0",

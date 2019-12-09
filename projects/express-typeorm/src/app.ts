@@ -10,6 +10,7 @@ import { createConnection } from 'typeorm';
 import { AuthControllerFactory } from './api/controllers/auth/auth.controller';
 
 import { Controller } from './api/controllers/controller';
+import { EmailControllerFactory } from './api/controllers/email/email.controller';
 import { IndividualControllerFactory } from './api/controllers/individual/individual.controller';
 import { OrganisationControllerFactory } from './api/controllers/organisation/organisation.controller';
 
@@ -26,6 +27,7 @@ export class App {
 
   constructor() {
 
+    this.controllers = this.controllers.concat(EmailControllerFactory());
     this.controllers = this.controllers.concat(IndividualControllerFactory());
     this.controllers = this.controllers.concat(OrganisationControllerFactory());
 
