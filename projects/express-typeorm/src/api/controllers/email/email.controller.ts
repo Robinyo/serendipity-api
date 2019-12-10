@@ -37,7 +37,7 @@ export class SendEmailController extends Controller {
 
       logger.info('email: ' + JSON.stringify(this.req.body, null, 2) + '\n');
 
-      const transporter = nodemailer.createTransport({
+      const transport = nodemailer.createTransport({
         host: 'smtp.mailtrap.io',
         port: 2525,
         // secure: true,
@@ -47,15 +47,15 @@ export class SendEmailController extends Controller {
         }
       });
 
-      const mailOptions = {
+      const options = {
         from: '"Serendipity CEP" <hey@serendipity.org.au>',
-        to: this.req.body.to,
-        subject: this.req.body.subject,
-        text: this.req.body.body,
-        html: '<b>Sample HTML</b>'
+        to: this.req.body.to ? this.req.body.to : 'from_test@gmail.com',
+        subject: this.req.body.subject ? this.req.body.subject : 'Hello',
+        text: this.req.body.body ? this.req.body.body : 'Hello from Nodemailer',
+        html: '<b>Hello World</b>'
       };
 
-      const info = await transporter.sendMail(mailOptions);
+      const info = await transport.sendMail(options);
 
       logger.info('Message sent: %s', info.messageId);
 
