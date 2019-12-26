@@ -49,7 +49,7 @@ export class SendEmailController extends Controller {
 
       const options = {
         from: '"Serendipity CEP" <hey@serendipity.org.au>',
-        to: this.req.body.to ? this.req.body.to : 'from_test@gmail.com',
+        to: this.req.body.to ? this.req.body.to : 'to_test@gmail.com',
         subject: this.req.body.subject ? this.req.body.subject : 'Hello',
         text: this.req.body.body ? this.req.body.body : 'Hello from Nodemailer',
         html: '<b>Hello World</b>'

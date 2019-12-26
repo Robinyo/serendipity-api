@@ -18,7 +18,11 @@ import { RoleRepository } from '../../repositorys/role.repository';
 
 import { Controller } from '../controller';
 
-import { authorise } from '../../middleware/auth-local/abac';
+// import { checkJwt } from '../../middleware/auth-local/check-jwt';
+// import { authorise } from '../../middleware/auth-local/abac';
+// import { authorise } from '../../middleware/auth-local/rbac';
+
+import { authorise } from '../../middleware/auth-oidc/abac';
 
 import { logger } from '../../../lib/logger';
 
