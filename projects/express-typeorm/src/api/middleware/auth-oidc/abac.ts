@@ -40,6 +40,8 @@ export const authorise = (req: Request, res: Response, next: NextFunction) => {
 
     // const jwtPayload = <any> jwt.verify(token, config.get('jwtSecret'));
 
+    // https://www.keycloak.org/docs/latest/securing_apps/#validating-access-tokens
+
     const jwtPayload = <any> jwt.decode(token);
 
     logger.info('jwtPayload: ' + JSON.stringify(jwtPayload, null, 2));

@@ -1,0 +1,34 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Compiled Output
+/target
+/.mvn
+
+# Eclipse
+.classpath
+.project
+.settings
+
+# STS
+.apt_generated
+.factorypath
+.springBeans
+.sts4-cache
+
+# IntelliJ IDEA
+.idea
+*.iws
+*.iml
+*.ipr
+
+# Misc
+/secrets
+/tmp
+/temp
+
+
+TODO.txt
