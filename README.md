@@ -58,8 +58,9 @@ Use TypeScript, Node.js, Express and TypeORM to build a RESTful API for Serendip
 
 ### Sample Data
 
-* Wikipedia: [List of political parties in Australia](https://en.wikipedia.org/wiki/List_of_political_parties_in_Australia)
-* Parliament of Australia: [Mail Labels for Australian Senators](https://www.aph.gov.au/Senators_and_Members/Guidelines_for_Contacting_Senators_and_Members/Address_labels_and_CSV_files)
-* Parliament of Australia: [Photographs of Senators](https://www.aph.gov.au/Senators_and_Members/Senators/Senators_photos)
+* [List of political parties in Australia](https://en.wikipedia.org/wiki/List_of_political_parties_in_Australia)
+* [Mail Labels for Australian Senators](https://www.aph.gov.au/Senators_and_Members/Guidelines_for_Contacting_Senators_and_Members/Address_labels_and_CSV_files)
+* [Photographs of Australian Senators](https://www.aph.gov.au/Senators_and_Members/Senators/Senators_photos)
+* [Discovering millions of datasets on the web](https://blog.google/products/search/discovering-millions-datasets-web/)
 
 ![divider](./divider.png)
