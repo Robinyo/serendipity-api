@@ -1,7 +1,11 @@
 package org.serendipity.restapi.model;
 
-import javax.persistence.Entity;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.Optional;
+
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
@@ -11,7 +15,9 @@ import javax.persistence.FetchType;
 
 import org.serendipity.restapi.model.Party;
 
+@Data
 @Entity
+@NoArgsConstructor
 @Table(name = "Individual")
 public class Individual {
   
@@ -19,7 +25,7 @@ public class Individual {
   private long id;
   
   @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "id", nullable = false)
+  @JoinColumn(name = "partyId")
   @MapsId
   private Party party;
 
@@ -30,6 +36,10 @@ public class Individual {
   private String middleName;    // otherNames
   
   private String familyName;
+  
+  public Optional<Long> getId() {
+    return Optional.ofNullable(this.id);
+  }
 
 }
 

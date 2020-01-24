@@ -1,5 +1,8 @@
 package org.serendipity.restapi.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,7 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@Data
 @Entity
+@NoArgsConstructor
 @Table(name = "Party")
 public class Party {
 
@@ -19,7 +24,7 @@ public class Party {
   private String type;            // 'Individual' | 'Organisation'
   
   private String displayName;
-  
+
 }
 
 /*
@@ -41,9 +46,5 @@ public class Party {
   private String displayName;
   
 }
-
-// import lombok.NoArgsConstructor;
-
-@NoArgsConstructor
 
 */
