@@ -1,7 +1,7 @@
 package org.serendipity.restapi.model;
 
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -10,9 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Builder
 @Data
 @Entity
-@NoArgsConstructor
 public class Party {
 
   @Id
@@ -28,13 +28,6 @@ public class Party {
   private Auditable auditable;
 
 }
-
-/*
-
-  @Embedded
-  private SurrogateKey surrogateKey;
-
-*/
 
 // @Version
 // private long version;
