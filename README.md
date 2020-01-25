@@ -16,7 +16,7 @@
 * [Express & TypeORM](https://github.com/Robinyo/serendipity-api/tree/master/projects/express-typeorm): 
   Use TypeScript, Node.js, Express and TypeORM to build a RESTful API for Serendipity CEP
 * [Spring Boot & Hibernate](https://github.com/Robinyo/serendipity-api/tree/master/projects/spring-boot/server): 
-  Use Java, Spring Boot, Spring HATEOAS, JSON:API and Hibernate to build a RESTful API for Serendipity CEP
+  Use Java, Spring Boot and Hibernate to build a RESTful API for Serendipity CEP
   
 ![divider](./divider.png)
 
