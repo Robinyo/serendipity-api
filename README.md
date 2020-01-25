@@ -13,13 +13,15 @@
 
 ## ❯ Roadmap
 
-Use TypeScript, Node.js, Express and TypeORM to build a RESTful API for Serendipity CRM.
+* Use TypeScript, Node.js, Express and TypeORM to build a RESTful API for Serendipity CEP.
+* Use Java, Spring Boot, Spring HATEOAS, JSON:API, Lombok and Hibernate to build a RESTful API for Serendipity CEP.
 
 ![divider](./divider.png)
 
-## ❯ Quick Links
+## ❯ Projects
 
 * [Express TypeORM](https://github.com/Robinyo/serendipity-api/tree/master/projects/express-typeorm)
+* [Spring Boot](https://github.com/Robinyo/serendipity-api/tree/master/projects/spring-boot/server)
 
 ![divider](./divider.png)
 
