@@ -1,24 +1,25 @@
 package org.serendipity.restapi.model;
 
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.util.Optional;
+import static javax.persistence.TemporalType.DATE;
+
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.Temporal;
 import javax.persistence.FetchType;
 
 import org.serendipity.restapi.model.Party;
 
+@Builder
 @Data
 @Entity
-@NoArgsConstructor
-@Table(name = "Individual")
 public class Individual {
   
   @Id
@@ -33,40 +34,39 @@ public class Individual {
   
   private String givenName;
   
-  private String middleName;    // otherNames
+  private String middleName; // otherNames
   
   private String familyName;
   
-  public Optional<Long> getId() {
-    return Optional.ofNullable(this.id);
-  }
-
+  private String honorific;
+  
+  private String salutation; // formalSalutation
+  
+  private String preferredName; // informalSalutation
+  
+  private String initials;
+  
+  @Temporal(DATE)
+  private Date dateOfBirth;
+  
+  private String placeOfBirth;
+  
+  private String gender;
+  
+  private String email;
+  
+  private String phoneNumber;
+  
+  private String photoUrl;
+  
 }
 
 /*
-
-@Entity
-@Table(name = "Individual")
-public class Individual extends Party {
-
-  private String title;
-  
-  private String givenName;
-  
-  private String middleName;    // otherNames
-  
-  private String familyName;
-
-}
-
-// import javax.persistence.Id;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
-
-  // @Id
-  @OneToOne
-  @MapsId
-  private Party party;
-
-
+ 
+import java.util.Optional;
+ 
+public Optional<Long> getId() {
+  return Optional.ofNullable(this.id);
+} 
+ 
 */

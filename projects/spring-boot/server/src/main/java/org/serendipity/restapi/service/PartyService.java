@@ -1,27 +1,26 @@
 package org.serendipity.restapi.service;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import org.serendipity.restapi.model.Party;
 import org.serendipity.restapi.repository.PartyRepository;
 
 @Service
 public class PartyService {
-  
+
   @Autowired
   private PartyRepository repository;
-  
-  public List<Party> find() {
-    
+
+  public Iterable<Party> find() {
+
     return repository.findAll();
   }
-  
-  public Party findOne(Long id) {
-    
-    return repository.getOne(id);
+
+  public Optional<Party> findById(Long id) {
+
+    return repository.findById(id);
   }
 
 }
