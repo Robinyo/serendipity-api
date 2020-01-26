@@ -31,5 +31,7 @@ public class Auditable {
   
 }
 
-// https://dzone.com/articles/spring-data-jpa-auditing-automatically-the-good-stuff
-// https://github.com/njnareshjoshi/articles/tree/master/spring-data-jpa-auditing
+// https://jira.spring.io/browse/DATACMNS-1274
+
+// https://vladmihalcea.com/how-to-audit-entity-modifications-using-the-jpa-entitylisteners-embedded-and-embeddable-annotations/
+// https://github.com/vladmihalcea/high-performance-java-persistence

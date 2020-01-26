@@ -1,6 +1,8 @@
 package org.serendipity.restapi.database.seed;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -9,8 +11,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import org.serendipity.restapi.model.Address;
+// import org.serendipity.restapi.model.Auditable;
+import org.serendipity.restapi.model.Individual;
 import org.serendipity.restapi.model.Location;
-// import org.serendipity.restapi.model.Individual;
+import org.serendipity.restapi.model.Party;
 
 import org.serendipity.restapi.repository.IndividualRepository;
 import org.serendipity.restapi.repository.AddressRepository;
@@ -32,6 +36,34 @@ public class SampleDataLoader implements CommandLineRunner {
     
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
     
+    // Auditable auditable = new Auditable();
+    
+    Party individualParty = Party.builder()
+        .type("Individual")
+        .displayName("Rob Ferguson")
+        .build();
+    
+    Date dateOfBirth = new SimpleDateFormat("dd/MM/yyyy").parse("10/01/2000"); 
+    
+    Individual individual = Individual.builder().party(individualParty)
+        .title("Mr")
+        .givenName("Robert")
+        .middleName("James")
+        .familyName("Ferguson")
+        .honorific("")
+        .salutation("Rob")
+        .preferredName("Rob")
+        .initials("R.J.")
+        .dateOfBirth(dateOfBirth)
+        .placeOfBirth("Gunnedah")
+        .gender("Male")
+        .email("rob.ferguson@robferguson.org")
+        .phoneNumber("(02) 6234 4321")
+        .photoUrl("")
+        .build();
+    
+    individualRepository.save(individual);
+    
     Location location = Location.builder()
         .type("Address")
         .displayName("PO Box 6100 Parliament House Canberra ACT 2600")
@@ -51,10 +83,7 @@ public class SampleDataLoader implements CommandLineRunner {
         .build();
     
     addressRepository.save(parliamentHouse);
-    
-    // Individual individual = Individual.builder().build();
-  
-    //individualRepository.save(individual);
+
   }
   
 }
