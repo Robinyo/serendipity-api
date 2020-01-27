@@ -29,7 +29,8 @@ public class IndividualController {
   @GetMapping("/individuals")
   public ResponseEntity<CollectionModel<EntityModel<Individual>>> findAll() {
     
-    return ResponseEntity.ok(assembler.toCollectionModel(entityService.findAll()));
+    return ResponseEntity.ok( //
+        assembler.toCollectionModel(entityService.findAll()));
   }
   
   @GetMapping("/individuals/{id}")

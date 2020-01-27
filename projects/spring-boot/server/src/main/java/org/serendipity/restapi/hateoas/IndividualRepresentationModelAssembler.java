@@ -19,14 +19,15 @@ public class IndividualRepresentationModelAssembler extends SimpleIdentifiableRe
   @Override
   public void addLinks(EntityModel<Individual> resource) {
     
+    super.addLinks(resource);
   }
   
   @Override
   public void addLinks(CollectionModel<EntityModel<Individual>> resources) {
     
+    super.addLinks(resources);
   }
 
 }
 
 // https://github.com/spring-projects/spring-hateoas-examples/blob/master/hypermedia/src/main/java/org/springframework/hateoas/examples/EmployeeRepresentationModelAssembler.java
-
