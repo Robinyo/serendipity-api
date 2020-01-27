@@ -3,7 +3,6 @@ package org.serendipity.restapi.model;
 import java.util.Date;
 
 import javax.persistence.Column;
-// import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -19,12 +18,18 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import static javax.persistence.TemporalType.TIMESTAMP;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Builder
-@Data
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 @EntityListeners(AuditingEntityListener.class)
 public class Location {
   
@@ -44,9 +49,12 @@ public class Location {
   
   @Temporal(TIMESTAMP)
   private Date toDate;
+ 
   
+  //
   // @Embedded
   // private Auditable audit;
+  //
   
   @CreatedBy
   private String createdBy;
@@ -61,6 +69,25 @@ public class Location {
   @LastModifiedDate
   @Temporal(TIMESTAMP)
   private Date updatedAt;
+  
+  @Override
+  public boolean equals(Object o) {
+
+    if (this == o)
+      return true;
+
+    if (!(o instanceof Location))
+      return false;
+
+    Location other = (Location) o;
+
+    return id != 0L && id == other.getId();
+  }
+
+  @Override
+  public int hashCode() {
+    return 31;
+  }
 
 }
 

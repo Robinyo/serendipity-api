@@ -11,7 +11,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import org.serendipity.restapi.model.Address;
-// import org.serendipity.restapi.model.Auditable;
 import org.serendipity.restapi.model.Individual;
 import org.serendipity.restapi.model.Location;
 import org.serendipity.restapi.model.Party;
@@ -36,14 +35,12 @@ public class SampleDataLoader implements CommandLineRunner {
     
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
     
-    // Auditable auditable = new Auditable();
-    
     Party individualParty = Party.builder()
         .type("Individual")
         .displayName("Rob Ferguson")
         .build();
     
-    Date dateOfBirth = new SimpleDateFormat("dd/MM/yyyy").parse("10/01/2000"); 
+    Date dateOfBirth = new SimpleDateFormat("dd/MM/yyyy").parse("13/01/1989"); 
     
     Individual individual = Individual.builder().party(individualParty)
         .title("Mr")
@@ -89,6 +86,8 @@ public class SampleDataLoader implements CommandLineRunner {
 }
 
 /*
+
+    // Auditable auditable = new Auditable();
 
     Location location = new Location();
     location.setType("Address");

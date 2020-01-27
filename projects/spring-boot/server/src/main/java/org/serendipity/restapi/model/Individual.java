@@ -8,24 +8,29 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
-import javax.persistence.FetchType;
+// import javax.persistence.FetchType;
 
 import static javax.persistence.TemporalType.DATE;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import org.serendipity.restapi.model.Party;
-
-@Builder
-@Data
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 public class Individual {
 
   @Id
   private long id;
 
-  @OneToOne(fetch = FetchType.LAZY)
+  // @OneToOne(fetch = FetchType.LAZY)
+  @OneToOne
   @JoinColumn(name = "partyId")
   @MapsId
   private Party party;
@@ -58,5 +63,24 @@ public class Individual {
   private String phoneNumber;
 
   private String photoUrl;
+  
+  @Override
+  public boolean equals(Object o) {
+
+    if (this == o)
+      return true;
+
+    if (!(o instanceof Individual))
+      return false;
+
+    Individual other = (Individual) o;
+
+    return id != 0L && id == other.getId();
+  }
+
+  @Override
+  public int hashCode() {
+    return 31;
+  }
 
 }

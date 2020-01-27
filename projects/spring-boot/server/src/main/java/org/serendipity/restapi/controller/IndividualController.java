@@ -33,34 +33,15 @@ public class IndividualController {
   }
   
   @GetMapping("/individuals/{id}")
-  public ResponseEntity<Individual> findById(
+  public ResponseEntity<EntityModel<Individual>> findById(
       @PathVariable("id") final Long id) throws ResponseStatusException {
     
-    Individual individual = entityService.findById(id).orElseThrow(() -> 
+    Individual entity = entityService.findById(id).orElseThrow(() -> 
         new ResponseStatusException(HttpStatus.NOT_FOUND));
     
-    return ResponseEntity.ok().body(individual);
+    return ResponseEntity.ok(assembler.toModel(entity));
   }
   
 }
 
 // https://github.com/spring-projects/spring-hateoas-examples/blob/master/hypermedia/src/main/java/org/springframework/hateoas/examples/EmployeeController.java
-
-/*
-
-  @GetMapping("/individuals")
-  public List<Individual> findAll() {
-
-    return entityService.findAll();
-  }
-
-
-    return ResponseEntity.status(HttpStatus.OK).body(individual);
-    
-      throws ResourceNotFoundException {
-      Employee employee = employeeRepository.findById(employeeId)
-      .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + employeeId));
-      return ResponseEntity.ok().body(employee);
-
-*/
-
