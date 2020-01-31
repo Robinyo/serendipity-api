@@ -4,122 +4,127 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.serendipity</groupId>
-    <artifactId>serendipity-rest-api</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
+  <groupId>org.serendipity</groupId>
+  <artifactId>serendipity-rest-api</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
-    <name>Serendipity REST API</name>
-    <description>Use Spring HATEOAS to build Serendipity's REST API</description>
+  <name>Serendipity REST API</name>
+  <description>Use Spring HATEOAS to build Serendipity's REST API</description>
 
-    <inceptionYear>2020</inceptionYear>
+  <inceptionYear>2020</inceptionYear>
 
-    <contributors>
-        <contributor>
-            <name>Rob Ferguson</name>
-            <organization>The Craft Beer Foundation</organization>
-            <organizationUrl>https://craftbeer.org.au</organizationUrl>
-            <roles>
-                <role>Project Lead</role>
-            </roles>
-            <timezone>+10</timezone>
-            <url>https://robferguson/blog</url>
-            <email>rob.ferguson (at) robferguson.org</email>
-        </contributor>
-    </contributors>
+  <contributors>
+    <contributor>
+      <name>Rob Ferguson</name>
+      <organization>The Craft Beer Foundation</organization>
+      <organizationUrl>https://craftbeer.org.au</organizationUrl>
+      <roles>
+        <role>Project Lead</role>
+      </roles>
+      <timezone>+10</timezone>
+      <url>https://robferguson/blog</url>
+      <email>rob.ferguson (at) robferguson.org</email>
+    </contributor>
+  </contributors>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.3.RELEASE</version>
-        <relativePath /> <!-- lookup parent from repository -->
-    </parent>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.2.3.RELEASE</version>
+    <relativePath /> <!-- lookup parent from repository -->
+  </parent>
 
-    <modules>
-        <module>server</module>
-    </modules>
+  <modules>
+    <module>server</module>
+  </modules>
 
-    <properties>
-        <evo.version>1.2.2</evo.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>11</java.version>
-    </properties>
+  <properties>
+    <evo.inflector.version>1.2.2</evo.inflector.version>
+    <java.version>11</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <spring.security.oauth2.autoconfigure.version>2.2.3.RELEASE</spring.security.oauth2.autoconfigure.version> 
+  </properties>
 
-    <dependencies>
+  <dependencies>
+  
+    <!-- Add JPA dependencies -->
 
-        <!-- Add Web application dependencies -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+    <dependency>
+      <groupId>org.xerial</groupId>
+      <artifactId>sqlite-jdbc</artifactId>
+    </dependency>  
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jetty</artifactId>
-        </dependency>
+    <!-- Add REST API (HATEOAS) dependencies -->
 
-        <!-- Add JPA dependencies -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-hateoas</artifactId>
+    </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
+    <dependency>
+      <groupId>org.atteo</groupId>
+      <artifactId>evo-inflector</artifactId>
+      <version>${evo.inflector.version}</version>
+    </dependency>
+    
+    <!-- Add OAuth 2.0 Resource Server dependencies -->
 
-        <!--
-        <dependency>
-          <groupId>com.h2database</groupId>
-          <artifactId>h2</artifactId>
-          <scope>runtime</scope>
-        </dependency>
-        -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
 
-        <dependency>
-            <groupId>org.xerial</groupId>
-            <artifactId>sqlite-jdbc</artifactId>
-        </dependency>
+    <!-- Add Web application dependencies -->
 
-        <!-- Add REST API (HATEOAS) dependencies -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-tomcat</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-hateoas</artifactId>
-        </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-jetty</artifactId>
+    </dependency>
 
-        <dependency>
-            <groupId>org.atteo</groupId>
-            <artifactId>evo-inflector</artifactId>
-            <version>${evo.version}</version>
-        </dependency>
+    <!-- Add LOMBOK dependencies -->
 
-        <!-- Add LOMBOK dependencies -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
 
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
+  </dependencies>
 
-    </dependencies>
+  <build>
+    <plugins>
 
-    <build>
-        <plugins>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <useSystemClassLoader>false</useSystemClassLoader>
+        </configuration>
+      </plugin>
 
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <useSystemClassLoader>false</useSystemClassLoader>
-                </configuration>
-            </plugin>
-
-        </plugins>
-    </build>
+    </plugins>
+  </build>
 
 </project>

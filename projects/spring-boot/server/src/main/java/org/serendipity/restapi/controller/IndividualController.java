@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +29,13 @@ public class IndividualController {
   @Autowired
   private IndividualRepresentationModelAssembler assembler;
   
+  @GetMapping("/whoami")
+  public String whoami(@AuthenticationPrincipal Jwt jwt) {
+    return String.format("Hello, %s!", jwt.getSubject());
+  }
+  
   @GetMapping("/individuals")
+  @PreAuthorize("hasAuthority('SCOPE_individual:read')")
   public ResponseEntity<CollectionModel<EntityModel<Individual>>> findAll() {
     
     return ResponseEntity.ok( //
@@ -34,6 +43,7 @@ public class IndividualController {
   }
   
   @GetMapping("/individuals/{id}")
+  @PreAuthorize("hasAuthority('SCOPE_individual:read')")
   public ResponseEntity<EntityModel<Individual>> findById(
       @PathVariable("id") final Long id) throws ResponseStatusException {
     
@@ -44,5 +54,3 @@ public class IndividualController {
   }
   
 }
-
-// https://github.com/spring-projects/spring-hateoas-examples/blob/master/hypermedia/src/main/java/org/springframework/hateoas/examples/EmployeeController.java
