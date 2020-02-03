@@ -33,5 +33,7 @@ Thumbs.db
 
 TODO.txt
 serendipity.db
+serendipity.mv.db
+serendipity.trace.db
 
 issue.md
