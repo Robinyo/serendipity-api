@@ -15,10 +15,19 @@ public class OAuth2ResourceServerSecurityConfiguration extends WebSecurityConfig
   @Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}") String jwkSetUri;
 
   @Override
-  protected void configure(HttpSecurity http) throws Exception {
+  protected void configure(HttpSecurity httpSecurity) throws Exception {
+    
+    // H2 console configuration
+    
+    httpSecurity.authorizeRequests().antMatchers("/h2-console/**").permitAll();
+    httpSecurity.csrf().disable();
+    httpSecurity.headers().frameOptions().disable();
+    
+    // OAuth Server configuration
 
-    http.authorizeRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
-        .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
+    httpSecurity.authorizeRequests().anyRequest().authenticated();
+    
+    httpSecurity.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
   }
 
   @Bean
