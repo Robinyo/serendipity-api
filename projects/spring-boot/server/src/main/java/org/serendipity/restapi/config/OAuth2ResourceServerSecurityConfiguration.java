@@ -23,7 +23,7 @@ public class OAuth2ResourceServerSecurityConfiguration extends WebSecurityConfig
     httpSecurity.csrf().disable();
     httpSecurity.headers().frameOptions().disable();
     
-    // OAuth Server configuration
+    // OAuth2 Resource Server configuration
 
     httpSecurity.authorizeRequests().anyRequest().authenticated();
     
