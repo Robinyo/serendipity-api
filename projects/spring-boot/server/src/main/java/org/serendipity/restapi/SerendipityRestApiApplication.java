@@ -11,7 +11,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.hateoas.server.core.EvoInflectorLinkRelationProvider;
 
 @EnableJpaAuditing(auditorAwareRef = "auditorProvider")
-@SpringBootApplication
+// @SpringBootApplication
+@SpringBootApplication(proxyBeanMethods = false)
 @Slf4j
 public class SerendipityRestApiApplication {
 
@@ -35,5 +36,3 @@ public class SerendipityRestApiApplication {
   }
 
 }
-
-// https://www.baeldung.com/spring-boot-logging

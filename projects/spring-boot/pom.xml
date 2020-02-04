@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.serendipity</groupId>
   <artifactId>serendipity-rest-api</artifactId>
@@ -41,6 +41,7 @@
 
   <properties>
     <evo.inflector.version>1.2.2</evo.inflector.version>
+    <flowable.version>6.5.0</flowable.version>
     <java.version>11</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -110,6 +111,20 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-jetty</artifactId>
+    </dependency>
+    
+    <!-- Add Flowable dependencies -->
+  
+    <dependency>
+      <groupId>org.flowable</groupId>
+      <artifactId>flowable-spring-boot-starter-process-rest</artifactId>
+      <version>${flowable.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.flowable</groupId>
+      <artifactId>flowable-ldap</artifactId>
+      <version>${flowable.version}</version>
     </dependency>
 
     <!-- Add LOMBOK dependencies -->
