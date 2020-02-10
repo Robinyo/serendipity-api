@@ -51,3 +51,56 @@ http://localhost:3001/api/organisations
 http://localhost:3001/docs
 ```
 
+## Flowable UI Applications
+
+Flowable's web applications:
+
+- Flowable Identity Management: http://localhost:8080/flowable-idm
+- Flowable Modeler: http://localhost:8888/flowable-modeler
+- Flowable Task: http://localhost:9999/flowable-task
+- Flowable Admin: http://localhost:9988/flowable-admin
+
+Flowable's web application configuration properties:
+
+```
+...
+
+# Spring JPA
+spring.datasource.driver-class-name=org.h2.Driver
+spring.datasource.url=jdbc:h2:~/serendipity-db/db;AUTO_SERVER=TRUE;AUTO_SERVER_PORT=9091;DB_CLOSE_DELAY=-1
+spring.datasource.username=admin
+spring.datasource.password=secret
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+spring.jpa.hibernate.ddl-auto=update
+
+# H2 Console
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+spring.h2.console.settings.trace=false
+spring.h2.console.settings.web-allow-others=false
+```
+
+**Note:** You can [download](https://flowable.com/open-source/downloads/) the Flowable open source distribution from the Flowable web site.
+
+### Flowable Identity Management
+
+To launch Flowable's Identity Management application:
+
+```
+java -jar flowable-idm.war
+```
+
+### Development
+
+To build the project:
+
+```
+mvn clean
+mvn package
+```
+       
+To launch the project:
+
+```
+java -jar target/serendipity-rest-api-core-0.0.1-SNAPSHOT.jar
+```
