@@ -8,7 +8,7 @@ The goal of this guide is to help you build and run Serendipity's API.
 
 You need to set up your development environment before you can do anything.
 
-What You Need:
+What you need:
 
 * JDK 1.8 or later
 * Maven 3.2 or later
@@ -45,10 +45,11 @@ TODO
 Open your browser and try:
 
 ```
+http://localhost:3001/api/whoami
 http://localhost:3001/api/individuals
-http://localhost:3001/api/individuals/4
-http://localhost:3001/api/organisations
-http://localhost:3001/docs
+http://localhost:3001/api/individuals/1
+http://localhost:3001/process-api/runtime/tasks
+http://localhost:3001/h2-console
 ```
 
 ## Flowable UI Applications
