@@ -73,11 +73,12 @@ spring.datasource.password=secret
 spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 spring.jpa.hibernate.ddl-auto=update
 
-# H2 Console
-spring.h2.console.enabled=true
-spring.h2.console.path=/h2-console
-spring.h2.console.settings.trace=false
-spring.h2.console.settings.web-allow-others=false
+# DEFAULT ADMINISTRATOR ACCOUNTS
+flowable.idm.app.admin.user-id=admin
+flowable.idm.app.admin.password=secret
+flowable.idm.app.admin.first-name=
+flowable.idm.app.admin.last-name=Administrator
+flowable.idm.app.admin.email=admin@serendipity.org.au
 ```
 
 **Note:** You can [download](https://flowable.com/open-source/downloads/) the Flowable open source distribution from the Flowable web site.
