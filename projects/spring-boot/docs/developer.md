@@ -58,8 +58,6 @@ Flowable's web applications:
 Web application configuration properties:
 
 ```
-...
-
 # Spring JPA
 spring.datasource.driver-class-name=org.h2.Driver
 spring.datasource.url=jdbc:h2:~/serendipity-db/db;AUTO_SERVER=TRUE;AUTO_SERVER_PORT=9091;DB_CLOSE_DELAY=-1
@@ -86,7 +84,7 @@ To launch Flowable's Identity Management application:
 java -jar flowable-idm.war
 ```
 
-### Development
+## Development
 
 To build the project:
 
