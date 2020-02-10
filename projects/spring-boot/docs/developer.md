@@ -36,12 +36,6 @@ cd serendipity-api/projects/spring-boot/server
 mvn spring-boot:run
 ```
 
-### Step 4: Seed the Database
-
-In another terminal session: 
-
-TODO
-
 Open your browser and try:
 
 ```
@@ -61,7 +55,7 @@ Flowable's web applications:
 - Flowable Task: http://localhost:9999/flowable-task
 - Flowable Admin: http://localhost:9988/flowable-admin
 
-Flowable's web application configuration properties:
+Web application configuration properties:
 
 ```
 ...
