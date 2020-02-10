@@ -12,6 +12,7 @@ Thumbs.db
 .classpath
 .project
 .settings
+/.settings
 
 # STS
 .apt_generated
