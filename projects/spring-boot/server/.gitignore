@@ -11,8 +11,8 @@ Thumbs.db
 # Eclipse
 .classpath
 .project
-.settings
-/.settings
+tmp/.settings
+/tmp/.settings
 
 # STS
 .apt_generated
