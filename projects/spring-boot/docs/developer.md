@@ -36,6 +36,14 @@ cd serendipity-api/projects/spring-boot/server
 mvn spring-boot:run
 ```
 
+By default, certain folders on the classpath are automatically scanned:
+
+- /apps: By default looks for all files ending with .zip or .bar and deploys them
+- /cases: By default looks for all files ending with .cmmn, .cmmn11, .cmmn.xml or .cmmn11.xml and deploys them
+- /dmn: By default looks for all files ending with .dmn, .dmn11, .dmn.xml or .dmn12.xml and deploys them
+- /forms: By default looks for all files ending with .form and deploys them
+- /processes: By default looks for all files ending with .bpmn20.xml or .bpmn and deploys them
+
 Open your browser and try:
 
 ```
@@ -47,8 +55,6 @@ http://localhost:3001/h2-console
 ```
 
 ## Flowable UI Applications
-
-Flowable's Web applications:
 
 - Flowable Identity Management: http://localhost:8080/flowable-idm
 - Flowable Modeler: http://localhost:8888/flowable-modeler
@@ -115,29 +121,6 @@ flowable.idm.ldap.cache.group-size=10000
 flowable.idm.ldap.cache.group-expiration=180000
 ```
 
-### Resource Deployment
-
-By default, certain folders on the classpath are automatically scanned:
-
-- /apps: By default looks for all files ending with .zip or .bar and deploys them
-- /cases: By default looks for all files ending with .cmmn, .cmmn11, .cmmn.xml or .cmmn11.xml and deploys them
-- /dmn: By default looks for all files ending with .dmn, .dmn11, .dmn.xml or .dmn12.xml and deploys them
-- /forms: By default looks for all files ending with .form and deploys them
-- /processes: By default looks for all files ending with .bpmn20.xml or .bpmn and deploys them
-
-For example:
-
-```
-flowable.cmmn.resource-location=classpath*:/cases/
-flowable.cmmn.resource-suffixes=**.cmmn,**.cmmn11,**.cmmn.xml,**.cmmn11.xml
-flowable.dmn.resource-location=classpath*:/dmn/
-flowable.dmn.resource-suffixes=**.dmn,**.dmn.xml,**.dmn11,**.dmn11.xml
-flowable.form.resource-location=classpath*:/forms/
-flowable.form.resource-suffixes=**.form
-flowable.process-definition-location-prefix=classpath*:/processes/
-flowable.process-definition-location-suffixes=**.bpmn20.xml,**.bpmn
-```
-
 ### Flowable Identity Management
 
 To launch Flowable's Identity Management application:
@@ -145,6 +128,8 @@ To launch Flowable's Identity Management application:
 ```
 java -jar flowable-idm.war
 ```
+
+Then navigate to: http://localhost:8080/flowable-idm
 
 ### Flowable Modeler
 
@@ -154,6 +139,8 @@ To launch Flowable's Modeler application:
 java -jar flowable-modeler.war
 ```
 
+Then navigate to: http://localhost:8888/flowable-modeler
+
 ### Flowable Task
 
 To launch Flowable's Task application:
@@ -162,6 +149,8 @@ To launch Flowable's Task application:
 java -jar flowable-task.war
 ```
 
+Then navigate to: http://localhost:9999/flowable-task
+
 ### Flowable Admin
 
 To launch Flowable's Admin application:
@@ -169,6 +158,8 @@ To launch Flowable's Admin application:
 ```
 java -jar flowable-admin.war
 ```
+
+Then navigate to: http://localhost:9988/flowable-admin
 
 ## Development
 
