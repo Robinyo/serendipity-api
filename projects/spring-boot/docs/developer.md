@@ -56,10 +56,10 @@ http://localhost:3001/h2-console
 
 ## Flowable UI Applications
 
-- Flowable Identity Management: http://localhost:8080/flowable-idm
-- Flowable Modeler: http://localhost:8888/flowable-modeler
-- Flowable Task: http://localhost:9999/flowable-task
-- Flowable Admin: http://localhost:9988/flowable-admin
+- Flowable Identity Management
+- Flowable Modeler
+- Flowable Task
+- Flowable Admin
 
 **Note:** You can [download](https://flowable.com/open-source/downloads/) the Flowable open source distribution from the Flowable web site.
 
