@@ -10,7 +10,7 @@ You need to set up your development environment before you can do anything.
 
 What you need:
 
-* JDK 1.8 or later
+* JDK 11 or later
 * Maven 3.2 or later
 
 ### Step 2. Clone the project 
