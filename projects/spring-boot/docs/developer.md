@@ -48,7 +48,7 @@ http://localhost:3001/h2-console
 
 ## Flowable UI Applications
 
-Flowable's Web [applications](https://flowable.com/open-source/docs/bpmn/ch14-Applications/):
+Flowable's Web applications:
 
 - Flowable Identity Management: http://localhost:8080/flowable-idm
 - Flowable Modeler: http://localhost:8888/flowable-modeler
