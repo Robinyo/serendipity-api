@@ -36,7 +36,7 @@ cd serendipity-api/projects/spring-boot/server
 mvn spring-boot:run
 ```
 
-By default, certain folders on the classpath are automatically scanned:
+By default, [certain folders](https://flowable.com/open-source/docs/bpmn/ch05a-Spring-Boot/#flowable-application-properties) on the classpath are automatically scanned:
 
 - /apps: By default looks for all files ending with .zip or .bar and deploys them
 - /cases: By default looks for all files ending with .cmmn, .cmmn11, .cmmn.xml or .cmmn11.xml and deploys them
