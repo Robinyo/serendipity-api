@@ -59,8 +59,61 @@ Flowable's Web applications:
 
 ### Externalised Configuration
 
-Flowable takes advantage of Spring Boot's support for externalised configuration: 
-[application.properties](https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/server/flowable/wars/application.properties):
+The Flowable Web applications take advantage of Spring Boot's support for externalised configuration: 
+
+```
+spring.main.banner-mode=off
+
+# Logging
+logging.level.root=INFO
+logging.level.org.hibernate.SQL=DEBUG
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder=TRACE
+logging.level.org.springframework.security=DEBUG
+
+# Spring JPA
+spring.datasource.driver-class-name=org.h2.Driver
+spring.datasource.url=jdbc:h2:~/serendipity-db/db;AUTO_SERVER=TRUE;AUTO_SERVER_PORT=9091;DB_CLOSE_DELAY=-1
+spring.datasource.username=admin
+spring.datasource.password=secret
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+spring.jpa.hibernate.ddl-auto=update
+
+# Default Admin Accounts
+flowable.idm.app.admin.user-id=flowable
+flowable.idm.app.admin.password=secret
+flowable.idm.app.admin.first-name=
+flowable.idm.app.admin.last-name=Administrator
+flowable.idm.app.admin.email=admin@serendipity.org.au
+
+flowable.common.app.idm-admin.user=flowable
+flowable.common.app.idm-admin.password=secret
+
+flowable.modeler.app.deployment-api-url=http://localhost:9999/flowable-task/app-api
+
+# LDAP
+flowable.idm.ldap.enabled=true
+flowable.idm.ldap.server=ldap://localhost
+flowable.idm.ldap.port=10389
+flowable.idm.ldap.user=cn=admin,dc=flowable,dc=org
+flowable.idm.ldap.password=secret
+flowable.idm.ldap.base-dn=dc=flowable,dc=org
+flowable.idm.ldap.user-base-dn=ou=users,dc=flowable,dc=org
+flowable.idm.ldap.group-base-dn=ou=groups,dc=flowable,dc=org
+flowable.idm.ldap.query.user-by-id=(&(objectClass=inetOrgPerson)(uid={0}))
+flowable.idm.ldap.query.user-by-full-name-like=(&(objectClass=inetOrgPerson)(|({0}=*{1}*)({2}=*{3}*)))
+flowable.idm.ldap.query.all-users=(objectClass=inetOrgPerson)
+flowable.idm.ldap.query.groups-for-user=(&(objectClass=groupOfUniqueNames)(uniqueMember={0}))
+flowable.idm.ldap.query.all-groups=(objectClass=groupOfUniqueNames)
+flowable.idm.ldap.query.group-by-id=(&(objectClass=groupOfUniqueNames)(uniqueId={0}))
+flowable.idm.ldap.attribute.user-id=uid
+flowable.idm.ldap.attribute.first-name=cn
+flowable.idm.ldap.attribute.last-name=sn
+flowable.idm.ldap.attribute.email=mail
+flowable.idm.ldap.attribute.group-id=cn
+flowable.idm.ldap.attribute.group-name=cn
+flowable.idm.ldap.cache.group-size=10000
+flowable.idm.ldap.cache.group-expiration=180000
+```
 
 ### Resource Deployment
 
