@@ -46,9 +46,9 @@ http://localhost:3001/process-api/runtime/tasks
 http://localhost:3001/h2-console
 ```
 
-## Flowable Applications
+## Flowable UI Applications
 
-Flowable's UI Web [applications](https://flowable.com/open-source/docs/bpmn/ch14-Applications/):
+Flowable's Web [applications](https://flowable.com/open-source/docs/bpmn/ch14-Applications/):
 
 - Flowable Identity Management: http://localhost:8080/flowable-idm
 - Flowable Modeler: http://localhost:8888/flowable-modeler
@@ -59,7 +59,7 @@ Flowable's UI Web [applications](https://flowable.com/open-source/docs/bpmn/ch14
 
 ### Externalised Configuration
 
-Flowable takes advantage of Spring Boot's support for [externalised configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/howto.html#howto-externalize-configuration): 
+Flowable takes advantage of Spring Boot's support for externalised configuration: 
 [application.properties](https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/server/flowable/wars/application.properties):
 
 ### Resource Deployment
