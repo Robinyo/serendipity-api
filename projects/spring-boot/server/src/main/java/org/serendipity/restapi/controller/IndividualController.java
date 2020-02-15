@@ -1,6 +1,10 @@
 package org.serendipity.restapi.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.serendipity.restapi.hateoas.IndividualRepresentationModelAssembler;
+import org.serendipity.restapi.model.Individual;
+import org.serendipity.restapi.service.IndividualService;
+
+import org.springframework.data.rest.webmvc.BasePathAwareController;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
@@ -10,24 +14,20 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 
-import org.serendipity.restapi.model.Individual;
-import org.serendipity.restapi.service.IndividualService;
-
-import org.serendipity.restapi.hateoas.IndividualRepresentationModelAssembler;
-
-@RestController
-@RequestMapping("/api")
+@BasePathAwareController
 public class IndividualController {
-  
-  @Autowired
-  private IndividualService entityService;
-  
-  @Autowired
-  private IndividualRepresentationModelAssembler assembler;
+
+  private final IndividualRepresentationModelAssembler assembler;
+  private final IndividualService entityService;
+
+  public IndividualController(IndividualService entityService,
+                              IndividualRepresentationModelAssembler assembler) {
+
+    this.entityService = entityService;
+    this.assembler = assembler;
+  }
   
   @GetMapping("/whoami")
   public String whoami(@AuthenticationPrincipal Jwt jwt) {
@@ -53,3 +53,8 @@ public class IndividualController {
   }
   
 }
+
+// @RestController
+// @RequestMapping("/api")
+
+// @Autowired

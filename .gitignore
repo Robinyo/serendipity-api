@@ -8,6 +8,7 @@ lib-cov
 *.gz
 *.swp
 
+architecture
 pids
 logs
 results

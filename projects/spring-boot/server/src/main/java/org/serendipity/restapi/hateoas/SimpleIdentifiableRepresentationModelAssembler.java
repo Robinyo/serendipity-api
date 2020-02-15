@@ -1,13 +1,10 @@
 package org.serendipity.restapi.hateoas;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
-
 import lombok.Getter;
 import lombok.Setter;
-
-import java.lang.reflect.Field;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.GenericTypeResolver;
+// import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.LinkBuilder;
@@ -17,7 +14,12 @@ import org.springframework.hateoas.server.core.EvoInflectorLinkRelationProvider;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.util.ReflectionUtils;
 
+import java.lang.reflect.Field;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+
 // https://github.com/spring-projects/spring-hateoas-examples/blob/master/commons/src/main/java/org/springframework/hateoas/SimpleIdentifiableRepresentationModelAssembler.java
+// https://github.com/spring-projects/spring-hateoas-examples/blob/master/spring-hateoas-and-spring-data-rest/src/main/java/org/springframework/hateoas/examples/OrderProcessor.java
 
 /**
  * A {@link SimpleRepresentationModelAssembler} that mixes together a Spring web controller and a
@@ -26,6 +28,9 @@ import org.springframework.util.ReflectionUtils;
  * @author Greg Turnquist
  */
 public class SimpleIdentifiableRepresentationModelAssembler<T> implements SimpleRepresentationModelAssembler<T> {
+
+  // @Autowired
+  // private final RepositoryRestConfiguration configuration;
 
   /**
    * The Spring MVC class for the object from which links will be built.
@@ -43,9 +48,9 @@ public class SimpleIdentifiableRepresentationModelAssembler<T> implements Simple
   @Getter private final Class<?> resourceType;
 
   /**
-   * Default base path as empty.
+   * Default base path.
    */
-  @Getter @Setter private String basePath = "";
+  @Getter @Setter private String basePath = "/api";
 
   /**
    * Default a assembler based on Spring MVC controller, resource type, and {@link LinkRelationProvider}. With this
@@ -134,6 +139,10 @@ public class SimpleIdentifiableRepresentationModelAssembler<T> implements Simple
    * Provide opportunity to override the base path for the URI.
    */
   private String getPrefix() {
+
+    // /api
+    // this.basePath = this.configuration.getBasePath().toString();
+
     return getBasePath().isEmpty() ? "" : getBasePath() + "/";
   }
 
