@@ -215,12 +215,6 @@ docker run --name serendipity-api \
   robinyo/serendipity-api
 ```
 
-or
-
-```
-docker start --interactive serendipity-api
-```
-
 To list all running containers:
 
 ```
