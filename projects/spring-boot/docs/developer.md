@@ -175,3 +175,102 @@ To launch the project:
 ```
 java -jar target/serendipity-rest-api-core-0.0.1-SNAPSHOT.jar
 ```
+
+
+## Docker
+
+### Build an Image
+
+You can use the sample 
+[Dockerfile](https://github.com/Robinyo/serendipity-api/tree/master/projects/express-typeorm/Dockerfile) to build an 
+application image:
+
+```
+docker build -t robinyo/serendipity-api .
+```
+
+**Note:** Replace `robinyo` with your Docker Hub username.
+
+Where is your image? It’s in your machine’s local Docker image registry:
+
+```
+docker image ls
+```
+
+You should see output like:
+
+```
+REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
+robinyo/serendipity-api   latest              b0b3042f59ab        12 seconds ago      1.01GB
+```
+
+### Run the Image
+
+For example:
+
+```
+docker run --name serendipity-api -p 3001:3001 robinyo/serendipity-api
+```
+
+or
+
+```
+docker start --interactive serendipity-api
+```
+
+To list all running containers:
+
+```
+docker container ls
+```
+
+To stop a container:
+
+```
+docker container stop [name]
+```
+
+For example:
+
+```
+docker container stop serendipity-api
+```
+
+To remove a container:
+
+```
+docker container rm CONTAINER_ID
+```
+
+To delete an image:
+
+```
+docker image rm IMAGE_ID --force
+```
+
+To remove all unused objects:
+
+```
+docker system prune
+```
+
+## Docker Compose
+
+### Build an Image
+
+You can use the sample 
+[Dockerfile](https://github.com/Robinyo/serendipity-api/tree/master/projects/express-typeorm/Dockerfile) and 
+[docker-compose.yml](https://github.com/Robinyo/serendipity-api/tree/master/projects/express-typeorm/docker-compose.yml) to build an 
+application image:
+
+```
+docker-compose build
+```
+
+### Run the Image
+
+For example:
+
+```
+docker-compose up -d
+```
