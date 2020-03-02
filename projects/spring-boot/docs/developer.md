@@ -176,13 +176,12 @@ To launch the project:
 java -jar target/serendipity-rest-api-core-0.0.1-SNAPSHOT.jar
 ```
 
-
 ## Docker
 
 ### Build an Image
 
 You can use the sample 
-[Dockerfile](https://github.com/Robinyo/serendipity-api/tree/master/projects/express-typeorm/Dockerfile) to build an 
+[Dockerfile](https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/server/Dockerfile) to build an 
 application image:
 
 ```
@@ -201,7 +200,7 @@ You should see output like:
 
 ```
 REPOSITORY                TAG                 IMAGE ID            CREATED             SIZE
-robinyo/serendipity-api   latest              b0b3042f59ab        12 seconds ago      1.01GB
+robinyo/serendipity-api   latest              39819e4c19c9        12 minutes ago      284MB
 ```
 
 ### Run the Image
@@ -209,7 +208,11 @@ robinyo/serendipity-api   latest              b0b3042f59ab        12 seconds ago
 For example:
 
 ```
-docker run --name serendipity-api -p 3001:3001 robinyo/serendipity-api
+docker run --name serendipity-api \
+  -p 3001:3001 \
+  -v ~/serendipity-db:/serendipity-db \
+  -e "spring.datasource.url=jdbc:h2:/serendipity-db/db;AUTO_SERVER=TRUE;AUTO_SERVER_PORT=9091;DB_CLOSE_DELAY=-1" \
+  robinyo/serendipity-api
 ```
 
 or
@@ -259,8 +262,8 @@ docker system prune
 ### Build an Image
 
 You can use the sample 
-[Dockerfile](https://github.com/Robinyo/serendipity-api/tree/master/projects/express-typeorm/Dockerfile) and 
-[docker-compose.yml](https://github.com/Robinyo/serendipity-api/tree/master/projects/express-typeorm/docker-compose.yml) to build an 
+[Dockerfile](https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/server/Dockerfile) and 
+[docker-compose.yml](https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docker-compose.yml) to build an 
 application image:
 
 ```
