@@ -10,7 +10,7 @@ RUN mkdir /opt/serendipity-api && chown spring:spring /opt/serendipity-api
 USER spring:spring
 
 # Install the App's dependencies
-ADD ./target/serendipity-rest-api-core-0.0.1-SNAPSHOT.jar /opt/serendipity-api
+COPY ./target/serendipity-rest-api-core-0.0.1-SNAPSHOT.jar /opt/serendipity-api
 
 CMD ["java", "-jar", "/opt/serendipity-api/serendipity-rest-api-core-0.0.1-SNAPSHOT.jar"]
 

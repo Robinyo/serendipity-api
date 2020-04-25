@@ -18,7 +18,7 @@ What you need:
 Change the current working directory to the location where you want the cloned directory to be:
 
 ```
-cd ~/workspaces
+cd ~/workspace
 ```
 
 Clone the project by running the following command:
