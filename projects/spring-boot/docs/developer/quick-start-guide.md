@@ -24,5 +24,18 @@ git clone https://github.com/Robinyo/serendipity-api
 cd serendipity-api
 ``` 
 
-### Step 3: Serve the application's API 
+### Step 3: Serve the application
 
+```
+# In the project's server directory: /spring-boot/server
+
+docker-compose up -d
+```
+
+The OpenLDAP, Keycloak and Serendipity API containers may take a minute or two to startup. 
+
+You can check the status of the containers using the following command:
+
+```
+docker-compose ps
+```
