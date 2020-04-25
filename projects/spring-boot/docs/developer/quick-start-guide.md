@@ -27,7 +27,7 @@ cd serendipity-api/projects/spring-boot
 ### Step 3: Serve the application
 
 ```
-# In the project's server directory: /spring-boot/server
+# In the project's server directory: /server
 
 docker-compose up -d
 ```
@@ -38,4 +38,12 @@ You can check the status of the containers using the following command:
 
 ```
 docker-compose ps
+```
+
+### Step 4: Stop the application
+
+You can stop the containers using the following command:
+
+```
+docker-compose down
 ```
