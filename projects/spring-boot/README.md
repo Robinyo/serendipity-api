@@ -1,7 +1,7 @@
-<h1 align="center">Serendipity CEP RESTful API</h1>
+<h1 align="center">Serendipity REST API</h1>
 
 <p align="center">
-  <b>The RESTful API for Serendipity CEP built using Java, Spring Boot and Hibernate.</b></br>
+  <b>The RESTful API for Serendipity built using Java, Spring Boot and Hibernate.</b></br>
 </p>
 
 ![divider](./divider.png)
