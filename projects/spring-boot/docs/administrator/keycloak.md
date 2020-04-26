@@ -16,7 +16,7 @@ docker exec -it keycloak /opt/jboss/keycloak/bin/standalone.sh \
   -Dkeycloak.migration.file=/tmp/development-realm.json
 ```
 
-**Reference:** [Keycloak: Server Administration Guide - Export and Import](https://www.keycloak.org/docs/latest/server_admin/index.html#_export_import)
+**Reference:** [Server Administration Guide - Export and Import](https://www.keycloak.org/docs/latest/server_admin/index.html#_export_import)
 
 ### Getting Started
 
@@ -54,7 +54,28 @@ Click 'Realm Settings' in the sidemenu and then click on the 'Login' tab:
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/realm-settings-login.png">
 </p>
 
-Check 'User registration' and 'Edit username'. Uncheck everything else and then click the 'Save' button.
+Check 'User registration', 'Remember me' and 'Edit username'. Uncheck everything else and then click the 'Save' button.
+
+### Create a New Client
+
+Every application that interacts with Keycloak is considered to be a client.
+
+To create a new client in the `development` realm click 'Clients' in the sidemenu and then click the 'Create' button:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/add-client.png">
+</p>
+
+Enter a Client ID and then click the 'Save' button:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/clients-settings.png">
+</p>
+
+Serendipity's Progressive Web App (PWA) uses OpenID Connect to interact with Keycloak. The 'Access Type' should be public.
+Check 'Standard Flow Enabled', 'Implicit Flow Enabled' and 'Direct Access Grants Enabled', enter a Valid Redirect URI (e.g., http://localhost:4200/*), enter a valid Web Origins (e.g., *) and then click the 'Save' button.
+
+**Note:** Standard Flow is Keycloak's name for the OpenID Connect Authorization Code Flow.
 
 ### Resources
 
