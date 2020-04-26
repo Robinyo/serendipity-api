@@ -18,6 +18,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "10001:8080"
+    volumes:
+      - .:/tmp
     env_file: ./services/keycloak/keycloak.env
 
   serendipity-api:
