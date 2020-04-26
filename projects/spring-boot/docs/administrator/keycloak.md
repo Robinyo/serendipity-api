@@ -56,7 +56,7 @@ Click 'Realm Settings' in the sidemenu and then click on the 'Login' tab:
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/realm-settings-login.png">
 </p>
 
-Check 'User registration', 'Remember me' and 'Edit username'. Uncheck everything else and then click the 'Save' button.
+Check 'User registration', 'Edit username' and 'Remember me'. Uncheck everything else and then click the 'Save' button.
 
 ### Create a New Client
 
@@ -75,7 +75,7 @@ Enter a Client ID and then click the 'Save' button:
 </p>
 
 Serendipity's Progressive Web App (PWA) uses OpenID Connect to interact with Keycloak. The 'Access Type' should be public.
-Check 'Standard Flow Enabled', 'Implicit Flow Enabled' and 'Direct Access Grants Enabled', enter a Valid Redirect URI (e.g., http://localhost:4200/*), enter a valid Web Origins (e.g., *) and then click the 'Save' button.
+Check 'Standard Flow Enabled', 'Implicit Flow Enabled' and 'Direct Access Grants Enabled', enter a Valid Redirect URI (e.g., `http://localhost:4200/*`), enter a valid Web Origins (e.g., `*)` and then click the 'Save' button.
 
 **Note:** Standard Flow is Keycloak's name for the OpenID Connect Authorization Code Flow.
 
