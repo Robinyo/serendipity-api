@@ -24,7 +24,7 @@ Follow the steps in the [Quick Start Guide](https://github.com/Robinyo/serendipi
 
 Navigate to the Keycloak Welcome page: http://localhost:10001
 
-Then login to the Administration Console using the KEYCLOAK_USER (admin) and KEYCLOAK_PASSWORD (secret) credentials.
+Login to the Administration Console using the KEYCLOAK_USER (admin) and KEYCLOAK_PASSWORD (secret) credentials.
 
 ### Create a New Realm
 
@@ -34,7 +34,27 @@ The Master realm should only be used to create and manage other realms. To creat
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/master-drop-down-menu.png">
 </p>
 
+Enter a Name:
 
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/add-realm.png">
+</p>
+
+Then click the 'Create' button:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/development-realm.png">
+</p>
+
+#### Login Page Settings
+
+Click 'Realm Settings' in the sidemenu and then click on the 'Login' tab:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/realm-settings-login.png">
+</p>
+
+Check 'User registration' and 'Edit username'. Uncheck everything else and then click the 'Save' button.
 
 ### Resources
 
