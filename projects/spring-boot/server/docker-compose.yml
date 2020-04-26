@@ -16,9 +16,9 @@ services:
     build:
       context: ./services/keycloak
       dockerfile: Dockerfile
-    env_file: ./services/keycloak/keycloak.env
     ports:
       - "10001:8080"
+    env_file: ./services/keycloak/keycloak.env
 
   serendipity-api:
     container_name: serendipity-api

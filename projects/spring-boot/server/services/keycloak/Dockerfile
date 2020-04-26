@@ -6,7 +6,9 @@ USER root
 
 RUN microdnf install -y unzip
 
-COPY ./serendipity-keycloak-theme-$THEME_VERSION.zip /opt/jboss/keycloak/themes/
-RUN cd /opt/jboss/keycloak/themes/ && \
+COPY json /tmp
+
+COPY ./serendipity-keycloak-theme-$THEME_VERSION.zip /opt/jboss/keycloak/themes
+RUN cd /opt/jboss/keycloak/themes && \
     unzip serendipity-keycloak-theme-$THEME_VERSION.zip && \
     rm serendipity-keycloak-theme-$THEME_VERSION.zip
