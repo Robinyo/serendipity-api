@@ -31,7 +31,7 @@ Then login to the Administration Console using the KEYCLOAK_USER (admin) and KEY
 The Master realm should only be used to create and manage other realms. To create a new realm, click 'Add realm' from the Master drop-down menu:
 
 <p align="center">
-  <img src="https://github.com/Robinyo/serendipity-api/blob/master/master/projects/spring-boot/docs/screen-shots/master-drop-down-menu.png">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/master-drop-down-menu.png">
 </p>
 
 
