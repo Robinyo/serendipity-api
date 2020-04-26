@@ -19,7 +19,7 @@ services:
     ports:
       - "10001:8080"
     volumes:
-      - .:/tmp
+      - .:/export
     env_file: ./services/keycloak/keycloak.env
 
   serendipity-api:

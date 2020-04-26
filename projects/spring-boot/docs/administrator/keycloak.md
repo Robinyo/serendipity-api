@@ -13,8 +13,10 @@ docker exec -it keycloak /opt/jboss/keycloak/bin/standalone.sh \
   -Dkeycloak.migration.provider=singleFile \
   -Dkeycloak.migration.realmName=development \
   -Dkeycloak.migration.usersExportStrategy=REALM_FILE \
-  -Dkeycloak.migration.file=/tmp/development-realm.json
+  -Dkeycloak.migration.file=/export/development-realm.json
 ```
+
+When the export is complete use `Ctrl-C` to exit the session.
 
 **Reference:** [Server Administration Guide - Export and Import](https://www.keycloak.org/docs/latest/server_admin/index.html#_export_import)
 
