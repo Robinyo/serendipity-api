@@ -45,5 +45,5 @@ docker-compose ps
 You can stop the containers using the following command:
 
 ```
-docker-compose down
+docker-compose down -v
 ```

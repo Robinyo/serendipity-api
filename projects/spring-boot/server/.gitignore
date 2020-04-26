@@ -31,9 +31,11 @@ tmp/.settings
 /tmp
 /temp
 
-
 TODO.txt
+
+/h2
 serendipity.db
+serendipity.lock.db
 serendipity.mv.db
 serendipity.trace.db
 
