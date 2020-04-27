@@ -108,7 +108,7 @@ Enter a Role Name:
 
 Then click the 'Save' button.
 
-I created four roles:
+I created four realm roles:
 
 <p align="center">
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/realm-roles.png">
@@ -137,11 +137,14 @@ Enter a Name:
 
 Then click the 'Save' button.
 
-I created four scopes:
+I created four client scopes:
 
 <p align="center">
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/client-scopes.png">
 </p>
+
+#### Link Client Scope with the Client
+
 
 ### Create a User Federation
 
