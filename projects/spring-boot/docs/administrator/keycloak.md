@@ -18,6 +18,30 @@ docker exec -it keycloak /opt/jboss/keycloak/bin/standalone.sh \
 
 When the export is complete use `Ctrl-C` to exit the session.
 
+#### Import
+
+To import a realm file place the (previously exported) file in the following location:
+
+```
+├── /spring-boot
+     └── /server
+           └── /services
+                 └── /keycloak
+                       └── /json
+                             ├── development-realm.json
+                 ├── Dockerfile
+                 ├── keycloak.env
+                 └── /openldap
+```
+
+And update the `KEYCLOAK_IMPORT` variable:
+
+```
+KEYCLOAK_IMPORT=/tmp/development-realm.json
+```
+
+If more than one realm file needs to be imported, a comma separated list of file names can be specified.
+ 
 **Reference:** [Server Administration Guide - Export and Import](https://www.keycloak.org/docs/latest/server_admin/index.html#_export_import)
 
 ### Getting Started
