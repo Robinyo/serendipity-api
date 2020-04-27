@@ -116,12 +116,32 @@ I created four roles:
 
 ### Client Scopes
 
+Serendipity's REST API uses scopes to protect resources, for example:
+
+* individual:post
+* individual:get
+* individual:patch
+* individual:delete
+
 To create a new scope in the `development` realm click 'Client Scopes' in the sidemenu and then click the 'Create' button:
 
 <p align="center">
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/client-scopes-create.png">
 </p>
 
+Enter a Name:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/create-scope.png">
+</p>
+
+Then click the 'Save' button.
+
+I created four scopes:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/client-scopes.png">
+</p>
 
 ### Create a User Federation
 
