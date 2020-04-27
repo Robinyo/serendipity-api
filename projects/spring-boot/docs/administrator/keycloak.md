@@ -24,14 +24,13 @@ To import a realm file place the (previously exported) file in the following loc
 
 ```
 ├── /spring-boot
-     └── /server
-           └── /services
-                 └── /keycloak
-                       └── /json
-                             ├── development-realm.json
-                 ├── Dockerfile
-                 ├── keycloak.env
-                 └── /openldap
+    └── /server
+        └── /services
+            └── /keycloak
+                └── /json
+                    ├── development-realm.json
+                ├── Dockerfile
+                ├── keycloak.env
 ```
 
 And update the `KEYCLOAK_IMPORT` variable:
