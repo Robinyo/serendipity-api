@@ -44,11 +44,11 @@ You can also use an [LDAP Browser](https://directory.apache.org/apacheds/) to ma
 Network settings:
 
 <p align="center">
-  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots//ldap-network-parameters.png">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/ldap-network-parameters.png">
 </p>
 
 Authentication settings:
 
 <p align="center">
-  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots//ldap-authentication.png">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/ldap-authentication.png">
 </p>
