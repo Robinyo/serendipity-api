@@ -145,6 +145,11 @@ I created four client scopes:
 
 #### Link Client Scope with the Client
 
+Linking between client scope and client is configured in the Client Scopes tab of the particular client. 
+
+
+
+
 
 ### Create a User Federation
 
