@@ -29,17 +29,22 @@ To import a realm file place the (previously exported) file in the following loc
             └── /keycloak
                 └── /json
                     ├── development-realm.json
+                    ├── production-realm.json
                 ├── Dockerfile
                 ├── keycloak.env
 ```
 
-And update the `KEYCLOAK_IMPORT` variable:
+All the files in the `/json` directory will be copied to the Keycloak container: 
 
 ```
-KEYCLOAK_IMPORT=/tmp/development-realm.json
+COPY json /tmp
 ```
 
-If more than one realm file needs to be imported, a comma separated list of file names can be specified.
+If more than one realm file needs to be imported, a comma separated list of file names can be specified:
+
+```
+KEYCLOAK_IMPORT=/tmp/development-realm.json, /tmp/production-realm.json
+```
  
 **Reference:** [Server Administration Guide - Export and Import](https://www.keycloak.org/docs/latest/server_admin/index.html#_export_import)
 
