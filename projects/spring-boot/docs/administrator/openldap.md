@@ -35,6 +35,67 @@ Let's check and see:
 docker exec openldap ldapsearch -x -H ldap://localhost -b dc=flowable,dc=org -D "cn=admin,dc=flowable,dc=org" -w secret
 ```
 
+Sample output:
+
+```
+# extended LDIF
+#
+# LDAPv3
+# base <dc=flowable,dc=org> with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+
+# flowable.org
+dn: dc=flowable,dc=org
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+o: flowable
+dc: flowable
+
+# admin, flowable.org
+dn: cn=admin,dc=flowable,dc=org
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: admin
+description: LDAP administrator
+userPassword:: e1NTSEF9ZGpXajIvR1ZLQW00K3FZeXF4M2hJMkl0RjJvankzbmw=
+
+# users, flowable.org
+dn: ou=users,dc=flowable,dc=org
+objectClass: organizationalUnit
+objectClass: extensibleObject
+objectClass: top
+ou: users
+description: All users in the organisation
+
+# groups, flowable.org
+dn: ou=groups,dc=flowable,dc=org
+objectClass: organizationalUnit
+objectClass: extensibleObject
+objectClass: top
+ou: groups
+description: All groups in the organisation
+
+# Administrator, users, flowable.org
+dn: cn=Administrator,ou=users,dc=flowable,dc=org
+objectClass: inetOrgPerson
+cn: Flowable
+cn: Administrator
+sn: Administrator
+mail: admin@serendipity.org.au
+uid: flowable
+userPassword:: ZEdWemRBPT0=
+
+# search result
+search: 2
+result: 0 Success
+
+# numResponses: 6
+# numEntries: 5
+```
+
 You can also use an [LDAP Browser](https://directory.apache.org/apacheds/) to manage OpenLDAP:
 
 <p align="center">
