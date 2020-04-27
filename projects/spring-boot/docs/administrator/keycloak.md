@@ -147,11 +147,20 @@ I created four client scopes:
 
 Linking between client scope and client is configured in the Client Scopes tab of the particular client. 
 
+I linked the client scopes with the client (serendipity-pwa):
 
-
-
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/serendipity-pwa-client-scopes.png">
+</p>
 
 ### Create a User Federation
+
+
+
+
+
+
+
 
 **Reference:** [Server Administration Guide - User Storage Federation](https://www.keycloak.org/docs/latest/server_admin/index.html#_user-storage-federation)
 
