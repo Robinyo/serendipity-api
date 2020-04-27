@@ -81,6 +81,45 @@ Enabled', enter a Valid Redirect URI (e.g., `http://localhost:4200/*`), enter a 
 
 **Note:** Standard Flow is Keycloak's name for the OpenID Connect Authorization Code Flow.
 
+### Roles
+
+Roles identify a type or category of user. Serendipity assigns permissions to roles rather than to individual users. 
+
+Serendipity has four default roles:
+
+* Guest
+* User
+* Manager
+* Administrator
+
+#### Realm Roles
+
+To create a new role in the `development` realm click 'Roles' in the sidemenu and then click the 'Add Role' button:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/roles-add-role.png">
+</p>
+
+Enter a Role Name:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/add-role.png">
+</p>
+
+Then click the 'Save' button.
+
+I created four roles:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/realm-roles.png">
+</p>
+
+### Client Scopes
+
+### Create a User Federation
+
+**Reference:** [Server Administration Guide - User Storage Federation](https://www.keycloak.org/docs/latest/server_admin/index.html#_user-storage-federation)
+
 ### Resources
 
 #### Keycloak-related Blog Posts 
