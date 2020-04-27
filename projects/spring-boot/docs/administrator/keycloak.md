@@ -116,6 +116,13 @@ I created four roles:
 
 ### Client Scopes
 
+To create a new scope in the `development` realm click 'Client Scopes' in the sidemenu and then click the 'Create' button:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/client-scopes-create.png">
+</p>
+
+
 ### Create a User Federation
 
 **Reference:** [Server Administration Guide - User Storage Federation](https://www.keycloak.org/docs/latest/server_admin/index.html#_user-storage-federation)
