@@ -153,14 +153,24 @@ I linked the client scopes with the client (serendipity-pwa):
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/serendipity-pwa-client-scopes.png">
 </p>
 
-### Create a User Federation
+### User Storage Federation
 
+Serendipity uses OpenLDAP to store user credentials.
 
+#### Adding a Provider
 
+To add a storage provider in the `development` realm click 'User Federation' in the sidemenu and then choose 'ldap' as the provider:
 
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/user-federation-ldap.png">
+</p>
 
+Check 'Enabled' and 'Import Users' then select 'Edit Mode: WRITABLE' and check 'Sync Registrations' so that 
+[user registrations](https://www.keycloak.org/docs/latest/server_admin/index.html#_user-registration) will be created in OpenLDAP.
 
+Select 'Vendor: Other' and enter 'uid' for the 'Username LDAP attribute', the 'RDN LDAP attribute' and the 'UID LDAP attribute'.
 
+I'm using [Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/) hence the need to use the special DNS name: `host.docker.internal`
 
 **Reference:** [Server Administration Guide - User Storage Federation](https://www.keycloak.org/docs/latest/server_admin/index.html#_user-storage-federation)
 
