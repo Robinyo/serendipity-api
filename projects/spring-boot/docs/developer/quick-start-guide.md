@@ -24,7 +24,7 @@ git clone https://github.com/Robinyo/serendipity-api
 cd serendipity-api/projects/spring-boot
 ``` 
 
-### Step 3: Serve the application
+### Step 3: Serve the applications
 
 ```
 # In the project's server directory: /server

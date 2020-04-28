@@ -33,7 +33,7 @@ Go to the project directory, install the project's dependencies and launch the s
 
 ```
 cd serendipity-api/projects/spring-boot/server
-mvn spring-boot:run
+mvn clean install spring-boot:repackage
 ```
 
 By default, [certain folders](https://flowable.com/open-source/docs/bpmn/ch05a-Spring-Boot/#flowable-application-properties) on the classpath are automatically scanned:
