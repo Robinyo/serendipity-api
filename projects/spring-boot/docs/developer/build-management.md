@@ -47,7 +47,6 @@ By default, [certain folders](https://flowable.com/open-source/docs/bpmn/ch05a-S
 - /apps: By default looks for all files ending with .zip or .bar and deploys them
 - /cases: By default looks for all files ending with .cmmn, .cmmn11, .cmmn.xml or .cmmn11.xml and deploys them
 - /dmn: By default looks for all files ending with .dmn, .dmn11, .dmn.xml or .dmn12.xml and deploys them
-- /forms: By default looks for all files ending with .form and deploys them
 - /processes: By default looks for all files ending with .bpmn20.xml or .bpmn and deploys them
 
 For example:
