@@ -40,8 +40,6 @@ You can check the status of the containers using the following command:
 docker-compose ps
 ```
 
-### Step 4: Stop the application
-
 You can stop the containers using the following command:
 
 ```
