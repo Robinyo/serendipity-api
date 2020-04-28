@@ -56,6 +56,7 @@ For example:
     └── /server
         └── /src
             └── /main
+                └── /java
                 └── /resources
                     └── /apps
                     └── /cases
@@ -74,7 +75,7 @@ For example:
 
 #### Externalised Configuration
 
-The Flowable Web applications take advantage of Spring Boot's support for externalised configuration: 
+The Flowable UI applications take advantage of Spring Boot's support for externalised configuration: 
 
 ```
 spring.main.banner-mode=off
