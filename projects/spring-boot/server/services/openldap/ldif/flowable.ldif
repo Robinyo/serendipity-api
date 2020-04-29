@@ -18,15 +18,16 @@ objectClass: top
 ou: groups
 description: All groups in the organisation
 
-# Actual users
+# Flowable (UI Applications) Admin User
 
-dn: cn=Administrator, ou=users,dc=flowable,dc=org
+dn: sn=Admin, ou=users,dc=flowable,dc=org
 changetype: add
 objectclass: inetOrgPerson
 cn: Flowable
-sn: Administrator
+sn: Admin
 mail: admin@serendipity.org.au
 uid: flowable
+# userPassword: test
 userPassword: dGVzdA==
 
 # dn: cn=Basic Auth, ou=users,dc=flowable,dc=org
@@ -36,4 +37,5 @@ userPassword: dGVzdA==
 # sn: Auth
 # mail: basic.auth@serendipity.org.au
 # uid: flowable-rest
+# userPassword: test
 # userPassword: dGVzdA==

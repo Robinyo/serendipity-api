@@ -1,0 +1,11 @@
+# Sample users
+
+dn: uid=rob.ferguson,ou=users,dc=flowable,dc=org
+changetype: add
+objectclass: inetOrgPerson
+cn: Rob
+sn: Ferguson
+mail: rob.ferguson@robferguson.org
+uid: rob.ferguson
+# userPassword: Password12
+userPassword: UGFzc3dvcmQxMg==
