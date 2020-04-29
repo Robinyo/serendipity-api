@@ -24,10 +24,14 @@ git clone https://github.com/Robinyo/serendipity-api
 cd serendipity-api/projects/spring-boot
 ``` 
 
-### Step 3: Serve the applications
+### Step 3: Serve the application
+
+To run a multi-container application with the Docker CLI, you use the `docker-compose up` command. 
+This command uses the project's [docker-compose.yml](https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/server/docker-compose.yml) 
+file to deploy a multi-container application:
 
 ```
-# In the project's server directory: /server
+# In the project's server directory: spring-boot/server
 
 docker-compose up -d
 ```
