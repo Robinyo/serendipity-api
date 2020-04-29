@@ -193,13 +193,13 @@ I linked the client scopes with the client (serendipity-pwa):
 
 Scope mappings allow you to restrict which user role mappings are included within the access token requested by the client.
 
-I linked the `individual:get` scope with the Guest role and the User role:
+I linked the `individual:get` scope with the **Guest** role and the **User** role:
 
 <p align="center">
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/individual-get-assigned-roles.png">
 </p>
 
-I also linked the `individual:post` and the individual:patch scopes with the User role. I linked the individual:delete scope with the Manager role.
+I also linked the `individual:post` and the `individual:patch` scopes with the **User** role. I linked the `individual:delete` scope with the **Manager** role.
 
 If the scope parameter contains the required scopes:
 
