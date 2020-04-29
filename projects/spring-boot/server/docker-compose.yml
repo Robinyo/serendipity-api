@@ -21,6 +21,8 @@ services:
     volumes:
       - .:/export
     env_file: ./services/keycloak/keycloak.env
+    depends_on:
+      - openldap
 
   serendipity-api:
     container_name: serendipity-api
@@ -32,3 +34,5 @@ services:
     volumes:
       - ./h2:/h2
     env_file: ./serendipity-api.env
+    depends_on:
+      - keycloak
