@@ -142,6 +142,14 @@ I created four realm roles:
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/realm-roles.png">
 </p>
 
+#### Default Roles
+
+New users (user registrations) will be assigned the 'Guest' role:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/roles-default-roles.png">
+</p>
+
 ### Client Scopes
 
 Serendipity's REST API uses scopes to protect resources, for example:
@@ -180,6 +188,66 @@ I linked the client scopes with the client (serendipity-pwa):
 <p align="center">
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/serendipity-pwa-client-scopes.png">
 </p>
+
+#### Scope Mappings
+
+Scope mappings allow you to restrict which user role mappings are included within the access token requested by the client.
+
+I linked the `individual:get` scope with the Guest role and the User role:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/individual-get-assigned-roles.png">
+</p>
+
+I also linked the `individual:post` and the individual:patch scopes with the User role. I linked the individual:delete scope with the Manager role.
+
+If the scope parameter contains the required scopes:
+
+```
+scope: 'openid profile email phone address offline_access individual:post individual:get individual:patch individual:delete'
+```
+
+And the user has the assigned roles:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/role-mappings.png">
+</p>
+
+Then the access token will contain the requested scopes:
+
+```
+{
+  "jti": "7ffcbecf-294c-404b-b199-ff066c065e43",
+  "exp": 1577743029,
+  "nbf": 0,
+  "iat": 1577742729,
+  "iss": "http://localhost:10001/auth/realms/development",
+  "aud": "account",
+  "sub": "28bb3e03-835f-4b52-be72-d61fc4ddcb9c",
+  "typ": "Bearer",
+  "azp": "serendipity-pwa",
+  "auth_time": 1577742728,
+  "session_state": "b7f63e8b-6e2b-41d3-95f1-e6e9022b82cb",
+  "acr": "1",
+  "allowed-origins": [
+    "*"
+  ],
+  "realm_access": {
+    "roles": [
+      "User",
+      "Manager"
+    ]
+  },
+  "scope": "openid individual:patch offline_access email phone address individual:post profile individual:get individual:delete",
+  "email_verified": true,
+  "address": {},
+  "name": "Rob Ferguson",
+  "preferred_username": "rob.ferguson@robferguson.org",
+  "given_name": "Rob",
+  "family_name": "Ferguson",
+  "email": "rob.ferguson@robferguson.org"
+}
+```
 
 ### User Storage Federation
 
