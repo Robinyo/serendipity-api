@@ -27,8 +27,8 @@ cn: Flowable
 sn: Admin
 mail: admin@serendipity.org.au
 uid: flowable
-# userPassword: test
-userPassword: dGVzdA==
+userPassword: test
+# userPassword: dGVzdA==
 
 # dn: cn=Basic Auth, ou=users,dc=flowable,dc=org
 # changetype: add
