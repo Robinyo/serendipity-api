@@ -1,5 +1,7 @@
 package org.serendipity.restapi.controller;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.serendipity.restapi.hateoas.IndividualRepresentationModelAssembler;
 import org.serendipity.restapi.model.Individual;
 import org.serendipity.restapi.service.IndividualService;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
 @BasePathAwareController
+@Slf4j
 public class IndividualController {
 
   private final IndividualRepresentationModelAssembler assembler;
@@ -28,19 +31,24 @@ public class IndividualController {
     this.entityService = entityService;
     this.assembler = assembler;
   }
-  
+
   @GetMapping("/whoami")
   public String whoami(@AuthenticationPrincipal Jwt jwt) {
     return String.format("Hello, %s!", jwt.getSubject());
   }
-  
+
   @GetMapping("/individuals")
   @PreAuthorize("hasAuthority('SCOPE_individual:read')")
   public ResponseEntity<CollectionModel<EntityModel<Individual>>> findAll() {
-    
-    return ResponseEntity.ok(assembler.toCollectionModel(entityService.findAll()));
+
+    CollectionModel<EntityModel<Individual>> model = assembler.toCollectionModel(entityService.findAll());
+
+    log.info("IndividualController /individuals: " + model);
+
+    return ResponseEntity.ok(model);
+    // return ResponseEntity.ok(assembler.toCollectionModel(entityService.findAll()));
   }
-  
+
   @GetMapping("/individuals/{id}")
   @PreAuthorize("hasAuthority('SCOPE_individual:read')")
   public ResponseEntity<EntityModel<Individual>> findById(

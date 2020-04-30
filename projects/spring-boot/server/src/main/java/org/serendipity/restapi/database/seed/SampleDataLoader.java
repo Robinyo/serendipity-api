@@ -85,6 +85,8 @@ public class SampleDataLoader implements CommandLineRunner {
   
 }
 
+// https://github.com/spring-projects/spring-hateoas-examples/tree/master/spring-hateoas-and-spring-data-rest
+
 /*
 
     // Auditable auditable = new Auditable();
