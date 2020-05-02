@@ -1,28 +1,15 @@
-package org.serendipity.restapi.model;
+package org.serendipity.restapi.entity;
 
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-
+import lombok.*;
+import org.serendipity.restapi.type.LocationType;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import static javax.persistence.TemporalType.TIMESTAMP;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Builder
@@ -34,20 +21,21 @@ import lombok.Setter;
 public class Location {
   
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
-  private long id;
+  private Long id;
 
   @Builder.Default
-  private String type = "Location"; 
+  @Enumerated(EnumType.STRING)
+  private LocationType type = LocationType.LOCATION;
 
   @Builder.Default
   private String displayName = "";
   
-  @Temporal(TIMESTAMP)
+  @Temporal(TemporalType.TIMESTAMP)
   private Date fromDate;
   
-  @Temporal(TIMESTAMP)
+  @Temporal(TemporalType.TIMESTAMP)
   private Date toDate;
  
   
@@ -60,14 +48,14 @@ public class Location {
   private String createdBy;
 
   @CreatedDate
-  @Temporal(TIMESTAMP)
+  @Temporal(TemporalType.TIMESTAMP)
   private Date createdAt;
 
   @LastModifiedBy
   private String updatedBy;
   
   @LastModifiedDate
-  @Temporal(TIMESTAMP)
+  @Temporal(TemporalType.TIMESTAMP)
   private Date updatedAt;
   
   @Override
@@ -81,7 +69,8 @@ public class Location {
 
     Location other = (Location) o;
 
-    return id != 0L && id == other.getId();
+    // return id != 0L && id == other.getId();
+    return id != 0L && id.equals(other.getId());
   }
 
   @Override
@@ -91,15 +80,12 @@ public class Location {
 
 }
 
-// type = "Address" | "Natural Area" | "Management Zone"
-
 /*
+
+  // @Builder.Default
+  // private String type = "Location";
 
   @Embedded
   private SurrogateKey surrogateKey;
-  
-  public Location(String type) {
-    this.type = type != null ? type : "Location" ;
-  }
 
 */

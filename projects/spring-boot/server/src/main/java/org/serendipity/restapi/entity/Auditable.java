@@ -1,16 +1,14 @@
-package org.serendipity.restapi.model;
-
-import javax.persistence.Embeddable;
-import javax.persistence.Temporal;
-
-import java.util.Date;
+package org.serendipity.restapi.entity;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import static javax.persistence.TemporalType.TIMESTAMP;
+import javax.persistence.Embeddable;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Date;
 
 @Embeddable
 public class Auditable {
@@ -19,14 +17,14 @@ public class Auditable {
   private String createdBy;
 
   @CreatedDate
-  @Temporal(TIMESTAMP)
+  @Temporal(TemporalType.TIMESTAMP)
   private Date createdAt;
 
   @LastModifiedBy
   private String updatedBy;
   
   @LastModifiedDate
-  @Temporal(TIMESTAMP)
+  @Temporal(TemporalType.TIMESTAMP)
   private Date updatedAt;
   
 }

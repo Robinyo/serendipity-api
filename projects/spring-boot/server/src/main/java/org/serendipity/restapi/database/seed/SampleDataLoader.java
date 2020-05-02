@@ -1,22 +1,21 @@
 package org.serendipity.restapi.database.seed;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import lombok.extern.slf4j.Slf4j;
-
+import org.serendipity.restapi.entity.Address;
+import org.serendipity.restapi.entity.Individual;
+import org.serendipity.restapi.entity.Location;
+import org.serendipity.restapi.entity.Party;
+import org.serendipity.restapi.repository.AddressRepository;
+import org.serendipity.restapi.repository.IndividualRepository;
+import org.serendipity.restapi.type.LocationType;
+import org.serendipity.restapi.type.PartyType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import org.serendipity.restapi.model.Address;
-import org.serendipity.restapi.model.Individual;
-import org.serendipity.restapi.model.Location;
-import org.serendipity.restapi.model.Party;
-
-import org.serendipity.restapi.repository.IndividualRepository;
-import org.serendipity.restapi.repository.AddressRepository;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Component
 @Slf4j
@@ -36,11 +35,11 @@ public class SampleDataLoader implements CommandLineRunner {
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
     
     Party individualParty = Party.builder()
-        .type("Individual")
+        .type(PartyType.INDIVIDUAL)
         .displayName("Rob Ferguson")
         .build();
     
-    Date dateOfBirth = new SimpleDateFormat("dd/MM/yyyy").parse("13/01/1989"); 
+    Date dateOfBirth = new SimpleDateFormat("dd/MM/yyyy").parse("01/11/1982");
     
     Individual individual = Individual.builder().party(individualParty)
         .title("Mr")
@@ -52,7 +51,7 @@ public class SampleDataLoader implements CommandLineRunner {
         .preferredName("Rob")
         .initials("R.J.")
         .dateOfBirth(dateOfBirth)
-        .placeOfBirth("Gunnedah")
+        .placeOfBirth("Tamworth")
         .gender("Male")
         .email("rob.ferguson@robferguson.org")
         .phoneNumber("(02) 6234 4321")
@@ -62,7 +61,7 @@ public class SampleDataLoader implements CommandLineRunner {
     individualRepository.save(individual);
     
     Location location = Location.builder()
-        .type("Address")
+        .type(LocationType.ADDRESS)
         .displayName("PO Box 6100 Parliament House Canberra ACT 2600")
         .fromDate(timestamp)
         .build();

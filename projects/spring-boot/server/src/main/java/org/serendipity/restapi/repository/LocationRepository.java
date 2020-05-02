@@ -1,9 +1,9 @@
 package org.serendipity.restapi.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.serendipity.restapi.entity.Location;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-import org.serendipity.restapi.model.Location;
-
-public interface LocationRepository extends CrudRepository<Location, Long> {
+// @Repository
+public interface LocationRepository extends PagingAndSortingRepository<Location, Long> {
 
 }

@@ -1,28 +1,15 @@
-package org.serendipity.restapi.model;
+package org.serendipity.restapi.entity;
 
-import static javax.persistence.TemporalType.TIMESTAMP;
-
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-
+import lombok.*;
+import org.serendipity.restapi.type.PartyType;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Builder
@@ -33,17 +20,20 @@ import lombok.Setter;
 @EntityListeners(AuditingEntityListener.class)
 public class Party {
 
+  // @GeneratedValue(strategy = GenerationType.AUTO)
+
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
-  private long id;
+  private Long id;
 
   @Builder.Default
-  private String type = "Party";
+  @Enumerated(EnumType.STRING)
+  private PartyType type = PartyType.PARTY;
 
   @Builder.Default
-  private String displayName = "";
-  
+  private String displayName= "";
+
   //
   // @Embedded
   // private Auditable audit;
@@ -53,14 +43,14 @@ public class Party {
   private String createdBy;
 
   @CreatedDate
-  @Temporal(TIMESTAMP)
+  @Temporal(TemporalType.TIMESTAMP)
   private Date createdAt;
 
   @LastModifiedBy
   private String updatedBy;
   
   @LastModifiedDate
-  @Temporal(TIMESTAMP)
+  @Temporal(TemporalType.TIMESTAMP)
   private Date updatedAt;
   
   @Override
@@ -74,7 +64,8 @@ public class Party {
 
     Party other = (Party) o;
 
-    return id != 0L && id == other.getId();
+    // return id != 0L && id == other.getId();
+    return id != 0L && id.equals(other.getId());
   }
 
   @Override
@@ -83,6 +74,8 @@ public class Party {
   }
 
 }
+
+// https://google.github.io/styleguide/javaguide.html
 
 // https://stackoverflow.com/questions/34241718/lombok-builder-and-jpa-default-constructor/35602246#35602246
 
@@ -95,9 +88,11 @@ IMPORTANT: Override toString, equals, and hashCode as described in these  docume
 
 */
 
-// type = "Individual" | "Organisation"
+// @Builder.Default
+// private String type = "Party";
+
+// @GeneratedValue(strategy = GenerationType.AUTO)
+// @Table(name = "Party")
 
 // @Version
-// private long version;
-
-// @Table(name = "Party")
+// private Long version;

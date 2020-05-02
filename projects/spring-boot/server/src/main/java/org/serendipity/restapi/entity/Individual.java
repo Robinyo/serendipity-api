@@ -1,22 +1,9 @@
-package org.serendipity.restapi.model;
+package org.serendipity.restapi.entity;
 
+import lombok.*;
+
+import javax.persistence.*;
 import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-// import javax.persistence.FetchType;
-
-import static javax.persistence.TemporalType.DATE;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Builder
@@ -27,10 +14,9 @@ import lombok.Setter;
 public class Individual {
 
   @Id
-  private long id;
+  private Long id;
 
-  // @OneToOne(fetch = FetchType.LAZY)
-  @OneToOne
+  @OneToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "partyId")
   @MapsId
   private Party party;
@@ -51,7 +37,7 @@ public class Individual {
 
   private String initials;
 
-  @Temporal(DATE)
+  @Temporal(TemporalType.DATE)
   private Date dateOfBirth;
 
   private String placeOfBirth;
@@ -75,7 +61,8 @@ public class Individual {
 
     Individual other = (Individual) o;
 
-    return id != 0L && id == other.getId();
+    // return id != 0L && id == other.getId();
+    return id != 0L && id.equals(other.getId());
   }
 
   @Override

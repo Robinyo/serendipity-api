@@ -1,10 +1,6 @@
-package org.serendipity.restapi.model;
+package org.serendipity.restapi.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 //
 // A surrogate key is any column or set of columns that can be declared as the primary key instead of a "real" or
@@ -16,9 +12,9 @@ import javax.persistence.Id;
 public class SurrogateKey {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
-  private long id;
+  private Long id;
   
   //
   // MongoDB

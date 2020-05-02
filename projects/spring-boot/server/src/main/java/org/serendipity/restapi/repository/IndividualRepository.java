@@ -1,13 +1,13 @@
 package org.serendipity.restapi.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.serendipity.restapi.entity.Individual;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-import org.serendipity.restapi.model.Individual;
-// import org.springframework.web.bind.annotation.CrossOrigin;
+// @Repository
+public interface IndividualRepository extends PagingAndSortingRepository<Individual, Long> {
 
-// @CrossOrigin
-public interface IndividualRepository extends CrudRepository<Individual, Long> {
+    Page<Individual> findAll(Pageable pageable);
 
 }
-
-// https://docs.spring.io/spring-data/rest/docs/current-SNAPSHOT/reference/html/#customizing-sdr.configuring-cors

@@ -35,21 +35,21 @@ For example:
 ```
 docker inspect -f \
   '{{range $index, $value := .Config.Env}}{{println $value}}{{end}}' \
-  flowable | grep FLOW
+  serendipity-api | grep SPRING
 ```
 
 To print logs:
 
 ```
-docker logs [name]
+docker container logs [name]
 ```
 
 For example:
 
 ```
-docker logs flowable
-docker logs keycloak
-docker logs openldap
+docker container logs serendipity-api
+docker container logs keycloak
+docker container logs openldap
 ```
 
 To start a shell session inside your container that you can interact with through your terminal:
@@ -76,7 +76,7 @@ docker container stop [name]
 For example:
 
 ```
-docker container stop flowable
+docker container stop serendipity-api
 docker container stop keycloak
 docker container stop openldap
 ```
@@ -90,7 +90,7 @@ docker container rm [name]
 For example:
 
 ```
-docker container rm flowable
+docker container rm serendipity-api
 docker container rm keycloak
 docker container rm openldap
 ```

@@ -1,17 +1,8 @@
-package org.serendipity.restapi.model;
+package org.serendipity.restapi.entity;
 
-import javax.persistence.Entity;
-// import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
+import lombok.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import javax.persistence.*;
 
 @Entity
 @Builder
@@ -22,10 +13,9 @@ import lombok.Setter;
 public class Address {
   
   @Id
-  private long id;
+  private Long id;
   
-  // @OneToOne(fetch = FetchType.LAZY)
-  @OneToOne
+  @OneToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "locationId")
   @MapsId
   private Location location;
@@ -57,7 +47,8 @@ public class Address {
 
     Address other = (Address) o;
 
-    return id != 0L && id == other.getId();
+    // return id != 0L && id == other.getId();
+    return id != 0L && id.equals(other.getId());
   }
 
   @Override

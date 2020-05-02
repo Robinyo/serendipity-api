@@ -44,6 +44,14 @@ You can check the status of the containers using the following command:
 docker-compose ps
 ```
 
+To check the environment variables inside your container:
+
+```
+docker inspect -f \
+  '{{range $index, $value := .Config.Env}}{{println $value}}{{end}}' \
+  serendipity-api
+```
+
 You can stop the containers using the following command:
 
 ```
