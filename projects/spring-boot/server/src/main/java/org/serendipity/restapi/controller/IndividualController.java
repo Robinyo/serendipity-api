@@ -10,9 +10,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.rest.webmvc.BasePathAwareController;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.server.ResponseStatusException;
 
 @BasePathAwareController
 @Slf4j
@@ -47,17 +50,23 @@ public class IndividualController {
 
     return ResponseEntity.ok(individualModels);
   }
-  
+
+  @GetMapping("/individuals/{id}")
+  @PreAuthorize("hasAuthority('SCOPE_individual:read')")
+  public ResponseEntity<IndividualModel> findById(
+      @PathVariable("id") final Long id) throws ResponseStatusException {
+
+    Individual entity = repository.findById(id).orElseThrow(() ->
+        new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+    return ResponseEntity.ok(assembler.toModel(entity));
+  }
+
 }
 
-// https://stackoverflow.com/questions/26889970/intellij-incorrectly-saying-no-beans-of-type-found-for-autowired-repository
 
 
-
-
-
-// https://github.com/spring-projects/spring-hateoas-examples Hmmm
-
+// https://github.com/spring-projects/spring-hateoas-examples
 
 // https://docs.spring.io/spring-data/data-commons/docs/current/reference/html/#core.web.pageables
 
