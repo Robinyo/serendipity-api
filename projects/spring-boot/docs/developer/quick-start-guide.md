@@ -60,5 +60,6 @@ docker-compose down -v
 
 ### Resources
 
+* [Spring HATEOAS - Representation models](https://docs.spring.io/spring-hateoas/docs/current/reference/html/#migrate-to-1.0.changes.representation-models)
 * [Spring HATEOAS Examples - Spring HATEOAS and Spring Data REST](https://github.com/spring-projects/spring-hateoas-examples/tree/master/spring-hateoas-and-spring-data-restceserver)
 * [Spring Security - OAuth 2.0 Resource Server Sample](https://github.com/spring-projects/spring-security/tree/master/samples/boot/oauth2resourceserver)
