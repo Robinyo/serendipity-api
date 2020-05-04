@@ -1,7 +1,6 @@
 package org.serendipity.restapi.model;
 
 import lombok.*;
-import org.serendipity.restapi.entity.Party;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.util.Date;
@@ -14,7 +13,7 @@ import java.util.Date;
 public class IndividualModel extends RepresentationModel<IndividualModel> {
 
   private Long id;
-  private Party party;
+  private PartyModel party;
   private String title;
   private String givenName;
   private String middleName;

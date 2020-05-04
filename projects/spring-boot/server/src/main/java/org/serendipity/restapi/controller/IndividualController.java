@@ -60,6 +60,8 @@ public class IndividualController {
     Individual entity = repository.findById(id).orElseThrow(() ->
         new ResponseStatusException(HttpStatus.NOT_FOUND));
 
+    IndividualModel model = assembler.toModel(entity);
+
     try {
 
       ObjectMapper mapper = new ObjectMapper();
@@ -70,14 +72,17 @@ public class IndividualController {
       mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
       log.info("IndividualController /individuals/{id}");
+      log.info("entity: ");
       log.info("{} {}", "/n", mapper.writeValueAsString(entity));
+      log.info("model: ");
+      log.info("{} {}", "/n", mapper.writeValueAsString(model));
 
     } catch (JsonProcessingException jpe) {
 
       log.error("IndividualController - JSON Processing Exception");
     }
 
-    return ResponseEntity.ok(assembler.toModel(entity));
+    return ResponseEntity.ok(model);
   }
 
 }
