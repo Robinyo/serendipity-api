@@ -61,6 +61,10 @@ docker container logs serendipity-api
 To launch the H2 console:
 
 ```
+# SPRING_DATASOURCE_URL=jdbc:h2:/h2/serendipity
+# SPRING_DATASOURCE_USERNAME=admin
+# SPRING_DATASOURCE_PASSWORD=secret
+
 http://localhost:3001/h2-console
 ```
 
