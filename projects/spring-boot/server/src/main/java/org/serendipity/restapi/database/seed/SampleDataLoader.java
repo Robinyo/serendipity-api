@@ -39,7 +39,7 @@ public class SampleDataLoader implements CommandLineRunner {
   static final int STATE = 8;
   static final int POLITICAL_PARTY = 9;
   static final int GENDER = 10;
-  static final int ELECTORATE_TELEPHONE = 16;
+  // static final int ELECTORATE_TELEPHONE = 16;
 
   @Autowired
   private AddressRepository addressRepository;
@@ -90,6 +90,7 @@ public class SampleDataLoader implements CommandLineRunner {
 
       while ((line = buffer.readLine()) != null && !line.isEmpty()) {
 
+        // Note: No support for strings with embedded comma's, for example: "Commonwealth Parliament Offices, Suite 8"
         String[] fields = line.split(",");
 
         String displayName = fields[SURNAME] + ", " + fields[TITLE] + " " + fields[FIRST_NAME];
@@ -112,7 +113,7 @@ public class SampleDataLoader implements CommandLineRunner {
             .initials(fields[INITIALS])
             .gender(fields[GENDER])
             .email(email)
-            .phoneNumber(fields[ELECTORATE_TELEPHONE])
+            .phoneNumber("")
             .photoUrl("")
             .build();
 
