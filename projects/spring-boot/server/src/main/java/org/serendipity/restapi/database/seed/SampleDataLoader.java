@@ -36,8 +36,8 @@ public class SampleDataLoader implements CommandLineRunner {
   static final int PREFERRED_NAME = 5;
   static final int INITIALS = 6;
   static final int POST_NOMINALS = 7;
-  static final int STATE = 8;
-  static final int POLITICAL_PARTY = 9;
+  // static final int STATE = 8;
+  // static final int POLITICAL_PARTY = 9;
   static final int GENDER = 10;
   // static final int ELECTORATE_TELEPHONE = 16;
 
@@ -132,8 +132,6 @@ public class SampleDataLoader implements CommandLineRunner {
   }
   
 }
-
-// https://github.com/spring-projects/spring-hateoas-examples/tree/master/spring-hateoas-and-spring-data-rest
 
 /*
 
