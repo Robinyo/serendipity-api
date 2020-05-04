@@ -11,8 +11,13 @@ import org.serendipity.restapi.type.LocationType;
 import org.serendipity.restapi.type.PartyType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,7 +25,22 @@ import java.util.Date;
 @Component
 @Slf4j
 public class SampleDataLoader implements CommandLineRunner {
-  
+
+  static final String PATH = "sample-data/allsenel.csv";
+
+  static final int TITLE = 0;
+  static final int SALUTATION = 1;
+  static final int SURNAME = 2;
+  static final int FIRST_NAME = 3;
+  static final int OTHER_NAME = 4;
+  static final int PREFERRED_NAME = 5;
+  static final int INITIALS = 6;
+  static final int POST_NOMINALS = 7;
+  static final int STATE = 8;
+  static final int POLITICAL_PARTY = 9;
+  static final int GENDER = 10;
+  static final int ELECTORATE_TELEPHONE = 16;
+
   @Autowired
   private AddressRepository addressRepository;
   
@@ -29,43 +49,21 @@ public class SampleDataLoader implements CommandLineRunner {
 
   @Override
   public void run(String... args) throws Exception {
-    
+
     log.info("Loading sample data ...");
-    
-    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-    
-    Party individualParty = Party.builder()
-        .type(PartyType.INDIVIDUAL)
-        .displayName("Rob Ferguson")
-        .build();
-    
-    Date dateOfBirth = new SimpleDateFormat("dd/MM/yyyy").parse("01/11/1982");
-    
-    Individual individual = Individual.builder().party(individualParty)
-        .title("Mr")
-        .givenName("Robert")
-        .middleName("James")
-        .familyName("Ferguson")
-        .honorific("")
-        .salutation("Rob")
-        .preferredName("Rob")
-        .initials("R.J.")
-        .dateOfBirth(dateOfBirth)
-        .placeOfBirth("Tamworth")
-        .gender("Male")
-        .email("rob.ferguson@robferguson.org")
-        .phoneNumber("(02) 6234 4321")
-        .photoUrl("")
-        .build();
-    
-    individualRepository.save(individual);
-    
+
+    //
+    // Parliament House Address
+    //
+
+    Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+
     Location location = Location.builder()
         .type(LocationType.ADDRESS)
         .displayName("PO Box 6100 Parliament House Canberra ACT 2600")
-        .fromDate(timestamp)
+        .fromDate(currentTime)
         .build();
-    
+
     Address parliamentHouse = Address.builder()
         .location(location)
         .name("The Senate")
@@ -77,14 +75,75 @@ public class SampleDataLoader implements CommandLineRunner {
         .country("Australia")
         .addressType("Mailing")
         .build();
-    
+
     addressRepository.save(parliamentHouse);
+
+    try {
+
+      InputStream resource = new ClassPathResource(PATH).getInputStream();
+
+      BufferedReader buffer = new BufferedReader(new InputStreamReader(resource));
+
+      String line = buffer.readLine();
+
+      log.info("Header: " + line);
+
+      while ((line = buffer.readLine()) != null && !line.isEmpty()) {
+
+        String[] fields = line.split(",");
+
+        String displayName = fields[SURNAME] + ", " + fields[TITLE] + " " + fields[FIRST_NAME];
+
+        Party individualParty = Party.builder()
+            .type(PartyType.INDIVIDUAL)
+            .displayName(displayName)
+            .build();
+
+        String email = fields[FIRST_NAME].toLowerCase() + "." + fields[SURNAME].toLowerCase() + "@aph.gov.au";
+
+        Individual individual = Individual.builder().party(individualParty)
+            .title(fields[TITLE])
+            .givenName(fields[FIRST_NAME])
+            .middleName(fields[OTHER_NAME])
+            .familyName(fields[SURNAME])
+            .honorific(fields[POST_NOMINALS])
+            .salutation(fields[SALUTATION])
+            .preferredName(fields[PREFERRED_NAME])
+            .initials(fields[INITIALS])
+            .gender(fields[GENDER])
+            .email(email)
+            .phoneNumber(fields[ELECTORATE_TELEPHONE])
+            .photoUrl("")
+            .build();
+
+        individualRepository.save(individual);
+
+      }
+
+      buffer.close();
+
+    } catch (IOException | NullPointerException e) {
+      log.error("Input stream could not be initialised");
+    }
+
+    log.info("Sample data loading complete");
 
   }
   
 }
 
 // https://github.com/spring-projects/spring-hateoas-examples/tree/master/spring-hateoas-and-spring-data-rest
+
+/*
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+Date dateOfBirth = new SimpleDateFormat("dd/MM/yyyy").parse("01/11/1982");
+.dateOfBirth(dateOfBirth)
+
+*/
+
 
 /*
 

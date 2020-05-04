@@ -21,14 +21,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
 
-    // Enable CORS, disable CSRF, every request must be authenticated
-
-    http.cors().and().csrf().disable().authorizeRequests().anyRequest().authenticated();
-
-    // OAuth2 Resource Server configuration
+    configureDevelopment(http);
+    // configureProduction(http);
 
     http.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
+  }
 
+  protected void configureDevelopment(HttpSecurity http) throws Exception {
+
+    http.cors().and()
+        .authorizeRequests()
+        .antMatchers("/h2-console/**").permitAll()
+        .anyRequest().authenticated();
+
+    http.csrf().ignoringAntMatchers("/h2-console/**");
+    http.headers().frameOptions().sameOrigin();
+  }
+
+  protected void configureProduction(HttpSecurity http) throws Exception {
+
+    // http.cors().and().csrf().disable().authorizeRequests().anyRequest().authenticated();
+    http.cors().and().authorizeRequests().anyRequest().authenticated();
   }
 
   @Bean
@@ -51,31 +64,3 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 // https://auth0.com/blog/implementing-jwt-authentication-on-spring-boot/
 
 // https://github.com/spring-projects/spring-security/blob/master/samples/boot/oauth2resourceserver/src/main/java/sample/OAuth2ResourceServerSecurityConfiguration.java
-
-/*
-
-@EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-  @Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}") String jwkSetUri;
-
-  @Override
-  protected void configure(HttpSecurity http) throws Exception {
-
-    // Every Request Must be Authenticated
-
-    http.authorizeRequests().anyRequest().authenticated();
-
-    // OAuth2 Resource Server configuration
-
-    http.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
-  }
-
-  @Bean
-  JwtDecoder jwtDecoder() {
-    return NimbusJwtDecoder.withJwkSetUri(this.jwkSetUri).build();
-  }
-
-}
-
-*/

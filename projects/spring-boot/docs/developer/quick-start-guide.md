@@ -52,6 +52,24 @@ docker inspect -f \
   serendipity-api
 ```
 
+To check the logs inside your container:
+
+```
+docker container logs serendipity-api
+```
+
+To launch the H2 console:
+
+```
+http://localhost:3001/h2-console
+```
+
+Sample output:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/h2-console.png">
+</p>
+
 You can stop the containers using the following command:
 
 ```
