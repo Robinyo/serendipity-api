@@ -11,6 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Setter
 @Getter
+@Table(indexes = { @Index(name = "FAMILY_NAME_INDEX", columnList = "familyName", unique = false) })
 public class Individual {
 
   @Id
@@ -27,6 +28,7 @@ public class Individual {
 
   private String middleName; // otherNames
 
+  @Column(name = "familyName", nullable = false)
   private String familyName;
 
   private String honorific;

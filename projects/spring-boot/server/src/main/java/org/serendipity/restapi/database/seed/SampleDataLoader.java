@@ -13,14 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Component
 @Slf4j
@@ -48,6 +49,7 @@ public class SampleDataLoader implements CommandLineRunner {
   private IndividualRepository individualRepository;
 
   @Override
+  @Transactional
   public void run(String... args) throws Exception {
 
     log.info("Loading sample data ...");
@@ -78,6 +80,9 @@ public class SampleDataLoader implements CommandLineRunner {
 
     addressRepository.save(parliamentHouse);
 
+    Set<Address> addresses = new HashSet<Address>();
+    addresses.add(parliamentHouse);
+
     try {
 
       InputStream resource = new ClassPathResource(PATH).getInputStream();
@@ -98,6 +103,7 @@ public class SampleDataLoader implements CommandLineRunner {
         Party individualParty = Party.builder()
             .type(PartyType.INDIVIDUAL)
             .displayName(displayName)
+            .addresses(addresses)
             .build();
 
         String email = fields[FIRST_NAME].toLowerCase() + "." + fields[SURNAME].toLowerCase() + "@aph.gov.au";

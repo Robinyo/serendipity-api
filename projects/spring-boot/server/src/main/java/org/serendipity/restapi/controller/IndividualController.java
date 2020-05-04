@@ -44,8 +44,8 @@ public class IndividualController {
 
     PagedModel<IndividualModel> individualModels = pagedResourcesAssembler.toModel(individuals, assembler);
 
-    // log.info("IndividualController /individuals individuals: " + individuals);
-    // log.info("IndividualController /individuals individualModels: " + individualModels);
+    log.info("IndividualController /individuals individuals: " + individuals);
+    log.info("IndividualController /individuals individualModels: " + individualModels);
 
     return ResponseEntity.ok(individualModels);
   }

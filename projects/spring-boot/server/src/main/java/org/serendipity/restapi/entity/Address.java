@@ -3,6 +3,8 @@ package org.serendipity.restapi.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Builder
@@ -35,7 +37,10 @@ public class Address {
   private String country;
   
   private String addressType;
-  
+
+  // @ManyToMany(mappedBy = "addresses")
+  // private Set<Party> partys = new HashSet<>();
+
   @Override
   public boolean equals(Object o) {
 

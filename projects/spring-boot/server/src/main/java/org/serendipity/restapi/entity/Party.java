@@ -10,6 +10,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Builder
@@ -33,6 +35,14 @@ public class Party {
 
   @Builder.Default
   private String displayName= "";
+
+  @ManyToMany
+  @JoinTable(
+    name = "PartyAddress",
+    joinColumns = @JoinColumn(name = "partyId"),
+    inverseJoinColumns = @JoinColumn(name = "locationId")
+  )
+  private Set<Address> addresses = new HashSet<Address>();
 
   //
   // @Embedded
