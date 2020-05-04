@@ -68,7 +68,7 @@ To launch the H2 console:
 http://localhost:3001/h2-console
 ```
 
-Sample output:
+For example:
 
 <p align="center">
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/h2-console.png">
