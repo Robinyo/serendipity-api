@@ -33,6 +33,6 @@ services:
       - "3001:3001"
     volumes:
       - ./h2:/h2
-    env_file: ./serendipity-api.env
+    env_file: ./serendipity-api-prod.env
     depends_on:
       - keycloak

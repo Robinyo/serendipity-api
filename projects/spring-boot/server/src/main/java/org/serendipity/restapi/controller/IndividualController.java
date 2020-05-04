@@ -1,5 +1,9 @@
 package org.serendipity.restapi.controller;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.extern.slf4j.Slf4j;
 import org.serendipity.restapi.assembler.IndividualModelAssembler;
 import org.serendipity.restapi.entity.Individual;
@@ -13,6 +17,7 @@ import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
@@ -41,29 +46,50 @@ public class IndividualController {
   public ResponseEntity<PagedModel<IndividualModel>> findAll(Pageable pageable) {
 
     Page<Individual> individuals = repository.findAll(pageable);
-
     PagedModel<IndividualModel> individualModels = pagedResourcesAssembler.toModel(individuals, assembler);
-
-    log.info("IndividualController /individuals individuals: " + individuals);
-    log.info("IndividualController /individuals individualModels: " + individualModels);
 
     return ResponseEntity.ok(individualModels);
   }
 
   @GetMapping("/individuals/{id}")
   @PreAuthorize("hasAuthority('SCOPE_individual:read')")
+  @Transactional
   public ResponseEntity<IndividualModel> findById(
       @PathVariable("id") final Long id) throws ResponseStatusException {
 
     Individual entity = repository.findById(id).orElseThrow(() ->
         new ResponseStatusException(HttpStatus.NOT_FOUND));
 
+    try {
+
+      ObjectMapper mapper = new ObjectMapper();
+
+      mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+      mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+
+      mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+      log.info("IndividualController /individuals/{id}");
+      log.info("{} {}", "/n", mapper.writeValueAsString(entity));
+
+    } catch (JsonProcessingException jpe) {
+
+      log.error("IndividualController - JSON Processing Exception");
+    }
+
     return ResponseEntity.ok(assembler.toModel(entity));
   }
 
 }
 
+// ObjectMapper requires @Transactional else JsonProcessingException :(
 
+/*
+
+    // log.info("IndividualController /individuals individuals: {}", individuals);
+    // log.info("IndividualController /individuals individualModels: {}", individualModels);
+
+*/
 
 
 
