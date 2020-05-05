@@ -45,6 +45,8 @@ public class IndividualController {
   @PreAuthorize("hasAuthority('SCOPE_individual:read')")
   public ResponseEntity<PagedModel<IndividualModel>> findAll(Pageable pageable) {
 
+    log.info("IndividualController /individuals");
+
     Page<Individual> individuals = repository.findAll(pageable);
     PagedModel<IndividualModel> individualModels = pagedResourcesAssembler.toModel(individuals, assembler);
 
@@ -56,6 +58,8 @@ public class IndividualController {
   @Transactional
   public ResponseEntity<IndividualModel> findById(
       @PathVariable("id") final Long id) throws ResponseStatusException {
+
+    log.info("IndividualController /individuals/{id}");
 
     Individual entity = repository.findById(id).orElseThrow(() ->
         new ResponseStatusException(HttpStatus.NOT_FOUND));
@@ -71,11 +75,10 @@ public class IndividualController {
 
       mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-      log.info("IndividualController /individuals/{id}");
       log.info("entity: ");
-      log.info("{} {}", "/n", mapper.writeValueAsString(entity));
+      log.info("{}", "\n" + mapper.writeValueAsString(entity));
       log.info("model: ");
-      log.info("{} {}", "/n", mapper.writeValueAsString(model));
+      log.info("{}", "\n" + mapper.writeValueAsString(model));
 
     } catch (JsonProcessingException jpe) {
 
