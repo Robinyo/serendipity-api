@@ -36,13 +36,14 @@ public class Party {
   @Builder.Default
   private String displayName= "";
 
-  @ManyToMany
+  @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(
     name = "PartyAddress",
     joinColumns = @JoinColumn(name = "partyId"),
     inverseJoinColumns = @JoinColumn(name = "locationId")
   )
-  private Set<Address> addresses = new HashSet<Address>();
+  // private Set<Address> addresses = new HashSet<Address>();
+  private Set<Address> addresses;
 
   //
   // @Embedded

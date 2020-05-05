@@ -1,0 +1,26 @@
+2020-05-04 22:19:21.388  INFO 1 --- [           main] o.s.r.database.seed.SampleDataLoader     : Sample data loading complete
+2020-05-04 22:21:19.567  INFO 1 --- [nio-3001-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-05-04 22:21:19.568  INFO 1 --- [nio-3001-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-05-04 22:21:19.599  INFO 1 --- [nio-3001-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 31 ms
+2020-05-04 22:21:20.401 ERROR 1 --- [nio-3001-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: org.serendipity.restapi.entity.Party.addresses, could not initialize proxy - no Session] with root cause
+
+org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: org.serendipity.restapi.entity.Party.addresses, could not initialize proxy - no Session
+	at org.hibernate.collection.internal.AbstractPersistentCollection.throwLazyInitializationException(AbstractPersistentCollection.java:606) ~[hibernate-core-5.4.12.Final.jar!/:5.4.12.Final]
+	at org.hibernate.collection.internal.AbstractPersistentCollection.withTemporarySessionIfNeeded(AbstractPersistentCollection.java:218) ~[hibernate-core-5.4.12.Final.jar!/:5.4.12.Final]
+	at org.hibernate.collection.internal.AbstractPersistentCollection.readSize(AbstractPersistentCollection.java:162) ~[hibernate-core-5.4.12.Final.jar!/:5.4.12.Final]
+	at org.hibernate.collection.internal.PersistentSet.isEmpty(PersistentSet.java:174) ~[hibernate-core-5.4.12.Final.jar!/:5.4.12.Final]
+	at org.serendipity.restapi.assembler.IndividualModelAssembler.toAddressModel(IndividualModelAssembler.java:63) ~[classes!/:0.0.1-SNAPSHOT]
+	at org.serendipity.restapi.assembler.IndividualModelAssembler.toPartyModel(IndividualModelAssembler.java:57) ~[classes!/:0.0.1-SNAPSHOT]
+	at org.serendipity.restapi.assembler.IndividualModelAssembler.toModel(IndividualModelAssembler.java:31) ~[classes!/:0.0.1-SNAPSHOT]
+	at org.serendipity.restapi.assembler.IndividualModelAssembler.toModel(IndividualModelAssembler.java:17) ~[classes!/:0.0.1-SNAPSHOT]
+	at org.springframework.data.web.PagedResourcesAssembler.createModel(PagedResourcesAssembler.java:211) ~[spring-data-commons-2.2.6.RELEASE.jar!/:2.2.6.RELEASE]
+	at org.springframework.data.web.PagedResourcesAssembler.toModel(PagedResourcesAssembler.java:123) ~[spring-data-commons-2.2.6.RELEASE.jar!/:2.2.6.RELEASE]
+	at org.serendipity.restapi.controller.IndividualController.findAll(IndividualController.java:49) ~[classes!/:0.0.1-SNAPSHOT]
+	at org.serendipity.restapi.controller.IndividualController$$FastClassBySpringCGLIB$$5d7d6b3.invoke(<generated>) ~[classes!/:0.0.1-SNAPSHOT]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) ~[spring-core-5.2.5.RELEASE.jar!/:5.2.5.RELEASE]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:687) ~[spring-aop-5.2.5.RELEASE.jar!/:5.2.5.RELEASE]
+	at org.serendipity.restapi.controller.IndividualController$$EnhancerBySpringCGLIB$$e830e4c0.findAll(<generated>) ~[classes!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source) ~[na:na]
