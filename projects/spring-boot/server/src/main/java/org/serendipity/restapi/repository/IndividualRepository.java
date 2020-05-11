@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
-// @Repository
 public interface IndividualRepository extends PagingAndSortingRepository<Individual, Long> {
 
     Page<Individual> findAll(Pageable pageable);

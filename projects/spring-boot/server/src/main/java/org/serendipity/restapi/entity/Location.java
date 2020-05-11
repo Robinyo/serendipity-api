@@ -37,8 +37,7 @@ public class Location {
   
   @Temporal(TemporalType.TIMESTAMP)
   private Date toDate;
- 
-  
+
   //
   // @Embedded
   // private Auditable audit;
@@ -69,7 +68,6 @@ public class Location {
 
     Location other = (Location) o;
 
-    // return id != 0L && id == other.getId();
     return id != 0L && id.equals(other.getId());
   }
 
@@ -79,13 +77,3 @@ public class Location {
   }
 
 }
-
-/*
-
-  // @Builder.Default
-  // private String type = "Location";
-
-  @Embedded
-  private SurrogateKey surrogateKey;
-
-*/

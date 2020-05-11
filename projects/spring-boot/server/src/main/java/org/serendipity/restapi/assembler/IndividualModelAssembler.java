@@ -80,5 +80,4 @@ public class IndividualModelAssembler extends RepresentationModelAssemblerSuppor
         .collect(Collectors.toSet());
   }
 
-
 }

@@ -3,8 +3,6 @@ package org.serendipity.restapi.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Builder
@@ -12,31 +10,22 @@ import java.util.Set;
 @NoArgsConstructor
 @Setter
 @Getter
-public class Address {
-  
+@Table(indexes = { @Index(name = "NAME_INDEX", columnList = "name", unique = false) })
+public class Organisation {
+
   @Id
   private Long id;
-  
+
   @OneToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "locationId")
+  @JoinColumn(name = "partyId")
   @MapsId
-  private Location location;
-  
+  private Party party;
+
   private String name;
-  
-  private String line1;
-  
-  private String line2;
-  
-  private String city;
-  
-  private String state;
-  
-  private String postalCode;
-  
-  private String country;
-  
-  private String addressType;
+
+  private String email;
+
+  private String phoneNumber;
 
   @Override
   public boolean equals(Object o) {
@@ -44,18 +33,17 @@ public class Address {
     if (this == o)
       return true;
 
-    if (!(o instanceof Address))
+    if (!(o instanceof Organisation))
       return false;
 
-    Address other = (Address) o;
+    Organisation other = (Organisation) o;
 
-    // return id != 0L && id == other.getId();
     return id != 0L && id.equals(other.getId());
   }
 
   @Override
   public int hashCode() {
     return 31;
-  }  
+  }
 
 }

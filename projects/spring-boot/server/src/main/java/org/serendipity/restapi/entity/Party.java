@@ -10,7 +10,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,8 +21,6 @@ import java.util.Set;
 @EntityListeners(AuditingEntityListener.class)
 public class Party {
 
-  // @GeneratedValue(strategy = GenerationType.AUTO)
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
@@ -34,7 +31,7 @@ public class Party {
   private PartyType type = PartyType.PARTY;
 
   @Builder.Default
-  private String displayName= "";
+  private String displayName = "";
 
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(
@@ -42,8 +39,15 @@ public class Party {
     joinColumns = @JoinColumn(name = "partyId"),
     inverseJoinColumns = @JoinColumn(name = "locationId")
   )
-  // private Set<Address> addresses = new HashSet<Address>();
   private Set<Address> addresses;
+
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(
+      name = "PartyRole",
+      joinColumns = @JoinColumn(name = "partyId"),
+      inverseJoinColumns = @JoinColumn(name = "roleId")
+  )
+  private Set<Role> roles;
 
   //
   // @Embedded
