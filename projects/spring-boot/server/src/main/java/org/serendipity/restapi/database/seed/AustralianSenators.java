@@ -62,33 +62,39 @@ public class AustralianSenators implements CommandLineRunner {
 
     log.info("Loading Australian Senators ...");
 
-    //
-    // Parliament House Address
-    //
-
-    Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-
-    Location location = Location.builder()
-        .type(LocationType.ADDRESS)
-        .displayName("PO Box 6100 Parliament House Canberra ACT 2600")
-        .fromDate(currentTime)
-        .build();
-
-    Address parliamentHouse = Address.builder()
-        .location(location)
-        .name("The Senate")
-        .line1("PO Box 6100")
-        .line2("Parliament House")
-        .city("Canberra")
-        .state("ACT")
-        .postalCode("2600")
-        .country("Australia")
-        .addressType("Mailing")
-        .build();
-
-    addressRepository.save(parliamentHouse);
-
     try {
+
+      //
+      // Parliament House Address
+      //
+
+      Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+
+      Location location = Location.builder()
+          .type(LocationType.ADDRESS)
+          .displayName("PO Box 6100 Parliament House Canberra ACT 2600")
+          .fromDate(currentTime)
+          .build();
+
+      Address parliamentHouse = Address.builder()
+          .location(location)
+          .name("The Senate")
+          .line1("PO Box 6100")
+          .line2("Parliament House")
+          .city("Canberra")
+          .state("ACT")
+          .postalCode("2600")
+          .country("Australia")
+          .addressType("Mailing")
+          .build();
+
+      addressRepository.save(parliamentHouse);
+
+      
+
+
+
+
 
       InputStream resource = new ClassPathResource(PATH).getInputStream();
 
@@ -218,11 +224,12 @@ public class AustralianSenators implements CommandLineRunner {
 
       buffer.close();
 
-    } catch (IOException | NullPointerException e) {
-      log.error("Input stream could not be initialised");
-    }
+      log.info("Loading Australian Senators complete");
 
-    log.info("Loading Australian Senators complete");
+    } catch (IOException | NullPointerException e) {
+
+      log.error("{}", e.getLocalizedMessage());
+    }
 
   }
   
