@@ -9,6 +9,7 @@ import org.serendipity.restapi.entity.*;
 import org.serendipity.restapi.repository.AddressRepository;
 import org.serendipity.restapi.repository.IndividualRepository;
 import org.serendipity.restapi.repository.OrganisationRepository;
+import org.serendipity.restapi.repository.RoleRepository;
 import org.serendipity.restapi.type.LocationType;
 import org.serendipity.restapi.type.PartyType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,9 @@ public class AustralianSenators implements CommandLineRunner {
   @Autowired
   private OrganisationRepository organisationRepository;
 
+  @Autowired
+  private RoleRepository roleRepository;
+
   @Override
   @Transactional
   public void run(String... args) throws Exception {
@@ -90,12 +94,6 @@ public class AustralianSenators implements CommandLineRunner {
 
       addressRepository.save(parliamentHouse);
 
-      
-
-
-
-
-
       InputStream resource = new ClassPathResource(PATH).getInputStream();
 
       BufferedReader buffer = new BufferedReader(new InputStreamReader(resource));
@@ -118,8 +116,6 @@ public class AustralianSenators implements CommandLineRunner {
             .roles(new HashSet<Role>())
             .build();
 
-        // individualParty.getAddresses().add(parliamentHouse);
-
         String email = fields[FIRST_NAME].toLowerCase() + "." + fields[SURNAME].toLowerCase() + "@aph.gov.au";
 
         Individual individual = Individual.builder()
@@ -137,6 +133,8 @@ public class AustralianSenators implements CommandLineRunner {
             .phoneNumber("")
             .photoUrl("")
             .build();
+
+        individualRepository.save(individual);
 
         Role role = Role.builder()
             .role("Member")
@@ -214,8 +212,11 @@ public class AustralianSenators implements CommandLineRunner {
             break;
         }
 
+        individualParty.getAddresses().add(parliamentHouse);
+
         if (membership) {
-          individual.getParty().getRoles().add(role);
+          roleRepository.save(role);
+          individualParty.getRoles().add(role);
         }
 
         individualRepository.save(individual);
