@@ -82,7 +82,7 @@ public class NationalPartyOfAustralia implements CommandLineRunner {
           .givenName("Larry")
           .familyName("Anthony")
           .gender("Male")
-          .email("larry.anthony@nationals.org.au'")
+          .email("larry.anthony@nationals.org.au")
           .phoneNumber("(02) 6273 3822")
           .build();
 

@@ -186,7 +186,6 @@ public class AustralianSenators implements CommandLineRunner {
 
               mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-              log.info("organisation: ");
               log.info("{}", "\n" + mapper.writeValueAsString(organisation));
 
             } catch (JsonProcessingException jpe) {

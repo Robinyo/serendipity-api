@@ -17,5 +17,6 @@ public class PartyModel extends RepresentationModel<PartyModel> {
   private PartyType type;
   private String displayName;
   private Set<AddressModel> addresses;
+  private Set<RoleModel> roles;
 
 }

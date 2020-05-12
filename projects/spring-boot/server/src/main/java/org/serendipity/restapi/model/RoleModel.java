@@ -1,6 +1,7 @@
 package org.serendipity.restapi.model;
 
 import lombok.*;
+import org.serendipity.restapi.type.PartyType;
 import org.springframework.hateoas.RepresentationModel;
 
 @Builder
@@ -12,15 +13,15 @@ public class RoleModel extends RepresentationModel<RoleModel> {
 
   private Long id;
   private String role;
-  private String partyId;
-  private String partyType;
+  private Long partyId;
+  private PartyType partyType;
   private String partyName;
   private String partyEmail;
   private String partyPhoneNumber;
   private String relationship;
   private String reciprocalRole;
-  private String reciprocalPartyId;
-  private String reciprocalPartyType;
+  private Long reciprocalPartyId;
+  private PartyType reciprocalPartyType;
   private String reciprocalPartyName;
   private String reciprocalPartyEmail;
   private String reciprocalPartyPhoneNumber;
