@@ -74,6 +74,12 @@ For example:
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/h2-console.png">
 </p>
 
+To view the OpenAPI specification in ReDoc:
+
+```
+http://localhost:3001/docs/index.html
+```
+
 You can stop the containers using the following command:
 
 ```
