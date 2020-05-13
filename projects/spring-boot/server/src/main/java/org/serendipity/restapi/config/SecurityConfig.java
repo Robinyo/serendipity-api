@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
-
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -16,7 +15,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-  @Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}") String jwkSetUri;
+  @Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}")
+  String jwkSetUri;
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
@@ -30,9 +30,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configureDevelopment(HttpSecurity http) throws Exception {
 
     http.cors().and()
-        .authorizeRequests()
-        .antMatchers("/h2-console/**").permitAll()
-        .anyRequest().authenticated();
+      .authorizeRequests()
+      .antMatchers("/h2-console/**").permitAll()
+      .antMatchers("/docs/**").permitAll()
+      .anyRequest().authenticated();
 
     http.csrf().ignoringAntMatchers("/h2-console/**");
     http.headers().frameOptions().sameOrigin();

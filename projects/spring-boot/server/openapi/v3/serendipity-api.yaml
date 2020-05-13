@@ -1,0 +1,540 @@
+openapi: '3.0.0'
+info:
+  title: Serendipity CRM REST API
+  version: 1.0.0
+  license:
+    name: 'Creative Commons Attribution 3.0 Australia (CC BY 3.0 AU)'
+    url: 'https://creativecommons.org/licenses/by/3.0/au/'
+  description: |
+    # Introduction
+    Serendipity's API is built on HTTP. The API is RESTful and it has predictable resource URIs.
+
+    The API is composed of four distinct resource archetypes: document, collection, store, and controller.
+
+    For more information, see: [RESTful API Design Guidelines](https://github.com/Robinyo/restful-api-design-guidelines)
+
+    # Overview
+    The following sections describe the resources that comprise Serendipity's REST API.
+
+    ## Current Version
+    By default, all requests to http://localhost:3001/api receive the `v1` version of the REST API. We encourage you to explicitly request this version via the `Accept` header.
+
+    ## Schema
+    All API access is over HTTP and accessed from http://localhost:3001/api. All data is sent and received as JSON. Blank fields are included.
+
+      All dates use the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format:
+
+        YYYY-MM-DD
+
+      For example: `2017-07-01` (the 1st of July 2017)
+
+      All timestamps use the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format:
+
+        YYYY-MM-DDTHH:MM:SSZ
+
+      For example: `2017-07-01T11:05:06+10:00`
+
+    ## Timezones
+    Some requests allow for specifying timestamps or generate timestamps with time zone information. We apply the following rules, in order of priority, to determine timezone information for API calls.
+
+    ### Explicitly provide an ISO 8601 timestamp with timezone information
+    For API calls that allow for a timestamp to be specified, we use that exact timestamp.
+
+      For example: `2017-07-01T11:05:06+10:00`
+
+    ## Pagination
+    Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
+      For example:
+
+        Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+              <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+    `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+
+    ## Parameters
+    Many API methods take optional parameters:
+
+        GET /individuals/1234/addresses/?addressType='Mailing'
+
+    In this example, the '1234' value is provided for the `:partyId` parameter in the path while `:addressType` is passed in the query string.
+    For POST, PATCH and DELETE requests, parameters not included in the URL should be encoded as JSON with a Content-Type of 'application/json'.
+
+    ## Metadata
+    The API provides **metadata services** that you can use to discover information about the classifcation schemes and values used by the application.
+
+      For example:
+
+        GET /classifications/roles
+
+      Sample response:
+
+        [
+          {
+            "id": 1,
+            "role": "Director",
+            "roleDescription": "An individual responsible for managing a ...",
+            "relationship": "Directorship",
+            "reciprocalRole": "Company",
+            "reciprocalRoleDescription": "An incorporated legal entity."
+          },
+          {
+            ...
+          }
+        ]
+    ## Root Endpoint
+    You can issue a GET request to the root endpoint (also known as the service root) to get all the endpoint categories that the REST API supports:
+
+        curl https://localhost:3001/api
+    ## Authentication
+    <!-- ReDoc-Inject: <security-definitions> -->
+  x-logo:
+    url: 'http://localhost:3001/public/images/icons/serendipity-logo.svg'
+servers:
+  - url: https://localhost:3001/api
+
+components:
+
+  securitySchemes:
+
+    Bearer:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        You can create an account by posting a Username and Password (and a Given Name and Family Name) to:
+
+            POST /register
+
+        You can sign in by posting a Username and Password to:
+
+            POST /login
+
+        To access an endpoint a user must have requested and been granted the appropriate scope.
+
+        | Scope             | Description                       |
+        | ----------------- | --------------------------------- |
+        | individual:post   | Required to create an Individual. |
+        | individual:get    | Required to view an Individual.   |
+        | individual:patch  | Required to update an Individual. |
+        | individual:delete | Required to delete an Individual. |
+
+        For example, to access:
+
+            GET /individuals
+
+        The user must have been granted the `individual:get` scope:
+
+            security:
+              - Bearer: [ individual:get ]
+
+  schemas:
+
+    resourceId:
+      type: number
+      example: 101
+    locationId:
+      allOf:
+        - $ref: '#/components/schemas/resourceId'
+        - type: number
+        - description: The resource's unique identifier.
+        - example: 101
+    partyId:
+      allOf:
+        - $ref: '#/components/schemas/resourceId'
+        - type: number
+        - description: The resource's unique identifier.
+        - example: 101
+
+    party:
+      description: The Party resource.
+      type: object
+      required:
+        - type
+      properties:
+        id:
+          description: The Party's unique identifier.
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/partyId'
+        type:
+          description: The Party type.
+          type: string
+          default: Individual
+          enum:
+            - Individual
+            - Organisation
+        name:
+          description: The Party's display name.
+          type: string
+          example: 'Ferguson, Rob'
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/address'
+
+    location:
+      description: The Location resource.
+      type: object
+      properties:
+        id:
+          description: The Location's unique identifier.
+          readOnly: true
+          allOf:
+            - $ref: '#/components/schemas/locationId'
+        type:
+          description: The Location's type.
+          default: Address
+          enum:
+            - Address
+            - Electronic Adress
+        fromDate:
+          description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+          type: string
+          example: '1979-01-13T09:05:06+10:00'
+        toDate:
+          description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
+          type: string
+          example: ''
+
+    address:
+      description: The Address resource.
+      type: object
+      properties:
+        location:
+          type: object
+          $ref: '#/components/schemas/location'
+        name:
+          description: The address name.
+          type: string
+          example: Kembery Building
+        line1:
+          description: The address line 1.
+          type: string
+          example: Level 7
+        line2:
+          description: The address line 2.
+          type: string
+          example: 21 Genge Street
+        city:
+          description: The city.
+          type: string
+          example: Canberra
+        state:
+          description: The state.
+          type: string
+          example: ACT
+        postalCode:
+          description: The postal code.
+          type: string
+          example: '2601'
+        country:
+          description: The country.
+          type: string
+          example: Australia
+        addressType:
+          description: The Address type.
+          default: Mailing
+          enum:
+            - Mailing
+            - Principal Place of Business
+            - Principal Place of Residence
+
+    individual:
+      description: The Individual resource.
+      type: object
+      properties:
+        party:
+          type: object
+          $ref: '#/components/schemas/party'
+        givenName:
+          description: The individual's given name.
+          type: string
+          example: Robert
+        middleName:
+          description: The individual's middle name.
+          type: string
+          example: James
+        familyName:
+          description: The individual's family name.
+          type: string
+          example: Ferguson
+        dateOfBirth:
+          description: 'The individual''s date of birth, for example, `1979-01-13` (in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).'
+          type: string
+          example: '1979-01-13'
+        placeOfBirth:
+          description: 'The individual''s place of birth, for example, `Tamworth`.'
+          type: string
+          example: Tamworth
+        gender:
+          description: The individual's gender.
+          type: string
+          default: Male
+          enum:
+            - Female
+            - Male
+            - Not Applicable
+            - Not Known
+
+    error-details:
+      type: object
+      properties:
+        code:
+          description: The error code.
+          type: string
+          example: NullValue
+        target:
+          description: The error target.
+          type: string
+          example: familyName
+        message:
+          description: The error message.
+          type: string
+          example: Family name must not be null
+    failed-precondition:
+      type: object
+      properties:
+        code:
+          description: The error code.
+          type: string
+          example: '400'
+        message:
+          description: The error message.
+          type: string
+          example: Request can not be executed in the current system state
+        status:
+          description: The error status.
+          type: string
+          example: FAILED_PRECONDITION
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/error-details'
+    invalid-argument:
+      type: object
+      properties:
+        code:
+          description: The error code.
+          type: string
+          example: '400'
+        message:
+          description: The error message.
+          type: string
+          example: The client specified an invalid argument
+        status:
+          description: The error status.
+          type: string
+          example: INVALID_ARGUMENT
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/error-details'
+    not-found:
+      type: object
+      properties:
+        code:
+          description: The error code.
+          type: string
+          example: '404'
+        message:
+          description: The error message.
+          type: string
+          example: The specified resource was not found
+        status:
+          description: The error status.
+          type: string
+          example: NOT_FOUND
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/error-details'
+    permission-denied:
+      type: object
+      properties:
+        code:
+          description: The error code.
+          type: string
+          example: '403'
+        message:
+          description: The error message.
+          type: string
+          example: The client does not have sufficient permission
+        status:
+          description: The error status.
+          type: string
+          example: PERMISSION_DENIED
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/error-details'
+    unauthorized:
+      type: object
+      properties:
+        code:
+          description: The error code.
+          type: string
+          example: '401'
+        message:
+          description: The error message.
+          type: string
+          example: 'Request not authorized due to missing, invalid, or expired token'
+        status:
+          description: The error status.
+          type: string
+          example: UNAUTHORIZED
+        details:
+          $ref: '#/components/schemas/error-details'
+
+  responses:
+    InvalidArgument:
+      description: The client specified an invalid argument
+      schema:
+        $ref: '#/components/schemas/invalid-argument'
+    NotFound:
+      description: The specified resource was not found
+      schema:
+        $ref: '#/components/schemas/not-found'
+    Unauthorized:
+      description: 'Request not authorised due to missing, invalid, or expired token'
+      schema:
+        $ref: '#/components/schemas/unauthorized'
+
+paths:
+
+  /individuals:
+    get:
+      tags:
+        - Individuals
+      summary: Retrieve a list of Individuals
+      description: |
+        Retrieve a list of Individuals
+      responses:
+        '200':
+          description: A list of Individuals was retrieved successfully
+          headers:
+            Link:
+              description: |
+                Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+                For example:
+
+                    Link: <https://localhost:3001/api/individuals?page=2>; rel="next",
+                          <https://localhost:3001/api/individuals?page=34>; rel="last"
+
+                `rel="next"` states that the next page is `page=2`.
+                 This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides
+                 some more information, stating that the last page of results is on `page 34`.
+                 Accordingly, we have 33 more pages of information that we can consume.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/individual'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        security:
+          - Bearer: [ individual:get ]
+    post:
+      tags:
+        - Individuals
+      summary: Create an Individual
+      description: |
+        Create a new Individual.
+      requestBody:
+        description: The Individual to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/individual'
+      responses:
+        '201':
+          description: Individual was created
+          headers:
+            Location:
+              description: |
+                A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
+              type: string
+          schema:
+            $ref: '#/components/schemas/individual'
+        '400':
+          $ref: '#/components/responses/InvalidArgument'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        security:
+          - Bearer: [ individual:post ]
+
+  /individuals/{partyId}:
+    parameters:
+      - in: path
+        name: partyId
+        required: true
+        schema:
+          $ref: '#/components/schemas/partyId'
+    get:
+      tags:
+        - Individuals
+      summary: Retrieve an Individual
+      description: |
+        Retrieve an Individual with the specified identifier
+      responses:
+        '200':
+          description: A list of individuals was retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/individual'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        security:
+          - Bearer: [ individual:get ]
+    patch:
+      tags:
+        - Individuals
+      summary: Update an Individual
+      description: |
+        Update an existing Individual.
+      requestBody:
+        description: The Individual to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/individual'
+      responses:
+        '200':
+          description: The Individual was update
+          schema:
+            $ref: '#/components/schemas/individual'
+        '400':
+          $ref: '#/components/responses/InvalidArgument'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        security:
+          - Bearer: [ individual:patch ]
+    delete:
+      tags:
+        - Individuals
+      summary: Delete an Individual
+      description: |
+        Delete an existing Individual.
+      responses:
+        '204':
+          description: Individual was deleted
+        '400':
+          $ref: '#/components/responses/InvalidArgument'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        security:
+          - Bearer: [ individual:delete ]
