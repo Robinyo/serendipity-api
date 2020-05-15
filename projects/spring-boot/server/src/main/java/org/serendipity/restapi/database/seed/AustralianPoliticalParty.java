@@ -57,10 +57,10 @@ public enum AustralianPoliticalParty {
     this.abbreviation = abbreviation;
   }
 
-  public static AustralianPoliticalParty valueOfAbbreviation(String label) {
+  public static AustralianPoliticalParty valueOfAbbreviation(String abbreviation) {
 
     for (AustralianPoliticalParty e : values()) {
-      if (e.abbreviation.equals(label)) {
+      if (e.abbreviation.equals(abbreviation)) {
         return e;
       }
     }
