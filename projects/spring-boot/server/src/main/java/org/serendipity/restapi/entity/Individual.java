@@ -14,6 +14,8 @@ import java.util.Date;
 @Table(indexes = { @Index(name = "FAMILY_NAME_INDEX", columnList = "familyName", unique = false) })
 public class Individual {
 
+  // An Individual is a person.
+
   @Id
   private Long id;
 
