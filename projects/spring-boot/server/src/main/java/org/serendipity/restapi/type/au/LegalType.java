@@ -30,22 +30,34 @@ public enum LegalType {
 
   // Unincorporated Private Sector Entities
 
-  SOLE_TRADER(21) { // Sole Proprietorship
+  SOLE_PROPRIETORSHIP(21) { // Sole Trader
     @Override
     public String toString() {
-      return "Sole Trader";
+      return "Sole Proprietorship";
     }
   },
-  PARTNERSHIP(23) { // Sole Proprietorship
+  FAMILY_PARTNERSHIP(22) {
     @Override
     public String toString() {
-      return "Partnership";
+      return "Family Partnership";
     }
   },
-  TRUST(25) { // Sole Proprietorship
+  OTHER_PARTNERSHIP(23) {
     @Override
     public String toString() {
-      return "Trust";
+      return "Other Partnership";
+    }
+  },
+  TRUST_REGARDED_AS_A_CORPORATION(24) {
+    @Override
+    public String toString() {
+      return "Trust regarded as a Corporation";
+    }
+  },
+  OTHER_TRUST(25) {
+    @Override
+    public String toString() {
+      return "Other Trust";
     }
   },
   OTHER_UNINCORPORATED_ENTITY(26) {
@@ -93,6 +105,5 @@ Cooperative
 Estate
 Joint Venture
 Not For Profit
-Trust
 
 */

@@ -94,6 +94,7 @@ public class LiberalPartyOfAustralia implements CommandLineRunner {
 
       Party organisationParty = Party.builder()
         .type(PartyType.ORGANISATION)
+        .legalType(LegalType.OTHER_INCORPORATED_ENTITY.toString())
         .displayName(AustralianPoliticalParty.LIBERAL_PARTY_OF_AUSTRALIA.toString())
         .addresses(new HashSet<Address>())
         .roles(new HashSet<Role>())
@@ -104,7 +105,6 @@ public class LiberalPartyOfAustralia implements CommandLineRunner {
         .name(AustralianPoliticalParty.LIBERAL_PARTY_OF_AUSTRALIA.toString())
         .email("libadm@liberal.org.au")
         .phoneNumber("(02) 6273 2564")
-        .legalType(LegalType.OTHER_INCORPORATED_ENTITY.toString())
         .build();
 
       organisationRepository.save(organisation);

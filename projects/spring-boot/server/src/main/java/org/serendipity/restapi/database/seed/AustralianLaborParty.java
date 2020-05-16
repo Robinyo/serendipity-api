@@ -95,6 +95,7 @@ public class AustralianLaborParty implements CommandLineRunner {
 
       Party organisationParty = Party.builder()
         .type(PartyType.ORGANISATION)
+        .legalType(LegalType.OTHER_INCORPORATED_ENTITY.toString())
         .displayName(AustralianPoliticalParty.AUSTRALIAN_LABOR_PARTY.toString())
         .addresses(new HashSet<Address>())
         .roles(new HashSet<Role>())
@@ -105,7 +106,6 @@ public class AustralianLaborParty implements CommandLineRunner {
         .name(AustralianPoliticalParty.AUSTRALIAN_LABOR_PARTY.toString())
         .email("hey@alp.org.au")
         .phoneNumber("(02) 6120 0800")
-        .legalType(LegalType.OTHER_INCORPORATED_ENTITY.toString())
         .build();
 
       organisationRepository.save(organisation);

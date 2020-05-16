@@ -94,6 +94,7 @@ public class JacquiLambieNetwork implements CommandLineRunner {
 
       Party organisationParty = Party.builder()
         .type(PartyType.ORGANISATION)
+        .legalType(LegalType.OTHER_INCORPORATED_ENTITY.toString())
         .displayName(AustralianPoliticalParty.JACQUI_LAMBIE_NETWORK.toString())
         .addresses(new HashSet<Address>())
         .roles(new HashSet<Role>())
@@ -104,7 +105,6 @@ public class JacquiLambieNetwork implements CommandLineRunner {
         .name(AustralianPoliticalParty.JACQUI_LAMBIE_NETWORK.toString())
         .email("hey@lambienetwork.com.au")
         .phoneNumber("(03) 6431 3112")
-        .legalType(LegalType.OTHER_INCORPORATED_ENTITY.toString())
         .build();
 
       organisationRepository.save(organisation);

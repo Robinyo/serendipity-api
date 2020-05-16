@@ -31,8 +31,6 @@ public class Organisation {
 
   private String phoneNumber;
 
-  private String legalType;
-
   @Override
   public boolean equals(Object o) {
 

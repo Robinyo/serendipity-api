@@ -94,6 +94,7 @@ public class PaulineHansonsOneNation implements CommandLineRunner {
 
       Party organisationParty = Party.builder()
         .type(PartyType.ORGANISATION)
+        .legalType(LegalType.OTHER_INCORPORATED_ENTITY.toString())
         .displayName(AustralianPoliticalParty.PAULINE_HANSONS_ONE_NATION.toString())
         .addresses(new HashSet<Address>())
         .roles(new HashSet<Role>())
@@ -104,7 +105,6 @@ public class PaulineHansonsOneNation implements CommandLineRunner {
         .name(AustralianPoliticalParty.PAULINE_HANSONS_ONE_NATION.toString())
         .email("'hey@onenation.org.au")
         .phoneNumber("1300 857 466")
-        .legalType(LegalType.OTHER_INCORPORATED_ENTITY.toString())
         .build();
 
       organisationRepository.save(organisation);

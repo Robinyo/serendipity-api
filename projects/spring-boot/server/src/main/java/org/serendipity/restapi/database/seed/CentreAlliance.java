@@ -94,6 +94,7 @@ public class CentreAlliance implements CommandLineRunner {
 
       Party organisationParty = Party.builder()
         .type(PartyType.ORGANISATION)
+        .legalType(LegalType.OTHER_INCORPORATED_ENTITY.toString())
         .displayName(AustralianPoliticalParty.CENTRE_ALLIANCE.toString())
         .addresses(new HashSet<Address>())
         .roles(new HashSet<Role>())
@@ -104,7 +105,6 @@ public class CentreAlliance implements CommandLineRunner {
         .name(AustralianPoliticalParty.CENTRE_ALLIANCE.toString())
         .email("hey@centrealliance.org.au")
         .phoneNumber("(08) 8545 0400")
-        .legalType(LegalType.OTHER_INCORPORATED_ENTITY.toString())
         .build();
 
       organisationRepository.save(organisation);

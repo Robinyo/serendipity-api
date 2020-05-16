@@ -30,6 +30,7 @@ public class PartyModelAssembler extends RepresentationModelAssemblerSupport<Par
 
     model.setId(entity.getId());
     model.setType(entity.getType());
+    model.setLegalType(entity.getLegalType());
     model.setDisplayName(entity.getDisplayName());
     model.setAddresses(toAddressModel(entity.getAddresses()));
     model.setRoles(toRoleModel(entity.getRoles()));
