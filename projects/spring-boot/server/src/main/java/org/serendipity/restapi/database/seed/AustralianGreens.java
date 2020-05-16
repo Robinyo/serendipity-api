@@ -8,6 +8,8 @@ import org.serendipity.restapi.repository.OrganisationRepository;
 import org.serendipity.restapi.repository.RoleRepository;
 import org.serendipity.restapi.type.LocationType;
 import org.serendipity.restapi.type.PartyType;
+import org.serendipity.restapi.type.au.LegalType;
+import org.serendipity.restapi.type.au.Sex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
@@ -49,80 +51,81 @@ public class AustralianGreens implements CommandLineRunner {
       Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 
       Location location = Location.builder()
-          .type(LocationType.ADDRESS)
-          .displayName("23/85 Northbourne Ave Turner ACT 2612")
-          .fromDate(currentTime)
-          .build();
+        .type(LocationType.ADDRESS)
+        .displayName("23/85 Northbourne Ave Turner ACT 2612")
+        .fromDate(currentTime)
+        .build();
 
       Address headOffice = Address.builder()
-          .location(location)
-          .name("")
-          .line1("23/85 Northbourne Ave")
-          .line2("")
-          .city("Turner")
-          .state("ACT")
-          .postalCode("2612")
-          .country("Australia")
-          .addressType("Principle Place of Business")
-          .build();
+        .location(location)
+        .name("")
+        .line1("23/85 Northbourne Ave")
+        .line2("")
+        .city("Turner")
+        .state("ACT")
+        .postalCode("2612")
+        .country("Australia")
+        .addressType("Principle Place of Business")
+        .build();
 
       addressRepository.save(headOffice);
 
       // Primary Contact (Individual)
 
       Party individualParty = Party.builder()
-          .type(PartyType.INDIVIDUAL)
-          .displayName("Hull" + ", " + "Jordan")
-          .addresses(new HashSet<Address>())
-          .roles(new HashSet<Role>())
-          .build();
+        .type(PartyType.INDIVIDUAL)
+        .displayName("Hull" + ", " + "Jordan")
+        .addresses(new HashSet<Address>())
+        .roles(new HashSet<Role>())
+        .build();
 
       Individual individual = Individual.builder()
-          .party(individualParty)
-          .givenName("Jordan")
-          .familyName("Hull")
-          .gender("Male")
-          .email("jordan.hull@greens.org.au")
-          .phoneNumber("(02) 6140 3220")
-          .build();
+        .party(individualParty)
+        .givenName("Jordan")
+        .familyName("Hull")
+        .sex(Sex.MALE.toString())
+        .email("jordan.hull@greens.org.au")
+        .phoneNumber("(02) 6140 3220")
+        .build();
 
       individualRepository.save(individual);
 
       // Organisation
 
       Party organisationParty = Party.builder()
-          .type(PartyType.ORGANISATION)
-          .displayName(AustralianPoliticalParty.AUSTRALIAN_GREENS.toString())
-          .addresses(new HashSet<Address>())
-          .roles(new HashSet<Role>())
-          .build();
+        .type(PartyType.ORGANISATION)
+        .displayName(AustralianPoliticalParty.AUSTRALIAN_GREENS.toString())
+        .addresses(new HashSet<Address>())
+        .roles(new HashSet<Role>())
+        .build();
 
       Organisation organisation = Organisation.builder()
-          .party(organisationParty)
-          .name(AustralianPoliticalParty.AUSTRALIAN_GREENS.toString())
-          .email("greens@greens.org.au")
-          .phoneNumber("(02) 6140 3220")
-          .build();
+        .party(organisationParty)
+        .name(AustralianPoliticalParty.AUSTRALIAN_GREENS.toString())
+        .email("greens@greens.org.au")
+        .phoneNumber("(02) 6140 3220")
+        .legalType(LegalType.OTHER_INCORPORATED_ENTITY.toString())
+        .build();
 
       organisationRepository.save(organisation);
 
       // Organisation, Relationship -> Primary Contact
 
       Role role = Role.builder()
-          .role("Organisation")
-          .partyId(organisation.getParty().getId())
-          .partyType(organisation.getParty().getType())
-          .partyName(organisation.getParty().getDisplayName())
-          .partyEmail(organisation.getEmail())
-          .partyPhoneNumber(organisation.getPhoneNumber())
-          .relationship("Primary Contact")
-          .reciprocalRole("Member")
-          .reciprocalPartyId(individual.getParty().getId())
-          .reciprocalPartyType(individual.getParty().getType())
-          .reciprocalPartyName(individual.getParty().getDisplayName())
-          .reciprocalPartyEmail(individual.getEmail())
-          .reciprocalPartyPhoneNumber(individual.getPhoneNumber())
-          .build();
+        .role("Organisation")
+        .partyId(organisation.getParty().getId())
+        .partyType(organisation.getParty().getType())
+        .partyName(organisation.getParty().getDisplayName())
+        .partyEmail(organisation.getEmail())
+        .partyPhoneNumber(organisation.getPhoneNumber())
+        .relationship("Primary Contact")
+        .reciprocalRole("Member")
+        .reciprocalPartyId(individual.getParty().getId())
+        .reciprocalPartyType(individual.getParty().getType())
+        .reciprocalPartyName(individual.getParty().getDisplayName())
+        .reciprocalPartyEmail(individual.getEmail())
+        .reciprocalPartyPhoneNumber(individual.getPhoneNumber())
+        .build();
 
       roleRepository.save(role);
 
@@ -134,20 +137,20 @@ public class AustralianGreens implements CommandLineRunner {
       // Primary Contact, Relationship -> Membership
 
       Role reciprocalRole = Role.builder()
-          .role("Member")
-          .partyId(individual.getParty().getId())
-          .partyType(individual.getParty().getType())
-          .partyName(individual.getParty().getDisplayName())
-          .partyEmail(individual.getEmail())
-          .partyPhoneNumber(individual.getPhoneNumber())
-          .relationship("Membership")
-          .reciprocalRole("Organisation")
-          .reciprocalPartyId(organisation.getParty().getId())
-          .reciprocalPartyType(organisation.getParty().getType())
-          .reciprocalPartyName(organisation.getParty().getDisplayName())
-          .reciprocalPartyEmail(organisation.getEmail())
-          .reciprocalPartyPhoneNumber(organisation.getPhoneNumber())
-          .build();
+        .role("Member")
+        .partyId(individual.getParty().getId())
+        .partyType(individual.getParty().getType())
+        .partyName(individual.getParty().getDisplayName())
+        .partyEmail(individual.getEmail())
+        .partyPhoneNumber(individual.getPhoneNumber())
+        .relationship("Membership")
+        .reciprocalRole("Organisation")
+        .reciprocalPartyId(organisation.getParty().getId())
+        .reciprocalPartyType(organisation.getParty().getType())
+        .reciprocalPartyName(organisation.getParty().getDisplayName())
+        .reciprocalPartyEmail(organisation.getEmail())
+        .reciprocalPartyPhoneNumber(organisation.getPhoneNumber())
+        .build();
 
       roleRepository.save(reciprocalRole);
 

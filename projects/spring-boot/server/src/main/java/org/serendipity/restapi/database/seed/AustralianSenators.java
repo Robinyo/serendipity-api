@@ -46,7 +46,7 @@ public class AustralianSenators implements CommandLineRunner {
   static final int INITIALS = 6;
   static final int POST_NOMINALS = 7;
   static final int POLITICAL_PARTY = 9;
-  static final int GENDER = 10;
+  static final int SEX = 10;
 
   @Autowired
   private AddressRepository addressRepository;
@@ -128,7 +128,7 @@ public class AustralianSenators implements CommandLineRunner {
             .salutation(fields[SALUTATION])
             .preferredName(fields[PREFERRED_NAME])
             .initials(fields[INITIALS])
-            .gender(fields[GENDER])
+            .sex(fields[SEX])
             .email(email)
             .phoneNumber("")
             .photoUrl("")

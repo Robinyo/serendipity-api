@@ -15,6 +15,7 @@ import java.util.Date;
 public class Individual {
 
   // An Individual is a person.
+  // The Individual concept represents people about which an Enterprise wishes to maintain information.
 
   @Id
   private Long id;
@@ -46,7 +47,7 @@ public class Individual {
 
   private String placeOfBirth;
 
-  private String gender;
+  private String sex;
 
   private String email;
 

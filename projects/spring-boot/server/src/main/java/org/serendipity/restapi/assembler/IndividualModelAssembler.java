@@ -36,7 +36,7 @@ public class IndividualModelAssembler extends RepresentationModelAssemblerSuppor
     model.setInitials(entity.getInitials());
     model.setDateOfBirth(entity.getDateOfBirth());
     model.setPlaceOfBirth(entity.getPlaceOfBirth());
-    model.setGender(entity.getGender());
+    model.setSex(entity.getSex());
     model.setEmail(entity.getEmail());
     model.setPhoneNumber(entity.getPhoneNumber());
     model.setPhotoUrl(entity.getPhotoUrl());

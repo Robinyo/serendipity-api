@@ -13,7 +13,13 @@ public enum LocationType {
     public String toString() {
       return "Electronic Address";
     }
-  },
+  }
+
+}
+
+// type = "Address" | "Natural Area" | "Management Zone"
+
+/*
 
   LOCATION {
     @Override
@@ -22,6 +28,4 @@ public enum LocationType {
     }
   }
 
-}
-
-// type = "Address" | "Natural Area" | "Management Zone"
+*/

@@ -27,7 +27,7 @@ public class Location {
 
   @Builder.Default
   @Enumerated(EnumType.STRING)
-  private LocationType type = LocationType.LOCATION;
+  private LocationType type = LocationType.ADDRESS;
 
   @Builder.Default
   private String displayName = "";

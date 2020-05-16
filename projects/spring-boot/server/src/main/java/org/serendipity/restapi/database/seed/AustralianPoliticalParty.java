@@ -1,5 +1,7 @@
 package org.serendipity.restapi.database.seed;
 
+import org.serendipity.restapi.type.au.Sex;
+
 public enum AustralianPoliticalParty {
 
   AUSTRALIAN_GREENS("AG") {

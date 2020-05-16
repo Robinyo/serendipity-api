@@ -28,7 +28,7 @@ public class Party {
 
   @Builder.Default
   @Enumerated(EnumType.STRING)
-  private PartyType type = PartyType.PARTY;
+  private PartyType type = PartyType.INDIVIDUAL;
 
   @Builder.Default
   private String displayName = "";

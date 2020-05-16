@@ -14,6 +14,8 @@ import javax.persistence.*;
 public class Organisation {
 
   // An Organisation usually consists of a number of individuals or groups bound by a common purpose.
+  // The Organisation concept represents companies and other type’s of organisations about which an Enterprise wishes
+  // to maintain information.
 
   @Id
   private Long id;
@@ -28,6 +30,8 @@ public class Organisation {
   private String email;
 
   private String phoneNumber;
+
+  private String legalType;
 
   @Override
   public boolean equals(Object o) {

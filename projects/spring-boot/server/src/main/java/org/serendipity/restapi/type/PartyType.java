@@ -14,6 +14,25 @@ public enum PartyType {
       return "Organisation";
     }
   },
+  ORGANISATIONAL_UNIT {
+    @Override
+    public String toString() {
+      return "Organisational Unit";
+    }
+  }
+
+}
+
+// https://google.github.io/styleguide/javaguide.html#s4.8.1-enum-classes
+
+/*
+
+  // EMPLOYMENT_POSITION {
+  //   @Override
+  //   public String toString() {
+  //     return "Employment Position";
+  //   }
+  // },
 
   PARTY {
     @Override
@@ -22,6 +41,4 @@ public enum PartyType {
     }
   }
 
-}
-
-// https://google.github.io/styleguide/javaguide.html#s4.8.1-enum-classes
+*/
