@@ -35,9 +35,46 @@ public enum LegalType {
     public String toString() {
       return "Sole Trader";
     }
-  };
+  },
+  PARTNERSHIP(23) { // Sole Proprietorship
+    @Override
+    public String toString() {
+      return "Partnership";
+    }
+  },
+  TRUST(25) { // Sole Proprietorship
+    @Override
+    public String toString() {
+      return "Trust";
+    }
+  },
+  OTHER_UNINCORPORATED_ENTITY(26) {
+    @Override
+    public String toString() {
+      return "Other Unincorporated Entity";
+    }
+  },
 
   // Public Sector Entities
+
+  GOVERNMENT_COMPANY(31) {
+    @Override
+    public String toString() {
+      return "Government Company";
+    }
+  },
+  OTHER_GOVERNMENT_ENTITY(32) {
+    @Override
+    public String toString() {
+      return "Other Government Entity";
+    }
+  },
+  FOREIGN_GOVERNMENT_ENTITY(33) {
+    @Override
+    public String toString() {
+      return "Foreign Government Entity";
+    }
+  };
 
   private final Integer code;
 
@@ -56,8 +93,6 @@ Cooperative
 Estate
 Joint Venture
 Not For Profit
-Partnership
 Trust
-
 
 */
