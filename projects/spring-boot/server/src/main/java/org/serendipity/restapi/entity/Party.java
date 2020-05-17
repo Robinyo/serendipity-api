@@ -30,7 +30,8 @@ public class Party {
   @Enumerated(EnumType.STRING)
   private PartyType type = PartyType.INDIVIDUAL;
 
-  private String legalType;
+  @Builder.Default
+  private String legalType = "";
 
   @Builder.Default
   private String displayName = "";

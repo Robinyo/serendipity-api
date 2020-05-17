@@ -33,7 +33,10 @@ import java.util.HashSet;
 @Component
 @Slf4j
 @Order(Ordered.LOWEST_PRECEDENCE)
-public class AustralianSenators implements CommandLineRunner {
+public class AustralianSenate implements CommandLineRunner {
+
+  // A senator is a member of the Australian Senate, elected to represent a state or territory. There are 76 senators,
+  // 12 from each state and two each from the Australian Capital Territory and the Northern Territory.
 
   static final String PATH = "sample-data/allsenel.csv";
 
@@ -64,7 +67,7 @@ public class AustralianSenators implements CommandLineRunner {
   @Transactional
   public void run(String... args) throws Exception {
 
-    log.info("Loading Australian Senators ...");
+    log.info("Loading members of the Australian Senate ...");
 
     try {
 
@@ -224,7 +227,7 @@ public class AustralianSenators implements CommandLineRunner {
 
       buffer.close();
 
-      log.info("Loading Australian Senators complete");
+      log.info("Loading members of the Australian Senate complete");
 
     } catch (IOException | NullPointerException e) {
 
@@ -234,6 +237,9 @@ public class AustralianSenators implements CommandLineRunner {
   }
   
 }
+
+// https://www.aph.gov.au/Senators_and_Members
+// https://www.aph.gov.au/Senators_and_Members/Guidelines_for_Contacting_Senators_and_Members/Address_labels_and_CSV_files
 
 // https://stackoverflow.com/questions/10387329/using-string-representations-of-enum-values-in-switch-case
 // https://www.baeldung.com/java-enum-values
