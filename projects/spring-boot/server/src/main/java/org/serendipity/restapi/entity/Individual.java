@@ -55,7 +55,7 @@ public class Individual {
 
   private String photoUrl;
 
-  private String Electorate;
+  private String electorate;
   
   @Override
   public boolean equals(Object o) {

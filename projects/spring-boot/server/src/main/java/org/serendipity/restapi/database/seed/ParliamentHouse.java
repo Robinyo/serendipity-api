@@ -1,0 +1,67 @@
+package org.serendipity.restapi.database.seed;
+
+import lombok.extern.slf4j.Slf4j;
+import org.serendipity.restapi.entity.Address;
+import org.serendipity.restapi.entity.Location;
+import org.serendipity.restapi.repository.AddressRepository;
+import org.serendipity.restapi.type.LocationType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.sql.Timestamp;
+
+@Component
+@Slf4j
+@Order(2)
+public class ParliamentHouse implements CommandLineRunner {
+
+  @Autowired
+  private AddressRepository addressRepository;
+
+  @Override
+  @Transactional
+  public void run(String... args) throws Exception {
+
+    log.info("Load Parliament House address ...");
+
+    try {
+
+      //
+      // Parliament House Address
+      //
+
+      Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+
+      Location location = Location.builder()
+        .type(LocationType.ADDRESS)
+        .displayName("PO Box 6100 Parliament House Canberra ACT 2600")
+        .fromDate(currentTime)
+        .build();
+
+      Address parliamentHouse = Address.builder()
+        .location(location)
+        .name("The Senate")
+        .line1("PO Box 6100")
+        .line2("Parliament House")
+        .city("Canberra")
+        .state("ACT")
+        .postalCode("2600")
+        .country("Australia")
+        .addressType("Mailing")
+        .build();
+
+      addressRepository.save(parliamentHouse);
+
+      log.info("Load Parliament House address complete");
+
+    } catch (NullPointerException e) {
+
+      log.error("{}", e.getLocalizedMessage());
+    }
+
+  }
+
+}

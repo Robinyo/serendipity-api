@@ -1,15 +1,24 @@
 package org.serendipity.restapi.database.seed;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.extern.slf4j.Slf4j;
+import org.serendipity.restapi.entity.*;
 import org.serendipity.restapi.repository.AddressRepository;
 import org.serendipity.restapi.repository.IndividualRepository;
 import org.serendipity.restapi.repository.OrganisationRepository;
 import org.serendipity.restapi.repository.RoleRepository;
+import org.serendipity.restapi.type.PartyType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +26,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.HashSet;
 
 @Component
 @Slf4j
@@ -58,6 +68,20 @@ public class HouseOfRepresentatives implements CommandLineRunner {
 
     try {
 
+      //
+      // Parliament House Address
+      //
+
+      Pageable pageable = PageRequest.of(0, 1);
+
+      Page<Address> addresses = addressRepository.findByName("The Senate", pageable);
+
+      Address parliamentHouse = addresses.getContent().get(0);
+
+      //
+      // Process sample data file
+      //
+
       InputStream resource = new ClassPathResource(PATH).getInputStream();
 
       BufferedReader buffer = new BufferedReader(new InputStreamReader(resource));
@@ -71,7 +95,117 @@ public class HouseOfRepresentatives implements CommandLineRunner {
         // Note: No support for strings with embedded comma's, for example: "Commonwealth Parliament Offices, Suite 8"
         String[] fields = line.split(",");
 
-        String displayName = fields[SURNAME] + ", " + fields[FIRST_NAME];
+        String displayName = fields[SURNAME] + ", " + fields[HONORIFIC] + " " + fields[FIRST_NAME];
+
+        Party individualParty = Party.builder()
+          .type(PartyType.INDIVIDUAL)
+          .displayName(displayName)
+          .addresses(new HashSet<Address>())
+          .roles(new HashSet<Role>())
+          .build();
+
+        String email = fields[FIRST_NAME].toLowerCase() + "." + fields[SURNAME].toLowerCase() + "@aph.gov.au";
+
+        Individual individual = Individual.builder()
+          .party(individualParty)
+          .title(fields[HONORIFIC])
+          .givenName(fields[FIRST_NAME])
+          .middleName(fields[OTHER_NAME])
+          .familyName(fields[SURNAME])
+          .honorific(fields[POST_NOMINALS])
+          .salutation(fields[SALUTATION])
+          .preferredName(fields[PREFERRED_NAME])
+          .initials(fields[INITIALS])
+          .sex(fields[SEX])
+          .email(email)
+          .phoneNumber("")
+          .photoUrl("")
+          .electorate(fields[ELECTORATE])
+          .build();
+
+        individualRepository.save(individual);
+
+        Role role = Role.builder()
+          .role("Member")
+          .partyId(individual.getParty().getId())
+          .partyType(individual.getParty().getType())
+          .partyName(individual.getParty().getDisplayName())
+          .partyEmail(individual.getEmail())
+          .partyPhoneNumber(individual.getPhoneNumber())
+          .relationship("Membership")
+          .reciprocalRole("Organisation")
+          // .reciprocalPartyId(1L)
+          // .reciprocalPartyType(PartyType.ORGANISATION)
+          // .reciprocalPartyName("")
+          // .reciprocalPartyEmail("")
+          // .reciprocalPartyPhoneNumber("")
+          .build();
+
+        boolean membership = true;
+
+        // "AG" | "ALP" | "CA" | "JLN" | "LP" | "NATS" | "PHON" | "IND
+        String abbreviation = fields[POLITICAL_PARTY].toUpperCase();
+
+        AustralianPoliticalParty politicalParty = AustralianPoliticalParty.valueOfAbbreviation(abbreviation);
+
+        switch (politicalParty) {
+
+          case AUSTRALIAN_GREENS:
+          case AUSTRALIAN_LABOR_PARTY:
+          case CENTRE_ALLIANCE:
+          case JACQUI_LAMBIE_NETWORK:
+          case LIBERAL_PARTY_OF_AUSTRALIA:
+          case NATIONAL_PARTY_OF_AUSTRALIA:
+          case PAULINE_HANSONS_ONE_NATION:
+
+            log.info("Political Party: {}", politicalParty.toString());
+
+            Page<Organisation> organisations = organisationRepository.findByName(politicalParty.toString(), pageable);
+
+            Organisation organisation = organisations.getContent().get(0);
+
+            try {
+
+              ObjectMapper mapper = new ObjectMapper();
+
+              mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+              mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+
+              mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+              log.info("{}", "\n" + mapper.writeValueAsString(organisation));
+
+            } catch (JsonProcessingException jpe) {
+
+              log.error("Australian Senators - JSON Processing Exception");
+            }
+
+            role.setReciprocalPartyId(organisation.getParty().getId());
+            role.setReciprocalPartyType(organisation.getParty().getType());
+            role.setReciprocalPartyName(organisation.getParty().getDisplayName());
+            role.setReciprocalPartyEmail(organisation.getEmail());
+            role.setReciprocalPartyPhoneNumber(organisation.getPhoneNumber());
+
+            break;
+
+          case INDEPENDENT:
+          default:
+
+            log.info("Political Party: {}", abbreviation);
+
+            membership = false;
+
+            break;
+        }
+
+        individualParty.getAddresses().add(parliamentHouse);
+
+        if (membership) {
+          roleRepository.save(role);
+          individualParty.getRoles().add(role);
+        }
+
+        individualRepository.save(individual);
 
       }
 
@@ -79,7 +213,7 @@ public class HouseOfRepresentatives implements CommandLineRunner {
 
       log.info("Loading members of the House of Representatives complete");
 
-    } catch (NullPointerException e) {
+    } catch (IOException | NullPointerException e) {
 
       log.error("{}", e.getLocalizedMessage());
     }

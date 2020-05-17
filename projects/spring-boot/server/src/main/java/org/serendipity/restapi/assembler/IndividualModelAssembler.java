@@ -40,6 +40,7 @@ public class IndividualModelAssembler extends RepresentationModelAssemblerSuppor
     model.setEmail(entity.getEmail());
     model.setPhoneNumber(entity.getPhoneNumber());
     model.setPhotoUrl(entity.getPhotoUrl());
+    model.setElectorate(entity.getElectorate());
 
     return model;
   }

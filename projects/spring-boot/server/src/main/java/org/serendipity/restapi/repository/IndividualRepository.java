@@ -10,7 +10,7 @@ public interface IndividualRepository extends PagingAndSortingRepository<Individ
 
     Page<Individual> findAll(Pageable pageable);
 
-    Page<Individual> findByFamilyNameStartsWith(@Param("name") String name, Pageable pageable);
+    Page<Individual> findByFamilyNameStartsWith(String name, Pageable pageable);
 
 }
 

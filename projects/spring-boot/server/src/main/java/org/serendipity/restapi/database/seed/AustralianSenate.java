@@ -75,27 +75,15 @@ public class AustralianSenate implements CommandLineRunner {
       // Parliament House Address
       //
 
-      Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+      Pageable pageable = PageRequest.of(0, 1);
 
-      Location location = Location.builder()
-          .type(LocationType.ADDRESS)
-          .displayName("PO Box 6100 Parliament House Canberra ACT 2600")
-          .fromDate(currentTime)
-          .build();
+      Page<Address> addresses = addressRepository.findByName("The Senate", pageable);
 
-      Address parliamentHouse = Address.builder()
-          .location(location)
-          .name("The Senate")
-          .line1("PO Box 6100")
-          .line2("Parliament House")
-          .city("Canberra")
-          .state("ACT")
-          .postalCode("2600")
-          .country("Australia")
-          .addressType("Mailing")
-          .build();
+      Address parliamentHouse = addresses.getContent().get(0);
 
-      addressRepository.save(parliamentHouse);
+      //
+      // Process sample data file
+      //
 
       InputStream resource = new ClassPathResource(PATH).getInputStream();
 
@@ -173,8 +161,6 @@ public class AustralianSenate implements CommandLineRunner {
           case PAULINE_HANSONS_ONE_NATION:
 
             log.info("Political Party: {}", politicalParty.toString());
-
-            Pageable pageable = PageRequest.of(0, 1);
 
             Page<Organisation> organisations = organisationRepository.findByName(politicalParty.toString(), pageable);
 

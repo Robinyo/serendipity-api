@@ -1,8 +1,26 @@
 package org.serendipity.restapi.repository;
 
 import org.serendipity.restapi.entity.Address;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface AddressRepository extends PagingAndSortingRepository<Address, Long> {
 
+  Page<Address> findByName(String name, Pageable pageable);
+
 }
+
+/*
+
+  Page<Address> findByNameAndLine1AndLine2AndCityAndStateAndPostalCodeAndCountryAndAddressType(
+    String name,
+    String line1,
+    String line2,
+    String city,
+    String state,
+    String postalCode,
+    String country,
+    String addressType);
+
+*/

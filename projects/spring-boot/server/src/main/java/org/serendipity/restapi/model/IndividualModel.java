@@ -28,7 +28,7 @@ public class IndividualModel extends RepresentationModel<IndividualModel> {
   private String email;
   private String phoneNumber;
   private String photoUrl;
-  private String Electorate;
+  private String electorate;
 
 }
 
