@@ -43,7 +43,7 @@ public class HouseOfRepresentatives implements CommandLineRunner {
   static final int OTHER_NAME = 5;
   static final int PREFERRED_NAME = 6;
   static final int INITIALS = 7;
-  static final int ELECTORATE = 8; // Electorate
+  static final int ELECTORATE = 8;
   static final int POLITICAL_PARTY = 10;
   static final int SEX = 11;
   // static final int TITLE = 0; // Parliamentary Title,Ministerial Title
@@ -125,6 +125,22 @@ public class HouseOfRepresentatives implements CommandLineRunner {
 
         individualRepository.save(individual);
 
+        try {
+
+          ObjectMapper mapper = new ObjectMapper();
+
+          mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+          mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+
+          mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+          log.info("{}", "\n" + mapper.writeValueAsString(individual));
+
+        } catch (JsonProcessingException jpe) {
+
+          log.error("House of Representatives - JSON Processing Exception");
+        }
+
         Role role = Role.builder()
           .role("Member")
           .partyId(individual.getParty().getId())
@@ -164,6 +180,8 @@ public class HouseOfRepresentatives implements CommandLineRunner {
 
             Organisation organisation = organisations.getContent().get(0);
 
+            /*
+
             try {
 
               ObjectMapper mapper = new ObjectMapper();
@@ -177,8 +195,10 @@ public class HouseOfRepresentatives implements CommandLineRunner {
 
             } catch (JsonProcessingException jpe) {
 
-              log.error("Australian Senators - JSON Processing Exception");
+              log.error("House of Representatives - JSON Processing Exception");
             }
+
+            */
 
             role.setReciprocalPartyId(organisation.getParty().getId());
             role.setReciprocalPartyType(organisation.getParty().getType());

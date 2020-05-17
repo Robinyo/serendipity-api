@@ -46,9 +46,9 @@ public class Party {
 
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(
-      name = "PartyRole",
-      joinColumns = @JoinColumn(name = "partyId"),
-      inverseJoinColumns = @JoinColumn(name = "roleId")
+    name = "PartyRole",
+    joinColumns = @JoinColumn(name = "partyId"),
+    inverseJoinColumns = @JoinColumn(name = "roleId")
   )
   private Set<Role> roles;
 

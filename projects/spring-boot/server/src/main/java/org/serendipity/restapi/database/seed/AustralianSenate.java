@@ -53,7 +53,7 @@ public class AustralianSenate implements CommandLineRunner {
 
   @Autowired
   private AddressRepository addressRepository;
-  
+
   @Autowired
   private IndividualRepository individualRepository;
 
@@ -101,47 +101,48 @@ public class AustralianSenate implements CommandLineRunner {
         String displayName = fields[SURNAME] + ", " + fields[TITLE] + " " + fields[FIRST_NAME];
 
         Party individualParty = Party.builder()
-            .type(PartyType.INDIVIDUAL)
-            .displayName(displayName)
-            .addresses(new HashSet<Address>())
-            .roles(new HashSet<Role>())
-            .build();
+          .type(PartyType.INDIVIDUAL)
+          .displayName(displayName)
+          .addresses(new HashSet<Address>())
+          .roles(new HashSet<Role>())
+          .build();
 
         String email = fields[FIRST_NAME].toLowerCase() + "." + fields[SURNAME].toLowerCase() + "@aph.gov.au";
 
         Individual individual = Individual.builder()
-            .party(individualParty)
-            .title(fields[TITLE])
-            .givenName(fields[FIRST_NAME])
-            .middleName(fields[OTHER_NAME])
-            .familyName(fields[SURNAME])
-            .honorific(fields[POST_NOMINALS])
-            .salutation(fields[SALUTATION])
-            .preferredName(fields[PREFERRED_NAME])
-            .initials(fields[INITIALS])
-            .sex(fields[SEX])
-            .email(email)
-            .phoneNumber("")
-            .photoUrl("")
-            .build();
+          .party(individualParty)
+          .title(fields[TITLE])
+          .givenName(fields[FIRST_NAME])
+          .middleName(fields[OTHER_NAME])
+          .familyName(fields[SURNAME])
+          .honorific(fields[POST_NOMINALS])
+          .salutation(fields[SALUTATION])
+          .preferredName(fields[PREFERRED_NAME])
+          .initials(fields[INITIALS])
+          .sex(fields[SEX])
+          .email(email)
+          .phoneNumber("")
+          .photoUrl("")
+          // .electorate(fields[ELECTORATE])
+          .build();
 
         individualRepository.save(individual);
 
         Role role = Role.builder()
-            .role("Member")
-            .partyId(individual.getParty().getId())
-            .partyType(individual.getParty().getType())
-            .partyName(individual.getParty().getDisplayName())
-            .partyEmail(individual.getEmail())
-            .partyPhoneNumber(individual.getPhoneNumber())
-            .relationship("Membership")
-            .reciprocalRole("Organisation")
-            // .reciprocalPartyId(1L)
-            // .reciprocalPartyType(PartyType.ORGANISATION)
-            // .reciprocalPartyName("")
-            // .reciprocalPartyEmail("")
-            // .reciprocalPartyPhoneNumber("")
-            .build();
+          .role("Member")
+          .partyId(individual.getParty().getId())
+          .partyType(individual.getParty().getType())
+          .partyName(individual.getParty().getDisplayName())
+          .partyEmail(individual.getEmail())
+          .partyPhoneNumber(individual.getPhoneNumber())
+          .relationship("Membership")
+          .reciprocalRole("Organisation")
+          // .reciprocalPartyId(1L)
+          // .reciprocalPartyType(PartyType.ORGANISATION)
+          // .reciprocalPartyName("")
+          // .reciprocalPartyEmail("")
+          // .reciprocalPartyPhoneNumber("")
+          .build();
 
         boolean membership = true;
 
@@ -166,6 +167,8 @@ public class AustralianSenate implements CommandLineRunner {
 
             Organisation organisation = organisations.getContent().get(0);
 
+            /*
+
             try {
 
               ObjectMapper mapper = new ObjectMapper();
@@ -181,6 +184,8 @@ public class AustralianSenate implements CommandLineRunner {
 
               log.error("Australian Senators - JSON Processing Exception");
             }
+
+            */
 
             role.setReciprocalPartyId(organisation.getParty().getId());
             role.setReciprocalPartyType(organisation.getParty().getType());
@@ -221,7 +226,7 @@ public class AustralianSenate implements CommandLineRunner {
     }
 
   }
-  
+
 }
 
 // https://www.aph.gov.au/Senators_and_Members
