@@ -125,6 +125,7 @@ public class HouseOfRepresentatives implements CommandLineRunner {
 
         individualRepository.save(individual);
 
+        /*
         try {
 
           ObjectMapper mapper = new ObjectMapper();
@@ -140,6 +141,7 @@ public class HouseOfRepresentatives implements CommandLineRunner {
 
           log.error("House of Representatives - JSON Processing Exception");
         }
+        */
 
         Role role = Role.builder()
           .role("Member")
@@ -181,7 +183,6 @@ public class HouseOfRepresentatives implements CommandLineRunner {
             Organisation organisation = organisations.getContent().get(0);
 
             /*
-
             try {
 
               ObjectMapper mapper = new ObjectMapper();
@@ -197,7 +198,6 @@ public class HouseOfRepresentatives implements CommandLineRunner {
 
               log.error("House of Representatives - JSON Processing Exception");
             }
-
             */
 
             role.setReciprocalPartyId(organisation.getParty().getId());
