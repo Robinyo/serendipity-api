@@ -16,6 +16,12 @@ public enum IdentifierType {
     public String toString() {
       return "Australian Company Number";
     }
+  },
+  CRN("CRN", "Services Australia") {
+    @Override
+    public String toString() {
+      return "Customer Reference Number";
+    }
   };
 
   private final String code;
