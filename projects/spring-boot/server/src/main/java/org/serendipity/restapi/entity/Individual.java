@@ -42,11 +42,6 @@ public class Individual {
 
   private String initials;
 
-  @Temporal(TemporalType.DATE)
-  private Date dateOfBirth;
-
-  private String placeOfBirth;
-
   private String sex;
 
   private String email;
@@ -56,6 +51,16 @@ public class Individual {
   private String photoUrl;
 
   private String electorate;
+
+
+
+  @Temporal(TemporalType.DATE)
+  private Date dateOfBirth;
+
+  private String placeOfBirth;
+
+  @Temporal(TemporalType.DATE)
+  private Date dateOfDeath;
   
   @Override
   public boolean equals(Object o) {

@@ -3,6 +3,7 @@ package org.serendipity.restapi.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Builder
@@ -30,6 +31,11 @@ public class Organisation {
   private String email;
 
   private String phoneNumber;
+
+
+
+  @Temporal(TemporalType.DATE)
+  private Date establishmentDate;
 
   @Override
   public boolean equals(Object o) {

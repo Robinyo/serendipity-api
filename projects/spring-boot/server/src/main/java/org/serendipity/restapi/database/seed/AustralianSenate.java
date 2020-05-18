@@ -1,16 +1,11 @@
 package org.serendipity.restapi.database.seed;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.extern.slf4j.Slf4j;
 import org.serendipity.restapi.entity.*;
 import org.serendipity.restapi.repository.AddressRepository;
 import org.serendipity.restapi.repository.IndividualRepository;
 import org.serendipity.restapi.repository.OrganisationRepository;
 import org.serendipity.restapi.repository.RoleRepository;
-import org.serendipity.restapi.type.LocationType;
 import org.serendipity.restapi.type.PartyType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -27,7 +22,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.sql.Timestamp;
 import java.util.HashSet;
 
 @Component
@@ -161,31 +155,11 @@ public class AustralianSenate implements CommandLineRunner {
           case NATIONAL_PARTY_OF_AUSTRALIA:
           case PAULINE_HANSONS_ONE_NATION:
 
-            log.info("Political Party: {}", politicalParty.toString());
+            // log.info("Political Party: {}", politicalParty.toString());
 
             Page<Organisation> organisations = organisationRepository.findByName(politicalParty.toString(), pageable);
 
             Organisation organisation = organisations.getContent().get(0);
-
-            /*
-
-            try {
-
-              ObjectMapper mapper = new ObjectMapper();
-
-              mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-              mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-
-              mapper.enable(SerializationFeature.INDENT_OUTPUT);
-
-              log.info("{}", "\n" + mapper.writeValueAsString(organisation));
-
-            } catch (JsonProcessingException jpe) {
-
-              log.error("Australian Senators - JSON Processing Exception");
-            }
-
-            */
 
             role.setReciprocalPartyId(organisation.getParty().getId());
             role.setReciprocalPartyType(organisation.getParty().getType());
@@ -243,6 +217,31 @@ public class AustralianSenate implements CommandLineRunner {
 
 /*
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
+            try {
+
+              ObjectMapper mapper = new ObjectMapper();
+
+              mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+              mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+
+              mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+              log.info("{}", "\n" + mapper.writeValueAsString(organisation));
+
+            } catch (JsonProcessingException jpe) {
+
+              log.error("Australian Senators - JSON Processing Exception");
+            }
+
+*/
+
+/*
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -250,7 +249,6 @@ Date dateOfBirth = new SimpleDateFormat("dd/MM/yyyy").parse("01/11/1982");
 .dateOfBirth(dateOfBirth)
 
 */
-
 
 /*
 
@@ -260,5 +258,5 @@ Date dateOfBirth = new SimpleDateFormat("dd/MM/yyyy").parse("01/11/1982");
     location.setType("Address");
     location.setFromDate(timestamp);
     location.setDisplayName("PO Box 6100 Parliament House Canberra ACT 2600");
-  
+
 */

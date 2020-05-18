@@ -53,6 +53,9 @@ public class Party {
   private Set<Role> roles;
 
   //
+  // Spring Data audit annotations in nested (embeddable) classes isn't supported yet.
+  // See: https://jira.spring.io/browse/DATACMNS-1274
+  //
   // @Embedded
   // private Auditable audit;
   //

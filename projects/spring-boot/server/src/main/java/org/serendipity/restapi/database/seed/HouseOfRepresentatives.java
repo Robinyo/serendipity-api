@@ -6,11 +6,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.extern.slf4j.Slf4j;
 import org.serendipity.restapi.entity.*;
-import org.serendipity.restapi.repository.AddressRepository;
-import org.serendipity.restapi.repository.IndividualRepository;
-import org.serendipity.restapi.repository.OrganisationRepository;
-import org.serendipity.restapi.repository.RoleRepository;
+import org.serendipity.restapi.repository.*;
 import org.serendipity.restapi.type.PartyType;
+import org.serendipity.restapi.type.au.IdentifierLifecycleStatus;
+import org.serendipity.restapi.type.au.IdentifierType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.Ordered;
@@ -26,6 +25,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.Timestamp;
 import java.util.HashSet;
 
 @Component
@@ -52,6 +52,9 @@ public class HouseOfRepresentatives implements CommandLineRunner {
   private AddressRepository addressRepository;
 
   @Autowired
+  private IdentifierRepository identifierRepository;
+
+  @Autowired
   private IndividualRepository individualRepository;
 
   @Autowired
@@ -69,13 +72,44 @@ public class HouseOfRepresentatives implements CommandLineRunner {
     try {
 
       //
+      // Example Identifier
+      //
+
+      Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+
+      Identifier identifier = Identifier.builder()
+        .type(IdentifierType.ABN.getCode())
+        .value("85 087 326 690")
+        .register(IdentifierType.ABN.getRegister())
+        .lifecycleStatus(IdentifierLifecycleStatus.ACTIVE.toString())
+        .fromDate(currentTime)
+        .build();
+
+      identifierRepository.save(identifier);
+
+      try {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+        log.info("identifier:  {}", "\n" + mapper.writeValueAsString(identifier));
+
+      } catch (JsonProcessingException jpe) {
+
+        log.error("House of Representatives - JSON Processing Exception");
+      }
+
+      //
       // Parliament House Address
       //
 
       Pageable pageable = PageRequest.of(0, 1);
 
       Page<Address> addresses = addressRepository.findByName("The Senate", pageable);
-
       Address parliamentHouse = addresses.getContent().get(0);
 
       //
@@ -125,24 +159,6 @@ public class HouseOfRepresentatives implements CommandLineRunner {
 
         individualRepository.save(individual);
 
-        /*
-        try {
-
-          ObjectMapper mapper = new ObjectMapper();
-
-          mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-          mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-
-          mapper.enable(SerializationFeature.INDENT_OUTPUT);
-
-          log.info("{}", "\n" + mapper.writeValueAsString(individual));
-
-        } catch (JsonProcessingException jpe) {
-
-          log.error("House of Representatives - JSON Processing Exception");
-        }
-        */
-
         Role role = Role.builder()
           .role("Member")
           .partyId(individual.getParty().getId())
@@ -176,29 +192,11 @@ public class HouseOfRepresentatives implements CommandLineRunner {
           case NATIONAL_PARTY_OF_AUSTRALIA:
           case PAULINE_HANSONS_ONE_NATION:
 
-            log.info("Political Party: {}", politicalParty.toString());
+            // log.info("Political Party: {}", politicalParty.toString());
 
             Page<Organisation> organisations = organisationRepository.findByName(politicalParty.toString(), pageable);
 
             Organisation organisation = organisations.getContent().get(0);
-
-            /*
-            try {
-
-              ObjectMapper mapper = new ObjectMapper();
-
-              mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-              mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-
-              mapper.enable(SerializationFeature.INDENT_OUTPUT);
-
-              log.info("{}", "\n" + mapper.writeValueAsString(organisation));
-
-            } catch (JsonProcessingException jpe) {
-
-              log.error("House of Representatives - JSON Processing Exception");
-            }
-            */
 
             role.setReciprocalPartyId(organisation.getParty().getId());
             role.setReciprocalPartyType(organisation.getParty().getType());
@@ -241,3 +239,39 @@ public class HouseOfRepresentatives implements CommandLineRunner {
   }
 
 }
+
+/*
+
+        try {
+
+          ObjectMapper mapper = new ObjectMapper();
+
+          mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+          mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+
+          mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+          log.info("{}", "\n" + mapper.writeValueAsString(individual));
+
+        } catch (JsonProcessingException jpe) {
+
+          log.error("House of Representatives - JSON Processing Exception");
+        }
+
+            try {
+
+              ObjectMapper mapper = new ObjectMapper();
+
+              mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+              mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+
+              mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+              log.info("{}", "\n" + mapper.writeValueAsString(organisation));
+
+            } catch (JsonProcessingException jpe) {
+
+              log.error("House of Representatives - JSON Processing Exception");
+            }
+
+*/
