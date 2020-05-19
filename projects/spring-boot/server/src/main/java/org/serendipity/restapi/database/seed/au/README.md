@@ -1,20 +1,20 @@
 <h1 align="center">Database Seeds</h1>
 
-Who is a Senator?
+## Who is a Senator?
 A senator is a member of the Australian Senate, elected to represent a state or territory. There are 76 senators, 12 
 from each state and two each from the Australian Capital Territory and the Northern Territory.
 
-The President
+### The President
 The President of the Senate is the presiding officer of the Senate, whose chief function is to guide and regulate the 
 proceedings in the Senate. The President is also responsible for the administration of the Department of the Senate. 
 The President is a senator who is elected to the position by the members of the Senate.
 
-Who is a Member?
+## Who is a Member?
 There are currently 151 members of the House of Representatives, each representing one geographic area of Australia. 
 Members are elected for a 3 year term and when in parliament take part in debate on proposed laws and public policy, 
 representing the views of the people in their electorate.
 
-The Speaker
+### The Speaker
 The Speaker is the principal office holder in the House of Representatives. He or she is the House's representative or 
 spokesperson and chairs its meetings. The Speaker is elected from among the 151 members of the House and is usually a 
 person of considerable parliamentary experience.
