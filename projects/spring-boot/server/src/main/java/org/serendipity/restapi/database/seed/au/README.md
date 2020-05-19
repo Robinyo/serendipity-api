@@ -1,23 +1,26 @@
-<h1 align="center">Australian Standard 4590.1:2017</h1>
+<h1 align="center">Database Seeds</h1>
 
-<p align="center">
-  <b>Interchange of client information</b></br>
-</p>
+Who is a Senator?
+A senator is a member of the Australian Senate, elected to represent a state or territory. There are 76 senators, 12 
+from each state and two each from the Australian Capital Territory and the Northern Territory.
 
-The objective of this Standard is to provide industry common client data elements and formats for data storage and 
-interchange.
+The President
+The President of the Senate is the presiding officer of the Senate, whose chief function is to guide and regulate the 
+proceedings in the Senate. The President is also responsible for the administration of the Department of the Senate. 
+The President is a senator who is elected to the position by the members of the Senate.
+
+Who is a Member?
+There are currently 151 members of the House of Representatives, each representing one geographic area of Australia. 
+Members are elected for a 3 year term and when in parliament take part in debate on proposed laws and public policy, 
+representing the views of the people in their electorate.
+
+The Speaker
+The Speaker is the principal office holder in the House of Representatives. He or she is the House's representative or 
+spokesperson and chairs its meetings. The Speaker is elected from among the 151 members of the House and is usually a 
+person of considerable parliamentary experience.
 
 ## Resources
 
-* [Standards Catalogue - AS 4590.1:2017](https://www.standards.org.au/standards-catalogue/sa-snz/communication/it-004/as--4590-dot-1-colon-2017)
-
-## Additional Resources
-
-* [METeOR - Australia's Metadata Online Repository](https://meteor.aihw.gov.au/content/index.phtml/itemId/181162)
-* [METeOR - Party identifier details data dictionary](https://meteor.aihw.gov.au/content/index.phtml/itemId/466213)
-* [METeOR - Person details data dictionary](https://meteor.aihw.gov.au/content/index.phtml/itemId/430772)
-* [METeOR - Organisation details data dictionary](https://meteor.aihw.gov.au/content/index.phtml/itemId/431158)
-* [The Spatial  Information Council (ANZLIC) - National Address Management Framework](https://www.anzlic.gov.au/resources/national-address-management-framework)
-* [Australian Securities and Investments Commission - Setting up a business structure](https://asic.gov.au/for-business/small-business/starting-a-small-business/setting-up-a-business-structure/)
-* [Australian Government - Publishing open data](https://toolkit.data.gov.au/Publishing_your_data.html)
-* [Australian Government - Consumer data right (CDR)](https://cdr-register.github.io/register/#consumer-data-right)
+* Parliament of Australia: [Senators and Members](https://www.aph.gov.au/Senators_and_Members)
+* Parliament of Australia: [Senators and Members - Address labels and CSV files](https://www.aph.gov.au/Senators_and_Members/Guidelines_for_Contacting_Senators_and_Members/Address_labels_and_CSV_files)
+* Wikipedia: [List of political parties in Australia](https://en.wikipedia.org/wiki/List_of_political_parties_in_Australia)
