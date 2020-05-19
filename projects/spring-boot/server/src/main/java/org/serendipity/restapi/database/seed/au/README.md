@@ -23,4 +23,5 @@ person of considerable parliamentary experience.
 
 * Parliament of Australia: [Senators and Members](https://www.aph.gov.au/Senators_and_Members)
 * Parliament of Australia: [Senators and Members - Address labels and CSV files](https://www.aph.gov.au/Senators_and_Members/Guidelines_for_Contacting_Senators_and_Members/Address_labels_and_CSV_files)
+* Australian Electoral Commision: [Current federal electoral divisions](https://www.aec.gov.au/profiles/)
 * Wikipedia: [List of political parties in Australia](https://en.wikipedia.org/wiki/List_of_political_parties_in_Australia)
