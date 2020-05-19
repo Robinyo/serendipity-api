@@ -1,7 +1,7 @@
-<h1 align="center">Database Seeds</h1>
+<h1 align="center">Australian Parliament</h1>
 
 <p align="center">
-  <b>Database seeds for the Australian Senate and the House of Representatives.</b></br>
+  <b>Database seeds for the Senate and the House of Representatives.</b></br>
 </p>
 
 ## Who is a Senator?
@@ -14,7 +14,7 @@ proceedings in the Senate. The President is also responsible for the administrat
 The President is a senator who is elected to the position by the members of the Senate.
 
 ## Who is a Member?
-There are currently 151 members of the House of Representatives, each representing one geographic area of Australia. 
+There are currently 151 members of the Australian House of Representatives, each representing one geographic area of Australia. 
 Members are elected for a 3 year term and when in parliament take part in debate on proposed laws and public policy, 
 representing the views of the people in their electorate.
 
