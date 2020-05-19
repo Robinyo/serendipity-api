@@ -1,5 +1,9 @@
 <h1 align="center">Database Seeds</h1>
 
+<p align="center">
+  <b>Database seeds for the Australian Senate and the House of Representatives.</b></br>
+</p>
+
 ## Who is a Senator?
 A senator is a member of the Australian Senate, elected to represent a state or territory. There are 76 senators, 12 
 from each state and two each from the Australian Capital Territory and the Northern Territory.
