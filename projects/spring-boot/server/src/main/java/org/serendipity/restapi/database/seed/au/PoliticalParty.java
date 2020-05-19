@@ -1,8 +1,6 @@
-package org.serendipity.restapi.database.seed;
+package org.serendipity.restapi.database.seed.au;
 
-import org.serendipity.restapi.type.au.Sex;
-
-public enum AustralianPoliticalParty {
+public enum PoliticalParty {
 
   AUSTRALIAN_GREENS("AG") {
     @Override
@@ -55,19 +53,19 @@ public enum AustralianPoliticalParty {
 
   private final String abbreviation;
 
-  private AustralianPoliticalParty(String abbreviation) {
+  private PoliticalParty(String abbreviation) {
     this.abbreviation = abbreviation;
   }
 
-  public static AustralianPoliticalParty valueOfAbbreviation(String abbreviation) {
+  public static PoliticalParty valueOfAbbreviation(String abbreviation) {
 
-    for (AustralianPoliticalParty e : values()) {
+    for (PoliticalParty e : values()) {
       if (e.abbreviation.equals(abbreviation)) {
         return e;
       }
     }
 
-    return AustralianPoliticalParty.INDEPENDENT;
+    return PoliticalParty.INDEPENDENT;
 
   }
 

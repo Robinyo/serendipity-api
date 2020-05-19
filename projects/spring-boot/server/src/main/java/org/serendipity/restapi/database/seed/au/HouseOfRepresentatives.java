@@ -1,12 +1,15 @@
-package org.serendipity.restapi.database.seed;
+package org.serendipity.restapi.database.seed.au;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.extern.slf4j.Slf4j;
 import org.serendipity.restapi.entity.*;
-import org.serendipity.restapi.repository.AddressRepository;
-import org.serendipity.restapi.repository.IndividualRepository;
-import org.serendipity.restapi.repository.OrganisationRepository;
-import org.serendipity.restapi.repository.RoleRepository;
+import org.serendipity.restapi.repository.*;
 import org.serendipity.restapi.type.PartyType;
+import org.serendipity.restapi.type.au.IdentifierLifecycleStatus;
+import org.serendipity.restapi.type.au.IdentifierType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.Ordered;
@@ -22,31 +25,34 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.Timestamp;
 import java.util.HashSet;
 
 @Component
 @Slf4j
 @Order(Ordered.LOWEST_PRECEDENCE)
-public class AustralianSenate implements CommandLineRunner {
+public class HouseOfRepresentatives implements CommandLineRunner {
 
-  // A senator is a member of the Australian Senate, elected to represent a state or territory. There are 76 senators,
-  // 12 from each state and two each from the Australian Capital Territory and the Northern Territory.
+  static final String PATH = "sample-data/SurnameRepsCSV.csv";
 
-  static final String PATH = "sample-data/allsenel.csv";
-
-  static final int TITLE = 0;
+  static final int HONORIFIC = 0;
   static final int SALUTATION = 1;
-  static final int SURNAME = 2;
-  static final int FIRST_NAME = 3;
-  static final int OTHER_NAME = 4;
-  static final int PREFERRED_NAME = 5;
-  static final int INITIALS = 6;
-  static final int POST_NOMINALS = 7;
-  static final int POLITICAL_PARTY = 9;
-  static final int SEX = 10;
+  static final int POST_NOMINALS = 2;
+  static final int SURNAME = 3;
+  static final int FIRST_NAME = 4;
+  static final int OTHER_NAME = 5;
+  static final int PREFERRED_NAME = 6;
+  static final int INITIALS = 7;
+  static final int ELECTORATE = 8;
+  static final int POLITICAL_PARTY = 10;
+  static final int SEX = 11;
+  // static final int TITLE = 0; // Parliamentary Title,Ministerial Title
 
   @Autowired
   private AddressRepository addressRepository;
+
+  @Autowired
+  private IdentifierRepository identifierRepository;
 
   @Autowired
   private IndividualRepository individualRepository;
@@ -61,9 +67,41 @@ public class AustralianSenate implements CommandLineRunner {
   @Transactional
   public void run(String... args) throws Exception {
 
-    log.info("Loading members of the Australian Senate ...");
+    log.info("Loading members of the House of Representatives ...");
 
     try {
+
+      //
+      // Example Identifier
+      //
+
+      Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+
+      Identifier identifier = Identifier.builder()
+        .type(IdentifierType.ABN.getCode())
+        .value("85 087 326 690")
+        .register(IdentifierType.ABN.getRegister())
+        .lifecycleStatus(IdentifierLifecycleStatus.ACTIVE.toString())
+        .fromDate(currentTime)
+        .build();
+
+      identifierRepository.save(identifier);
+
+      try {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+        log.info("identifier:  {}", "\n" + mapper.writeValueAsString(identifier));
+
+      } catch (JsonProcessingException jpe) {
+
+        log.error("House of Representatives - JSON Processing Exception");
+      }
 
       //
       // Parliament House Address
@@ -72,7 +110,6 @@ public class AustralianSenate implements CommandLineRunner {
       Pageable pageable = PageRequest.of(0, 1);
 
       Page<Address> addresses = addressRepository.findByName("The Senate", pageable);
-
       Address parliamentHouse = addresses.getContent().get(0);
 
       //
@@ -92,7 +129,7 @@ public class AustralianSenate implements CommandLineRunner {
         // Note: No support for strings with embedded comma's, for example: "Commonwealth Parliament Offices, Suite 8"
         String[] fields = line.split(",");
 
-        String displayName = fields[SURNAME] + ", " + fields[TITLE] + " " + fields[FIRST_NAME];
+        String displayName = fields[SURNAME] + ", " + fields[HONORIFIC] + " " + fields[FIRST_NAME];
 
         Party individualParty = Party.builder()
           .type(PartyType.INDIVIDUAL)
@@ -105,7 +142,7 @@ public class AustralianSenate implements CommandLineRunner {
 
         Individual individual = Individual.builder()
           .party(individualParty)
-          .title(fields[TITLE])
+          .title(fields[HONORIFIC])
           .givenName(fields[FIRST_NAME])
           .middleName(fields[OTHER_NAME])
           .familyName(fields[SURNAME])
@@ -117,7 +154,7 @@ public class AustralianSenate implements CommandLineRunner {
           .email(email)
           .phoneNumber("")
           .photoUrl("")
-          // .electorate(fields[ELECTORATE])
+          .electorate(fields[ELECTORATE])
           .build();
 
         individualRepository.save(individual);
@@ -143,7 +180,7 @@ public class AustralianSenate implements CommandLineRunner {
         // "AG" | "ALP" | "CA" | "JLN" | "LP" | "NATS" | "PHON" | "IND
         String abbreviation = fields[POLITICAL_PARTY].toUpperCase();
 
-        AustralianPoliticalParty politicalParty = AustralianPoliticalParty.valueOfAbbreviation(abbreviation);
+        PoliticalParty politicalParty = PoliticalParty.valueOfAbbreviation(abbreviation);
 
         switch (politicalParty) {
 
@@ -192,7 +229,7 @@ public class AustralianSenate implements CommandLineRunner {
 
       buffer.close();
 
-      log.info("Loading members of the Australian Senate complete");
+      log.info("Loading members of the House of Representatives complete");
 
     } catch (IOException | NullPointerException e) {
 
@@ -203,24 +240,23 @@ public class AustralianSenate implements CommandLineRunner {
 
 }
 
-// https://www.aph.gov.au/Senators_and_Members
-// https://www.aph.gov.au/Senators_and_Members/Guidelines_for_Contacting_Senators_and_Members/Address_labels_and_CSV_files
-
-// https://stackoverflow.com/questions/10387329/using-string-representations-of-enum-values-in-switch-case
-// https://www.baeldung.com/java-enum-values
-
-// static final int STATE = 8;
-// static final int ELECTORATE_TELEPHONE = 16;
-
-// Set<Address> addresses = new HashSet<Address>();
-// addresses.add(parliamentHouse);
-
 /*
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+        try {
+
+          ObjectMapper mapper = new ObjectMapper();
+
+          mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+          mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+
+          mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+          log.info("{}", "\n" + mapper.writeValueAsString(individual));
+
+        } catch (JsonProcessingException jpe) {
+
+          log.error("House of Representatives - JSON Processing Exception");
+        }
 
             try {
 
@@ -235,28 +271,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
             } catch (JsonProcessingException jpe) {
 
-              log.error("Australian Senators - JSON Processing Exception");
+              log.error("House of Representatives - JSON Processing Exception");
             }
-
-*/
-
-/*
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-Date dateOfBirth = new SimpleDateFormat("dd/MM/yyyy").parse("01/11/1982");
-.dateOfBirth(dateOfBirth)
-
-*/
-
-/*
-
-    // Auditable auditable = new Auditable();
-
-    Location location = new Location();
-    location.setType("Address");
-    location.setFromDate(timestamp);
-    location.setDisplayName("PO Box 6100 Parliament House Canberra ACT 2600");
 
 */

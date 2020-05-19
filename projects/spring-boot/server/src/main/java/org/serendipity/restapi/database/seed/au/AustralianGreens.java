@@ -1,4 +1,4 @@
-package org.serendipity.restapi.database.seed;
+package org.serendipity.restapi.database.seed.au;
 
 import lombok.extern.slf4j.Slf4j;
 import org.serendipity.restapi.entity.*;
@@ -21,8 +21,8 @@ import java.util.HashSet;
 
 @Component
 @Slf4j
-@Order(6)
-public class LiberalPartyOfAustralia implements CommandLineRunner {
+@Order(10)
+public class AustralianGreens implements CommandLineRunner {
 
   @Autowired
   private AddressRepository addressRepository;
@@ -40,7 +40,7 @@ public class LiberalPartyOfAustralia implements CommandLineRunner {
   @Transactional
   public void run(String... args) throws Exception {
 
-    log.info("Create {} ...", AustralianPoliticalParty.LIBERAL_PARTY_OF_AUSTRALIA.toString());
+    log.info("Create {} ...", PoliticalParty.AUSTRALIAN_GREENS.toString());
 
     try {
 
@@ -52,18 +52,18 @@ public class LiberalPartyOfAustralia implements CommandLineRunner {
 
       Location location = Location.builder()
         .type(LocationType.ADDRESS)
-        .displayName("Cnr Blackall and Macquarie Streets Barton ACT 2612")
+        .displayName("23/85 Northbourne Ave Turner ACT 2612")
         .fromDate(currentTime)
         .build();
 
       Address headOffice = Address.builder()
         .location(location)
-        .name("RG Menzies House")
-        .line1("Cnr Blackall and Macquarie Streets")
+        .name("")
+        .line1("23/85 Northbourne Ave")
         .line2("")
-        .city("Barton")
+        .city("Turner")
         .state("ACT")
-        .postalCode("2600")
+        .postalCode("2612")
         .country("Australia")
         .addressType("Principle Place of Business")
         .build();
@@ -74,17 +74,17 @@ public class LiberalPartyOfAustralia implements CommandLineRunner {
 
       Party individualParty = Party.builder()
         .type(PartyType.INDIVIDUAL)
-        .displayName("Greiner" + ", " + "Nick")
+        .displayName("Hull" + ", " + "Jordan")
         .addresses(new HashSet<Address>())
         .roles(new HashSet<Role>())
         .build();
 
       Individual individual = Individual.builder()
         .party(individualParty)
-        .givenName("Nick")
-        .familyName("Greiner")
+        .givenName("Jordan")
+        .familyName("Hull")
         .sex(Sex.MALE.toString())
-        .email("nick.greiner@liberal.org.au")
+        .email("jordan.hull@greens.org.au")
         .phoneNumber("(02) 6140 3220")
         .build();
 
@@ -95,16 +95,16 @@ public class LiberalPartyOfAustralia implements CommandLineRunner {
       Party organisationParty = Party.builder()
         .type(PartyType.ORGANISATION)
         .legalType(LegalType.OTHER_INCORPORATED_ENTITY.toString())
-        .displayName(AustralianPoliticalParty.LIBERAL_PARTY_OF_AUSTRALIA.toString())
+        .displayName(PoliticalParty.AUSTRALIAN_GREENS.toString())
         .addresses(new HashSet<Address>())
         .roles(new HashSet<Role>())
         .build();
 
       Organisation organisation = Organisation.builder()
         .party(organisationParty)
-        .name(AustralianPoliticalParty.LIBERAL_PARTY_OF_AUSTRALIA.toString())
-        .email("libadm@liberal.org.au")
-        .phoneNumber("(02) 6273 2564")
+        .name(PoliticalParty.AUSTRALIAN_GREENS.toString())
+        .email("greens@greens.org.au")
+        .phoneNumber("(02) 6140 3220")
         .build();
 
       organisationRepository.save(organisation);
@@ -159,7 +159,7 @@ public class LiberalPartyOfAustralia implements CommandLineRunner {
 
       individualRepository.save(individual);
 
-      log.info("Create {} complete", AustralianPoliticalParty.LIBERAL_PARTY_OF_AUSTRALIA.toString());
+      log.info("Create {} complete", PoliticalParty.AUSTRALIAN_GREENS.toString());
 
     } catch (Exception e) {
 

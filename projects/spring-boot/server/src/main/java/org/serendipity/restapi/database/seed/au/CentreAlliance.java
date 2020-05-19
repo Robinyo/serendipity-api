@@ -1,4 +1,4 @@
-package org.serendipity.restapi.database.seed;
+package org.serendipity.restapi.database.seed.au;
 
 import lombok.extern.slf4j.Slf4j;
 import org.serendipity.restapi.entity.*;
@@ -21,8 +21,8 @@ import java.util.HashSet;
 
 @Component
 @Slf4j
-@Order(4)
-public class PaulineHansonsOneNation implements CommandLineRunner {
+@Order(8)
+public class CentreAlliance implements CommandLineRunner {
 
   @Autowired
   private AddressRepository addressRepository;
@@ -40,7 +40,7 @@ public class PaulineHansonsOneNation implements CommandLineRunner {
   @Transactional
   public void run(String... args) throws Exception {
 
-    log.info("Create {} ...", AustralianPoliticalParty.PAULINE_HANSONS_ONE_NATION.toString());
+    log.info("Create {} ...", PoliticalParty.CENTRE_ALLIANCE.toString());
 
     try {
 
@@ -52,18 +52,18 @@ public class PaulineHansonsOneNation implements CommandLineRunner {
 
       Location location = Location.builder()
         .type(LocationType.ADDRESS)
-        .displayName("PO Box 136 Pinkenba QLD 4008")
+        .displayName("Unit 7 169 Unley Rd Unley SA 5061")
         .fromDate(currentTime)
         .build();
 
       Address headOffice = Address.builder()
         .location(location)
         .name("")
-        .line1("PO Box 136")
-        .line2("")
-        .city("Pinkenba")
-        .state("QLD")
-        .postalCode("4008")
+        .line1("Unit 7")
+        .line2("169 Unley Rd")
+        .city("Unley")
+        .state("SA")
+        .postalCode("5061")
         .country("Australia")
         .addressType("Principle Place of Business")
         .build();
@@ -74,18 +74,18 @@ public class PaulineHansonsOneNation implements CommandLineRunner {
 
       Party individualParty = Party.builder()
         .type(PartyType.INDIVIDUAL)
-        .displayName("Miles" + ", " + "Rod")
+        .displayName("Patrick" + ", " + "R")
         .addresses(new HashSet<Address>())
         .roles(new HashSet<Role>())
         .build();
 
       Individual individual = Individual.builder()
         .party(individualParty)
-        .givenName("Rod")
-        .familyName("Miles")
+        .givenName("R")
+        .familyName("Patrick")
         .sex(Sex.MALE.toString())
-        .email("rod.mills@onenation.org.au")
-        .phoneNumber("1300 857 466")
+        .email("r.patrick@centrealliance.org.au")
+        .phoneNumber("(08) 8545 0400")
         .build();
 
       individualRepository.save(individual);
@@ -95,16 +95,16 @@ public class PaulineHansonsOneNation implements CommandLineRunner {
       Party organisationParty = Party.builder()
         .type(PartyType.ORGANISATION)
         .legalType(LegalType.OTHER_INCORPORATED_ENTITY.toString())
-        .displayName(AustralianPoliticalParty.PAULINE_HANSONS_ONE_NATION.toString())
+        .displayName(PoliticalParty.CENTRE_ALLIANCE.toString())
         .addresses(new HashSet<Address>())
         .roles(new HashSet<Role>())
         .build();
 
       Organisation organisation = Organisation.builder()
         .party(organisationParty)
-        .name(AustralianPoliticalParty.PAULINE_HANSONS_ONE_NATION.toString())
-        .email("'hey@onenation.org.au")
-        .phoneNumber("1300 857 466")
+        .name(PoliticalParty.CENTRE_ALLIANCE.toString())
+        .email("hey@centrealliance.org.au")
+        .phoneNumber("(08) 8545 0400")
         .build();
 
       organisationRepository.save(organisation);
@@ -159,7 +159,7 @@ public class PaulineHansonsOneNation implements CommandLineRunner {
 
       individualRepository.save(individual);
 
-      log.info("Create {} complete", AustralianPoliticalParty.PAULINE_HANSONS_ONE_NATION.toString());
+      log.info("Create {} complete", PoliticalParty.CENTRE_ALLIANCE.toString());
 
     } catch (Exception e) {
 
