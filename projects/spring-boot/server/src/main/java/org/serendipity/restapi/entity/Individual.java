@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Builder
@@ -11,7 +12,6 @@ import java.util.Date;
 @NoArgsConstructor
 @Setter
 @Getter
-@Table(indexes = { @Index(name = "FAMILY_NAME_INDEX", columnList = "familyName", unique = false) })
 public class Individual {
 
   // An Individual is a person.
@@ -25,24 +25,12 @@ public class Individual {
   @MapsId
   private Party party;
 
-  private String title;
-
-  private String givenName;
-
-  private String middleName; // otherNames
-
-  @Column(name = "familyName", nullable = false)
-  private String familyName;
-
-  private String honorific;
-
-  private String salutation; // formalSalutation
-
-  private String preferredName; // informalSalutation
-
-  private String initials;
+  @OneToMany(mappedBy = "individual", fetch = FetchType.EAGER)
+  private Set<IndividualName> names;
 
   private String sex;
+
+  private String gender;
 
   private String email;
 
@@ -51,8 +39,6 @@ public class Individual {
   private String photoUrl;
 
   private String electorate;
-
-
 
   @Temporal(TemporalType.DATE)
   private Date dateOfBirth;

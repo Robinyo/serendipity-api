@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.util.Date;
+import java.util.Set;
 
 @Builder
 @AllArgsConstructor
@@ -14,14 +15,7 @@ public class IndividualModel extends RepresentationModel<IndividualModel> {
 
   private Long id;
   private PartyModel party;
-  private String title;
-  private String givenName;
-  private String middleName;
-  private String familyName;
-  private String honorific;
-  private String salutation;
-  private String preferredName;
-  private String initials;
+  private Set<IndividualNameModel> names;
   private Date dateOfBirth;
   private String placeOfBirth;
   private String sex;

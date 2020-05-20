@@ -10,6 +10,7 @@ import org.serendipity.restapi.repository.*;
 import org.serendipity.restapi.type.PartyType;
 import org.serendipity.restapi.type.au.IdentifierLifecycleStatus;
 import org.serendipity.restapi.type.au.IdentifierType;
+import org.serendipity.restapi.type.au.IndividualNameType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.Ordered;
@@ -55,6 +56,9 @@ public class HouseOfRepresentatives implements CommandLineRunner {
   private IdentifierRepository identifierRepository;
 
   @Autowired
+  private IndividualNameRepository individualNameRepository;
+
+  @Autowired
   private IndividualRepository individualRepository;
 
   @Autowired
@@ -71,11 +75,11 @@ public class HouseOfRepresentatives implements CommandLineRunner {
 
     try {
 
+      Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+
       //
       // Example Identifier
       //
-
-      Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 
       Identifier identifier = Identifier.builder()
         .type(IdentifierType.ABN.getCode())
@@ -142,14 +146,7 @@ public class HouseOfRepresentatives implements CommandLineRunner {
 
         Individual individual = Individual.builder()
           .party(individualParty)
-          .title(fields[HONORIFIC])
-          .givenName(fields[FIRST_NAME])
-          .middleName(fields[OTHER_NAME])
-          .familyName(fields[SURNAME])
-          .honorific(fields[POST_NOMINALS])
-          .salutation(fields[SALUTATION])
-          .preferredName(fields[PREFERRED_NAME])
-          .initials(fields[INITIALS])
+          .names(new HashSet<>())
           .sex(fields[SEX])
           .email(email)
           .phoneNumber("")
@@ -158,6 +155,22 @@ public class HouseOfRepresentatives implements CommandLineRunner {
           .build();
 
         individualRepository.save(individual);
+
+        IndividualName individualName = IndividualName.builder()
+          .individual(individual)
+          .type(IndividualNameType.LEGAL_NAME.toString())
+          .title(fields[HONORIFIC])
+          .givenName(fields[FIRST_NAME])
+          .middleName(fields[OTHER_NAME])
+          .familyName(fields[SURNAME])
+          .honorific(fields[POST_NOMINALS])
+          .salutation(fields[SALUTATION])
+          .preferredName(fields[PREFERRED_NAME])
+          .initials(fields[INITIALS])
+          // .fromDate(currentTime)
+          .build();
+
+        individualNameRepository.save(individualName);
 
         Role role = Role.builder()
           .role("Member")
@@ -188,6 +201,7 @@ public class HouseOfRepresentatives implements CommandLineRunner {
           case AUSTRALIAN_LABOR_PARTY:
           case CENTRE_ALLIANCE:
           case JACQUI_LAMBIE_NETWORK:
+          case LIBERAL_NATIONAL_PARTY_OF_QUEENSLAND:
           case LIBERAL_PARTY_OF_AUSTRALIA:
           case NATIONAL_PARTY_OF_AUSTRALIA:
           case PAULINE_HANSONS_ONE_NATION:

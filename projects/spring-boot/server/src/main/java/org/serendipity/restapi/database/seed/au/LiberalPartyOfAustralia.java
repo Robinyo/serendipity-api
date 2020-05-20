@@ -2,12 +2,10 @@ package org.serendipity.restapi.database.seed.au;
 
 import lombok.extern.slf4j.Slf4j;
 import org.serendipity.restapi.entity.*;
-import org.serendipity.restapi.repository.AddressRepository;
-import org.serendipity.restapi.repository.IndividualRepository;
-import org.serendipity.restapi.repository.OrganisationRepository;
-import org.serendipity.restapi.repository.RoleRepository;
+import org.serendipity.restapi.repository.*;
 import org.serendipity.restapi.type.LocationType;
 import org.serendipity.restapi.type.PartyType;
+import org.serendipity.restapi.type.au.IndividualNameType;
 import org.serendipity.restapi.type.au.LegalType;
 import org.serendipity.restapi.type.au.Sex;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +19,7 @@ import java.util.HashSet;
 
 @Component
 @Slf4j
-@Order(6)
+@Order(5)
 public class LiberalPartyOfAustralia implements CommandLineRunner {
 
   @Autowired
@@ -29,6 +27,9 @@ public class LiberalPartyOfAustralia implements CommandLineRunner {
 
   @Autowired
   private IndividualRepository individualRepository;
+
+  @Autowired
+  private IndividualNameRepository individualNameRepository;
 
   @Autowired
   private OrganisationRepository organisationRepository;
@@ -48,12 +49,12 @@ public class LiberalPartyOfAustralia implements CommandLineRunner {
       // Head Office Address
       //
 
-      Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+      // Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 
       Location location = Location.builder()
         .type(LocationType.ADDRESS)
         .displayName("Cnr Blackall and Macquarie Streets Barton ACT 2612")
-        .fromDate(currentTime)
+        // .fromDate(currentTime)
         .build();
 
       Address headOffice = Address.builder()
@@ -70,7 +71,7 @@ public class LiberalPartyOfAustralia implements CommandLineRunner {
 
       addressRepository.save(headOffice);
 
-      // Primary Contact (Individual)
+      // Create the Primary Contact (Individual)
 
       Party individualParty = Party.builder()
         .type(PartyType.INDIVIDUAL)
@@ -81,14 +82,27 @@ public class LiberalPartyOfAustralia implements CommandLineRunner {
 
       Individual individual = Individual.builder()
         .party(individualParty)
-        .givenName("Nick")
-        .familyName("Greiner")
+        .names(new HashSet<>())
         .sex(Sex.MALE.toString())
         .email("nick.greiner@liberal.org.au")
         .phoneNumber("(02) 6140 3220")
         .build();
 
+      // Save the Primary Contact (Individual)
+
       individualRepository.save(individual);
+
+      // Create and save the Primary Contact's names
+
+      IndividualName individualName = IndividualName.builder()
+        .individual(individual)
+        .type(IndividualNameType.LEGAL_NAME.toString())
+        .givenName("Nick")
+        .familyName("Greiner")
+        // .fromDate(currentTime)
+        .build();
+
+      individualNameRepository.save(individualName);
 
       // Organisation
 

@@ -26,6 +26,12 @@ public enum PoliticalParty {
       return "Jacqui Lambie Network";
     }
   },
+  LIBERAL_NATIONAL_PARTY_OF_QUEENSLAND("LNP") {
+    @Override
+    public String toString() {
+      return "Liberal National Party of Queensland";
+    }
+  },
   LIBERAL_PARTY_OF_AUSTRALIA("LP") {
     @Override
     public String toString() {

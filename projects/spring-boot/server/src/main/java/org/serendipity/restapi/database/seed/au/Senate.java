@@ -2,11 +2,9 @@ package org.serendipity.restapi.database.seed.au;
 
 import lombok.extern.slf4j.Slf4j;
 import org.serendipity.restapi.entity.*;
-import org.serendipity.restapi.repository.AddressRepository;
-import org.serendipity.restapi.repository.IndividualRepository;
-import org.serendipity.restapi.repository.OrganisationRepository;
-import org.serendipity.restapi.repository.RoleRepository;
+import org.serendipity.restapi.repository.*;
 import org.serendipity.restapi.type.PartyType;
+import org.serendipity.restapi.type.au.IndividualNameType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.Ordered;
@@ -22,6 +20,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.Timestamp;
 import java.util.HashSet;
 
 @Component
@@ -52,6 +51,9 @@ public class Senate implements CommandLineRunner {
   private IndividualRepository individualRepository;
 
   @Autowired
+  private IndividualNameRepository individualNameRepository;
+
+  @Autowired
   private OrganisationRepository organisationRepository;
 
   @Autowired
@@ -64,6 +66,8 @@ public class Senate implements CommandLineRunner {
     log.info("Loading members of the Senate ...");
 
     try {
+
+      // Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 
       //
       // Parliament House Address
@@ -97,14 +101,26 @@ public class Senate implements CommandLineRunner {
         Party individualParty = Party.builder()
           .type(PartyType.INDIVIDUAL)
           .displayName(displayName)
-          .addresses(new HashSet<Address>())
-          .roles(new HashSet<Role>())
+          .addresses(new HashSet<>())
+          .roles(new HashSet<>())
           .build();
 
         String email = fields[FIRST_NAME].toLowerCase() + "." + fields[SURNAME].toLowerCase() + "@aph.gov.au";
 
         Individual individual = Individual.builder()
           .party(individualParty)
+          .names(new HashSet<>())
+          .sex(fields[SEX])
+          .email(email)
+          .phoneNumber("")
+          .photoUrl("")
+          .build();
+
+        individualRepository.save(individual);
+
+        IndividualName individualName = IndividualName.builder()
+          .individual(individual)
+          .type(IndividualNameType.LEGAL_NAME.toString())
           .title(fields[TITLE])
           .givenName(fields[FIRST_NAME])
           .middleName(fields[OTHER_NAME])
@@ -113,13 +129,10 @@ public class Senate implements CommandLineRunner {
           .salutation(fields[SALUTATION])
           .preferredName(fields[PREFERRED_NAME])
           .initials(fields[INITIALS])
-          .sex(fields[SEX])
-          .email(email)
-          .phoneNumber("")
-          .photoUrl("")
+          // .fromDate(currentTime)
           .build();
 
-        individualRepository.save(individual);
+        individualNameRepository.save(individualName);
 
         Role role = Role.builder()
           .role("Member")
@@ -171,7 +184,7 @@ public class Senate implements CommandLineRunner {
           case INDEPENDENT:
           default:
 
-            // log.info("Political Party: {}", abbreviation);
+            log.info("Political Party: {}", abbreviation);
 
             membership = false;
 

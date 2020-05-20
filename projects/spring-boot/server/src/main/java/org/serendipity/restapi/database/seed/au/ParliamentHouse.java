@@ -33,12 +33,12 @@ public class ParliamentHouse implements CommandLineRunner {
       // Parliament House Address
       //
 
-      Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+      // Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 
       Location location = Location.builder()
         .type(LocationType.ADDRESS)
         .displayName("PO Box 6100 Parliament House Canberra ACT 2600")
-        .fromDate(currentTime)
+        // .fromDate(currentTime)
         .build();
 
       Address parliamentHouse = Address.builder()

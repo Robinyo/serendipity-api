@@ -2,12 +2,10 @@ package org.serendipity.restapi.database.seed.au;
 
 import lombok.extern.slf4j.Slf4j;
 import org.serendipity.restapi.entity.*;
-import org.serendipity.restapi.repository.AddressRepository;
-import org.serendipity.restapi.repository.IndividualRepository;
-import org.serendipity.restapi.repository.OrganisationRepository;
-import org.serendipity.restapi.repository.RoleRepository;
+import org.serendipity.restapi.repository.*;
 import org.serendipity.restapi.type.LocationType;
 import org.serendipity.restapi.type.PartyType;
+import org.serendipity.restapi.type.au.IndividualNameType;
 import org.serendipity.restapi.type.au.LegalType;
 import org.serendipity.restapi.type.au.Sex;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +19,7 @@ import java.util.HashSet;
 
 @Component
 @Slf4j
-@Order(5)
+@Order(4)
 public class NationalPartyOfAustralia implements CommandLineRunner {
 
   @Autowired
@@ -29,6 +27,9 @@ public class NationalPartyOfAustralia implements CommandLineRunner {
 
   @Autowired
   private IndividualRepository individualRepository;
+
+  @Autowired
+  private IndividualNameRepository individualNameRepository;
 
   @Autowired
   private OrganisationRepository organisationRepository;
@@ -48,12 +49,12 @@ public class NationalPartyOfAustralia implements CommandLineRunner {
       // Head Office Address
       //
 
-      Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+      // Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 
       Location location = Location.builder()
         .type(LocationType.ADDRESS)
         .displayName("7 National Circuit Barton ACT 2600")
-        .fromDate(currentTime)
+        // .fromDate(currentTime)
         .build();
 
       Address headOffice = Address.builder()
@@ -70,7 +71,7 @@ public class NationalPartyOfAustralia implements CommandLineRunner {
 
       addressRepository.save(headOffice);
 
-      // Primary Contact (Individual)
+      // Create the Primary Contact (Individual)
 
       Party individualParty = Party.builder()
         .type(PartyType.INDIVIDUAL)
@@ -81,14 +82,27 @@ public class NationalPartyOfAustralia implements CommandLineRunner {
 
       Individual individual = Individual.builder()
         .party(individualParty)
-        .givenName("Larry")
-        .familyName("Anthony")
+        .names(new HashSet<>())
         .sex(Sex.MALE.toString())
         .email("larry.anthony@nationals.org.au")
         .phoneNumber("(02) 6273 3822")
         .build();
 
+      // Save the Primary Contact (Individual)
+
       individualRepository.save(individual);
+
+      // Create and save the Primary Contact's names
+
+      IndividualName individualName = IndividualName.builder()
+        .individual(individual)
+        .type(IndividualNameType.LEGAL_NAME.toString())
+        .givenName("Larry")
+        .familyName("Anthony")
+        // .fromDate(currentTime)
+        .build();
+
+      individualNameRepository.save(individualName);
 
       // Organisation
 

@@ -22,6 +22,12 @@ public enum IdentifierType {
     public String toString() {
       return "Customer Reference Number";
     }
+  },
+  USI("USI", "Australian Government") {
+    @Override
+    public String toString() {
+      return "Unique Student Identifier";
+    }
   };
 
   private final String code;

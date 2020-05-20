@@ -57,7 +57,7 @@ public class Party {
   // See: https://jira.spring.io/browse/DATACMNS-1274
   //
   // @Embedded
-  // private Auditable audit;
+  // private Auditable auditable;
   //
   
   @CreatedBy

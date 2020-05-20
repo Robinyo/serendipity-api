@@ -2,12 +2,10 @@ package org.serendipity.restapi.database.seed.au;
 
 import lombok.extern.slf4j.Slf4j;
 import org.serendipity.restapi.entity.*;
-import org.serendipity.restapi.repository.AddressRepository;
-import org.serendipity.restapi.repository.IndividualRepository;
-import org.serendipity.restapi.repository.OrganisationRepository;
-import org.serendipity.restapi.repository.RoleRepository;
+import org.serendipity.restapi.repository.*;
 import org.serendipity.restapi.type.LocationType;
 import org.serendipity.restapi.type.PartyType;
+import org.serendipity.restapi.type.au.IndividualNameType;
 import org.serendipity.restapi.type.au.LegalType;
 import org.serendipity.restapi.type.au.Sex;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +29,9 @@ public class CentreAlliance implements CommandLineRunner {
   private IndividualRepository individualRepository;
 
   @Autowired
+  private IndividualNameRepository individualNameRepository;
+
+  @Autowired
   private OrganisationRepository organisationRepository;
 
   @Autowired
@@ -48,12 +49,12 @@ public class CentreAlliance implements CommandLineRunner {
       // Head Office Address
       //
 
-      Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+      // Timestamp currentTime = new Timestamp(System.currentTimeMillis());
 
       Location location = Location.builder()
         .type(LocationType.ADDRESS)
         .displayName("Unit 7 169 Unley Rd Unley SA 5061")
-        .fromDate(currentTime)
+        // .fromDate(currentTime)
         .build();
 
       Address headOffice = Address.builder()
@@ -70,7 +71,7 @@ public class CentreAlliance implements CommandLineRunner {
 
       addressRepository.save(headOffice);
 
-      // Primary Contact (Individual)
+      // Create the Primary Contact (Individual)
 
       Party individualParty = Party.builder()
         .type(PartyType.INDIVIDUAL)
@@ -81,14 +82,27 @@ public class CentreAlliance implements CommandLineRunner {
 
       Individual individual = Individual.builder()
         .party(individualParty)
-        .givenName("R")
-        .familyName("Patrick")
+        .names(new HashSet<>())
         .sex(Sex.MALE.toString())
         .email("r.patrick@centrealliance.org.au")
         .phoneNumber("(08) 8545 0400")
         .build();
 
+      // Save the Primary Contact (Individual)
+
       individualRepository.save(individual);
+
+      // Create and save the Primary Contact's names
+
+      IndividualName individualName = IndividualName.builder()
+        .individual(individual)
+        .type(IndividualNameType.LEGAL_NAME.toString())
+        .givenName("R")
+        .familyName("Patrick")
+        // .fromDate(currentTime)
+        .build();
+
+      individualNameRepository.save(individualName);
 
       // Organisation
 
