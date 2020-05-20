@@ -31,18 +31,16 @@ public class IndividualModelAssembler extends RepresentationModelAssemblerSuppor
     IndividualModel model = instantiateModel(entity);
 
     model.setId(entity.getId());
-
     model.setParty(partyModelAssembler.toModel(entity.getParty()));
 
-    // model.setNames(entity.getNames());
-
-    model.setDateOfBirth(entity.getDateOfBirth());
-    model.setPlaceOfBirth(entity.getPlaceOfBirth());
+    model.setNames(toIndividualNameModel(entity.getNames()));
     model.setSex(entity.getSex());
     model.setEmail(entity.getEmail());
     model.setPhoneNumber(entity.getPhoneNumber());
     model.setPhotoUrl(entity.getPhotoUrl());
     model.setElectorate(entity.getElectorate());
+    model.setDateOfBirth(entity.getDateOfBirth());
+    model.setPlaceOfBirth(entity.getPlaceOfBirth());
 
     return model;
   }

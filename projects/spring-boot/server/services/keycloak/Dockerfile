@@ -1,4 +1,4 @@
-FROM jboss/keycloak:9.0.3
+FROM jboss/keycloak:10.0.1
 
 ENV THEME_VERSION 1.0
 

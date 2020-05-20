@@ -47,10 +47,29 @@ public class IndividualController {
 
     log.info("IndividualController /individuals");
 
-    Page<Individual> individuals = repository.findAll(pageable);
-    PagedModel<IndividualModel> individualModels = pagedResourcesAssembler.toModel(individuals, assembler);
+    Page<Individual> entities = repository.findAll(pageable);
+    PagedModel<IndividualModel> models = pagedResourcesAssembler.toModel(entities, assembler);
 
-    return ResponseEntity.ok(individualModels);
+    try {
+
+      ObjectMapper mapper = new ObjectMapper();
+
+      mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+      mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+
+      mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+      // log.info("entity: ");
+      // log.info("{}", "\n" + mapper.writeValueAsString(entities));
+      log.info("models: ");
+      log.info("{}", "\n" + mapper.writeValueAsString(models));
+
+    } catch (JsonProcessingException jpe) {
+
+      log.error("IndividualController - JSON Processing Exception");
+    }
+
+    return ResponseEntity.ok(models);
   }
 
   @GetMapping("/individuals/{id}")

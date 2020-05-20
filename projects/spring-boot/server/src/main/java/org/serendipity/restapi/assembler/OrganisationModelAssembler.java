@@ -23,7 +23,6 @@ public class OrganisationModelAssembler extends RepresentationModelAssemblerSupp
     OrganisationModel model = instantiateModel(entity);
 
     model.setId(entity.getId());
-
     model.setParty(partyModelAssembler.toModel(entity.getParty()));
 
     model.setName(entity.getName());
