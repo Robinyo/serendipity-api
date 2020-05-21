@@ -28,6 +28,8 @@ public class Individual {
 
   // @Embedded
   // private Name name;
+  
+  // @OrderColumn
   @Column(name = "sort", nullable = false)
   private String sort; // IndividualName.familyName
 
