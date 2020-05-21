@@ -67,6 +67,7 @@ public class Individual {
   private String relationshipLifecycleStatus;
 
   // occupation
+  // positions
   
   @Override
   public boolean equals(Object o) {

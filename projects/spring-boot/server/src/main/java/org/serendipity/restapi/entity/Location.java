@@ -77,3 +77,6 @@ public class Location {
   }
 
 }
+
+// https://github.com/GeoscienceAustralia/AS4590-codelists
+// https://toolkit.data.gov.au/Publishing_your_data.html
