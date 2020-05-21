@@ -87,6 +87,7 @@ public class LiberalNationalPartyOfQueensland implements CommandLineRunner {
         .sex(Sex.MALE.toString())
         .email("david.hutchinson@lnp.org.au")
         .phoneNumber("(07) 3844 0666")
+        .sort("Hutchinson")
         .build();
 
       // Save the Primary Contact (Individual)

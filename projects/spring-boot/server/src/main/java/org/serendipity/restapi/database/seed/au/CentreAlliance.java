@@ -86,6 +86,7 @@ public class CentreAlliance implements CommandLineRunner {
         .sex(Sex.MALE.toString())
         .email("r.patrick@centrealliance.org.au")
         .phoneNumber("(08) 8545 0400")
+        .sort("Patrick")
         .build();
 
       // Save the Primary Contact (Individual)

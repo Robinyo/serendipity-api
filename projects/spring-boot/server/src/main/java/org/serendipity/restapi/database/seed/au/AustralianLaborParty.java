@@ -87,6 +87,7 @@ public class AustralianLaborParty implements CommandLineRunner {
         .sex(Sex.MALE.toString())
         .email("wayne.swan@alp.org.au")
         .phoneNumber("(02) 6120 0800")
+        .sort("Swan")
         .build();
 
       // Save the Primary Contact (Individual)

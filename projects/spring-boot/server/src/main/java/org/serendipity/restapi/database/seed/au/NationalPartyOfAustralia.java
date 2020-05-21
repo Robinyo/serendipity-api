@@ -86,6 +86,7 @@ public class NationalPartyOfAustralia implements CommandLineRunner {
         .sex(Sex.MALE.toString())
         .email("larry.anthony@nationals.org.au")
         .phoneNumber("(02) 6273 3822")
+        .sort("Anthony")
         .build();
 
       // Save the Primary Contact (Individual)

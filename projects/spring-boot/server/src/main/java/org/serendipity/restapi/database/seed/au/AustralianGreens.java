@@ -86,6 +86,7 @@ public class AustralianGreens implements CommandLineRunner {
         .sex(Sex.MALE.toString())
         .email("jordan.hull@greens.org.au")
         .phoneNumber("(02) 6140 3220")
+        .sort("Hull")
         .build();
 
       // Save the Primary Contact (Individual)

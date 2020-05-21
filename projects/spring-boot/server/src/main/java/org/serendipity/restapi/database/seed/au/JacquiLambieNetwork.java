@@ -86,6 +86,7 @@ public class JacquiLambieNetwork implements CommandLineRunner {
         .sex(Sex.MALE.toString())
         .email("glynn.williams@lambienetwork.com.au")
         .phoneNumber("(03) 6431 3112")
+        .sort("Williams")
         .build();
 
       // Save the Primary Contact (Individual)

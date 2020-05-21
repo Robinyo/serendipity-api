@@ -86,6 +86,7 @@ public class LiberalPartyOfAustralia implements CommandLineRunner {
         .sex(Sex.MALE.toString())
         .email("nick.greiner@liberal.org.au")
         .phoneNumber("(02) 6140 3220")
+        .sort("Greiner")
         .build();
 
       // Save the Primary Contact (Individual)

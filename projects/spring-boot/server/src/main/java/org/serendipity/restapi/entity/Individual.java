@@ -12,6 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Setter
 @Getter
+@Table(indexes = { @Index(name = "SORT_INDEX", columnList = "sort", unique = false) })
 public class Individual {
 
   // An Individual is a person.
@@ -24,6 +25,14 @@ public class Individual {
   @JoinColumn(name = "partyId")
   @MapsId
   private Party party;
+
+  // @Embedded
+  // private Name name;
+  @Column(name = "sort", nullable = false)
+  private String sort; // IndividualName.familyName
+
+  // You cannot limit the size of a @OneToMany collection
+  // See: https://vladmihalcea.com/the-best-way-to-map-a-onetomany-association-with-jpa-and-hibernate/
 
   @OneToMany(mappedBy = "individual", fetch = FetchType.EAGER)
   private Set<IndividualName> names;

@@ -114,6 +114,7 @@ public class Senate implements CommandLineRunner {
           .email(email)
           .phoneNumber("")
           .photoUrl("")
+          .sort(fields[SURNAME])
           .build();
 
         individualRepository.save(individual);

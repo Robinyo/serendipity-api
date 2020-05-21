@@ -10,7 +10,9 @@ import org.serendipity.restapi.entity.Individual;
 import org.serendipity.restapi.model.IndividualModel;
 import org.serendipity.restapi.repository.IndividualRepository;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.rest.webmvc.BasePathAwareController;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
@@ -46,6 +48,9 @@ public class IndividualController {
   public ResponseEntity<PagedModel<IndividualModel>> findAll(Pageable pageable) {
 
     log.info("IndividualController /individuals");
+
+    // Pageable sort = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
+    //   Sort.by("IndividualName.familyName").ascending());
 
     Page<Individual> entities = repository.findAll(pageable);
     PagedModel<IndividualModel> models = pagedResourcesAssembler.toModel(entities, assembler);

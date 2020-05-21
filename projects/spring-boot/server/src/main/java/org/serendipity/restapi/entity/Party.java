@@ -21,8 +21,12 @@ import java.util.Set;
 @EntityListeners(AuditingEntityListener.class)
 public class Party {
 
+  // When using Hibernate, the IDENTITY generator is not a good choice since it disables JDBC batching.
+  // See: https://vladmihalcea.com/14-high-performance-java-persistence-tips/
+
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  // @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE)
   @Column(name = "id", nullable = false)
   private Long id;
 
@@ -96,8 +100,9 @@ public class Party {
 
 }
 
-// https://google.github.io/styleguide/javaguide.html
+// https://vladmihalcea.com/14-high-performance-java-persistence-tips/
 
+// https://google.github.io/styleguide/javaguide.html
 // https://stackoverflow.com/questions/34241718/lombok-builder-and-jpa-default-constructor/35602246#35602246
 
 /* 

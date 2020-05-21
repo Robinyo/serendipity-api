@@ -32,8 +32,6 @@ public class Organisation {
 
   private String phoneNumber;
 
-
-
   @Temporal(TemporalType.DATE)
   private Date establishmentDate;
 

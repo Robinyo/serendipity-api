@@ -86,6 +86,7 @@ public class PaulineHansonsOneNation implements CommandLineRunner {
         .sex(Sex.MALE.toString())
         .email("rod.mills@onenation.org.au")
         .phoneNumber("1300 857 466")
+        .sort("Miles")
         .build();
 
       // Save the Primary Contact (Individual)

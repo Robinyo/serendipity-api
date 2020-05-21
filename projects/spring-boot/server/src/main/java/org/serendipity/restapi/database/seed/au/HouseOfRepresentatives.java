@@ -152,6 +152,7 @@ public class HouseOfRepresentatives implements CommandLineRunner {
           .phoneNumber("")
           .photoUrl("")
           .electorate(fields[ELECTORATE])
+          .sort(fields[SURNAME])
           .build();
 
         individualRepository.save(individual);
