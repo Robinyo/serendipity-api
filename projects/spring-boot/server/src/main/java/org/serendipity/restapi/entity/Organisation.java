@@ -26,6 +26,7 @@ public class Organisation {
   @MapsId
   private Party party;
 
+  // @OrderColumn
   private String name;
 
   private String email;

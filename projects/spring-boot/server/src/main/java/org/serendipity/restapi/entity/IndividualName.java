@@ -33,18 +33,22 @@ public class IndividualName {
 
   private String givenName;
 
+  private String preferredGivenName;
+
   private String middleName;    // otherNames
+
+  private String initials;
 
   @Column(name = "familyName", nullable = false)
   private String familyName;
 
-  private String honorific;
-
-  private String salutation;    // formalSalutation
+  private String preferredFamilyName;
 
   private String preferredName; // informalSalutation
 
-  private String initials;
+  private String honorific;     // name suffix
+
+  private String salutation;    // formalSalutation
 
   @Temporal(TemporalType.TIMESTAMP)
   private Date fromDate;

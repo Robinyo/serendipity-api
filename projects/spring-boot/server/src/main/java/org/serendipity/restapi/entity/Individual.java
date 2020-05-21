@@ -28,7 +28,7 @@ public class Individual {
 
   // @Embedded
   // private Name name;
-  
+
   // @OrderColumn
   @Column(name = "sort", nullable = false)
   private String sort; // IndividualName.familyName
@@ -53,11 +53,20 @@ public class Individual {
 
   @Temporal(TemporalType.DATE)
   private Date dateOfBirth;
-
   private String placeOfBirth;
+  private String countryOfBirth;
 
   @Temporal(TemporalType.DATE)
   private Date dateOfDeath;
+  private String placeOfDeath;
+  private String countryOfDeath;
+
+  // citizenship
+  // residences
+
+  private String relationshipLifecycleStatus;
+
+  // occupation
   
   @Override
   public boolean equals(Object o) {
