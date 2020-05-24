@@ -61,13 +61,13 @@ public class Electorate implements CommandLineRunner {
         String[] fields = line.split(",");
 
         // 20 July 2018
-        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH);
+        // SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH);
 
         ElectoralDivision electoralDivision = ElectoralDivision.builder()
           .name(fields[NAME])
-          .state(fields[STATE])
-          .area(fields[AREA])
-          .dateGazetted(formatter.parse(fields[DATE_GAZETTED]))
+          // .state(fields[STATE])
+          // .area(fields[AREA])
+          // .dateGazetted(formatter.parse(fields[DATE_GAZETTED]))
           .latitude(fields[LATITUDE])
           .longitude(fields[LONGITUDE])
           .build();
@@ -93,3 +93,11 @@ public class Electorate implements CommandLineRunner {
   }
 
 }
+
+// https://www.aec.gov.au/profiles/
+
+// https://en.wikipedia.org/wiki/Divisions_of_the_Australian_House_of_Representatives
+
+// http://psephos.adam-carr.net/
+
+
