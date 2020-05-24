@@ -64,14 +64,14 @@ public class IndividualController {
 
       mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-      // log.info("entity: ");
+      // log.info("entities: ");
       // log.info("{}", "\n" + mapper.writeValueAsString(entities));
       log.info("models: ");
       log.info("{}", "\n" + mapper.writeValueAsString(models));
 
     } catch (JsonProcessingException jpe) {
 
-      log.error("IndividualController - JSON Processing Exception");
+      log.error("IndividualController /individuals JPE: {}", jpe.getLocalizedMessage());
     }
 
     return ResponseEntity.ok(models);
@@ -99,14 +99,12 @@ public class IndividualController {
 
       mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-      log.info("entity: ");
-      log.info("{}", "\n" + mapper.writeValueAsString(entity));
-      log.info("model: ");
-      log.info("{}", "\n" + mapper.writeValueAsString(model));
+      log.info("entity: {}", "\n" + mapper.writeValueAsString(entity));
+      log.info("model: {}", "\n" + mapper.writeValueAsString(model));
 
     } catch (JsonProcessingException jpe) {
 
-      log.error("IndividualController - JSON Processing Exception");
+      log.error("IndividualController /individuals/{id} JPE: {}", jpe.getLocalizedMessage());
     }
 
     return ResponseEntity.ok(model);

@@ -1,5 +1,6 @@
 package org.serendipity.restapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public class IndividualName {
   @Column(name = "id", nullable = false)
   private Long id;
 
+  @JsonIgnore
   @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "individualId", nullable = false)
   private Individual individual;
