@@ -19,7 +19,7 @@ import java.util.HashSet;
 
 @Component
 @Slf4j
-@Order(7)
+@Order(2)
 public class JacquiLambieNetwork implements CommandLineRunner {
 
   @Autowired

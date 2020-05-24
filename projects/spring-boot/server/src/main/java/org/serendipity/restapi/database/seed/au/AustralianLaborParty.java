@@ -19,7 +19,7 @@ import java.util.HashSet;
 
 @Component
 @Slf4j
-@Order(9)
+@Order(2)
 public class AustralianLaborParty implements CommandLineRunner {
 
 

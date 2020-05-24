@@ -29,6 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   protected void configureDevelopment(HttpSecurity http) throws Exception {
 
+    // SPRING_MVC_STATIC_PATH_PATTERN=/docs/**
+
     http.cors().and()
       .authorizeRequests()
       .antMatchers("/h2-console/**").permitAll()
@@ -40,8 +42,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   }
 
   protected void configureProduction(HttpSecurity http) throws Exception {
-
-    // http.cors().and().csrf().disable().authorizeRequests().anyRequest().authenticated();
     http.cors().and().authorizeRequests().anyRequest().authenticated();
   }
 
@@ -61,6 +61,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   }
 
 }
+
+// http.cors().and().csrf().disable().authorizeRequests().anyRequest().authenticated();
 
 // https://auth0.com/blog/implementing-jwt-authentication-on-spring-boot/
 

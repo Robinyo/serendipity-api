@@ -19,7 +19,7 @@ import java.util.HashSet;
 
 @Component
 @Slf4j
-@Order(8)
+@Order(2)
 public class CentreAlliance implements CommandLineRunner {
 
   @Autowired

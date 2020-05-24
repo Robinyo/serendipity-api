@@ -19,7 +19,7 @@ import java.util.HashSet;
 
 @Component
 @Slf4j
-@Order(3)
+@Order(2)
 public class PaulineHansonsOneNation implements CommandLineRunner {
 
   @Autowired

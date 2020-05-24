@@ -19,7 +19,7 @@ import java.util.HashSet;
 
 @Component
 @Slf4j
-@Order(6)
+@Order(2)
 public class LiberalNationalPartyOfQueensland implements CommandLineRunner {
 
 

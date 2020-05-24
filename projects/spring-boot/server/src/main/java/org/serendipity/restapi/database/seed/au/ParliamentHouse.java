@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 
 @Component
 @Slf4j
-@Order(2)
+@Order(1)
 public class ParliamentHouse implements CommandLineRunner {
 
   @Autowired

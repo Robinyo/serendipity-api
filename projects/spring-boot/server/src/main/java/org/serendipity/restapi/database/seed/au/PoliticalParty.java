@@ -76,3 +76,6 @@ public enum PoliticalParty {
   }
 
 }
+
+// https://www.aec.gov.au/Electorates/party-codes.htm
+

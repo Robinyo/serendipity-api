@@ -73,6 +73,8 @@ public class HouseOfRepresentatives implements CommandLineRunner {
 
     log.info("Loading members of the House of Representatives ...");
 
+    BufferedReader buffer = null;
+
     try {
 
       Timestamp currentTime = new Timestamp(System.currentTimeMillis());
@@ -122,11 +124,11 @@ public class HouseOfRepresentatives implements CommandLineRunner {
 
       InputStream resource = new ClassPathResource(PATH).getInputStream();
 
-      BufferedReader buffer = new BufferedReader(new InputStreamReader(resource));
+      buffer = new BufferedReader(new InputStreamReader(resource));
 
       String line = buffer.readLine();
 
-      log.info("Header: {}", line);
+      // log.info("Header: {}", line);
 
       while ((line = buffer.readLine()) != null && !line.isEmpty()) {
 
@@ -242,13 +244,18 @@ public class HouseOfRepresentatives implements CommandLineRunner {
 
       }
 
-      buffer.close();
-
       log.info("Loading members of the House of Representatives complete");
 
     } catch (IOException | NullPointerException e) {
 
       log.error("{}", e.getLocalizedMessage());
+
+    } finally {
+
+      if (buffer != null) {
+        buffer.close();
+      }
+
     }
 
   }

@@ -19,7 +19,7 @@ import java.util.HashSet;
 
 @Component
 @Slf4j
-@Order(10)
+@Order(2)
 public class AustralianGreens implements CommandLineRunner {
 
   @Autowired
