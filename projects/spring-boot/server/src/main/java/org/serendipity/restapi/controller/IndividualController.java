@@ -64,10 +64,8 @@ public class IndividualController {
 
       mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-      // log.info("entities: ");
-      // log.info("{}", "\n" + mapper.writeValueAsString(entities));
-      log.info("models: ");
-      log.info("{}", "\n" + mapper.writeValueAsString(models));
+      // log.info("entities: {}", "\n" + mapper.writeValueAsString(entities));
+      log.info("models: {}", "\n" + mapper.writeValueAsString(models));
 
     } catch (JsonProcessingException jpe) {
 
