@@ -10,7 +10,7 @@ public interface OrganisationRepository extends PagingAndSortingRepository<Organ
   Page<Organisation> findAll(Pageable pageable);
 
   Page<Organisation> findByName(String name, Pageable pageable);
-  Page<Organisation> findByNameStartsWith(String name, Pageable pageable);
+  // Page<Organisation> findByNameStartsWith(String name, Pageable pageable);
 
 }
 

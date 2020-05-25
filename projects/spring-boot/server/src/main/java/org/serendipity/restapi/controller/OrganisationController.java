@@ -1,9 +1,5 @@
 package org.serendipity.restapi.controller;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.extern.slf4j.Slf4j;
 import org.serendipity.restapi.assembler.OrganisationModelAssembler;
 import org.serendipity.restapi.entity.Organisation;
@@ -23,11 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @BasePathAwareController
 @Slf4j
-public class OrganisationController {
-
-  private final OrganisationRepository repository;
-  private final OrganisationModelAssembler assembler;
-  private final PagedResourcesAssembler<Organisation> pagedResourcesAssembler;
+public class OrganisationController extends Controller<Organisation, OrganisationRepository, OrganisationModelAssembler>{
 
   // Suppress IntelliJ IDEA Error: Could not autowire. No beans of 'PagedResourcesAssembler<Individual>' type found.
   @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
@@ -35,9 +27,7 @@ public class OrganisationController {
                                 OrganisationModelAssembler assembler,
                                 PagedResourcesAssembler<Organisation> pagedResourcesAssembler) {
 
-    this.repository = repository;
-    this.assembler = assembler;
-    this.pagedResourcesAssembler = pagedResourcesAssembler;
+    super(repository, assembler, pagedResourcesAssembler);
   }
 
   @GetMapping("/organisations")
@@ -45,10 +35,12 @@ public class OrganisationController {
 
     log.info("OrganisationController /organisations");
 
-    Page<Organisation> organisations = repository.findAll(pageable);
-    PagedModel<OrganisationModel> organisationModels = pagedResourcesAssembler.toModel(organisations, assembler);
+    Page<Organisation> entities = repository.findAll(pageable);
+    PagedModel<OrganisationModel> models = pagedResourcesAssembler.toModel(entities, assembler);
 
-    return ResponseEntity.ok(organisationModels);
+    // logInfo(entities, models);
+
+    return ResponseEntity.ok(models);
   }
 
   @GetMapping("/organisations/{id}")
@@ -63,24 +55,7 @@ public class OrganisationController {
 
     OrganisationModel model = assembler.toModel(entity);
 
-    try {
-
-      ObjectMapper mapper = new ObjectMapper();
-
-      mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-      mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-
-      mapper.enable(SerializationFeature.INDENT_OUTPUT);
-
-      log.info("entity: ");
-      log.info("{}", "\n" + mapper.writeValueAsString(entity));
-      log.info("model: ");
-      log.info("{}", "\n" + mapper.writeValueAsString(model));
-
-    } catch (JsonProcessingException jpe) {
-
-      log.error("OrganisationController - JSON Processing Exception");
-    }
+    logInfo(entity, model);
 
     return ResponseEntity.ok(model);
   }

@@ -1,32 +1,79 @@
 package org.serendipity.restapi.controller;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.extern.slf4j.Slf4j;
 import org.serendipity.restapi.assembler.IndividualModelAssembler;
 import org.serendipity.restapi.entity.Individual;
 import org.serendipity.restapi.model.IndividualModel;
 import org.serendipity.restapi.repository.IndividualRepository;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.rest.webmvc.BasePathAwareController;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 
 @BasePathAwareController
 @Slf4j
-public class IndividualController {
+public class IndividualController extends Controller<Individual, IndividualRepository, IndividualModelAssembler> {
+
+  // Suppress IntelliJ IDEA Error: Could not autowire. No beans of 'PagedResourcesAssembler<Individual>' type found.
+  @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+  public IndividualController(IndividualRepository repository,
+                              IndividualModelAssembler assembler,
+                              PagedResourcesAssembler<Individual> pagedResourcesAssembler) {
+
+    super(repository, assembler, pagedResourcesAssembler);
+  }
+
+  @GetMapping("/individuals")
+  @PreAuthorize("hasAuthority('SCOPE_individual:read')")
+  public ResponseEntity<PagedModel<IndividualModel>> findAll(Pageable pageable) {
+
+    log.info("IndividualController /individuals");
+
+    Page<Individual> entities = repository.findAll(pageable);
+    PagedModel<IndividualModel> models = pagedResourcesAssembler.toModel(entities, assembler);
+
+    // logInfo(entities, models);
+
+    return ResponseEntity.ok(models);
+  }
+
+  @GetMapping("/individuals/{id}")
+  @PreAuthorize("hasAuthority('SCOPE_individual:read')")
+  public ResponseEntity<IndividualModel> findById(
+      @PathVariable("id") final Long id) throws ResponseStatusException {
+
+    log.info("IndividualController /individuals/{id}");
+
+    Individual entity = repository.findById(id).orElseThrow(() ->
+        new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+    IndividualModel model = assembler.toModel(entity);
+
+    logInfo(entity, model);
+
+    return ResponseEntity.ok(model);
+  }
+
+}
+
+// https://github.com/spring-projects/spring-hateoas-examples
+
+// https://docs.spring.io/spring-data/data-commons/docs/current/reference/html/#core.web.pageables
+
+
+
+
+
+/*
+
+public class IndividualController extends Controller<Individual> {
 
   private final IndividualRepository repository;
   private final IndividualModelAssembler assembler;
@@ -48,9 +95,6 @@ public class IndividualController {
   public ResponseEntity<PagedModel<IndividualModel>> findAll(Pageable pageable) {
 
     log.info("IndividualController /individuals");
-
-    // Pageable sort = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
-    //   Sort.by("IndividualName.familyName").ascending());
 
     Page<Individual> entities = repository.findAll(pageable);
     PagedModel<IndividualModel> models = pagedResourcesAssembler.toModel(entities, assembler);
@@ -77,7 +121,6 @@ public class IndividualController {
 
   @GetMapping("/individuals/{id}")
   @PreAuthorize("hasAuthority('SCOPE_individual:read')")
-  @Transactional
   public ResponseEntity<IndividualModel> findById(
       @PathVariable("id") final Long id) throws ResponseStatusException {
 
@@ -110,22 +153,17 @@ public class IndividualController {
 
 }
 
-// ObjectMapper requires @Transactional else JsonProcessingException :(
+*/
 
 /*
+
+    // Pageable sort = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
+    //   Sort.by("IndividualName.familyName").ascending());
 
     // log.info("IndividualController /individuals individuals: {}", individuals);
     // log.info("IndividualController /individuals individualModels: {}", individualModels);
 
 */
-
-
-
-
-
-// https://github.com/spring-projects/spring-hateoas-examples
-
-// https://docs.spring.io/spring-data/data-commons/docs/current/reference/html/#core.web.pageables
 
 /*
 
