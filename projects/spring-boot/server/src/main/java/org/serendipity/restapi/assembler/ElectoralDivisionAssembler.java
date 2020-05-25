@@ -25,7 +25,7 @@ public class ElectoralDivisionAssembler extends RepresentationModelAssemblerSupp
     model.setArea(entity.getArea());
     model.setLocationDescription(entity.getLocationDescription());
     model.setDateGazetted(entity.getDateGazetted());
-    model.setLatitude(entity.getLongitude());
+    model.setLatitude(entity.getLatitude());
     model.setLongitude(entity.getLongitude());
 
     return model;

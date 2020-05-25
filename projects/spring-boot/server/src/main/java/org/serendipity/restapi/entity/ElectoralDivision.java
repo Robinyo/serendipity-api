@@ -1,7 +1,6 @@
 package org.serendipity.restapi.entity;
 
 import lombok.*;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,7 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Setter
 @Getter
-@EntityListeners(AuditingEntityListener.class)
+@Table(indexes = { @Index(name = "NAME_INDEX", columnList = "name", unique = true) })
 public class ElectoralDivision {
 
   @Id
