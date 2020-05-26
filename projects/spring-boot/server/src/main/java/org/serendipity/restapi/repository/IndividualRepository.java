@@ -9,10 +9,8 @@ public interface IndividualRepository extends PagingAndSortingRepository<Individ
 
   Page<Individual> findAll(Pageable pageable);
 
-  Page<Individual> findBySortStartsWith(String name, Pageable pageable);
+  Page<Individual> findByNameFamilyNameStartsWith(String name, Pageable pageable);
 
 }
 
 // https://docs.spring.io/spring-data/rest/docs/current/reference/html/#paging-and-sorting
-
-// Page<Individual> findByFamilyNameStartsWith(String name, Pageable pageable);

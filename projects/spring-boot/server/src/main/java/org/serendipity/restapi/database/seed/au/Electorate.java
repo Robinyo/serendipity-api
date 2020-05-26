@@ -13,8 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 @Component
 @Slf4j
@@ -57,7 +55,7 @@ public class Electorate implements CommandLineRunner {
 
       while ((line = buffer.readLine()) != null && !line.isEmpty()) {
 
-        // Note: No support for strings with embedded comma's
+        // Note: No support for strings with embedded commas
         String[] fields = line.split(",");
 
         // 20 July 2018

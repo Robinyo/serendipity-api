@@ -46,6 +46,80 @@ public class IndividualModelAssembler extends RepresentationModelAssemblerSuppor
       model.setPhotoUrl("female-avatar.svg");
     }
 
+    // "photos/albanese-anthony.jpg"
+    String url = "photos/" + entity.getName().getFamilyName().toLowerCase() + "-" +
+      entity.getName().getGivenName().toLowerCase() + ".jpg";
+
+    if (new ClassPathResource("public/" + url).exists()) {
+      model.setPhotoUrl(url);
+    }
+
+    // log.info("photoUrl: {}", model.getPhotoUrl());
+
+    model.setElectorate(entity.getElectorate());
+    model.setDateOfBirth(entity.getDateOfBirth());
+    model.setPlaceOfBirth(entity.getPlaceOfBirth());
+
+    return model;
+  }
+
+  private Set<IndividualNameModel> toIndividualNameModel(Set<IndividualName> names) {
+
+    if (names.isEmpty()) {
+      return Collections.emptySet();
+    }
+
+    return names.stream()
+      .map(individualName -> IndividualNameModel.builder()
+        .id(individualName.getId())
+        .type(individualName.getType())
+        .title(individualName.getName().getTitle())
+        .givenName(individualName.getName().getGivenName())
+        .middleName(individualName.getName().getMiddleName())
+        .familyName(individualName.getName().getFamilyName())
+        .honorific(individualName.getName().getHonorific())
+        .salutation(individualName.getName().getSalutation())
+        .preferredName(individualName.getName().getPreferredName())
+        .initials(individualName.getName().getInitials())
+        .fromDate(individualName.getFromDate())
+        .toDate(individualName.getToDate())
+        .build())
+      .collect(Collectors.toSet());
+
+  }
+
+}
+
+/*
+
+public class IndividualModelAssembler extends RepresentationModelAssemblerSupport<Individual, IndividualModel> {
+
+  @Autowired
+  private PartyModelAssembler partyModelAssembler;
+
+  public IndividualModelAssembler() {
+    super(IndividualController.class, IndividualModel.class);
+  }
+
+  @Override
+  public IndividualModel toModel(Individual entity) {
+
+    IndividualModel model = instantiateModel(entity);
+
+    model.setId(entity.getId());
+    model.setParty(partyModelAssembler.toModel(entity.getParty()));
+
+    model.setNames(toIndividualNameModel(entity.getNames()));
+    model.setSex(entity.getSex());
+    model.setEmail(entity.getEmail());
+    model.setPhoneNumber(entity.getPhoneNumber());
+
+    model.setPhotoUrl("male-avatar.svg");
+
+    if (entity.getSex().equals(Sex.FEMALE.toString())) {
+      model.setPhotoUrl("female-avatar.svg");
+    }
+
     for (IndividualName individualName : entity.getNames()) {
 
       if (individualName.getType().equals(IndividualNameType.LEGAL_NAME.toString())) {
@@ -98,3 +172,5 @@ public class IndividualModelAssembler extends RepresentationModelAssemblerSuppor
   }
 
 }
+
+*/

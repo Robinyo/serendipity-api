@@ -10,7 +10,6 @@ import org.serendipity.restapi.repository.*;
 import org.serendipity.restapi.type.PartyType;
 import org.serendipity.restapi.type.au.IdentifierLifecycleStatus;
 import org.serendipity.restapi.type.au.IdentifierType;
-import org.serendipity.restapi.type.au.IndividualNameType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.Ordered;
@@ -54,9 +53,6 @@ public class HouseOfRepresentatives implements CommandLineRunner {
 
   @Autowired
   private IdentifierRepository identifierRepository;
-
-  @Autowired
-  private IndividualNameRepository individualNameRepository;
 
   @Autowired
   private IndividualRepository individualRepository;
@@ -132,36 +128,10 @@ public class HouseOfRepresentatives implements CommandLineRunner {
 
       while ((line = buffer.readLine()) != null && !line.isEmpty()) {
 
-        // Note: No support for strings with embedded comma's, for example: "Commonwealth Parliament Offices, Suite 8"
+        // Note: No support for strings with embedded commas, for example: "Commonwealth Parliament Offices, Suite 8"
         String[] fields = line.split(",");
 
-        String displayName = fields[SURNAME] + ", " + fields[HONORIFIC] + " " + fields[FIRST_NAME];
-
-        Party individualParty = Party.builder()
-          .type(PartyType.INDIVIDUAL)
-          .displayName(displayName)
-          .addresses(new HashSet<Address>())
-          .roles(new HashSet<Role>())
-          .build();
-
-        String email = fields[FIRST_NAME].toLowerCase() + "." + fields[SURNAME].toLowerCase() + "@aph.gov.au";
-
-        Individual individual = Individual.builder()
-          .party(individualParty)
-          .names(new HashSet<>())
-          .sex(fields[SEX])
-          .email(email)
-          .phoneNumber("")
-          .photoUrl("")
-          .electorate(fields[ELECTORATE])
-          .sort(fields[SURNAME])
-          .build();
-
-        individualRepository.save(individual);
-
-        IndividualName individualName = IndividualName.builder()
-          .individual(individual)
-          .type(IndividualNameType.LEGAL_NAME.toString())
+        Name name = Name.builder()
           .title(fields[HONORIFIC])
           .givenName(fields[FIRST_NAME])
           .middleName(fields[OTHER_NAME])
@@ -170,10 +140,30 @@ public class HouseOfRepresentatives implements CommandLineRunner {
           .salutation(fields[SALUTATION])
           .preferredName(fields[PREFERRED_NAME])
           .initials(fields[INITIALS])
-          // .fromDate(currentTime)
           .build();
 
-        individualNameRepository.save(individualName);
+        String displayName = name.getFamilyName() + ", " + name.getTitle() + " " + name.getGivenName();
+
+        Party individualParty = Party.builder()
+          .type(PartyType.INDIVIDUAL)
+          .displayName(displayName)
+          .addresses(new HashSet<Address>())
+          .roles(new HashSet<Role>())
+          .build();
+
+        String email = name.getGivenName().toLowerCase() + "." + name.getFamilyName().toLowerCase() + "@aph.gov.au";
+
+        Individual individual = Individual.builder()
+          .party(individualParty)
+          .name(name)
+          .sex(fields[SEX])
+          .email(email)
+          .phoneNumber("")
+          .photoUrl("")
+          .electorate(fields[ELECTORATE])
+          .build();
+
+        individualRepository.save(individual);
 
         Role role = Role.builder()
           .role("Member")
@@ -261,39 +251,3 @@ public class HouseOfRepresentatives implements CommandLineRunner {
   }
 
 }
-
-/*
-
-        try {
-
-          ObjectMapper mapper = new ObjectMapper();
-
-          mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-          mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-
-          mapper.enable(SerializationFeature.INDENT_OUTPUT);
-
-          log.info("{}", "\n" + mapper.writeValueAsString(individual));
-
-        } catch (JsonProcessingException jpe) {
-
-          log.error("House of Representatives - JSON Processing Exception");
-        }
-
-            try {
-
-              ObjectMapper mapper = new ObjectMapper();
-
-              mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-              mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-
-              mapper.enable(SerializationFeature.INDENT_OUTPUT);
-
-              log.info("{}", "\n" + mapper.writeValueAsString(organisation));
-
-            } catch (JsonProcessingException jpe) {
-
-              log.error("House of Representatives - JSON Processing Exception");
-            }
-
-*/

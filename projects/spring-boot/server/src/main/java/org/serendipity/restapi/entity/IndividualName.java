@@ -12,7 +12,6 @@ import java.util.Date;
 @NoArgsConstructor
 @Setter
 @Getter
-@Table(indexes = { @Index(name = "FAMILY_NAME_INDEX", columnList = "familyName", unique = false) })
 public class IndividualName {
 
   @Id
@@ -25,8 +24,23 @@ public class IndividualName {
   @JoinColumn(name = "individualId", nullable = false)
   private Individual individual;
 
-  // @Embedded
-  // private Name name;
+  @Column(name = "type", nullable = false)
+  private String type;
+
+  @Embedded
+  private Name name;
+
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date fromDate;
+
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date toDate;
+
+}
+
+// @Table(indexes = { @Index(name = "FAMILY_NAME_INDEX", columnList = "familyName", unique = false) })
+
+/*
 
   @Column(name = "type", nullable = false)
   private String type;
@@ -52,13 +66,7 @@ public class IndividualName {
 
   private String salutation;    // formalSalutation
 
-  @Temporal(TemporalType.TIMESTAMP)
-  private Date fromDate;
-
-  @Temporal(TemporalType.TIMESTAMP)
-  private Date toDate;
-
-}
+*/
 
 /*
 

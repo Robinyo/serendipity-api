@@ -12,7 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Setter
 @Getter
-@Table(indexes = { @Index(name = "SORT_INDEX", columnList = "sort", unique = false) })
+@Table(indexes = { @Index(name = "FAMILY_NAME_INDEX", columnList = "familyName", unique = false) })
 public class Individual {
 
   // An Individual is a person.
@@ -26,12 +26,8 @@ public class Individual {
   @MapsId
   private Party party;
 
-  // @Embedded
-  // private Name name;
-
-  // @OrderColumn
-  @Column(name = "sort", nullable = false)
-  private String sort; // IndividualName.familyName
+  @Embedded
+  private Name name; // The Individual's principle name (legal aame)
 
   // You cannot limit the size of a @OneToMany collection
   // See: https://vladmihalcea.com/the-best-way-to-map-a-onetomany-association-with-jpa-and-hibernate/
@@ -90,3 +86,9 @@ public class Individual {
   }
 
 }
+
+// @Table(indexes = { @Index(name = "SORT_INDEX", columnList = "sort", unique = false) })
+
+// @OrderColumn
+// @Column(name = "sort", nullable = false)
+// private String sort; // IndividualName.familyName

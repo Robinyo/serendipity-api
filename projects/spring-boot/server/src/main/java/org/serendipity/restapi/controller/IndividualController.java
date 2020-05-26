@@ -6,7 +6,9 @@ import org.serendipity.restapi.entity.Individual;
 import org.serendipity.restapi.model.IndividualModel;
 import org.serendipity.restapi.repository.IndividualRepository;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.rest.webmvc.BasePathAwareController;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
@@ -61,13 +63,13 @@ public class IndividualController extends Controller<Individual, IndividualRepos
     return ResponseEntity.ok(model);
   }
 
-  @GetMapping("/individuals/search/findBySortStartsWith")
+  @GetMapping("/individuals/search/findByFamilyNameStartsWith")
   @PreAuthorize("hasAuthority('SCOPE_individual:read')")
-  public ResponseEntity<PagedModel<IndividualModel>> findBySortStartsWith(String name, Pageable pageable) {
+  public ResponseEntity<PagedModel<IndividualModel>> findByFamilyNameStartsWith(String name, Pageable pageable) {
 
     log.info("IndividualController /individuals");
 
-    Page<Individual> entities = repository.findBySortStartsWith(name, pageable);
+    Page<Individual> entities = repository.findByNameFamilyNameStartsWith(name, pageable);
     PagedModel<IndividualModel> models = pagedResourcesAssembler.toModel(entities, assembler);
 
     // logInfo(entities, models);
@@ -80,6 +82,16 @@ public class IndividualController extends Controller<Individual, IndividualRepos
 // https://github.com/spring-projects/spring-hateoas-examples
 
 // https://docs.spring.io/spring-data/data-commons/docs/current/reference/html/#core.web.pageables
+
+/*
+
+    Pageable sort = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
+          Sort.by("name.familyName").ascending());
+
+    logInfo(pageable, null);
+    logInfo(sort, null);
+
+*/
 
 
 

@@ -2,10 +2,12 @@ package org.serendipity.restapi.database.seed.au;
 
 import lombok.extern.slf4j.Slf4j;
 import org.serendipity.restapi.entity.*;
-import org.serendipity.restapi.repository.*;
+import org.serendipity.restapi.repository.AddressRepository;
+import org.serendipity.restapi.repository.IndividualRepository;
+import org.serendipity.restapi.repository.OrganisationRepository;
+import org.serendipity.restapi.repository.RoleRepository;
 import org.serendipity.restapi.type.LocationType;
 import org.serendipity.restapi.type.PartyType;
-import org.serendipity.restapi.type.au.IndividualNameType;
 import org.serendipity.restapi.type.au.LegalType;
 import org.serendipity.restapi.type.au.Sex;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Timestamp;
 import java.util.HashSet;
 
 @Component
@@ -27,9 +28,6 @@ public class JacquiLambieNetwork implements CommandLineRunner {
 
   @Autowired
   private IndividualRepository individualRepository;
-
-  @Autowired
-  private IndividualNameRepository individualNameRepository;
 
   @Autowired
   private OrganisationRepository organisationRepository;
@@ -73,37 +71,29 @@ public class JacquiLambieNetwork implements CommandLineRunner {
 
       // Create the Primary Contact (Individual)
 
+      Name name = Name.builder()
+        .givenName("Glynn")
+        .familyName("Williams")
+        .build();
+
       Party individualParty = Party.builder()
         .type(PartyType.INDIVIDUAL)
-        .displayName("Williams" + ", " + "Glynn")
-        .addresses(new HashSet<Address>())
-        .roles(new HashSet<Role>())
+        .displayName(name.getFamilyName() + ", " + name.getGivenName())
+        .addresses(new HashSet<>())
+        .roles(new HashSet<>())
         .build();
 
       Individual individual = Individual.builder()
         .party(individualParty)
-        .names(new HashSet<>())
+        .name(name)
         .sex(Sex.MALE.toString())
         .email("glynn.williams@lambienetwork.com.au")
         .phoneNumber("(03) 6431 3112")
-        .sort("Williams")
         .build();
 
       // Save the Primary Contact (Individual)
 
       individualRepository.save(individual);
-
-      // Create and save the Primary Contact's names
-
-      IndividualName individualName = IndividualName.builder()
-        .individual(individual)
-        .type(IndividualNameType.LEGAL_NAME.toString())
-        .givenName("Glynn")
-        .familyName("Williams")
-        // .fromDate(currentTime)
-        .build();
-
-      individualNameRepository.save(individualName);
 
       // Organisation
 

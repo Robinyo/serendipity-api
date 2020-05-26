@@ -2,10 +2,12 @@ package org.serendipity.restapi.database.seed.au;
 
 import lombok.extern.slf4j.Slf4j;
 import org.serendipity.restapi.entity.*;
-import org.serendipity.restapi.repository.*;
+import org.serendipity.restapi.repository.AddressRepository;
+import org.serendipity.restapi.repository.IndividualRepository;
+import org.serendipity.restapi.repository.OrganisationRepository;
+import org.serendipity.restapi.repository.RoleRepository;
 import org.serendipity.restapi.type.LocationType;
 import org.serendipity.restapi.type.PartyType;
-import org.serendipity.restapi.type.au.IndividualNameType;
 import org.serendipity.restapi.type.au.LegalType;
 import org.serendipity.restapi.type.au.Sex;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +29,6 @@ public class PaulineHansonsOneNation implements CommandLineRunner {
 
   @Autowired
   private IndividualRepository individualRepository;
-
-  @Autowired
-  private IndividualNameRepository individualNameRepository;
 
   @Autowired
   private OrganisationRepository organisationRepository;
@@ -73,37 +72,29 @@ public class PaulineHansonsOneNation implements CommandLineRunner {
 
       // Create the Primary Contact (Individual)
 
+      Name name = Name.builder()
+        .givenName("Rod")
+        .familyName("Miles")
+        .build();
+
       Party individualParty = Party.builder()
         .type(PartyType.INDIVIDUAL)
-        .displayName("Miles" + ", " + "Rod")
-        .addresses(new HashSet<Address>())
-        .roles(new HashSet<Role>())
+        .displayName(name.getFamilyName() + ", " + name.getGivenName())
+        .addresses(new HashSet<>())
+        .roles(new HashSet<>())
         .build();
 
       Individual individual = Individual.builder()
         .party(individualParty)
-        .names(new HashSet<>())
+        .name(name)
         .sex(Sex.MALE.toString())
         .email("rod.mills@onenation.org.au")
         .phoneNumber("1300 857 466")
-        .sort("Miles")
         .build();
 
       // Save the Primary Contact (Individual)
 
       individualRepository.save(individual);
-
-      // Create and save the Primary Contact's names
-
-      IndividualName individualName = IndividualName.builder()
-        .individual(individual)
-        .type(IndividualNameType.LEGAL_NAME.toString())
-        .givenName("Rod")
-        .familyName("Miles")
-        // .fromDate(currentTime)
-        .build();
-
-      individualNameRepository.save(individualName);
 
       // Organisation
 
