@@ -61,6 +61,20 @@ public class IndividualController extends Controller<Individual, IndividualRepos
     return ResponseEntity.ok(model);
   }
 
+  @GetMapping("/individuals/search/findBySortStartsWith")
+  @PreAuthorize("hasAuthority('SCOPE_individual:read')")
+  public ResponseEntity<PagedModel<IndividualModel>> findBySortStartsWith(String name, Pageable pageable) {
+
+    log.info("IndividualController /individuals");
+
+    Page<Individual> entities = repository.findBySortStartsWith(name, pageable);
+    PagedModel<IndividualModel> models = pagedResourcesAssembler.toModel(entities, assembler);
+
+    // logInfo(entities, models);
+
+    return ResponseEntity.ok(models);
+  }
+
 }
 
 // https://github.com/spring-projects/spring-hateoas-examples

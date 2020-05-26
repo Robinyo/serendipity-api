@@ -31,7 +31,7 @@ public class Senate implements CommandLineRunner {
   // A senator is a member of the Australian Senate, elected to represent a state or territory. There are 76 senators,
   // 12 from each state and two each from the Australian Capital Territory and the Northern Territory.
 
-  static final String PATH = "sample-data/allsenel.csv";
+  static final String PATH = "sample-data/senate.csv";
 
   static final int TITLE = 0;
   static final int SALUTATION = 1;

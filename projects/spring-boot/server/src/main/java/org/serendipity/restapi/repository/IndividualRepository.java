@@ -7,7 +7,9 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface IndividualRepository extends PagingAndSortingRepository<Individual, Long> {
 
-    Page<Individual> findAll(Pageable pageable);
+  Page<Individual> findAll(Pageable pageable);
+
+  Page<Individual> findBySortStartsWith(String name, Pageable pageable);
 
 }
 

@@ -34,7 +34,7 @@ import java.util.HashSet;
 @Order(Ordered.LOWEST_PRECEDENCE)
 public class HouseOfRepresentatives implements CommandLineRunner {
 
-  static final String PATH = "sample-data/SurnameRepsCSV.csv";
+  static final String PATH = "sample-data/house-of-representatives.csv";
 
   static final int HONORIFIC = 0;
   static final int SALUTATION = 1;
