@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 @BasePathAwareController
@@ -65,9 +66,10 @@ public class IndividualController extends Controller<Individual, IndividualRepos
 
   @GetMapping("/individuals/search/findByFamilyNameStartsWith")
   @PreAuthorize("hasAuthority('SCOPE_individual:read')")
-  public ResponseEntity<PagedModel<IndividualModel>> findByFamilyNameStartsWith(String name, Pageable pageable) {
+  public ResponseEntity<PagedModel<IndividualModel>> findByFamilyNameStartsWith(
+    @RequestParam("name") final String name, Pageable pageable) {
 
-    log.info("IndividualController /individuals");
+    log.info("IndividualController /individuals/search/findByFamilyNameStartsWith");
 
     Page<Individual> entities = repository.findByNameFamilyNameStartsWith(name, pageable);
     PagedModel<IndividualModel> models = pagedResourcesAssembler.toModel(entities, assembler);
