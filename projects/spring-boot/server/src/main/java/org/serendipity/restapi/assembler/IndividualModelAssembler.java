@@ -35,6 +35,15 @@ public class IndividualModelAssembler extends RepresentationModelAssemblerSuppor
     model.setId(entity.getId());
     model.setParty(partyModelAssembler.toModel(entity.getParty()));
 
+    model.setTitle(entity.getName().getTitle());
+    model.setGivenName(entity.getName().getGivenName());
+    model.setMiddleName(entity.getName().getMiddleName());
+    model.setFamilyName(entity.getName().getFamilyName());
+    model.setHonorific(entity.getName().getHonorific());
+    model.setSalutation(entity.getName().getSalutation());
+    model.setPreferredName(entity.getName().getPreferredName());
+    model.setInitials(entity.getName().getInitials());
+
     model.setNames(toIndividualNameModel(entity.getNames()));
     model.setSex(entity.getSex());
     model.setEmail(entity.getEmail());

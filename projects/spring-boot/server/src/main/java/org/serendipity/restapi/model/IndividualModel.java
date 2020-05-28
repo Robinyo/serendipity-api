@@ -15,6 +15,20 @@ public class IndividualModel extends RepresentationModel<IndividualModel> {
 
   private Long id;
   private PartyModel party;
+
+  // @Embedded
+  // private Name name;
+  private String title;         // name prefix
+  private String givenName;
+  private String preferredGivenName;
+  private String middleName;    // otherNames
+  private String initials;
+  private String familyName;
+  private String preferredFamilyName;
+  private String preferredName; // informalSalutation
+  private String honorific;     // name suffix
+  private String salutation;    // formalSalutation
+
   private Set<IndividualNameModel> names;
   private Date dateOfBirth;
   private String placeOfBirth;
