@@ -107,7 +107,7 @@ public class IndividualController extends Controller<Individual, IndividualRepos
   @PatchMapping("/individuals/{id}")
   @PreAuthorize("hasAuthority('SCOPE_individual:patch')")
   public ResponseEntity<IndividualModel> update(
-    @RequestBody Individual individual, @PathVariable("id") final Long id) throws ResponseStatusException {
+    @PathVariable("id") final Long id, @RequestBody Individual individual) throws ResponseStatusException {
 
     log.info("IndividualController PATCH /individuals/{id}");
 
