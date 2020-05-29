@@ -20,8 +20,13 @@ import java.util.Date;
 public class Identifier {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
-  @Column(name = "id", nullable = false)
+  @GeneratedValue(
+    strategy = GenerationType.SEQUENCE,
+    generator = "SequenceIdentifier")
+  @SequenceGenerator(
+    name = "SequenceIdentifier",
+    allocationSize = 1
+  )
   private Long id;
 
   @Column(name = "type", nullable = false)

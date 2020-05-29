@@ -19,10 +19,15 @@ import java.util.Date;
 @Getter
 @EntityListeners(AuditingEntityListener.class)
 public class Location {
-  
+
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
-  @Column(name = "id", nullable = false)
+  @GeneratedValue(
+    strategy = GenerationType.SEQUENCE,
+    generator = "SequenceLocation")
+  @SequenceGenerator(
+    name = "SequenceLocation",
+    allocationSize = 1
+  )
   private Long id;
 
   @Builder.Default

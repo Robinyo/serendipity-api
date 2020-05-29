@@ -76,7 +76,6 @@ public class Individual {
 
     Individual other = (Individual) o;
 
-    // return id != 0L && id == other.getId();
     return id != 0L && id.equals(other.getId());
   }
 

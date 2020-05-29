@@ -15,8 +15,13 @@ import java.util.Date;
 public class ElectoralDivision {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
-  @Column(name = "id", nullable = false)
+  @GeneratedValue(
+    strategy = GenerationType.SEQUENCE,
+    generator = "SequenceElectoralDivision")
+  @SequenceGenerator(
+    name = "SequenceElectoralDivision",
+    allocationSize = 1
+  )
   private Long id;
 
   @Column(name = "name", nullable = false)

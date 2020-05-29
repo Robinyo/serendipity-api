@@ -23,11 +23,16 @@ public class Party {
 
   // When using Hibernate, the IDENTITY generator is not a good choice since it disables JDBC batching.
   // See: https://vladmihalcea.com/14-high-performance-java-persistence-tips/
+  //      https://vladmihalcea.com/jpa-entity-identifier-sequence/
 
   @Id
-  // @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
-  @Column(name = "id", nullable = false)
+  @GeneratedValue(
+    strategy = GenerationType.SEQUENCE,
+    generator = "SequenceParty")
+  @SequenceGenerator(
+    name = "SequenceParty",
+    allocationSize = 1
+  )
   private Long id;
 
   @Builder.Default
@@ -77,7 +82,10 @@ public class Party {
   @LastModifiedDate
   @Temporal(TemporalType.TIMESTAMP)
   private Date updatedAt;
-  
+
+  // Equals and hashCode must behave consistently across all entity state transitions
+  // See: https://vladmihalcea.com/the-best-way-to-implement-equals-hashcode-and-tostring-with-jpa-and-hibernate/
+
   @Override
   public boolean equals(Object o) {
 
@@ -89,7 +97,6 @@ public class Party {
 
     Party other = (Party) o;
 
-    // return id != 0L && id == other.getId();
     return id != 0L && id.equals(other.getId());
   }
 

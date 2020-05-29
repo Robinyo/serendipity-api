@@ -15,8 +15,13 @@ import java.util.Date;
 public class IndividualName {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
-  @Column(name = "id", nullable = false)
+  @GeneratedValue(
+    strategy = GenerationType.SEQUENCE,
+    generator = "SequenceIndividualName")
+  @SequenceGenerator(
+    name = "SequenceIndividualName",
+    allocationSize = 1
+  )
   private Long id;
 
   @JsonIgnore
