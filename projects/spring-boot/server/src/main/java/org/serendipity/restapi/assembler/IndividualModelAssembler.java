@@ -3,8 +3,10 @@ package org.serendipity.restapi.assembler;
 import org.serendipity.restapi.controller.IndividualController;
 import org.serendipity.restapi.entity.Individual;
 import org.serendipity.restapi.entity.IndividualName;
+import org.serendipity.restapi.entity.Name;
 import org.serendipity.restapi.model.IndividualModel;
 import org.serendipity.restapi.model.IndividualNameModel;
+import org.serendipity.restapi.model.NameModel;
 import org.serendipity.restapi.type.au.IndividualNameType;
 import org.serendipity.restapi.type.au.Sex;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,16 +36,7 @@ public class IndividualModelAssembler extends RepresentationModelAssemblerSuppor
 
     model.setId(entity.getId());
     model.setParty(partyModelAssembler.toModel(entity.getParty()));
-
-    model.setTitle(entity.getName().getTitle());
-    model.setGivenName(entity.getName().getGivenName());
-    model.setMiddleName(entity.getName().getMiddleName());
-    model.setFamilyName(entity.getName().getFamilyName());
-    model.setHonorific(entity.getName().getHonorific());
-    model.setSalutation(entity.getName().getSalutation());
-    model.setPreferredName(entity.getName().getPreferredName());
-    model.setInitials(entity.getName().getInitials());
-
+    model.setName(toNameModel(entity.getName()));
     model.setNames(toIndividualNameModel(entity.getNames()));
     model.setSex(entity.getSex());
     model.setEmail(entity.getEmail());
@@ -66,8 +59,30 @@ public class IndividualModelAssembler extends RepresentationModelAssemblerSuppor
     // log.info("photoUrl: {}", model.getPhotoUrl());
 
     model.setElectorate(entity.getElectorate());
+
     model.setDateOfBirth(entity.getDateOfBirth());
     model.setPlaceOfBirth(entity.getPlaceOfBirth());
+    model.setCountryOfBirth(entity.getCountryOfBirth());
+
+    model.setDateOfDeath(entity.getDateOfDeath());
+    model.setPlaceOfDeath(entity.getPlaceOfDeath());
+    model.setCountryOfDeath(entity.getCountryOfDeath());
+
+    return model;
+  }
+
+  private NameModel toNameModel(Name name) {
+
+    NameModel model = new NameModel();
+
+    model.setTitle(name.getTitle());
+    model.setGivenName(name.getGivenName());
+    model.setMiddleName(name.getMiddleName());
+    model.setFamilyName(name.getFamilyName());
+    model.setHonorific(name.getHonorific());
+    model.setSalutation(name.getSalutation());
+    model.setPreferredName(name.getPreferredName());
+    model.setInitials(name.getInitials());
 
     return model;
   }

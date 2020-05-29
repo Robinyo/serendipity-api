@@ -1,5 +1,9 @@
 package org.serendipity.restapi.database.seed.au;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.extern.slf4j.Slf4j;
 import org.serendipity.restapi.entity.*;
 import org.serendipity.restapi.repository.AddressRepository;
@@ -163,6 +167,22 @@ public class AustralianGreens implements CommandLineRunner {
       individualParty.getAddresses().add(headOffice);
       individualParty.getRoles().add(reciprocalRole);
 
+      try {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+        log.info("individual:  {}", "\n" + mapper.writeValueAsString(individual));
+
+      } catch (JsonProcessingException jpe) {
+
+        log.error("Json Processing Exception: {}", jpe.getLocalizedMessage());
+      }
+
       individualRepository.save(individual);
 
       log.info("Create {} complete", PoliticalParty.AUSTRALIAN_GREENS.toString());
@@ -175,3 +195,23 @@ public class AustralianGreens implements CommandLineRunner {
   }
 
 }
+
+/*
+
+      try {
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+        log.info("identifier:  {}", "\n" + mapper.writeValueAsString(identifier));
+
+      } catch (JsonProcessingException jpe) {
+
+        log.error("House of Representatives - JSON Processing Exception");
+      }
+
+*/

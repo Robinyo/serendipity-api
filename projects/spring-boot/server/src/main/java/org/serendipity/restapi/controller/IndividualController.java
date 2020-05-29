@@ -42,12 +42,22 @@ public class IndividualController extends Controller<Individual, IndividualRepos
 
     log.info("IndividualController GET /individuals");
 
-    Page<Individual> entities = repository.findAll(pageable);
-    PagedModel<IndividualModel> models = pagedResourcesAssembler.toModel(entities, assembler);
+    try {
 
-    // logInfo(entities, models);
+      Page<Individual> entities = repository.findAll(pageable);
+      PagedModel<IndividualModel> models = pagedResourcesAssembler.toModel(entities, assembler);
 
-    return ResponseEntity.ok(models);
+      // logInfo(entities, models);
+
+      return ResponseEntity.ok(models);
+
+    } catch (Exception e) {
+
+      log.error("{}", e.getLocalizedMessage());
+
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+    }
+
   }
 
   @GetMapping("/individuals/{id}")
@@ -57,14 +67,24 @@ public class IndividualController extends Controller<Individual, IndividualRepos
 
     log.info("IndividualController GET /individuals/{id}");
 
-    Individual entity = repository.findById(id).orElseThrow(() ->
+    try {
+
+      Individual entity = repository.findById(id).orElseThrow(() ->
         new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-    IndividualModel model = assembler.toModel(entity);
+      IndividualModel model = assembler.toModel(entity);
 
-    logInfo(entity, model);
+      logInfo(entity, model);
 
-    return ResponseEntity.ok(model);
+      return ResponseEntity.ok(model);
+
+    } catch (Exception e) {
+
+      log.error("{}", e.getLocalizedMessage());
+
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+    }
+
   }
 
   @GetMapping("/individuals/search/findByFamilyNameStartsWith")
@@ -74,12 +94,22 @@ public class IndividualController extends Controller<Individual, IndividualRepos
 
     log.info("IndividualController GET /individuals/search/findByFamilyNameStartsWith");
 
-    Page<Individual> entities = repository.findByNameFamilyNameStartsWith(name, pageable);
-    PagedModel<IndividualModel> models = pagedResourcesAssembler.toModel(entities, assembler);
+    try {
 
-    // logInfo(entities, models);
+      Page<Individual> entities = repository.findByNameFamilyNameStartsWith(name, pageable);
+      PagedModel<IndividualModel> models = pagedResourcesAssembler.toModel(entities, assembler);
 
-    return ResponseEntity.ok(models);
+      // logInfo(entities, models);
+
+      return ResponseEntity.ok(models);
+
+    } catch (Exception e) {
+
+      log.error("{}", e.getLocalizedMessage());
+
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+    }
+
   }
 
   @PostMapping("/individuals")
@@ -99,6 +129,9 @@ public class IndividualController extends Controller<Individual, IndividualRepos
       return ResponseEntity.created(linkTo(methodOn(IndividualController.class).findById(entity.getId())).toUri()).body(model);
 
     } catch (Exception e) {
+
+      log.error("{}", e.getLocalizedMessage());
+
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
     }
 
@@ -111,6 +144,8 @@ public class IndividualController extends Controller<Individual, IndividualRepos
 
     log.info("IndividualController PATCH /individuals/{id}");
 
+    logInfo(individual, null);
+
     try {
 
       individual.setId(id);
@@ -122,6 +157,9 @@ public class IndividualController extends Controller<Individual, IndividualRepos
       return ResponseEntity.noContent().location(new URI(link.getHref())).build();
 
     } catch (Exception e) {
+
+      log.error("{}", e.getLocalizedMessage());
+
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
     }
 
