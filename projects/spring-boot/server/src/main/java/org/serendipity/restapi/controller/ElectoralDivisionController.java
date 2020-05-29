@@ -33,16 +33,27 @@ public class ElectoralDivisionController extends Controller<ElectoralDivision, E
 
   @GetMapping("/electoral-divisions")
   @PreAuthorize("hasAuthority('SCOPE_individual:read')")
-  public ResponseEntity<PagedModel<ElectoralDivisionModel>> findAll(Pageable pageable) {
+  public ResponseEntity<PagedModel<ElectoralDivisionModel>> findAll(
+    Pageable pageable) throws ResponseStatusException {
 
-    log.info("ElectoralDivisionController /electoral-divisions");
+    log.info("ElectoralDivisionController GET /electoral-divisions");
 
-    Page<ElectoralDivision> entities = repository.findAll(pageable);
-    PagedModel<ElectoralDivisionModel> models = pagedResourcesAssembler.toModel(entities, assembler);
+    try {
 
-    logInfo(entities, models);
+      Page<ElectoralDivision> entities = repository.findAll(pageable);
+      PagedModel<ElectoralDivisionModel> models = pagedResourcesAssembler.toModel(entities, assembler);
 
-    return ResponseEntity.ok(models);
+      logInfo(entities, models);
+
+      return ResponseEntity.ok(models);
+
+    } catch (Exception e) {
+
+      log.error("{}", e.getLocalizedMessage());
+
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+    }
+
   }
 
   @GetMapping("/electoral-divisions/search/findByName")
@@ -50,16 +61,26 @@ public class ElectoralDivisionController extends Controller<ElectoralDivision, E
   public ResponseEntity<ElectoralDivisionModel> findByName(
     @RequestParam("name") final String name) throws ResponseStatusException {
 
-    log.info("IndividualController /electoral-divisions/search/findByName");
+    log.info("IndividualController GET /electoral-divisions/search/findByName");
 
-    ElectoralDivision entity = repository.findByName(name).orElseThrow(() ->
-      new ResponseStatusException(HttpStatus.NOT_FOUND));
+    try {
 
-    ElectoralDivisionModel model = assembler.toModel(entity);
+      ElectoralDivision entity = repository.findByName(name).orElseThrow(() ->
+        new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-    logInfo(entity, model);
+      ElectoralDivisionModel model = assembler.toModel(entity);
 
-    return ResponseEntity.ok(model);
+      logInfo(entity, model);
+
+      return ResponseEntity.ok(model);
+
+    } catch (Exception e) {
+
+      log.error("{}", e.getLocalizedMessage());
+
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+    }
+
   }
 
 }

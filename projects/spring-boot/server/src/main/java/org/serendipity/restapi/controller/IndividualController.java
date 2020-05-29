@@ -38,7 +38,8 @@ public class IndividualController extends Controller<Individual, IndividualRepos
 
   @GetMapping("/individuals")
   @PreAuthorize("hasAuthority('SCOPE_individual:read')")
-  public ResponseEntity<PagedModel<IndividualModel>> findAll(Pageable pageable) {
+  public ResponseEntity<PagedModel<IndividualModel>> findAll(
+    Pageable pageable) throws ResponseStatusException {
 
     log.info("IndividualController GET /individuals");
 
@@ -90,7 +91,7 @@ public class IndividualController extends Controller<Individual, IndividualRepos
   @GetMapping("/individuals/search/findByFamilyNameStartsWith")
   @PreAuthorize("hasAuthority('SCOPE_individual:read')")
   public ResponseEntity<PagedModel<IndividualModel>> findByFamilyNameStartsWith(
-    @RequestParam("name") final String name, Pageable pageable) {
+    @RequestParam("name") final String name, Pageable pageable) throws ResponseStatusException {
 
     log.info("IndividualController GET /individuals/search/findByFamilyNameStartsWith");
 
@@ -155,6 +156,28 @@ public class IndividualController extends Controller<Individual, IndividualRepos
       Link link = linkTo(methodOn(IndividualController.class).findById(id)).withSelfRel();
 
       return ResponseEntity.noContent().location(new URI(link.getHref())).build();
+
+    } catch (Exception e) {
+
+      log.error("{}", e.getLocalizedMessage());
+
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+    }
+
+  }
+
+  @DeleteMapping("/individuals/{id}")
+  @PreAuthorize("hasAuthority('SCOPE_individual:delete')")
+  public ResponseEntity<IndividualModel> delete(
+    @PathVariable("id") final Long id) throws ResponseStatusException {
+
+    log.info("IndividualController GET /individuals/{id}");
+
+    try {
+
+      repository.deleteById(id);
+
+      return ResponseEntity.noContent().build();
 
     } catch (Exception e) {
 

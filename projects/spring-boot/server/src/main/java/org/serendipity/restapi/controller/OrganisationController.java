@@ -31,16 +31,27 @@ public class OrganisationController extends Controller<Organisation, Organisatio
   }
 
   @GetMapping("/organisations")
-  public ResponseEntity<PagedModel<OrganisationModel>> findAll(Pageable pageable) {
+  public ResponseEntity<PagedModel<OrganisationModel>> findAll(
+    Pageable pageable) throws ResponseStatusException {
 
-    log.info("OrganisationController /organisations");
+    log.info("OrganisationController GET /organisations");
 
-    Page<Organisation> entities = repository.findAll(pageable);
-    PagedModel<OrganisationModel> models = pagedResourcesAssembler.toModel(entities, assembler);
+    try {
 
-    // logInfo(entities, models);
+      Page<Organisation> entities = repository.findAll(pageable);
+      PagedModel<OrganisationModel> models = pagedResourcesAssembler.toModel(entities, assembler);
 
-    return ResponseEntity.ok(models);
+      // logInfo(entities, models);
+
+      return ResponseEntity.ok(models);
+
+    } catch (Exception e) {
+
+      log.error("{}", e.getLocalizedMessage());
+
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+    }
+
   }
 
   @GetMapping("/organisations/{id}")
@@ -48,16 +59,26 @@ public class OrganisationController extends Controller<Organisation, Organisatio
   public ResponseEntity<OrganisationModel> findById(
     @PathVariable("id") final Long id) throws ResponseStatusException {
 
-    log.info("OrganisationController /organisations/{id}");
+    log.info("OrganisationController GET /organisations/{id}");
 
-    Organisation entity = repository.findById(id).orElseThrow(() ->
-      new ResponseStatusException(HttpStatus.NOT_FOUND));
+    try {
 
-    OrganisationModel model = assembler.toModel(entity);
+      Organisation entity = repository.findById(id).orElseThrow(() ->
+        new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-    logInfo(entity, model);
+      OrganisationModel model = assembler.toModel(entity);
 
-    return ResponseEntity.ok(model);
+      logInfo(entity, model);
+
+      return ResponseEntity.ok(model);
+
+    } catch (Exception e) {
+
+      log.error("{}", e.getLocalizedMessage());
+
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+    }
+
   }
 
 }
