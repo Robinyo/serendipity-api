@@ -158,6 +158,16 @@
     <plugins>
 
       <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <profiles>
+            <profile>dev</profile>
+          </profiles>
+        </configuration>
+      </plugin>
+
+      <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <configuration>
           <useSystemClassLoader>false</useSystemClassLoader>
