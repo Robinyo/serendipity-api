@@ -11,7 +11,6 @@ import org.springframework.data.rest.webmvc.BasePathAwareController;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedModel;
-import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -171,7 +170,7 @@ public class IndividualController extends Controller<Individual, IndividualRepos
   public ResponseEntity<IndividualModel> delete(
     @PathVariable("id") final Long id) throws ResponseStatusException {
 
-    log.info("IndividualController GET /individuals/{id}");
+    log.info("IndividualController DELETE /individuals/{id}");
 
     try {
 

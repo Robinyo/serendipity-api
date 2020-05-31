@@ -10,16 +10,8 @@ public interface OrganisationRepository extends PagingAndSortingRepository<Organ
   Page<Organisation> findAll(Pageable pageable);
 
   Page<Organisation> findByName(String name, Pageable pageable);
-  // Page<Organisation> findByNameStartsWith(String name, Pageable pageable);
+  Page<Organisation> findByNameStartsWith(String name, Pageable pageable);
 
 }
 
 // https://docs.spring.io/spring-data/rest/docs/current/reference/html/#paging-and-sorting
-
-/*
-
-  Page<Organisation> findByName(@Param("name") String name, Pageable pageable);
-
-  Page<Organisation> findByNameStartsWith(@Param("name") String name, Pageable pageable);
-
-*/
