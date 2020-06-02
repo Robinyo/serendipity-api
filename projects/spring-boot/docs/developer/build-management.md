@@ -11,7 +11,7 @@ To build the API:
 ```
 # In the project's server directory: /server
 
-mvn clean install spring-boot:repackage
+mvn -P dev-h2 clean install spring-boot:repackage
 ```
 
 To build the project:
