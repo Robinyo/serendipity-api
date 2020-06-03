@@ -61,28 +61,6 @@ docker container logs postgres
 docker container logs serendipity-api
 ```
 
-To launch the H2 console:
-
-```
-# SPRING_DATASOURCE_URL=jdbc:h2:/h2/serendipity
-# SPRING_DATASOURCE_USERNAME=admin
-# SPRING_DATASOURCE_PASSWORD=secret
-
-http://localhost:3001/h2-console
-```
-
-For example:
-
-<p align="center">
-  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/h2-console.png">
-</p>
-
-To view the OpenAPI specification in ReDoc:
-
-```
-http://localhost:3001/docs/index.html
-```
-
 You can stop the containers using the following command:
 
 ```
