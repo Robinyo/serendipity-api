@@ -10,8 +10,13 @@ To build the API:
 
 ```
 # In the project's server directory: /server
+# mvn clean package
 
-mvn -P dev-h2 clean install spring-boot:repackage
+mvn clean install spring-boot:repackage
+
+# or
+
+mvn clean install -Pdev-pg spring-boot:repackage
 ```
 
 To build the project:
@@ -45,6 +50,9 @@ docker inspect -f \
 To check the logs inside your container:
 
 ```
+docker container logs openldap
+docker container logs keycloak
+docker container logs postgres
 docker container logs serendipity-api
 ```
 

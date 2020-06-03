@@ -11,7 +11,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.hateoas.server.core.EvoInflectorLinkRelationProvider;
 
 @EnableJpaAuditing(auditorAwareRef = "auditorProvider")
-// @SpringBootApplication
 @SpringBootApplication(proxyBeanMethods = false)
 @Slf4j
 public class SerendipityRestApiApplication {
@@ -36,3 +35,5 @@ public class SerendipityRestApiApplication {
   }
 
 }
+
+// https://stackoverflow.com/questions/24827963/enabling-websecurityconfigurer-via-profile-does-not-work

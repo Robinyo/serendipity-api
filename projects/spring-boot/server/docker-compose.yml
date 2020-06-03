@@ -33,6 +33,9 @@ services:
       - "3001:3001"
     volumes:
       - ./h2:/h2
-    env_file: ./serendipity-api-prod.env
+    # environment:
+    #   SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/serendipity
+    env_file: ./serendipity-api-dev.env
     depends_on:
+    # - db
       - keycloak

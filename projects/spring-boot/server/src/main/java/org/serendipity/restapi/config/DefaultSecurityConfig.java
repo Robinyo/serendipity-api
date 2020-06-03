@@ -16,45 +16,46 @@ import java.util.Arrays;
 import java.util.Collections;
 
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class DefaultSecurityConfig extends WebSecurityConfigurerAdapter {
+
+  // spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://localhost:10001/auth/realms/development/protocol/openid-connect/certs
+  // SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=http://keycloak:8080/auth/realms/development/protocol/openid-connect/certs
 
   @Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}")
-  String jwkSetUri;
+  private String jwkSetUri;
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
 
-    configureDevelopment(http);
-    // configureProduction(http);
+    // log.info("SecurityConfig: configure()");
 
-    http.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
-  }
-
-  protected void configureDevelopment(HttpSecurity http) throws Exception {
-
-    // SPRING_MVC_STATIC_PATH_PATTERN=/docs/**
+    // spring.mvc.static-path-pattern=/**
 
     http.cors().and()
       .authorizeRequests()
       .antMatchers("/h2-console/**").permitAll()
-      .antMatchers("/**").permitAll()
+      // .antMatchers("/**").permitAll()
+      // .antMatchers("/docs/**").permitAll()
       .anyRequest().authenticated();
 
     http.csrf().ignoringAntMatchers("/h2-console/**");
     http.headers().frameOptions().sameOrigin();
-  }
 
-  protected void configureProduction(HttpSecurity http) throws Exception {
-    http.cors().and().authorizeRequests().anyRequest().authenticated();
+    http.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
   }
 
   @Bean
   JwtDecoder jwtDecoder() {
+
+    // log.info("SecurityConfig: jwtDecoder()");
+
     return NimbusJwtDecoder.withJwkSetUri(this.jwkSetUri).build();
   }
 
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
+
+    // log.info("SecurityConfig: corsConfigurationSource()");
 
     CorsConfiguration configuration = new CorsConfiguration();
 
@@ -73,24 +74,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 /*
 
-    configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PATCH", "DELETE"));
-
-  @Bean
-  CorsConfigurationSource corsConfigurationSource() {
-
-    final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-
-    source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-
-    return source;
-  }
 
 */
-
-// http.cors().and().csrf().disable().authorizeRequests().anyRequest().authenticated();
-
-// https://auth0.com/blog/implementing-jwt-authentication-on-spring-boot/
-
-// https://github.com/spring-projects/spring-security/blob/master/samples/boot/oauth2resourceserver/src/main/java/sample/OAuth2ResourceServerSecurityConfiguration.java
-
-// .antMatchers("/docs/**").permitAll()
