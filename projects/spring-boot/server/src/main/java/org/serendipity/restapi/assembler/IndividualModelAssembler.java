@@ -42,14 +42,14 @@ public class IndividualModelAssembler extends RepresentationModelAssemblerSuppor
     model.setEmail(entity.getEmail());
     model.setPhoneNumber(entity.getPhoneNumber());
 
-    model.setPhotoUrl("male-avatar.svg");
+    model.setPhotoUrl("images/male-avatar.svg");
 
     if (entity.getSex().equals(Sex.FEMALE.toString())) {
-      model.setPhotoUrl("female-avatar.svg");
+      model.setPhotoUrl("images/female-avatar.svg");
     }
 
     // "photos/albanese-anthony.jpg"
-    String url = "photos/" + entity.getName().getFamilyName().toLowerCase() + "-" +
+    String url = "images/" + entity.getName().getFamilyName().toLowerCase() + "-" +
       entity.getName().getGivenName().toLowerCase() + ".jpg";
 
     if (new ClassPathResource("public/" + url).exists()) {

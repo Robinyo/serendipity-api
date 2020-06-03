@@ -1,6 +1,8 @@
 package org.serendipity.restapi.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,6 +18,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 @EnableWebSecurity
+@Slf4j
 public class DefaultSecurityConfig extends WebSecurityConfigurerAdapter {
 
   // spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://localhost:10001/auth/realms/development/protocol/openid-connect/certs
@@ -27,15 +30,13 @@ public class DefaultSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
 
-    // log.info("SecurityConfig: configure()");
-
-    // spring.mvc.static-path-pattern=/**
+    log.info("SecurityConfig: configure()");
 
     http.cors().and()
       .authorizeRequests()
+      .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
       .antMatchers("/h2-console/**").permitAll()
-      // .antMatchers("/**").permitAll()
-      // .antMatchers("/docs/**").permitAll()
+      .antMatchers("/docs/**").permitAll()
       .anyRequest().authenticated();
 
     http.csrf().ignoringAntMatchers("/h2-console/**");
@@ -47,7 +48,7 @@ public class DefaultSecurityConfig extends WebSecurityConfigurerAdapter {
   @Bean
   JwtDecoder jwtDecoder() {
 
-    // log.info("SecurityConfig: jwtDecoder()");
+    log.info("SecurityConfig: jwtDecoder()");
 
     return NimbusJwtDecoder.withJwkSetUri(this.jwkSetUri).build();
   }
@@ -55,7 +56,7 @@ public class DefaultSecurityConfig extends WebSecurityConfigurerAdapter {
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
 
-    // log.info("SecurityConfig: corsConfigurationSource()");
+    log.info("SecurityConfig: corsConfigurationSource()");
 
     CorsConfiguration configuration = new CorsConfiguration();
 
@@ -71,6 +72,8 @@ public class DefaultSecurityConfig extends WebSecurityConfigurerAdapter {
   }
 
 }
+
+// Spring Boot will, by default, permit access to /css/**, /js/**, /images/**, and /**/favicon.ico
 
 /*
 
