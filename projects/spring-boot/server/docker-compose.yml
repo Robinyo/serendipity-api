@@ -24,6 +24,17 @@ services:
     depends_on:
       - openldap
 
+  db:
+    container_name: postgres
+    build:
+      context: ./services/postgres
+      dockerfile: Dockerfile
+    ports:
+      - "5432:5432"
+    volumes:
+      - .:/var/lib/postgresql/data
+    env_file: ./services/postgres/postgres.env
+
   serendipity-api:
     container_name: serendipity-api
     build:
@@ -31,16 +42,14 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3001:3001"
-    volumes:
-      - ./h2:/h2
     environment:
       - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=http://keycloak:8080/auth/realms/development/protocol/openid-connect/certs
-      - SPRING_DATASOURCE_URL=jdbc:h2:/h2/serendipity
-      - AUTO_SERVER=TRUE
-      - AUTO_SERVER_PORT=9091
-      - DB_CLOSE_DELAY=-1
-    # environment:
-    #   - SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/serendipity
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/serendipity
+    # volumes:
+    #   - ./h2:/h2
+    # env_file: ./serendipity-api-test.env
     depends_on:
-    # - db
+      - db
       - keycloak
+
+# Note: environment or env_file you can't use both
