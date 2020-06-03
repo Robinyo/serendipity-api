@@ -6,6 +6,8 @@ Follow the steps in the [Quick Start Guide](https://github.com/Robinyo/serendipi
 
 ### Development
 
+The build supports the following Maven project profiles: dev, test and production.
+
 To build the API:
 
 ```
@@ -15,7 +17,9 @@ mvn clean install spring-boot:repackage
 
 # or
 
-mvn clean install -Pdev-pg spring-boot:repackage
+mvn clean install -Pdev spring-boot:repackage
+mvn clean install -Ptest spring-boot:repackage
+mvn clean install -Pprod spring-boot:repackage
 ```
 
 To build the project:
