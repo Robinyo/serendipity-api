@@ -55,6 +55,8 @@ docker inspect -f \
 To check the logs inside your container:
 
 ```
+docker container logs openldap
+docker container logs keycloak
 docker container logs serendipity-api
 ```
 
