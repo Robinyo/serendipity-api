@@ -10,7 +10,6 @@ To build the API:
 
 ```
 # In the project's server directory: /server
-# mvn clean package
 
 mvn clean install spring-boot:repackage
 

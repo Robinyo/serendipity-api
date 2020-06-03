@@ -33,9 +33,14 @@ services:
       - "3001:3001"
     volumes:
       - ./h2:/h2
+    environment:
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=http://keycloak:8080/auth/realms/development/protocol/openid-connect/certs
+      - SPRING_DATASOURCE_URL=jdbc:h2:/h2/serendipity
+      - AUTO_SERVER=TRUE
+      - AUTO_SERVER_PORT=9091
+      - DB_CLOSE_DELAY=-1
     # environment:
-    #   SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/serendipity
-    env_file: ./serendipity-api-dev.env
+    #   - SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/serendipity
     depends_on:
     # - db
       - keycloak

@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -18,6 +19,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 @EnableWebSecurity
+@Profile({"dev", "test", "prod"})
 @Slf4j
 public class DefaultSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -74,8 +76,3 @@ public class DefaultSecurityConfig extends WebSecurityConfigurerAdapter {
 }
 
 // Spring Boot will, by default, permit access to /css/**, /js/**, /images/**, and /**/favicon.ico
-
-/*
-
-
-*/

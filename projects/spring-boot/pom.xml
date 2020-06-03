@@ -132,26 +132,17 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- The "default" profile requires the H2 database -->
-
-    <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-
   </dependencies>
 
-  <!--
   <profiles>
 
     <profile>
-      <id>dev-h2</id>
+      <id>test</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <spring.profiles.active>dev-h2</spring.profiles.active>
+        <spring.profiles.active>test</spring.profiles.active>
       </properties>
       <dependencies>
 
@@ -165,12 +156,12 @@
     </profile>
 
     <profile>
-      <id>dev-pg</id>
+      <id>dev</id>
       <activation>
         <activeByDefault>false</activeByDefault>
       </activation>
       <properties>
-        <spring.profiles.active>dev-pg</spring.profiles.active>
+        <spring.profiles.active>dev</spring.profiles.active>
       </properties>
       <dependencies>
 
@@ -180,11 +171,16 @@
           <scope>runtime</scope>
         </dependency>
 
+        <dependency>
+          <groupId>com.h2database</groupId>
+          <artifactId>h2</artifactId>
+          <scope>test</scope>
+        </dependency>
+
       </dependencies>
     </profile>
 
   </profiles>
-  -->
 
   <build>
     <plugins>
@@ -205,19 +201,3 @@
   </build>
 
 </project>
-
-        <!--
-        <dependency>
-          <groupId>com.h2database</groupId>
-          <artifactId>h2</artifactId>
-          <scope>test</scope>
-        </dependency>
-        -->
-
-        <!--
-        <configuration>
-          <profiles>
-            <profile>dev-pg</profile>
-          </profiles>
-        </configuration>
-        -->
