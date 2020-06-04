@@ -4,9 +4,13 @@
 
 Follow the steps in the [Quick Start Guide](https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/developer/quick-start-guide.md).
 
-#### pgamin
+#### pgAmin
 
-You can also use an [pgamin](https://directory.apache.org/apacheds/) to manage PostrgeSQL.
+You can use [pgAdmin](https://directory.apache.org/apacheds/) to manage PostrgeSQL.
+
+Navigate to the pgAdmin Welcome page: http://localhost:5050
+
+Login using the PGADMIN_DEFAULT_EMAIL (admin@serendipity.org.au) and PGADMIN_DEFAULT_PASSWORD (secret) credentials:
 
 Login:
 
