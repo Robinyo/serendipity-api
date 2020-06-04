@@ -26,4 +26,4 @@ Create Connection Wizard - Connection Tab:
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/pgamin-server-connection-tab.png">
 </p>
 
-**Note:** The hostname is the value (postgres) specified in the project's [docker-compose.yml](https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/server/docker-compose.yml).
+**Note:** The 'Host name / address' field must match the value (postgres) specified in the project's [docker-compose.yml](https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/server/docker-compose.yml).
