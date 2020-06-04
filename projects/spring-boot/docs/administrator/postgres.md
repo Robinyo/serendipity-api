@@ -10,8 +10,6 @@ Navigate to the pgAdmin Welcome page: http://localhost:5050
 
 Login using the PGADMIN_DEFAULT_EMAIL (admin@serendipity.org.au) and PGADMIN_DEFAULT_PASSWORD (secret) credentials:
 
-Login:
-
 <p align="center">
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/pgamin-login.png">
 </p>
