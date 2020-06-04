@@ -4,6 +4,8 @@
 
 Follow the steps in the [Quick Start Guide](https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/developer/quick-start-guide.md).
 
+#### pgamin
+
 You can also use an [pgamin](https://directory.apache.org/apacheds/) to manage PostrgeSQL.
 
 Login:
