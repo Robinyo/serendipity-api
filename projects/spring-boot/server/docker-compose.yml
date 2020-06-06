@@ -1,4 +1,4 @@
-version: '3.7'
+version: '2.4'
 
 services:
 
@@ -28,9 +28,12 @@ services:
 
   postgres:
     container_name: postgres
-    build:
-      context: ./services/postgres
-      dockerfile: Dockerfile
+    image: postgres:latest
+    healthcheck:
+      test: "pg_isready -q -h db"
+      interval: 1m
+      timeout: 15s
+      retries: 5
     ports:
       - "5432:5432"
     volumes:
@@ -64,13 +67,13 @@ services:
     #   - ./h2:/h2
     # env_file: ./serendipity-api-test.env
     depends_on:
-      - postgres
-      - keycloak
+      postgres:
+        condition: service_healthy
 
-  jasper-reports:
-    container_name: jasper-reports
+  jasperreports-server:
+    container_name: jasperreports-server
     build:
-      context: ./services/jasper-reports
+      context: ./services/jasperreports-server
       dockerfile: Dockerfile
     ports:
       - "11001:8080"
@@ -78,11 +81,33 @@ services:
     volumes:
       - ./license:/usr/local/share/jasperserver/license
       - ./keystore:/usr/local/share/jasperserver/keystore
-    env_file: ./services/jasper-reports/jasper-reports.env
+    env_file: ./services/jasperreports-server/jasper-reports.env
     environment:
       - DB_HOST=postgres
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
+
+  jasperreports-server-cmdline:
+    container_name: jasperreports-server-cmdline
+    build:
+      context: ./services/jasperreports-server
+      dockerfile: Dockerfile-cmdline
+    volumes:
+      - ./license:/usr/local/share/jasperserver/license
+      - ./keystore:/usr/local/share/jasperserver/keystore
+    env_file: ./services/jasperreports-server/jasper-reports.env
+    environment:
+      - DB_HOST=postgres
+      - JRS_LOAD_SAMPLES=true
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+# version: '3.8'
+
+# How to determine when new container is truly "ready"
+# https://github.com/docker-library/postgres/issues/146
 
 # https://docs.docker.com/compose/compose-file/#variable-substitution
 # ${VARIABLE:-default} evaluates to default if VARIABLE is unset or empty in the environment.

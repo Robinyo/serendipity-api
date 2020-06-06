@@ -2,16 +2,6 @@
 # This file is subject to the license terms contained
 # in the license file that is distributed with this file.
 
-# Tomcat official Docker Hub images are not using Oracle anymore, hence the rename
-#FROM tomcat:9.0-jre8
-
-# set certified Tomcat+JRE image version for the JasperReports Server
-# Certified version of Tomcat for JasperReports Server 7.2.0 commercial editions
-# ARG TOMCAT_BASE_IMAGE=tomcat:9.0.17-jre8
-
-# Certified version of Tomcat for JasperReports Server 7.5.0 commercial editions
-# ARG TOMCAT_BASE_IMAGE=tomcat:9.0-jdk11-corretto
-
 ARG TOMCAT_BASE_IMAGE=tomcat:9.0.31-jdk11-openjdk
 FROM ${TOMCAT_BASE_IMAGE}
 
@@ -24,12 +14,12 @@ ARG POSTGRES_JDBC_DRIVER_VERSION
 ARG JASPERREPORTS_SERVER_VERSION
 ARG EXPLODED_INSTALLER_DIRECTORY
 
-ENV PHANTOMJS_VERSION         ${PHANTOMJS_VERSION:-2.1.1}
-ENV DN_HOSTNAME         ${DN_HOSTNAME:-localhost.localdomain}
-ENV KS_PASSWORD         ${KS_PASSWORD:-changeit}
-ENV JRS_HTTPS_ONLY         ${JRS_HTTPS_ONLY:-false}
-ENV HTTP_PORT             ${HTTP_PORT:-8080}
-ENV HTTPS_PORT             ${HTTPS_PORT:-8443}
+ENV PHANTOMJS_VERSION ${PHANTOMJS_VERSION:-2.1.1}
+ENV DN_HOSTNAME ${DN_HOSTNAME:-localhost.localdomain}
+ENV KS_PASSWORD ${KS_PASSWORD:-changeit}
+ENV JRS_HTTPS_ONLY ${JRS_HTTPS_ONLY:-false}
+ENV HTTP_PORT ${HTTP_PORT:-8080}
+ENV HTTPS_PORT ${HTTPS_PORT:-8443}
 ENV POSTGRES_JDBC_DRIVER_VERSION ${POSTGRES_JDBC_DRIVER_VERSION:-42.2.13}
 ENV JASPERREPORTS_SERVER_VERSION ${JASPERREPORTS_SERVER_VERSION:-7.5.0}
 ENV EXPLODED_INSTALLER_DIRECTORY ${EXPLODED_INSTALLER_DIRECTORY:-resources/jasperreports-server-cp-$JASPERREPORTS_SERVER_VERSION-bin}
@@ -114,14 +104,10 @@ RUN echo "nameserver 8.8.8.8" | tee /etc/resolv.conf > /dev/null && \
         -v "/root/.keystore.p12" \
     ${CATALINA_HOME}/conf/server.xml
 
-# Expose ports. Note that you must do one of the following:
-# map them to local ports at container runtime via "-p 8080:8080 -p 8443:8443"
-# or use dynamic ports.
 EXPOSE ${HTTP_PORT} ${HTTPS_PORT}
 
 ENTRYPOINT ["/entrypoint.sh"]
 
-# Default action executed by entrypoint script.
 CMD ["run"]
 
 

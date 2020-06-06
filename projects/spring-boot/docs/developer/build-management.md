@@ -59,7 +59,7 @@ docker container logs openldap
 docker container logs keycloak
 docker container logs postgres
 docker container logs serendipity-api
-docker container logs jasper-reports
+docker container logs jasperreports-server
 ```
 
 To view the OpenAPI specification in ReDoc:
