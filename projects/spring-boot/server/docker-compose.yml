@@ -82,7 +82,7 @@ services:
     environment:
       - DB_HOST=postgres
     depends_on:
-      - serendipity-api
+      - postgres
 
 # https://docs.docker.com/compose/compose-file/#variable-substitution
 # ${VARIABLE:-default} evaluates to default if VARIABLE is unset or empty in the environment.
