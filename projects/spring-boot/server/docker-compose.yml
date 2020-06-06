@@ -76,8 +76,8 @@ services:
       - "11001:8080"
       - "11443:8443"
     volumes:
-      - ./license:/usr/local/share/jasperserver-pro/license
-      - ./keystore:/usr/local/share/jasperserver-pro/keystore
+      - ./license:/usr/local/share/jasperserver/license
+      - ./keystore:/usr/local/share/jasperserver/keystore
     env_file: ./services/jasper-reports/jasper-reports.env
     environment:
       - DB_HOST=postgres

@@ -21,9 +21,10 @@ run_jasperserver() {
   test_database_connection
   
   # Because default_master.properties could change on any launch,
-  # always do deploy-webapp-pro.
+  # always do deploy-webapp.
 
-  execute_buildomatic deploy-webapp-pro
+  # execute_buildomatic deploy-webapp-pro
+  execute_buildomatic deploy-webapp-ce
 
   # setup phantomjs
   config_phantomjs
@@ -35,8 +36,6 @@ run_jasperserver() {
   # start tomcat
   exec env JAVA_OPTS="$JAVA_OPTS" catalina.sh run
 }
-
-
 
 config_phantomjs() {
   # if phantomjs binary is present, update JasperReports Server config.
@@ -119,7 +118,6 @@ config_ports_and_ssl() {
   fi
 
 }
-
 
 apply_customizations() {
   # unpack zips (if exist) from path

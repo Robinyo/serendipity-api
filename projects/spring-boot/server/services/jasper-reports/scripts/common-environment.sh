@@ -6,7 +6,7 @@
 
 # This script sets up and runs JasperReports Server on container start.
 # Default "run" command, set in Dockerfile, executes run_jasperserver.
-# If webapps/jasperserver-ce does not exist, run_jasperserver
+# If webapps/jasperserver does not exist, run_jasperserver
 # redeploys webapp. If "jasperserver" database does not exist,
 # run_jasperserver redeploys minimal database.
 # Additional "init" only calls init_database, which will try to recreate
@@ -16,7 +16,7 @@
 set -e
 
 BUILDOMATIC_HOME=${BUILDOMATIC_HOME:-/usr/src/jasperreports-server/buildomatic}
-MOUNTS_HOME=${MOUNTS_HOME:-/usr/local/share/jasperserver-ce}
+MOUNTS_HOME=${MOUNTS_HOME:-/usr/local/share/jasperserver}
 
 KEYSTORE_PATH=${KEYSTORE_PATH:-${MOUNTS_HOME}/keystore}
 export ks=$KEYSTORE_PATH
@@ -85,7 +85,7 @@ dbPassword=$DB_PASSWORD
 js.dbName=$DB_NAME
 foodmart.dbName=foodmart
 sugarcrm.dbName=sugarcrm
-webAppName=jasperserver-ce
+webAppName=jasperserver
 ks=$KEYSTORE_PATH
 ksp=$KEYSTORE_PATH
 _EOL_
@@ -230,7 +230,6 @@ test_database_connection() {
 	done
 }
 
-
 config_license() {
   # load license file from volume
   JRS_LICENSE_FINAL=${JRS_LICENSE:-${MOUNTS_HOME}/license}
@@ -255,7 +254,7 @@ execute_buildomatic() {
 
   for i in $@; do
     # Default buildomatic deploy-webapp-pro target attempts to remove
-    # $CATALINA_HOME/webapps/jasperserver-ce path.
+    # $CATALINA_HOME/webapps/jasperserver path.
     # This behaviour does not work if mounted volumes are used.
     # Using unzip to populate webapp directory and non-destructive
     # targets for configuration
@@ -264,12 +263,15 @@ execute_buildomatic() {
         set-pro-webapp-name \
         deploy-webapp-datasource-configs \
         deploy-jdbc-jar \
-        -DwarTargetDir=$CATALINA_HOME/webapps/jasperserver-ce
+        -DwarTargetDir=$CATALINA_HOME/webapps/jasperserver
     else
       # warTargetDir webaAppName are set as
       # workaround for database configuration regeneration
       ./js-ant $i \
-        -DwarTargetDir=$CATALINA_HOME/webapps/jasperserver-ce
+        set-ce-webapp-name \
+        deploy-webapp-datasource-configs \
+        deploy-jdbc-jar \
+        -DwarTargetDir=$CATALINA_HOME/webapps/jasperserver
     fi
   done
 }
