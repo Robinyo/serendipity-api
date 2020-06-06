@@ -49,6 +49,7 @@ export JAVA_OPTS="$JAVA_OPTS -XX:-UseContainerSupport -XX:MinRAMPercentage=$JAVA
 export ANT_OPTS="$ANT_OPTS @/java11.opts"
 
 initialize_deploy_properties() {
+
   # license could fail
   # config_license
 
@@ -253,14 +254,14 @@ execute_buildomatic() {
   cd ${BUILDOMATIC_HOME}/
 
   for i in $@; do
-    # Default buildomatic deploy-webapp-pro target attempts to remove
+    # Default buildomatic deploy-webapp-ce target attempts to remove
     # $CATALINA_HOME/webapps/jasperserver path.
     # This behaviour does not work if mounted volumes are used.
     # Using unzip to populate webapp directory and non-destructive
     # targets for configuration
-    if [ $i == "deploy-webapp-pro" ]; then
+    if [ $i == "deploy-webapp-ce" ]; then
       ./js-ant \
-        set-pro-webapp-name \
+        set-ce-webapp-name \
         deploy-webapp-datasource-configs \
         deploy-jdbc-jar \
         -DwarTargetDir=$CATALINA_HOME/webapps/jasperserver
@@ -268,9 +269,6 @@ execute_buildomatic() {
       # warTargetDir webaAppName are set as
       # workaround for database configuration regeneration
       ./js-ant $i \
-        set-ce-webapp-name \
-        deploy-webapp-datasource-configs \
-        deploy-jdbc-jar \
         -DwarTargetDir=$CATALINA_HOME/webapps/jasperserver
     fi
   done
