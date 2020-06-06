@@ -80,7 +80,7 @@ services:
       - DB_HOST=postgres
     depends_on:
       - postgres
-    command: ["./wait-for-it.sh --timeout=30", "postgres:5432", "--", "./entrypoint.sh"]
+    command: ["./wait-for-it.sh", "postgres:5432", "-t 30", "--", "./entrypoint.sh"]
 
   jasperreports-server-cmdline:
     container_name: jasperreports-server-cmdline
@@ -96,7 +96,7 @@ services:
       - JRS_LOAD_SAMPLES=true
     depends_on:
       - postgres
-    command: ["./wait-for-it.sh --timeout=30", "postgres:5432", "--", "./entrypoint-cmdline.sh"]
+    command: ["./wait-for-it.sh", "postgres:5432", "-t 30", "--", "./entrypoint-cmdline.sh"]
 
 # How to determine when new container is truly "ready"
 # https://github.com/docker-library/postgres/issues/146
