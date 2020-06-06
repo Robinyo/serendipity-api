@@ -2,8 +2,8 @@
 
 ### Building the JasperReports Server image
 
-[Download](https://community.jaspersoft.com/project/jasperreports-server/releases) the Community Edition of the 
-JasperReports Server zip archive and place it in the `resources` directory.
+[Download](https://community.jaspersoft.com/project/jasperreports-server/releases) the Community Edition of 
+JasperReports Server and place it in the `resources` directory.
 
 Unpack the zip archive:
 
