@@ -6,7 +6,6 @@
 
 # This script sets up and runs JasperReports Server on container start.
 # Default "run" command, set in Dockerfile, executes run_jasperserver.
-# Use jasperserver-ce-cmdline to initialize the repository database
 
 # Sets script to fail if any command fails.
 set -e
@@ -43,7 +42,7 @@ config_phantomjs() {
     PATH_PHANTOM='\/usr\/local\/bin\/phantomjs'
     PATTERN1='com.jaspersoft.jasperreports'
     PATTERN2='phantomjs.executable.path'
-    cd $CATALINA_HOME/webapps/jasperserver-ce/WEB-INF
+    cd $CATALINA_HOME/webapps/jasperserver/WEB-INF
     sed -i -r "s/(.*)($PATTERN1.highcharts.$PATTERN2=)(.*)/\2$PATH_PHANTOM/" \
       classes/jasperreports.properties
     sed -i -r "s/(.*)($PATTERN1.fusion.$PATTERN2=)(.*)/\2$PATH_PHANTOM/" \
@@ -70,7 +69,7 @@ config_ports_and_ssl() {
 
   if "$JRS_HTTPS_ONLY" = "true" ; then
     echo "Setting HTTPS only within JasperReports Server"
-    cd $CATALINA_HOME/webapps/jasperserver-ce/WEB-INF
+    cd $CATALINA_HOME/webapps/jasperserver/WEB-INF
     xmlstarlet ed --inplace \
       -N x="http://java.sun.com/xml/ns/j2ee" -u \
       "//x:security-constraint/x:user-data-constraint/x:transport-guarantee"\
@@ -123,7 +122,7 @@ apply_customizations() {
   # unpack zips (if exist) from path
   # ${MOUNTS_HOME}/customization
   # to JasperReports Server web application path
-  # $CATALINA_HOME/webapps/jasperserver-ce/
+  # $CATALINA_HOME/webapps/jasperserver/
   # file sorted with natural sort
   JRS_CUSTOMIZATION=${JRS_CUSTOMIZATION:-${MOUNTS_HOME}/customization}
   if [ -d "$JRS_CUSTOMIZATION" ]; then
@@ -146,7 +145,7 @@ apply_customizations() {
 		  else
 			echo "Unzipping $customization into JasperReports Server webapp"
 			unzip -o -q "$customization" \
-				-d $CATALINA_HOME/webapps/jasperserver-ce/
+				-d $CATALINA_HOME/webapps/jasperserver/
 		  fi
 		fi
 	  done
