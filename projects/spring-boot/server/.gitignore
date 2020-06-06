@@ -43,3 +43,6 @@ serendipity.mv.db
 serendipity.trace.db
 
 /pgdata
+
+/keystore
+/license
