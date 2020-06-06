@@ -1,4 +1,4 @@
-version: '3.7'
+version: '2.4'
 
 services:
 
@@ -29,6 +29,11 @@ services:
   postgres:
     container_name: postgres
     image: postgres:latest
+    healthcheck:
+      test: "pg_isready -q -h db"
+      interval: 1m
+      timeout: 15s
+      retries: 5
     ports:
       - "5432:5432"
     volumes:
@@ -62,8 +67,8 @@ services:
     #   - ./h2:/h2
     # env_file: ./serendipity-api-test.env
     depends_on:
-      - postgres
-    command: ["./wait-for-it.sh", "postgres:5432", "--", "python", "app.py"]
+      postgres:
+        condition: service_healthy
 
   jasperreports-server:
     container_name: jasperreports-server
@@ -80,8 +85,8 @@ services:
     environment:
       - DB_HOST=postgres
     depends_on:
-      - postgres
-    command: ["./wait-for-it.sh", "postgres:5432", "--", "python", "app.py"]
+      postgres:
+        condition: service_healthy
 
   jasperreports-server-cmdline:
     container_name: jasperreports-server-cmdline
@@ -96,8 +101,8 @@ services:
       - DB_HOST=postgres
       - JRS_LOAD_SAMPLES=true
     depends_on:
-      - postgres
-    command: ["./wait-for-it.sh", "postgres:5432", "--", "python", "app.py"]
+      postgres:
+        condition: service_healthy
 
 # How to determine when new container is truly "ready"
 # https://github.com/docker-library/postgres/issues/146
