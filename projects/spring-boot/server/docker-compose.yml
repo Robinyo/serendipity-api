@@ -39,7 +39,9 @@ services:
 
   pgadmin:
     container_name: pgadmin
-    image: dpage/pgadmin4
+    build:
+      context: ./services/pgadmin
+      dockerfile: Dockerfile
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@serendipity.org.au}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-secret}
@@ -73,8 +75,12 @@ services:
     ports:
       - "11001:8080"
       - "11443:8443"
-    # volumes:
+    volumes:
+      - ./license:/usr/local/share/jasperserver-pro/license
+      - ./keystore:/usr/local/share/jasperserver-pro/keystore
     env_file: ./services/jasper-reports/jasper-reports.env
+    environment:
+      - DB_HOST=postgres
     depends_on:
       - serendipity-api
 

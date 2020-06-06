@@ -31,9 +31,10 @@ tmp/.settings
 /tmp
 /temp
 
-
 TODO.txt
 temp.txt
+
+issue.md
 
 /h2
 serendipity.db
@@ -42,5 +43,3 @@ serendipity.mv.db
 serendipity.trace.db
 
 /pgdata
-
-issue.md
