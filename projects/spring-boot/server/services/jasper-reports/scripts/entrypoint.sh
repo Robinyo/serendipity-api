@@ -95,7 +95,7 @@ config_ports_and_ssl() {
 			if [[ -f "$keystore" ]]; then
 			  echo "Deploying SSL Keystore $keystore"
 			  cp "${keystore}" /root
-			  xmlstarlet ed --inplace --subnode "/Server/Service/Connector[@port='${HTTPS_PORT:-8443}']" --type elem \ 
+			  xmlstarlet ed --inplace --subnode "/Server/Service/Connector[@port='${HTTPS_PORT:-8443}']" --type elem \
 					--var connector-ssl '$prev' \
 				--update '$connector-ssl' --type attr -n port -v "${HTTPS_PORT:-8443}" \
 				--update '$connector-ssl' --type attr -n keystoreFile  -v "/root/${keystore}" \

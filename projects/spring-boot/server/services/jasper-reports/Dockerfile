@@ -61,7 +61,7 @@ COPY scripts /
 
 RUN echo "nameserver 8.8.8.8" | tee /etc/resolv.conf > /dev/null && \
     chmod +x /*.sh && \
-    /installPackagesForJasperserver-pro.sh > /dev/null && \
+    /installPackagesForJasperserver-ce.sh > /dev/null && \
 	echo "finished installing packages" && \
     rm -rf $CATALINA_HOME/webapps/ROOT && \
     rm -rf $CATALINA_HOME/webapps/docs && \
