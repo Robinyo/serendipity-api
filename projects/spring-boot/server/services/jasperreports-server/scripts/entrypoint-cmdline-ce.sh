@@ -353,22 +353,19 @@ initialize_deploy_properties
 appServerType=skipAppServerCheck
 _EOL_
 
-init_databases "init"
-
-# case "$1" in
-#   init)
-#     shift 1
-#     init_databases "$@"
-#     ;;
-#   import)
-#     shift 1
-#     import "$@"
-#     ;;
-#   export)
-#     shift 1
-#     export "$@"
-#     ;;
-#   *)
-#     exec "$@"
-# esac
-
+case "$1" in
+  init)
+    shift 1
+    init_databases "$@"
+    ;;
+  import)
+    shift 1
+    import "$@"
+    ;;
+  export)
+    shift 1
+    export "$@"
+    ;;
+  *)
+    exec "$@"
+esac

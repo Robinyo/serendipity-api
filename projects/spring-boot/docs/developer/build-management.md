@@ -58,8 +58,10 @@ To check the logs inside your container:
 docker container logs openldap
 docker container logs keycloak
 docker container logs postgres
+docker container logs pgadmin
 docker container logs serendipity-api
 docker container logs jasperreports-server
+docker container logs jasperreports-server-cmdline
 ```
 
 To view the OpenAPI specification in ReDoc:

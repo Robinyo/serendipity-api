@@ -2,30 +2,6 @@ version: '3.7'
 
 services:
 
-  openldap:
-    container_name: openldap
-    build:
-      context: ./services/openldap
-      dockerfile: Dockerfile
-    env_file: ./services/openldap/openldap.env
-    ports:
-      - "389:389"
-      - "636:636"
-
-  keycloak:
-    container_name: keycloak
-    build:
-      context: ./services/keycloak
-      dockerfile: Dockerfile
-    ports:
-      - "10001:8080"
-      - "10443:8443"
-    volumes:
-      - .:/export
-    env_file: ./services/keycloak/keycloak.env
-    depends_on:
-      - openldap
-
   postgres:
     container_name: postgres
     image: postgres:latest
@@ -47,22 +23,6 @@ services:
       - "${PGADMIN_PORT:-5050}:80"
     volumes:
       - .:/root/.pgadmin
-
-  serendipity-api:
-    container_name: serendipity-api
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "3001:3001"
-    environment:
-      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=http://keycloak:8080/auth/realms/development/protocol/openid-connect/certs
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/serendipity
-    # volumes:
-    #   - ./h2:/h2
-    # env_file: ./serendipity-api-test.env
-    depends_on:
-      - postgres
 
   jasperreports-server:
     container_name: jasperreports-server
@@ -95,20 +55,4 @@ services:
       - JRS_LOAD_SAMPLES=true
     depends_on:
       - postgres
-    command: ["./wait-for-it.sh", "postgres:5432", "-t" , "30", "--", "./entrypoint-cmdline.sh"]
-
-# How to determine when new container is truly "ready"
-# https://github.com/docker-library/postgres/issues/146
-
-# https://docs.docker.com/compose/compose-file/#variable-substitution
-# ${VARIABLE:-default} evaluates to default if VARIABLE is unset or empty in the environment.
-# ${VARIABLE:?err} exits with an error message containing err if VARIABLE is unset or empty in the environment.
-
-# When you set the same environment variable in multiple files, here’s the priority used by Compose to choose which
-# value to use:
-#
-# Compose file
-# Shell environment variables
-# Environment file
-# Dockerfile
-# Variable is not defined
+    command: ["./wait-for-it.sh", "postgres:5432", "-t" , "30", "--", "./entrypoint-cmdline-ce.sh", "init"]
