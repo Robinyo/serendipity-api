@@ -25,7 +25,7 @@ docker container exec [name] printenv [variable]
 For example:
 
 ```
-docker containerexec flowable printenv FLOWABLE_IDM_LDAP_ENABLED
+docker container exec flowable printenv FLOWABLE_IDM_LDAP_ENABLED
 ```
 
 To check the environment variables inside your container:
