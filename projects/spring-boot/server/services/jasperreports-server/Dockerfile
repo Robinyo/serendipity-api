@@ -106,8 +106,8 @@ RUN echo "nameserver 8.8.8.8" | tee /etc/resolv.conf > /dev/null && \
 
 EXPOSE ${HTTP_PORT} ${HTTPS_PORT}
 
-ENTRYPOINT ["/entrypoint.sh"]
+# ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ["run"]
+# CMD ["run"]
 
 

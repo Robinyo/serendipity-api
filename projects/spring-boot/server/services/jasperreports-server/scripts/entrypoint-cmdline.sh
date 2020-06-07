@@ -135,8 +135,7 @@ init_databases() {
   echo "Database init status: administrative : $sawAdministrative , $DB_NAME : $sawJRSDBName , foodmart: $sawFoodmartDBName , sugarcrm $sawSugarCRMDBName"
   if [ "$sawJRSDBName" = "no" ]; then
     echo "Initializing $DB_NAME repository database"
-	execute_buildomatic set-pro-webapp-name create-js-db init-js-db-pro import-minimal-pro
-	
+  execute_buildomatic set-ce-webapp-name create-js-db init-js-db-ce import-minimal-ce
 	JRS_LOAD_SAMPLES=${JRS_LOAD_SAMPLES:-false}
 	  
 	# Only install the samples if explicitly requested
@@ -155,7 +154,7 @@ init_databases() {
 							load-sugarcrm-db 
 		fi
 
-		execute_buildomatic import-sample-data-pro
+		execute_buildomatic import-sample-data-ce
 	fi
   else
     echo "$DB_NAME repository database already exists: not creating and loading it or samples"
@@ -354,20 +353,22 @@ initialize_deploy_properties
 appServerType=skipAppServerCheck
 _EOL_
 
-case "$1" in
-  init)
-    shift 1
-    init_databases "$@"
-    ;;
-  import)
-    shift 1
-    import "$@"
-    ;;
-  export)
-    shift 1
-    export "$@"
-    ;;
-  *)
-    exec "$@"
-esac
+init_databases "init"
+
+# case "$1" in
+#   init)
+#     shift 1
+#     init_databases "$@"
+#     ;;
+#   import)
+#     shift 1
+#     import "$@"
+#     ;;
+#   export)
+#     shift 1
+#     export "$@"
+#     ;;
+#   *)
+#     exec "$@"
+# esac
 

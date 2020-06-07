@@ -56,6 +56,6 @@ RUN echo "apt-get" && \
     wget "https://jdbc.postgresql.org/download/postgresql-${POSTGRES_JDBC_DRIVER_VERSION}.jar"  \
         -P /usr/src/jasperreports-server/buildomatic/conf_source/db/postgresql/jdbc --no-verbose
 
-ENTRYPOINT ["/entrypoint-cmdline.sh"]
+# ENTRYPOINT ["/entrypoint-cmdline.sh"]
 
-CMD ["init"]
+# CMD ["init"]

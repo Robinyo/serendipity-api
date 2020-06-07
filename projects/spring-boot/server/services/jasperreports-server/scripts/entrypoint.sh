@@ -166,15 +166,15 @@ apply_customizations() {
 	fi
 }
 
-
 initialize_deploy_properties
 
-case "$1" in
-  run)
-    shift 1
-    run_jasperserver "$@"
-    ;;
-  *)
-    exec "$@"
-esac
+run_jasperserver "run"
 
+# case "$1" in
+#  run)
+#    shift 1
+#    run_jasperserver "$@"
+#    ;;
+#  *)
+#    exec "$@"
+# esac
