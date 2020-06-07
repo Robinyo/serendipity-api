@@ -3,9 +3,16 @@
 
 CONTAINER=$1
 
-RUNNING=$(docker inspect --format="{{.State.Running}}" $CONTAINER 2> /dev/null)
+# $ curl --unix-socket /var/run/docker.sock http:/v1.24/containers/jasperreports-server-cmdline/json
 
-if [ "$RUNNING" == "true" ]; then
-  echo "$CONTAINER is running."
-  exit
-fi
+
+
+
+
+
+
+# https://docs.docker.com/engine/api/v1.24/
+# https://docs.docker.com/engine/api/sdk/examples/
+
+# https://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/
+# https://jpetazzo.github.io/2016/04/03/one-container-to-rule-them-all/
