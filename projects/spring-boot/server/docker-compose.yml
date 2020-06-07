@@ -40,6 +40,9 @@ services:
       - DB_HOST=postgres
     depends_on:
       - jasperreports-server-cmdline
+    command: /bin/bash -c "
+      sleep 60 &&
+      run"
 
   jasperreports-server-cmdline:
     container_name: jasperreports-server-cmdline
