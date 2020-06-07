@@ -163,7 +163,7 @@ init_databases() {
 
 import() {
 
-    # Import from the passed in list of volumes
+  # Import from the passed in list of volumes
 	# Default: use import.properties file in the given volume
 	# could be passed in /path/to/volume/aProperties.file
 	# use that as the volume for files and the named properties file

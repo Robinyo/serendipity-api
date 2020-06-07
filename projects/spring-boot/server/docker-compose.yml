@@ -79,8 +79,7 @@ services:
     environment:
       - DB_HOST=postgres
     depends_on:
-      - postgres
-    command: ["./wait-for-it.sh", "postgres:5432", "-t" , "30", "--", "./entrypoint.sh"]
+      - jasperreports-server-cmdline
 
   jasperreports-server-cmdline:
     container_name: jasperreports-server-cmdline
