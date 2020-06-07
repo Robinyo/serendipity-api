@@ -35,6 +35,7 @@ services:
     volumes:
       - ./license:/usr/local/share/jasperserver/license
       - ./keystore:/usr/local/share/jasperserver/keystore
+      - /var/run/docker.sock:/var/run/docker.sock
     env_file: ./services/jasperreports-server/jasper-reports.env
     environment:
       - DB_HOST=postgres

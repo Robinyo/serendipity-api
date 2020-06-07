@@ -1,5 +1,11 @@
 <h1 align="center">Working with Docker</h1>
 
+I use Docker Desktop for Mac:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/docker-desktop.png">
+</p>
+
 Docker CLI management commands start with `docker`, then a space, then the management category, then a space, and then 
 the command. A flag with two dashes in front is the full name of the flag. A flag with one dash is a shortcut for the 
 full flag name.
@@ -13,19 +19,19 @@ docker container ls
 To check an environment variable inside your container:
 
 ```
-docker exec [name] printenv [variable]
+docker container exec [name] printenv [variable]
 ```
 
 For example:
 
 ```
-docker exec flowable printenv FLOWABLE_IDM_LDAP_ENABLED
+docker containerexec flowable printenv FLOWABLE_IDM_LDAP_ENABLED
 ```
 
 To check the environment variables inside your container:
 
 ```
-docker inspect -f \
+docker container inspect -f \
   '{{range $index, $value := .Config.Env}}{{println $value}}{{end}}' \
   [name] | grep [value]
 ```
@@ -33,7 +39,7 @@ docker inspect -f \
 For example:
 
 ```
-docker inspect -f \
+docker container inspect -f \
   '{{range $index, $value := .Config.Env}}{{println $value}}{{end}}' \
   serendipity-api | grep SPRING
 ```
@@ -47,15 +53,19 @@ docker container logs [name]
 For example:
 
 ```
-docker container logs serendipity-api
-docker container logs keycloak
 docker container logs openldap
+docker container logs keycloak
+docker container logs postgres
+docker container logs pgadmin
+docker container logs serendipity-api
+docker container logs jasperreports-server
+docker container logs jasperreports-server-cmdline
 ```
 
 To start a shell session inside your container that you can interact with through your terminal:
 
 ```
-docker exec -it [name] /bin/bash
+docker container exec -it [name] /bin/bash
 ```
 
 `-i` is short for `--interactive`. Keep STDIN open even if unattached.
@@ -64,7 +74,7 @@ docker exec -it [name] /bin/bash
 For example:
 
 ```
-docker exec -it flowable sh
+docker container exec -it flowable sh
 ```
 
 You can stop a container using the following command:
