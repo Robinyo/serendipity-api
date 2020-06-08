@@ -10,13 +10,19 @@ INSPECT_CONTAINER=`curl --silent --unix-socket /var/run/docker.sock -H ${CONTENT
 
 INSPECT_CONTAINER_RESULT=$(jq -s --raw-output '.[0].message' <<< "${INSPECT_CONTAINER}")
 
-echo INSPECT_CONTAINER_RESULT
+# echo $INSPECT_CONTAINER | jq
+# echo $INSPECT_CONTAINER_RESULT
 
 if [[ "${INSPECT_CONTAINER_RESULT}" == "page not found" ]]; then
-  echo "${CONTAINER} not found"
+  echo "No such container: ${CONTAINER}"
 else
-  echo "${CONTAINER} found"
+  echo $INSPECT_CONTAINER | jq
 fi
+
+# chmod 755 wait-for-container-to-exit.sh
+# ./wait-for-container-to-exit.sh jasperreports-server-cmdline
+
+
 
 # https://docs.docker.com/engine/api/v1.24/#31-containers
 # https://docs.docker.com/engine/api/v1.24/
@@ -26,9 +32,6 @@ fi
 # https://jpetazzo.github.io/2016/04/03/one-container-to-rule-them-all/
 
 # https://gist.github.com/paulosalgado/91bd74c284e262a4806524b0dde126ba
-
-# chmod 755 wait-for-container-to-exit.sh
-# ./wait-for-container-to-exit.sh jasperreports-server-cmdline
 
 # JSON lines format
 # echo $INSPECT_CONTAINER | jq -s --raw-output'.[0].message'
