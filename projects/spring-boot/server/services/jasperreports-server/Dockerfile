@@ -2,7 +2,7 @@
 # This file is subject to the license terms contained
 # in the license file that is distributed with this file.
 
-ARG TOMCAT_BASE_IMAGE=tomcat:9.0.31-jdk11-openjdk
+ARG TOMCAT_BASE_IMAGE=tomcat:9.0.35-jdk11-openjdk
 FROM ${TOMCAT_BASE_IMAGE}
 
 ARG DN_HOSTNAME

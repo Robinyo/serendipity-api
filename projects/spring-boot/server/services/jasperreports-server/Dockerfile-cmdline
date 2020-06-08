@@ -2,7 +2,7 @@
 # This file is subject to the license terms contained
 # in the license file that is distributed with this file.
 
-ARG JAVA_BASE_IMAGE=openjdk:11.0-slim
+ARG JAVA_BASE_IMAGE=openjdk:11.0.7-slim
 FROM ${JAVA_BASE_IMAGE}
 
 ARG POSTGRES_JDBC_DRIVER_VERSION
