@@ -22,7 +22,7 @@ echo "Installing packages with $PACKAGE_MGR"
 case "$PACKAGE_MGR" in
 	"yum" )
 		yum -y update
-		yum -y install yum-utils wget unzip tar bzip2
+		yum -y install yum-utils wget unzip tar bzip2 curl jq
 		wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
 			-O /tmp/epel-release-latest-7.noarch.rpm --no-verbose 
 		yum -y install /tmp/epel-release-latest-7.noarch.rpm
@@ -33,7 +33,7 @@ case "$PACKAGE_MGR" in
 		;;
 	"zypper" )
 		zypper refresh && \
-		zypper -n install wget unzip tar bzip2 && \
+		zypper -n install wget unzip tar bzip2 curl jq && \
 		wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
 			-O /tmp/epel-release-latest-7.noarch.rpm --no-verbose 
 		zypper -n install /tmp/epel-release-latest-7.noarch.rpm
@@ -42,8 +42,8 @@ case "$PACKAGE_MGR" in
 		;;
 	"apt_get" )
 		apt-get update
-		apt-get install -y --no-install-recommends apt-utils unzip xmlstarlet
-		#apt-get install -y unzip xmlstarlet 
+		apt-get install -y --no-install-recommends apt-utils unzip xmlstarlet curl jq
+		# apt-get install -y unzip xmlstarlet
 		rm -rf /var/lib/apt/lists/*
 		;;
 esac

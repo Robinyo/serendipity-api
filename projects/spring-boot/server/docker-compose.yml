@@ -43,7 +43,8 @@ services:
       - DB_HOST=postgres
     depends_on:
       - jasperreports-server-cmdline
-    command: ["run"]
+    command: ["./wait-for-container-to-exit.sh", "jasperreports-server-cmdline", "-t" , "30", "--", "./entrypoint-ce.sh", "run"]
+    # command: ["run"]
 
   jasperreports-server-cmdline:
     container_name: jasperreports-server-cmdline

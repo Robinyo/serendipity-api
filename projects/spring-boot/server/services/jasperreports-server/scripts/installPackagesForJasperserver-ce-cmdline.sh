@@ -22,18 +22,18 @@ echo "Installing packages with $PACKAGE_MGR"
 case "$PACKAGE_MGR" in
 	"yum" )
 		yum -y update
-		yum -y install yum-utils wget unzip
+		yum -y install yum-utils wget unzip curl jq
 		;;
 	"rpm" )
 		echo "Installed nothing via rpm"
 		;;
 	"zypper" )
 		zypper refresh && \
-		zypper -n install wget unzip && \
+		zypper -n install wget unzip curl jq && \
 		zypper clean -a
 		;;
 	"apt_get" )
 		apt-get update
-		apt-get install -y --no-install-recommends apt-utils unzip wget 
+		apt-get install -y --no-install-recommends apt-utils unzip wget curl jq
 		rm -rf /var/lib/apt/lists/*
 esac
