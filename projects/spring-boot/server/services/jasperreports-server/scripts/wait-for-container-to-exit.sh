@@ -7,27 +7,24 @@ CONTAINER=$1
 # API_SERVER=http:/v1.24
 API_SERVER=http:/docker
 
-INSPECT_CONTAINER=`curl --silent --unix-socket /var/run/docker.sock ${API_SERVER}/containers/${CONTAINER}/json`
-
-INSPECT_CONTAINER_RESULT=$(jq -s --raw-output '.[0].message' <<< "${INSPECT_CONTAINER}")
-
-# No such container: jasperreports-server-cmdline
-
 while :
 do
 
-  if [[ "${INSPECT_CONTAINER_RESULT}" == *container:* ]]; then
+  INSPECT_CONTAINER=`curl --silent --unix-socket /var/run/docker.sock ${API_SERVER}/containers/${CONTAINER}/json`
+
+  INSPECT_CONTAINER_RESULT=$(jq --raw-output '.State.Status' <<< "${INSPECT_CONTAINER}")
+
+  # echo $INSPECT_CONTAINER_RESULT
+
+  if [[ $INSPECT_CONTAINER_RESULT == "exited" ]]; then
     echo $INSPECT_CONTAINER_RESULT
     exit
   else
-    # echo $INSPECT_CONTAINER | jq
-    echo "sleep 15"
-    sleep 15
+    echo "sleep 30"
+    sleep 30
   fi
 
 done
-
-
 
 # chmod 755 wait-for-container-to-exit.sh
 # ./wait-for-container-to-exit.sh jasperreports-server-cmdline
