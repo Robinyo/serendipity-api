@@ -17,3 +17,8 @@ Dashboard:
 <p align="center">
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-dashboard.png">
 </p>
+
+### Resources
+
+* Jaspersoft Community: [Documentation](https://community.jaspersoft.com/documentation?version=59011)
+* GitHub: [JasperReports](https://github.com/TIBCOSoftware/jasperreports)
