@@ -65,7 +65,7 @@ services:
     depends_on:
       - keycloak
       - jasperreports-server-cmdline
-    command: ["/wait-for-container-to-exit.sh", "jasperreports-server-cmdline", "-t" , "40", "--", "java", "-jar", "/opt/serendipity-api/serendipity-rest-api-core-0.0.1-SNAPSHOT.jar"]
+    command: ["/wait-for-container-to-exit.sh", "jasperreports-server-cmdline", "-t" , "40", "--", "/entrypoint.sh"]
 
   jasperreports-server:
     container_name: jasperreports-server
