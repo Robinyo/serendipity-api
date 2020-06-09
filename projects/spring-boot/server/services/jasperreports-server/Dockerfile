@@ -49,9 +49,6 @@ COPY ${EXPLODED_INSTALLER_DIRECTORY}/buildomatic/target /usr/src/jasperreports-s
 
 COPY scripts /
 
-# COPY scripts/wait-for-container-to-exit.sh /usr/local/tomcat/wait-for-container-to-exit.sh
-# COPY scripts/entrypoint-ce.sh /usr/local/tomcat/entrypoint-ce.sh
-
 RUN echo "nameserver 8.8.8.8" | tee /etc/resolv.conf > /dev/null && \
     chmod +x /*.sh && \
     /installPackagesForJasperserver-ce.sh > /dev/null && \

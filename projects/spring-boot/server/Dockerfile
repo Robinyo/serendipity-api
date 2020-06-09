@@ -1,15 +1,16 @@
-# I prefer to name a specific version, rather than one of the ‘floating’ tags
-# FROM adoptopenjdk/openjdk11:jre-11.0.6_10
-FROM adoptopenjdk:11-jre-hotspot
-# FROM adoptopenjdk/openjdk11:ubi
-
-# Commands that we need to run as root
-RUN addgroup --system spring && adduser --system spring --ingroup spring
-RUN mkdir /opt/serendipity-api && chown spring:spring /opt/serendipity-api
-
-USER spring:spring
+FROM openjdk:12-jdk-oraclelinux7
 
 COPY ./services/jasperreports-server/scripts/wait-for-container-to-exit.sh /
+
+# Commands that we need to run as root
+RUN echo "apt-get" && \
+    chmod +x /*.sh && \
+    yum -y update && \
+    yum -y install yum-utils curl jq && \
+    addgroup --system spring && adduser --system spring --ingroup spring && \
+    mkdir /opt/serendipity-api && chown spring:spring /opt/serendipity-api
+
+USER spring:spring
 
 # Install the App's dependencies
 COPY ./target/serendipity-rest-api-core-0.0.1-SNAPSHOT.jar /opt/serendipity-api
@@ -17,3 +18,13 @@ COPY ./target/serendipity-rest-api-core-0.0.1-SNAPSHOT.jar /opt/serendipity-api
 CMD ["java", "-jar", "/opt/serendipity-api/serendipity-rest-api-core-0.0.1-SNAPSHOT.jar"]
 
 EXPOSE 3001
+
+# apt-get install -y --no-install-recommends curl jq && \
+# apk add --no-cache curl jq && \
+
+# FROM adoptopenjdk/openjdk11:jre-11.0.6_10
+# FROM adoptopenjdk/openjdk11:ubi
+# FROM adoptopenjdk:11-jre-hotspot
+
+# https://stackoverflow.com/questions/53669151/java-11-application-as-lightweight-docker-image
+# https://forums.docker.com/t/openjdk-bin-sh-apt-command-not-found/72606
