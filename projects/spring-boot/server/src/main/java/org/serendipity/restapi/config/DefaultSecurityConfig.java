@@ -32,7 +32,7 @@ public class DefaultSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
 
-    log.info("SecurityConfig: configure()");
+    log.info("DefaultSecurityConfig: configure()");
 
     http.cors().and()
       .authorizeRequests()
@@ -50,7 +50,7 @@ public class DefaultSecurityConfig extends WebSecurityConfigurerAdapter {
   @Bean
   JwtDecoder jwtDecoder() {
 
-    log.info("SecurityConfig: jwtDecoder()");
+    log.info("DefaultSecurityConfig: jwtDecoder()");
 
     return NimbusJwtDecoder.withJwkSetUri(this.jwkSetUri).build();
   }
@@ -58,7 +58,7 @@ public class DefaultSecurityConfig extends WebSecurityConfigurerAdapter {
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
 
-    log.info("SecurityConfig: corsConfigurationSource()");
+    log.info("DefaultSecurityConfig: corsConfigurationSource()");
 
     CorsConfiguration configuration = new CorsConfiguration();
 
