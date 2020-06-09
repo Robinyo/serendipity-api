@@ -36,7 +36,7 @@ file to deploy a multi-container application:
 docker-compose up -d
 ```
 
-The OpenLDAP, Keycloak, PostgreSQL and Serendipity API containers may take a minute or two to startup. 
+The OpenLDAP, Keycloak, PostgreSQL, pgAdmin, JasperReports and Serendipity API containers may take a minute or two to startup. 
 
 You can check the status of the containers using the following command:
 
@@ -58,6 +58,9 @@ To check the logs inside your container:
 docker container logs openldap
 docker container logs keycloak
 docker container logs postgres
+docker container logs pgadmin
+docker container logs jasperreports-server
+docker container logs jasperreports-server-cmdline
 docker container logs serendipity-api
 ```
 

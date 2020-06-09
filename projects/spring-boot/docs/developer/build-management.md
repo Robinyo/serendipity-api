@@ -35,7 +35,7 @@ To serve the applications:
 docker-compose up -d
 ```
 
-The OpenLDAP, Keycloak, PostgreSQL and Serendipity API containers may take a minute or two to startup. 
+The OpenLDAP, Keycloak, PostgreSQL, pgAdmin, JasperReports and Serendipity API containers may take a minute or two to startup. 
 
 You can check the status of the containers using the following command:
 
@@ -58,9 +58,9 @@ docker container logs openldap
 docker container logs keycloak
 docker container logs postgres
 docker container logs pgadmin
-docker container logs serendipity-api
 docker container logs jasperreports-server
 docker container logs jasperreports-server-cmdline
+docker container logs serendipity-api
 ```
 
 To view the OpenAPI specification in ReDoc:
