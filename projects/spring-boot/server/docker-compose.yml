@@ -50,23 +50,6 @@ services:
     volumes:
       - .:/root/.pgadmin
 
-  serendipity-api:
-    container_name: serendipity-api
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "3001:3001"
-    environment:
-      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=http://keycloak:8080/auth/realms/development/protocol/openid-connect/certs
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/serendipity
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    depends_on:
-      - keycloak
-      - jasperreports-server-cmdline
-    command: ["/wait-for-container-to-exit.sh", "jasperreports-server-cmdline", "-t" , "40", "--", "/entrypoint.sh"]
-
   jasperreports-server:
     container_name: jasperreports-server
     build:
@@ -101,6 +84,23 @@ services:
     depends_on:
       - postgres
     command: ["/wait-for-it.sh", "postgres:5432", "-t" , "30", "--", "/entrypoint-cmdline-ce.sh", "init"]
+
+  serendipity-api:
+    container_name: serendipity-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=http://keycloak:8080/auth/realms/development/protocol/openid-connect/certs
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/serendipity
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - keycloak
+      - jasperreports-server-cmdline
+    command: ["/wait-for-container-to-exit.sh", "jasperreports-server-cmdline", "-t" , "40", "--", "/entrypoint.sh"]
 
 # serendipity-api:
 # volumes:
