@@ -36,9 +36,8 @@ services:
     environment:
       - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=http://keycloak:8080/auth/realms/development/protocol/openid-connect/certs
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/serendipity
-    # volumes:
-    #   - ./h2:/h2
-    # env_file: ./serendipity-api-test.env
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - jasperreports-server-cmdline
     command: ["/wait-for-container-to-exit.sh", "jasperreports-server-cmdline", "-t" , "40", "--", "java", "-jar", "/opt/serendipity-api/serendipity-rest-api-core-0.0.1-SNAPSHOT.jar"]
@@ -52,9 +51,9 @@ services:
       - "11001:8080"
       - "11443:8443"
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock-
       - ./license:/usr/local/share/jasperserver/license
       - ./keystore:/usr/local/share/jasperserver/keystore
-      - /var/run/docker.sock:/var/run/docker.sock
     env_file: ./services/jasperreports-server/jasperreports-server.env
     environment:
       - DB_HOST=postgres
@@ -77,3 +76,8 @@ services:
     depends_on:
       - postgres
     command: ["/wait-for-it.sh", "postgres:5432", "-t" , "30", "--", "/entrypoint-cmdline-ce.sh", "init"]
+
+# serendipity-api:
+# volumes:
+#   - ./h2:/h2
+# env_file: ./serendipity-api-test.env
