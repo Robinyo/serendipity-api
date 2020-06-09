@@ -11,3 +11,8 @@ Unpack the zip archive:
 # chmod 755 unpackWARInstaller.sh
 ./unpackWARInstaller.sh
 ```
+
+### Resources
+
+* Jaspersoft Community: [Documentation](https://community.jaspersoft.com/documentation?version=59011)
+* GitHub: [JasperReports](https://github.com/TIBCOSoftware/jasperreports)
