@@ -9,6 +9,8 @@ RUN mkdir /opt/serendipity-api && chown spring:spring /opt/serendipity-api
 
 USER spring:spring
 
+COPY ./services/jasperreports-server/scripts/wait-for-container-to-exit.sh /
+
 # Install the App's dependencies
 COPY ./target/serendipity-rest-api-core-0.0.1-SNAPSHOT.jar /opt/serendipity-api
 

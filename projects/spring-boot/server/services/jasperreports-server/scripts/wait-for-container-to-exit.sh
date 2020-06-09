@@ -10,7 +10,7 @@ usage()
     cat << USAGE >&2
 Usage:
     $WAITFORIT_cmdname container [-s] [-t timeout] [-- command args]
-    container                   The container name
+    container                   The name of the container to wait for :)
     -q | --quiet                Don't output any status messages
     -t TIMEOUT | --timeout=TIMEOUT
                                 Timeout in seconds
@@ -28,14 +28,12 @@ wait_for()
 
     INSPECT_CONTAINER_RESULT=$(jq --raw-output '.State.Status' <<< "${INSPECT_CONTAINER}")
 
-    # echo $INSPECT_CONTAINER_RESULT
+    # echoerr $INSPECT_CONTAINER_RESULT
 
     if [[ $INSPECT_CONTAINER_RESULT == "exited" ]]; then
-      echo $INSPECT_CONTAINER_RESULT
       exec "${WAITFORIT_CLI[@]}"
       exit
     else
-      # echo "sleep $WAITFORIT_TIMEOUT"
       sleep $WAITFORIT_TIMEOUT
     fi
 

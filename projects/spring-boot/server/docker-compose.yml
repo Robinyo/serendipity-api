@@ -26,6 +26,23 @@ services:
     volumes:
       - .:/root/.pgadmin
 
+  serendipity-api:
+    container_name: serendipity-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=http://keycloak:8080/auth/realms/development/protocol/openid-connect/certs
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/serendipity
+    # volumes:
+    #   - ./h2:/h2
+    # env_file: ./serendipity-api-test.env
+    depends_on:
+      - jasperreports-server-cmdline
+    command: ["/wait-for-container-to-exit.sh", "jasperreports-server-cmdline", "-t" , "40", "--", "java", "-jar", "/opt/serendipity-api/serendipity-rest-api-core-0.0.1-SNAPSHOT.jar"]
+
   jasperreports-server:
     container_name: jasperreports-server
     build:
@@ -43,8 +60,7 @@ services:
       - DB_HOST=postgres
     depends_on:
       - jasperreports-server-cmdline
-    command: ["./wait-for-container-to-exit.sh", "jasperreports-server-cmdline", "-t" , "30", "--", "./entrypoint-ce.sh", "run"]
-    # command: ["run"]
+    command: ["/wait-for-container-to-exit.sh", "jasperreports-server-cmdline", "-t" , "30", "--", "/entrypoint-ce.sh", "run"]
 
   jasperreports-server-cmdline:
     container_name: jasperreports-server-cmdline
@@ -60,4 +76,4 @@ services:
       - JRS_LOAD_SAMPLES=true
     depends_on:
       - postgres
-    command: ["./wait-for-it.sh", "postgres:5432", "-t" , "30", "--", "./entrypoint-cmdline-ce.sh", "init"]
+    command: ["/wait-for-it.sh", "postgres:5432", "-t" , "30", "--", "/entrypoint-cmdline-ce.sh", "init"]
