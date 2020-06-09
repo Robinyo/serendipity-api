@@ -2,6 +2,30 @@ version: '3.7'
 
 services:
 
+  openldap:
+    container_name: openldap
+    build:
+      context: ./services/openldap
+      dockerfile: Dockerfile
+    env_file: ./services/openldap/openldap.env
+    ports:
+      - "389:389"
+      - "636:636"
+
+  keycloak:
+    container_name: keycloak
+    build:
+      context: ./services/keycloak
+      dockerfile: Dockerfile
+    ports:
+      - "10001:8080"
+      - "10443:8443"
+    volumes:
+      - .:/export
+    env_file: ./services/keycloak/keycloak.env
+    depends_on:
+      - openldap
+
   postgres:
     container_name: postgres
     build:
@@ -39,6 +63,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
+      - keycloak
       - jasperreports-server-cmdline
     command: ["/wait-for-container-to-exit.sh", "jasperreports-server-cmdline", "-t" , "40", "--", "java", "-jar", "/opt/serendipity-api/serendipity-rest-api-core-0.0.1-SNAPSHOT.jar"]
 
@@ -51,7 +76,7 @@ services:
       - "11001:8080"
       - "11443:8443"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock-
+      - /var/run/docker.sock:/var/run/docker.sock
       - ./license:/usr/local/share/jasperserver/license
       - ./keystore:/usr/local/share/jasperserver/keystore
     env_file: ./services/jasperreports-server/jasperreports-server.env
