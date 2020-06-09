@@ -13,7 +13,7 @@
 
 ## ❯ Projects
 
-* [Serendipity Server](https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/developer/quick-start-guide.md): built using Java, Spring Boot (Web, REST, JPA, HAETOAS) and Spring Security (Config, OAuth2, JOSE) 
+* [Serendipity Server](https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/developer/quick-start-guide.md): built using Java, Spring Boot and Spring Security 
 
 ![divider](./divider.png)
 
