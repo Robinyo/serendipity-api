@@ -2,7 +2,7 @@
   <img src="./serendipity-logo.svg" alt="Serendipity" width="400"/>
 </p>
 
-<h1 align="center">Serendipity REST API</h1>
+<h1 align="center">Serendipity Server</h1>
 
 <p align="center">
   <b>Serendipity is an open source Customer Engagement Platform.</b></br>
@@ -13,11 +13,7 @@
 
 ## ❯ Projects
 
-Use Java, Spring Boot (Web, REST, JPA, HAETOAS) and Spring Security (Config, OAuth2, JOSE) to build a [RESTful API](https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/developer/quick-start-guide.md) for Serendipity:
-
-<p align="center">
-  <img src="https://github.com/Robinyo/serendipity-api/blob/master/redoc.png">
-</p>
+* [Serendipity Server](https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/developer/quick-start-guide.md): built using Java, Spring Boot (Web, REST, JPA, HAETOAS) and Spring Security (Config, OAuth2, JOSE) 
 
 ![divider](./divider.png)
 
