@@ -15,4 +15,6 @@ Unpack the zip archive:
 ### Resources
 
 * Jaspersoft Community: [Documentation](https://community.jaspersoft.com/documentation?version=59011)
+* Jaspersoft Community: [Forum (Answers)](https://community.jaspersoft.com/answers)
+* Stack Overflow: [Questions tagged jasperserver](https://stackoverflow.com/questions/tagged/jasperserver)
 * GitHub: [JasperReports](https://github.com/TIBCOSoftware/jasperreports)
