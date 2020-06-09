@@ -100,7 +100,7 @@ services:
     depends_on:
       - keycloak
       - jasperreports-server-cmdline
-    command: ["/wait-for-container-to-exit.sh", "jasperreports-server-cmdline", "-t" , "40", "--", "/entrypoint.sh"]
+    command: ["/wait-for-container-to-exit.sh", "jasperreports-server-cmdline", "-t" , "30", "--", "/entrypoint.sh"]
 
 # serendipity-api:
 # volumes:
