@@ -85,8 +85,8 @@ services:
       - postgres
     command: ["/wait-for-it.sh", "postgres:5432", "-t" , "30", "--", "/entrypoint-cmdline-ce.sh", "init"]
 
-  serendipity-api:
-    container_name: serendipity-api
+  serendipity-server:
+    container_name: serendipity-server
     build:
       context: .
       dockerfile: Dockerfile
@@ -105,4 +105,4 @@ services:
 # serendipity-api:
 # volumes:
 #   - ./h2:/h2
-# env_file: ./serendipity-api-test.env
+# env_file: ./serendipity-server-test.env
