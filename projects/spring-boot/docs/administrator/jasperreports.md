@@ -14,7 +14,7 @@ You can login using the following (default) credentials.
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-login.png">
 </p>
 
-Dashboard:
+Getting Started page:
 
 <p align="center">
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-dashboard.png">
