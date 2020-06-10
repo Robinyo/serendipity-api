@@ -1,4 +1,4 @@
-<h1 align="center">Working with JasperReports Community Edition</h1>
+<h1 align="center">Working with JasperReports</h1>
 
 ### Getting Started
 
@@ -14,7 +14,7 @@ You can login using the following (default) credentials.
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-login.png">
 </p>
 
-Getting Started page:
+Reporting and Analytics:
 
 <p align="center">
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-dashboard.png">
