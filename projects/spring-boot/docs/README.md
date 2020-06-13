@@ -5,6 +5,7 @@
   * [Working with Keycloak](./administrator/keycloak.md)   
   * [Working with OpenLDAP](./administrator/openldap.md)  
   * [Working with PostgreSQL](./administrator/postgres.md)  
+  * [Working with Jaspersoft Studio](./administrator/jaspersoft-studio.md)  
   * [Working with JasperReports](./administrator/jasperreports.md)  
 * Developer Documentation
   * [Quick Start Guide](./developer/quick-start-guide.md)
