@@ -12,9 +12,9 @@ stand-alone application.
 [Download](https://community.jaspersoft.com/project/jaspersoft-studio/releases) the Community Edition of Jaspersoft 
 Studio.
 
-#### Fonts
+#### Custom Fonts
 
-Select Preferences => Jaspersoft Studio => Fonts and then click the Add button:
+In Jaspersoft Studio select Preferences => Jaspersoft Studio => Fonts and then click the Add button:
 
 <p align="center">
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jaspersoft-studio-configure-custom-font.png">
