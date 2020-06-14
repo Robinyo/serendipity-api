@@ -18,6 +18,8 @@ In Jaspersoft Studio select Preferences => Jaspersoft Studio => Fonts and then c
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jaspersoft-studio-configure-custom-font.png">
 </p>
 
+**Note:** It has been my experience that Jaspersoft Studio doesn't support the .woff (Web Open Font Format) font format.
+
 ### Resources
 
 * Jaspersoft Community: [Documentation](https://community.jaspersoft.com/documentation?version=59011)
