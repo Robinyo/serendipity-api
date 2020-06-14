@@ -16,7 +16,27 @@ In Jaspersoft Studio select Preferences => Jaspersoft Studio => Fonts and then c
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jaspersoft-studio-configure-custom-font.png">
 </p>
 
-**Note:** It has been my experience that you can't use custom fonts directly but that you must create a style and then apply that style to an element.
+#### Fonts Extention
+
+In Jaspersoft Studio select Preferences => Jaspersoft Studio => Fonts and then click the Export button:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/fonts-extention.png">
+</p>
+
+Place a copy of the `fonts-extention.jar' in your project folder:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/project-folder.png">
+</p>
+
+Right-click on your project and select Build Path => Configure build path. Click the Add Jars button:
+ 
+And add the fonts-extention.jar' to the Java Build Path.
+
+**Note:** It has been my experience that you can't use custom fonts directly but that you must create a style and then 
+apply that style to an element. Also, Jaspersoft Studio doesn't like spaces in style names, for example `ColumnHeader` 
+not `Column Header`.
 
 ### Resources
 
