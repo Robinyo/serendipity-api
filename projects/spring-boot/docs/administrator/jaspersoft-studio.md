@@ -2,7 +2,7 @@
 
 ### Getting Started
 
-Jaspersoft Studio is an Eclipse-based report designer for JasperReports; it's available as an Eclipse plug-in or as a 
+Jaspersoft Studio is an Eclipse-based report designer for JasperReports, it's available as an Eclipse plug-in or as a 
 stand-alone application.
 
 [Download](https://community.jaspersoft.com/project/jaspersoft-studio/releases) the Community Edition of Jaspersoft 
