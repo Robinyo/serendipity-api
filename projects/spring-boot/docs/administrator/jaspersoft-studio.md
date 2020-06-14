@@ -12,10 +12,18 @@ Studio.
 
 [Download](https://fonts.google.com/specimen/Open+Sans?query=open+sans#standard-styles) the Open Sans font family.
 
-In Jaspersoft Studio select Preferences => Jaspersoft Studio => Fonts and then click the Add button:
+In Jaspersoft Studio select Preferences => Jaspersoft Studio => Fonts and then click the Add button.
+
+Normal Tab:
 
 <p align="center">
-  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jaspersoft-studio-configure-custom-font.png">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jaspersoft-studio-configure-custom-font-normal.png">
+</p>
+
+Bold Tab:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jaspersoft-studio-configure-custom-font-bold.png">
 </p>
 
 **Note:** It has been my experience that Jaspersoft Studio doesn't support the Web Open Font Format (.woff).
