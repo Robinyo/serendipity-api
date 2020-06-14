@@ -6,7 +6,7 @@
   * [Working with OpenLDAP](./administrator/openldap.md)  
   * [Working with PostgreSQL](./administrator/postgres.md)  
   * [Working with Jaspersoft Studio](./administrator/jaspersoft-studio.md)  
-  * [Working with JasperReports](./administrator/jasperreports.md)  
+  * [Working with JasperReports Server](./administrator/jasperreports-server.md)  
 * Developer Documentation
   * [Quick Start Guide](./developer/quick-start-guide.md)
   * [Build Management](./developer/build-management.md)
