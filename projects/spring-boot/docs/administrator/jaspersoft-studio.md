@@ -28,6 +28,14 @@ Bold Tab:
 
 **Note:** It has been my experience that Jaspersoft Studio doesn't support the Web Open Font Format (.woff).
 
+#### Data Adapters
+
+Database JDBC Connection:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/database-jdbc-connection.png">
+</p>
+
 ### Resources
 
 * Jaspersoft Community: [Documentation](https://community.jaspersoft.com/documentation?version=59011)
