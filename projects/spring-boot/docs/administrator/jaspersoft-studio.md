@@ -30,7 +30,7 @@ Place a copy of the `fonts-extention.jar' in your project folder:
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/project-folder.png">
 </p>
 
-Right-click on your project and select Build Path => Configure build path. Click the Add Jars button:
+Right-click on your project and select Build Path => Configure Build Path. Click the Add Jars button:
 
 <p align="center">
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/java-build-path.png">
