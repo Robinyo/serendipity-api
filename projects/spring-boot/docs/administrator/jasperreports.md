@@ -1,4 +1,4 @@
-<h1 align="center">Working with JasperReports</h1>
+<h1 align="center">Working with JasperReports Server</h1>
 
 ### Getting Started
 
@@ -6,7 +6,7 @@ Follow the steps in the [Quick Start Guide](https://github.com/Robinyo/serendipi
 
 ### JasperReports Server
 
-Navigate to the JasperReports Community Edition welcome page: http://localhost:11001/jasperserver
+Navigate to the JasperReports Server Community Edition welcome page: http://localhost:11001/jasperserver
 
 You can login using the following credentials:
 * JasperReports Admin User - User ID: jasperadmin and Password: jasperadmin
@@ -16,10 +16,10 @@ You can login using the following credentials:
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-login.png">
 </p>
 
-Reporting and Analytics:
+JasperReports Server Community Edition landing page:
 
 <p align="center">
-  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-dashboard.png">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-landing-page.png">
 </p>
 
 ### Resources
