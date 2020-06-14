@@ -30,7 +30,12 @@ Bold Tab:
 
 #### Data Adapters
 
-Database JDBC Connection:
+**Database JDBC Connection**
+
+JDBC Driver: org.postgresql.Driver
+JDBC Url: jdbc:postgresql://localhost:5432/serendipity
+Username: POSTGRES_USER (admin)
+Password: POSTGRES_PASSWORD (secret)
 
 <p align="center">
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/database-jdbc-connection.png">
