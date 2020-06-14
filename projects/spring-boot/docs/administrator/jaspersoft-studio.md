@@ -28,9 +28,7 @@ Bold Tab:
 
 **Note:** It has been my experience that Jaspersoft Studio doesn't support the Web Open Font Format (.woff).
 
-#### Data Adapters
-
-**Database JDBC Connection**
+#### Data Adapters - Database JDBC Connection
 
 JDBC Driver: org.postgresql.Driver
 JDBC Url: jdbc:postgresql://localhost:5432/serendipity
