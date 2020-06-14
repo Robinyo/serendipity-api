@@ -32,4 +32,4 @@ Bold Tab:
 
 * Jaspersoft Community: [Documentation](https://community.jaspersoft.com/documentation?version=59011)
 * Jaspersoft Community: [Forum (Answers)](https://community.jaspersoft.com/answers)
-* Jaspersoft Wiki: [Custom Font with the Font Extension](https://community.jaspersoft.com/wiki/custom-font-font-extension)
+* Jaspersoft Wiki: [Custom Fonts with the Fonts Extension](https://community.jaspersoft.com/wiki/custom-font-font-extension)
