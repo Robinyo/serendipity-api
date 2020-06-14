@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="contacts" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a92b9b18-7c63-4972-8af8-21672f7e67cf">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Serendipity"/>
+	<property name="ireport.jasperserver.url" value="http://localhost:11001/jasperserver/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin"/>
+	<style name="Normal" isDefault="true" fontName="Open Sans" fontSize="10"/>
+	<style name="ColumnHeader" fontSize="12" isBold="true"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM individual ORDER BY family_name]]>
+	</queryString>
+	<field name="party_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="party_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<field name="country_of_birth" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="country_of_birth"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<field name="country_of_death" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="country_of_death"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<field name="date_of_birth" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="date_of_birth"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<field name="date_of_death" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="date_of_death"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<field name="electorate" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="electorate"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<field name="email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="email"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<field name="gender" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="gender"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<field name="family_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="family_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<field name="given_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="given_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<field name="honorific" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="honorific"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<field name="initials" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="initials"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<field name="middle_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="middle_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<field name="preferred_family_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="preferred_family_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<field name="preferred_given_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="preferred_given_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<field name="preferred_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="preferred_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<field name="salutation" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="salutation"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<field name="title" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="title"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<field name="phone_number" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="phone_number"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<field name="photo_url" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="photo_url"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<field name="place_of_birth" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="place_of_birth"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<field name="place_of_death" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="place_of_death"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<field name="relationship_lifecycle_status" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="relationship_lifecycle_status"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<field name="sex" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sex"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="individual"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="351" y="12" width="100" height="30" uuid="cbb35662-3636-4df4-97cf-3815e55e390d"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contacts]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="11" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="20" width="800" height="5" uuid="255b1064-f680-4d9b-8891-5bcfbd3b39fe"/>
+			</line>
+			<staticText>
+				<reportElement style="ColumnHeader" x="142" y="0" width="100" height="19" uuid="e43d9fd7-df67-42b8-8a1d-36480bca7e5c"/>
+				<text><![CDATA[Given Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="ColumnHeader" x="1" y="1" width="100" height="18" uuid="b4c3518e-e2a7-4a52-973b-aa89aac62f40"/>
+				<text><![CDATA[Family Name]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="130" height="20" uuid="ac4181c5-c55f-48e6-946f-dec9c622972c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="895df874-6c2e-4fae-b4da-385b1617f294"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{family_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="0" width="100" height="20" uuid="efd7540e-b293-4f7c-9630-a5226dbe7932">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fb95b16c-8be9-4318-8e0b-065899270e2d"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{given_name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="12" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="56" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="16" width="80" height="21" uuid="5462e47f-fda8-4966-8baf-105eab11c649"/>
+				<imageExpression><![CDATA["repo:/images/JRLogo"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="635" y="25" width="100" height="30" uuid="aaa6fb3f-eb27-42a3-bded-c379f439ae9b"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="735" y="25" width="100" height="30" uuid="d26a2861-6b9e-42d7-be02-93a97f5e4f33"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="18" splitType="Stretch"/>
+	</summary>
+</jasperReport>
