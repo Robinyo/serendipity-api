@@ -22,6 +22,20 @@ JasperReports Server Community Edition landing page:
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-landing-page.png">
 </p>
 
+#### Data Sources
+
+In JasperReports Server right-click on Data Sources and select Add Resource => Data Source:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-add-resource-data-source.png">
+</p>
+
+Click save and then enter a Data Source Name: 
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-data-source-name.png">
+</p>
+
 ### Resources
 
 * Jaspersoft Community: [Documentation](https://community.jaspersoft.com/documentation?version=59011)
