@@ -8,6 +8,14 @@ stand-alone application.
 [Download](https://community.jaspersoft.com/project/jaspersoft-studio/releases) the Community Edition of Jaspersoft 
 Studio.
 
+#### Servers
+
+In Jaspersoft Studio right-click on Servers and select Create JasperReports Server Connection:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jaspersoft-studio-jasperserver-connection.png">
+</p> 
+
 #### Custom Fonts
 
 [Download](https://fonts.google.com/specimen/Open+Sans?query=open+sans#standard-styles) the Open Sans font family.
