@@ -59,7 +59,7 @@ Select the report's resources (e.g., serendipity-logo.svg) and then click Next:
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-publishing-wizard-report-configure-data-source.png">
 </p>
 
-Select a data source and then Finish:
+Select a data source and then click Finish:
 
 <p align="center">
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-publishing-wizard-report-success.png">
