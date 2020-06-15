@@ -33,7 +33,7 @@ In JasperReports Server right-click on Data Sources and select Add Resource => D
 JDBC Driver: org.postgresql.Driver  
 Host: postgres  
 Port: 5432  
-Database: serendipity
+Database: serendipity  
 Username: POSTGRES_USER (admin)  
 Password: POSTGRES_PASSWORD (secret) 
 
