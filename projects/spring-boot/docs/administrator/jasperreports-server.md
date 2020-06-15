@@ -30,6 +30,13 @@ In JasperReports Server right-click on Data Sources and select Add Resource => D
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-add-resource-data-source.png">
 </p>
 
+JDBC Driver: org.postgresql.Driver  
+Host: postgres  
+Port: 5432  
+Database: serendipity
+Username: POSTGRES_USER (admin)  
+Password: POSTGRES_PASSWORD (secret) 
+
 Click save and then enter a Data Source Name: 
 
 <p align="center">
