@@ -47,13 +47,13 @@ In Jaspersoft Studio select Project => Publish the file on JasperReports Server:
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-publishing-wizard-report-location.png">
 </p>
 
-Select the location (Reports) and then click the Next button:
+Select the location (e.g., Reports) and then click the Next button:
 
 <p align="center">
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-publishing-wizard-report-resources.png">
 </p>
 
-Select report's resources (serendipity-logo.svg) and then click Next:
+Select the report's resources (e.g., serendipity-logo.svg) and then click Next:
 
 <p align="center">
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-publishing-wizard-report-configure-data-source.png">
