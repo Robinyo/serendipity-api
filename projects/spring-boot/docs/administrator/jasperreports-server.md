@@ -37,7 +37,7 @@ Database: serendipity
 Username: POSTGRES_USER (admin)  
 Password: POSTGRES_PASSWORD (secret) 
 
-Click save and then enter a Data Source Name: 
+Click Save and then enter a Data Source Name: 
 
 <p align="center">
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-data-source-name.png">

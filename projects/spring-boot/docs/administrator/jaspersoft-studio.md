@@ -39,6 +39,32 @@ JDBC Url: jdbc:postgresql://localhost:5432/serendipity
 Username: POSTGRES_USER (admin)  
 Password: POSTGRES_PASSWORD (secret)  
 
+#### Report Publishing
+
+In Jaspersoft Studio select Project => Publish the file on JasperReports Server:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-publishing-wizard-report-location.png">
+</p>
+
+Select the location (Reports) and then click the Next button:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-publishing-wizard-report-resources.png">
+</p>
+
+Click Next:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-publishing-wizard-report-configure-data-source.png">
+</p>
+
+Click Finish:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-publishing-wizard-report-success.png">
+</p>
+
 ### Resources
 
 * Jaspersoft Community: [Documentation](https://community.jaspersoft.com/documentation?version=59011)
