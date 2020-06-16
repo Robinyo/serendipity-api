@@ -16,26 +16,6 @@ In Jaspersoft Studio right-click on Servers and select Create JasperReports Serv
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jaspersoft-studio-jasperserver-connection.png">
 </p> 
 
-#### Custom Fonts
-
-[Download](https://fonts.google.com/specimen/Open+Sans?query=open+sans#standard-styles) the Open Sans font family.
-
-In Jaspersoft Studio select Preferences => Jaspersoft Studio => Fonts and then click the Add button.
-
-Normal Tab:
-
-<p align="center">
-  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jaspersoft-studio-configure-custom-font-normal.png">
-</p>
-
-Bold Tab:
-
-<p align="center">
-  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jaspersoft-studio-configure-custom-font-bold.png">
-</p>
-
-**Note:** It has been my experience that Jaspersoft Studio doesn't support the Web Open Font Format (.woff).
-
 #### Data Adapters - Database JDBC Connection
 
 <p align="center">
@@ -73,6 +53,47 @@ Select a data source and then click Finish:
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-publishing-wizard-report-success.png">
 </p>
 
+#### Custom Fonts
+
+[Download](https://fonts.google.com/specimen/Open+Sans?query=open+sans#standard-styles) the Open Sans font family.
+
+In Jaspersoft Studio select Preferences => Jaspersoft Studio => Fonts and then click the Add button.
+
+Normal Tab:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jaspersoft-studio-configure-custom-font-normal.png">
+</p>
+
+Bold Tab:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jaspersoft-studio-configure-custom-font-bold.png">
+</p>
+
+**Note:** It has been my experience that Jaspersoft Studio doesn't support the Web Open Font Format (.woff).
+
+#### Fonts Extension
+
+In Jaspersoft Studio choose Preferences => Jaspersoft Studio => Fonts, select 'Open Sans' and then click the Export button:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jaspersoft-studio-fonts-extension.png">
+</p>
+
+Place a copy of the `fonts-extention.jar` in your project folder:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jaspersoft-studio-project-folder.png">
+</p>
+
+Right-click on your project and select Build Path => Configure Build Path. Click the Add Jars button and add the 
+`open-sans-fonts-extension.jar` to the Java Build Path.
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jaspersoft-studio-java-build-path.png">
+</p>
+ 
 ### Resources
 
 * Jaspersoft Community: [Documentation](https://community.jaspersoft.com/documentation?version=59011)
