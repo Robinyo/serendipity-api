@@ -55,7 +55,7 @@ In Jaspersoft Studio choose Preferences => Jaspersoft Studio => Fonts, select 'O
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jaspersoft-studio-fonts-extension.png">
 </p>
 
-Place a copy of the `fonts-extention.jar` in your project folder:
+Place a copy of the `open-sans-fonts-extension.jar` in your project folder:
 
 <p align="center">
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jaspersoft-studio-project-folder.png">
