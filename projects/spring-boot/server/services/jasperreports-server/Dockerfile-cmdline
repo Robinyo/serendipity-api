@@ -9,7 +9,7 @@ ARG POSTGRES_JDBC_DRIVER_VERSION
 ARG JASPERREPORTS_SERVER_VERSION
 ARG EXPLODED_INSTALLER_DIRECTORY
 
-ENV POSTGRES_JDBC_DRIVER_VERSION ${POSTGRES_JDBC_DRIVER_VERSION:-42.2.13}
+ENV POSTGRES_JDBC_DRIVER_VERSION ${POSTGRES_JDBC_DRIVER_VERSION:-42.2.14}
 ENV JASPERREPORTS_SERVER_VERSION ${JASPERREPORTS_SERVER_VERSION:-7.5.0}
 ENV EXPLODED_INSTALLER_DIRECTORY ${EXPLODED_INSTALLER_DIRECTORY:-resources/jasperreports-server-cp-$JASPERREPORTS_SERVER_VERSION-bin}
 
@@ -53,8 +53,9 @@ RUN echo "apt-get" && \
 	chmod +x /usr/src/jasperreports-server/buildomatic/bin/*.sh && \
 	chmod +x /usr/src/jasperreports-server/apache-ant/bin/* && \
     java -version && \
-    wget "https://jdbc.postgresql.org/download/postgresql-${POSTGRES_JDBC_DRIVER_VERSION}.jar"  \
-        -P /usr/src/jasperreports-server/buildomatic/conf_source/db/postgresql/jdbc --no-verbose
+    # wget "https://jdbc.postgresql.org/download/postgresql-${POSTGRES_JDBC_DRIVER_VERSION}.jar"  \
+    #   -P /usr/src/jasperreports-server/buildomatic/conf_source/db/postgresql/jdbc --no-verbose
+    cp resources/postgresql-${POSTGRES_JDBC_DRIVER_VERSION}.jar /usr/src/jasperreports-server/buildomatic/conf_source/db/postgresql/jdbc
 
 # ENTRYPOINT ["/entrypoint-cmdline-ce.sh"]
 

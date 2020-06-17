@@ -12,6 +12,12 @@ Unpack the zip archive:
 ./unpackWARInstaller.sh
 ```
 
+[Download](https://phantomjs.org/download.html) the Linux 64-bit version of PhantomJS and place it in the `resources` 
+directory.
+
+[Download](https://jdbc.postgresql.org/download.html) the PostgreSQL JDBC driver and place it in the `resources` 
+directory.
+
 ### Resources
 
 * Jaspersoft Community: [Documentation](https://community.jaspersoft.com/documentation?version=59011)

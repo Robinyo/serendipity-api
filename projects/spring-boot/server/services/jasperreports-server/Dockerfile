@@ -20,7 +20,7 @@ ENV KS_PASSWORD ${KS_PASSWORD:-changeit}
 ENV JRS_HTTPS_ONLY ${JRS_HTTPS_ONLY:-false}
 ENV HTTP_PORT ${HTTP_PORT:-8080}
 ENV HTTPS_PORT ${HTTPS_PORT:-8443}
-ENV POSTGRES_JDBC_DRIVER_VERSION ${POSTGRES_JDBC_DRIVER_VERSION:-42.2.13}
+ENV POSTGRES_JDBC_DRIVER_VERSION ${POSTGRES_JDBC_DRIVER_VERSION:-42.2.14}
 ENV JASPERREPORTS_SERVER_VERSION ${JASPERREPORTS_SERVER_VERSION:-7.5.0}
 ENV EXPLODED_INSTALLER_DIRECTORY ${EXPLODED_INSTALLER_DIRECTORY:-resources/jasperreports-server-cp-$JASPERREPORTS_SERVER_VERSION-bin}
 
@@ -64,19 +64,17 @@ RUN echo "nameserver 8.8.8.8" | tee /etc/resolv.conf > /dev/null && \
     chmod +x /usr/src/jasperreports-server/buildomatic/js-* && \
     chmod +x /usr/src/jasperreports-server/apache-ant/bin/* && \
     java -version && \
-#
-# Extract phantomjs, move to /usr/local/share/phantomjs, link to /usr/local/bin.
-# Comment out if phantomjs not required.
-#
-    wget "https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2" \
-        -O /tmp/phantomjs.tar.bz2 --no-verbose && \
+    # wget "https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2" \
+    #   -O /tmp/phantomjs.tar.bz2 --no-verbose && \
+    cp resources/phantomjs-2.1.1-linux-x86_64.tar.bz2 /tmp/phantomjs.tar.bz2 \
     tar -xjf /tmp/phantomjs.tar.bz2 -C /tmp && \
     rm -f /tmp/phantomjs.tar.bz2 && \
     mv /tmp/phantomjs*linux-x86_64 /usr/local/share/phantomjs && \
     ln -sf /usr/local/share/phantomjs/bin/phantomjs /usr/local/bin && \
-#
-    wget "https://jdbc.postgresql.org/download/postgresql-${POSTGRES_JDBC_DRIVER_VERSION}.jar"  \
-        -P /usr/src/jasperreports-server/buildomatic/conf_source/db/postgresql/jdbc --no-verbose && \
+    rm -rf /tmp/* && \
+    # wget "https://jdbc.postgresql.org/download/postgresql-${POSTGRES_JDBC_DRIVER_VERSION}.jar"  \
+    #   -P /usr/src/jasperreports-server/buildomatic/conf_source/db/postgresql/jdbc --no-verbose && \
+    cp resources/postgresql-${POSTGRES_JDBC_DRIVER_VERSION}.jar /usr/src/jasperreports-server/buildomatic/conf_source/db/postgresql/jdbc \
 #
 # Configure tomcat for SSL by default with a self-signed certificate.
 # Option to set up JasperReports Server to use HTTPS only.
