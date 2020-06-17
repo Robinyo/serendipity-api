@@ -42,6 +42,8 @@ COPY ${EXPLODED_INSTALLER_DIRECTORY}/buildomatic/target /usr/src/jasperreports-s
 
 COPY scripts /
 
+COPY resources/postgresql-${POSTGRES_JDBC_DRIVER_VERSION}.jar /usr/src/jasperreports-server/buildomatic/conf_source/db/postgresql/jdbc
+
 RUN echo "apt-get" && \
     echo "nameserver 8.8.8.8" | tee /etc/resolv.conf > /dev/null && \
     chmod +x /*.sh && \
@@ -52,10 +54,7 @@ RUN echo "apt-get" && \
 	chmod +x /usr/src/jasperreports-server/buildomatic/js-* && \
 	chmod +x /usr/src/jasperreports-server/buildomatic/bin/*.sh && \
 	chmod +x /usr/src/jasperreports-server/apache-ant/bin/* && \
-    java -version && \
-    # wget "https://jdbc.postgresql.org/download/postgresql-${POSTGRES_JDBC_DRIVER_VERSION}.jar"  \
-    #   -P /usr/src/jasperreports-server/buildomatic/conf_source/db/postgresql/jdbc --no-verbose
-    cp resources/postgresql-${POSTGRES_JDBC_DRIVER_VERSION}.jar /usr/src/jasperreports-server/buildomatic/conf_source/db/postgresql/jdbc
+    java -version
 
 # ENTRYPOINT ["/entrypoint-cmdline-ce.sh"]
 

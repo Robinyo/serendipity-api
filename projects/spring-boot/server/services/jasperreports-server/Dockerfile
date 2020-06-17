@@ -49,6 +49,8 @@ COPY ${EXPLODED_INSTALLER_DIRECTORY}/buildomatic/target /usr/src/jasperreports-s
 
 COPY scripts /
 
+COPY resources/postgresql-${POSTGRES_JDBC_DRIVER_VERSION}.jar /usr/src/jasperreports-server/buildomatic/conf_source/db/postgresql/jdbc
+
 RUN echo "nameserver 8.8.8.8" | tee /etc/resolv.conf > /dev/null && \
     chmod +x /*.sh && \
     /installPackagesForJasperserver-ce.sh > /dev/null && \
@@ -58,27 +60,11 @@ RUN echo "nameserver 8.8.8.8" | tee /etc/resolv.conf > /dev/null && \
     rm -rf $CATALINA_HOME/webapps/examples && \
     rm -rf $CATALINA_HOME/webapps/host-manager && \
     rm -rf $CATALINA_HOME/webapps/manager && \
-    #
 	cp -R /buildomatic /usr/src/jasperreports-server/buildomatic && \
 	rm /installPackagesForJasperserver*.sh && rm -rf /buildomatic && \
     chmod +x /usr/src/jasperreports-server/buildomatic/js-* && \
     chmod +x /usr/src/jasperreports-server/apache-ant/bin/* && \
     java -version && \
-    # wget "https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2" \
-    #   -O /tmp/phantomjs.tar.bz2 --no-verbose && \
-    cp resources/phantomjs-2.1.1-linux-x86_64.tar.bz2 /tmp/phantomjs.tar.bz2 \
-    tar -xjf /tmp/phantomjs.tar.bz2 -C /tmp && \
-    rm -f /tmp/phantomjs.tar.bz2 && \
-    mv /tmp/phantomjs*linux-x86_64 /usr/local/share/phantomjs && \
-    ln -sf /usr/local/share/phantomjs/bin/phantomjs /usr/local/bin && \
-    rm -rf /tmp/* && \
-    # wget "https://jdbc.postgresql.org/download/postgresql-${POSTGRES_JDBC_DRIVER_VERSION}.jar"  \
-    #   -P /usr/src/jasperreports-server/buildomatic/conf_source/db/postgresql/jdbc --no-verbose && \
-    cp resources/postgresql-${POSTGRES_JDBC_DRIVER_VERSION}.jar /usr/src/jasperreports-server/buildomatic/conf_source/db/postgresql/jdbc \
-#
-# Configure tomcat for SSL by default with a self-signed certificate.
-# Option to set up JasperReports Server to use HTTPS only.
-#
     keytool -genkey -alias self_signed -dname "CN=${DN_HOSTNAME}" \
         -storetype PKCS12 \
         -storepass "${KS_PASSWORD}" \
@@ -97,7 +83,7 @@ RUN echo "nameserver 8.8.8.8" | tee /etc/resolv.conf > /dev/null && \
     --insert '$connector-ssl' --type attr -n clientAuth -v "false" \
     --insert '$connector-ssl' --type attr -n sslProtocol -v "TLS" \
     --insert '$connector-ssl' --type attr -n keystorePass \
-        -v "${KS_PASSWORD}"\
+        -v "${KS_PASSWORD}" \
     --insert '$connector-ssl' --type attr -n keystoreFile \
         -v "/root/.keystore.p12" \
     ${CATALINA_HOME}/conf/server.xml
@@ -107,5 +93,3 @@ EXPOSE ${HTTP_PORT} ${HTTPS_PORT}
 # ENTRYPOINT ["/entrypoint-ce.sh"]
 
 CMD ["run"]
-
-
