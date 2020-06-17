@@ -20,7 +20,5 @@ directory.
 
 ### Resources
 
-* Jaspersoft Community: [Documentation](https://community.jaspersoft.com/documentation?version=59011)
-* Jaspersoft Community: [Forum (Answers)](https://community.jaspersoft.com/answers)
-* Stack Overflow: [Questions tagged jasperserver](https://stackoverflow.com/questions/tagged/jasperserver)
-* GitHub: [JasperReports](https://github.com/TIBCOSoftware/jasperreports)
+* GitHub: [js-docker](https://github.com/TIBCOSoftware/js-docker)
+* GitHub: [JasperReports Server Community Edition](https://github.com/TIBCOSoftware/jasperreports)
