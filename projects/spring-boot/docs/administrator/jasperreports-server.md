@@ -22,6 +22,12 @@ JasperReports Server Community Edition landing page:
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-landing-page.png">
 </p>
 
+With samples (JRS_LOAD_SAMPLES=true):
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-landing-page-load-samples.png">
+</p>
+
 #### Data Sources
 
 In JasperReports Server right-click on Data Sources and select Add Resource => Data Source:
