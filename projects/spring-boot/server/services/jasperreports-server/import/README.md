@@ -7,15 +7,15 @@ and out of the JasperReports Server's repository.
 Jaspersoft refers to the output of the export command and the input to the import command as a catalog. A catalog is 
 a collection of folders and files in a single zip file (compressed archive).
 
-The JasperReports Server distribution includes sample catalogs: 
+The JasperReports Server distribution includes sample catalogs:
 
 ```
 ├── /jasperreports-server-cp-7.5.0-bin
     └── /buildomatic
         └── /install_resources
             └── /export
-                    ├── js-catalog-postgresql-ce.zip
-                    ├── js-catalog-postgresql-minimal-ce.zip
+                ├── js-catalog-postgresql-ce.zip
+                ├── js-catalog-postgresql-minimal-ce.zip
 
 ```
 
