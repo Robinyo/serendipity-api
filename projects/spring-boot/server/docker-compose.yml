@@ -60,8 +60,8 @@ services:
       - "11443:8443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./license:/usr/local/share/jasperserver/license
-      - ./keystore:/usr/local/share/jasperserver/keystore
+      - ./services/jasperreports-server/license:/usr/local/share/jasperserver/license
+      - ./services/jasperreports-server/keystore:/usr/local/share/jasperserver/keystore
     env_file: ./services/jasperreports-server/jasperreports-server.env
     environment:
       - DB_HOST=postgres
@@ -75,12 +75,12 @@ services:
       context: ./services/jasperreports-server
       dockerfile: Dockerfile-cmdline
     volumes:
-      - ./license:/usr/local/share/jasperserver/license
-      - ./keystore:/usr/local/share/jasperserver/keystore
+      - ./services/jasperreports-server/license:/usr/local/share/jasperserver/license
+      - ./services/jasperreports-server/keystore:/usr/local/share/jasperserver/keystore
     env_file: ./services/jasperreports-server/jasperreports-server.env
     environment:
       - DB_HOST=postgres
-      - JRS_LOAD_SAMPLES=false
+      - JRS_LOAD_SAMPLES=true
     depends_on:
       - postgres
     command: ["/wait-for-it.sh", "postgres:5432", "-t" , "30", "--", "/entrypoint-cmdline-ce.sh", "init"]
