@@ -80,7 +80,7 @@ services:
     env_file: ./services/jasperreports-server/jasperreports-server.env
     environment:
       - DB_HOST=postgres
-      - JRS_LOAD_SAMPLES=true
+      - JRS_LOAD_SAMPLES=false
     depends_on:
       - postgres
     command: ["/wait-for-it.sh", "postgres:5432", "-t" , "30", "--", "/entrypoint-cmdline-ce.sh", "init"]

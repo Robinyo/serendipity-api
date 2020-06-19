@@ -16,7 +16,6 @@ The JasperReports Server distribution includes sample catalogs:
             └── /export
                 ├── js-catalog-postgresql-ce.zip
                 ├── js-catalog-postgresql-minimal-ce.zip
-
 ```
 
 ### Resources
