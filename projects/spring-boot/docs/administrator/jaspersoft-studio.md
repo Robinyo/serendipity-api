@@ -94,7 +94,7 @@ Select a data source and then click Finish:
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jaspersoft-studio-publishing-wizard-report-success.png">
 </p>
 
-JasperReport Server repository:
+JasperReports Server repository:
 
 <p align="center">
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jasperserver-reports-folder.png">
