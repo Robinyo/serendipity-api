@@ -49,7 +49,11 @@ COPY ${EXPLODED_INSTALLER_DIRECTORY}/buildomatic/target /usr/src/jasperreports-s
 
 COPY scripts /
 
-COPY resources/postgresql-${POSTGRES_JDBC_DRIVER_VERSION}.jar /usr/src/jasperreports-server/buildomatic/conf_source/db/postgresql/jdbc
+# Copy Fonts Extension lib
+COPY assets/libs $CATALINA_HOME/webapps/jasperserver/WEB-INF/lib/
+
+# Copy JDBC Driver
+COPY resources/postgresql-${POSTGRES_JDBC_DRIVER_VERSION}.jar /usr/src/jasperreports-server/buildomatic/conf_source/db/postgresql/jdbc/
 
 RUN echo "nameserver 8.8.8.8" | tee /etc/resolv.conf > /dev/null && \
     chmod +x /*.sh && \
