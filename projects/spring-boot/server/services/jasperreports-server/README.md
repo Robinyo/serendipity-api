@@ -8,8 +8,8 @@ JasperReports Server and place it in the `resources` directory.
 Unpack the zip archive:
 
 ```
-# chmod 755 unpackWARInstaller.sh
-./unpackWARInstaller.sh
+# chmod 755 unpackWARInstaller-ce.sh
+./unpackWARInstaller-ce.sh
 ```
 
 [Download](https://phantomjs.org/download.html) the Linux 64-bit version of PhantomJS and place it in the `resources` 
