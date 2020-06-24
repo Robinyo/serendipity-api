@@ -82,7 +82,7 @@ Select the location (e.g., Reports) and then click the Next button:
   <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/jaspersoft-studio-publishing-wizard-report-resources.png">
 </p>
 
-Select the report's resources (e.g., JRlogo) and then click Next:
+Select the report's resources (e.g., JRLogo) and then click Next:
 
 **Note:** The JasperReports logo (JRLogo) has already been published to the repository so we can use the 'Ignore' publish strategy.
 
