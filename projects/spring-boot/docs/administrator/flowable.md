@@ -131,8 +131,9 @@ Then navigate to: http://localhost:9988/flowable-admin
 
 #### Cannot load driver class: org.postgresql.Driver
 
-The Flowable UI application wars include the H2 database driver. If you want to use a different database then you need 
-to update the war, for example:
+The Flowable UI application wars include the H2 database driver. If you want to use a different 
+[database](https://flowable.com/open-source/docs/bpmn/ch03-Configuration/#supported-databases) then you need to update 
+each war file, for example:
 
 ```
 unzip flowable-idm.war
