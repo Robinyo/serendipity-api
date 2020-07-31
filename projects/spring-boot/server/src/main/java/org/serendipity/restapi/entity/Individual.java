@@ -27,7 +27,7 @@ public class Individual {
   private Party party;
 
   @Embedded
-  private Name name; // The Individual's principle name (legal aame)
+  private Name name; // The Individual's principle name (legal name)
 
   // You cannot limit the size of a @OneToMany collection
   // See: https://vladmihalcea.com/the-best-way-to-map-a-onetomany-association-with-jpa-and-hibernate/

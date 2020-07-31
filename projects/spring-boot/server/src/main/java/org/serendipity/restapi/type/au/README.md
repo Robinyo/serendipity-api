@@ -17,7 +17,7 @@ interchange.
 * [METeOR - Party identifier details data dictionary](https://meteor.aihw.gov.au/content/index.phtml/itemId/466213)
 * [METeOR - Person details data dictionary](https://meteor.aihw.gov.au/content/index.phtml/itemId/430772)
 * [METeOR - Organisation details data dictionary](https://meteor.aihw.gov.au/content/index.phtml/itemId/431158)
-* [The Spatial  Information Council (ANZLIC) - National Address Management Framework](https://www.anzlic.gov.au/resources/national-address-management-framework)
+* [The Spatial Information Council (ANZLIC) - National Address Management Framework](https://www.anzlic.gov.au/resources/national-address-management-framework)
 * [Australian Securities and Investments Commission - Setting up a business structure](https://asic.gov.au/for-business/small-business/starting-a-small-business/setting-up-a-business-structure/)
 * [Australian Government - Publishing open data](https://toolkit.data.gov.au/Publishing_your_data.html)
 * [Australian Government - Consumer data right (CDR)](https://cdr-register.github.io/register/#consumer-data-right)

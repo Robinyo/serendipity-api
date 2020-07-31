@@ -31,7 +31,7 @@ public enum IndividualNameType {
   NEWBORN_IDENTIFICATION_NAME("NEW") {
     @Override
     public String toString() {
-      return "Newboarn identification name";
+      return "Newborn identification name";
     }
   },
   OTHER_NAME("OTH") {

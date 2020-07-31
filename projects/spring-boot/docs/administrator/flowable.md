@@ -1,3 +1,20 @@
+<h1 align="center">Working with Flowable</h1>
+
+### Flowable UI Applications
+
+* Flowable Identity Management
+* Flowable Modeler
+* Flowable Task
+* Flowable Admin
+
+You can [download](https://flowable.com/open-source/downloads/) the Flowable open source distribution from the Flowable 
+web site.
+
+#### Externalised Configuration
+
+The Flowable Web applications take advantage of Spring Boot's support for externalised configuration:
+
+```
 spring.main.banner-mode=off
 spring.jpa.open-in-view=false
 
@@ -70,16 +87,55 @@ flowable.idm.ldap.attribute.group-id=cn
 flowable.idm.ldap.attribute.group-name=cn
 flowable.idm.ldap.cache.group-size=10000
 flowable.idm.ldap.cache.group-expiration=180000
+```
 
-# EMAIL
-# flowable.mail.server.host=localhost
-# flowable.mail.server.port=1025
-# flowable.mail.server.username=
-# flowable.mail.server.password=
+#### Flowable Identity Management
 
-# Idm: https://github.com/flowable/flowable-engine/blob/master/modules/flowable-ui-idm/flowable-ui-idm-app/src/main/resources/flowable-default.properties
-# Modeler: https://github.com/flowable/flowable-engine/blob/master/modules/flowable-ui-modeler/flowable-ui-modeler-app/src/main/resources/flowable-default.properties
-# Task: https://github.com/flowable/flowable-engine/blob/master/modules/flowable-ui-task/flowable-ui-task-app/src/main/resources/flowable-default.properties
-# Admin: https://github.com/flowable/flowable-engine/blob/master/modules/flowable-ui-admin/flowable-ui-admin-app/src/main/resources/flowable-default.properties
+To launch Flowable's Identity Management application:
 
-# flowable.idm.ldap.server=ldap://host.docker.internal
+```
+java -jar flowable-idm.war
+```
+
+Then navigate to: http://localhost:8080/flowable-idm
+
+#### Flowable Modeler
+
+To launch Flowable's Modeler application:
+
+```
+java -jar flowable-modeler.war
+```
+
+Then navigate to: http://localhost:8888/flowable-modeler
+
+#### Flowable Task
+
+To launch Flowable's Task application:
+
+```
+java -jar flowable-task.war
+```
+
+Then navigate to: http://localhost:9999/flowable-task
+
+#### Flowable Admin
+
+To launch Flowable's Admin application:
+
+```
+java -jar flowable-admin.war
+```
+
+Then navigate to: http://localhost:9988/flowable-admin
+
+#### Cannot load driver class: org.postgresql.Driver
+
+The Flowable UI application wars include the H2 database driver. If you want to use a different database then you need 
+to update the war, for example:
+
+```
+unzip flowable-idm.war
+mv postgresql-42.2.14.jar WEB-INF/lib
+jar uf0 flowable-idm.war WEB-INF/lib/postgresql-42.2.14.jar
+```
