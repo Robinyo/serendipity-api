@@ -21,7 +21,7 @@ Clone the project by running the following command:
 
 ```
 git clone https://github.com/Robinyo/serendipity-api
-cd serendipity-api/projects/spring-boot
+cd serendipity-api/projects/spring-boot/server
 ``` 
 
 ### Step 3: Serve the application
