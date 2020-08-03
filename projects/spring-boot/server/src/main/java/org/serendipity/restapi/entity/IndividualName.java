@@ -43,8 +43,6 @@ public class IndividualName {
 
 }
 
-// @Table(indexes = { @Index(name = "FAMILY_NAME_INDEX", columnList = "familyName", unique = false) })
-
 /*
 
   @Column(name = "type", nullable = false)

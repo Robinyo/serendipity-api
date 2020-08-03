@@ -1,4 +1,5 @@
-FROM openjdk:11.0.7-slim
+# FROM openjdk:11.0.7-slim -> libfreetype.so.6: cannot open shared object file: No such file or directory
+FROM openjdk:11.0.7
 
 COPY /services/jasperreports-server/scripts/wait-for-container-to-exit.sh /
 COPY entrypoint.sh /

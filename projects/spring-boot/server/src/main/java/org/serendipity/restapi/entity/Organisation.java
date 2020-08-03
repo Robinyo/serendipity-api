@@ -11,7 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Setter
 @Getter
-@Table(indexes = { @Index(name = "NAME_INDEX", columnList = "name", unique = false) })
+@Table(indexes = { @Index(name = "ORGANISATION_NAME_INDEX", columnList = "name", unique = false) })
 public class Organisation {
 
   // An Organisation usually consists of a number of individuals or groups bound by a common purpose.

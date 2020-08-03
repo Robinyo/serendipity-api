@@ -11,7 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Setter
 @Getter
-@Table(indexes = { @Index(name = "NAME_INDEX", columnList = "name", unique = true) })
+@Table(indexes = { @Index(name = "ELECTORAL_DIVISION_NAME_INDEX", columnList = "name", unique = true) })
 public class ElectoralDivision {
 
   @Id

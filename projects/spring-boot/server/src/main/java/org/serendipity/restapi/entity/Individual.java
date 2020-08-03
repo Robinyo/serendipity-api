@@ -12,7 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Setter
 @Getter
-@Table(indexes = { @Index(name = "FAMILY_NAME_INDEX", columnList = "familyName", unique = false) })
+@Table(indexes = { @Index(name = "INDIVIDUAL_FAMILY_NAME_INDEX", columnList = "familyName", unique = false) })
 public class Individual {
 
   // An Individual is a person.

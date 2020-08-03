@@ -135,37 +135,58 @@ The Flowable UI applications take advantage of Spring Boot's support for externa
 
 ```
 spring.main.banner-mode=off
+spring.jpa.open-in-view=false
 
 # Logging
 logging.level.root=INFO
-logging.level.org.hibernate.SQL=DEBUG
-logging.level.org.hibernate.type.descriptor.sql.BasicBinder=TRACE
-logging.level.org.springframework.security=DEBUG
+logging.level.org.flowable=WARN
+logging.level.org.hibernate.SQL=WARN
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder=WARN
+logging.level.org.springframework.security=WARN
 
-# Spring JPA
-spring.datasource.driver-class-name=org.h2.Driver
-spring.datasource.url=jdbc:h2:~/serendipity-db/db;AUTO_SERVER=TRUE;AUTO_SERVER_PORT=9091;DB_CLOSE_DELAY=-1
+# Spring Datasource - Postgres
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.datasource.url=jdbc:postgresql://localhost:5432/serendipity
 spring.datasource.username=admin
 spring.datasource.password=secret
-spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
-spring.jpa.hibernate.ddl-auto=update
 
-# Default Admin Accounts
+# Spring JPA - Postgres
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.hibernate.ddl-auto=update
+# spring.jpa.hibernate.naming.physical-strategy=com.vladmihalcea.hibernate.type.util.CamelCaseToSnakeCaseNamingStrategy
+
+# Spring Datasource - H2
+# spring.datasource.driver-class-name=org.h2.Driver
+# spring.datasource.url=jdbc:h2:~/serendipity-db/db;AUTO_SERVER=TRUE;AUTO_SERVER_PORT=9091;DB_CLOSE_DELAY=-1
+# spring.datasource.username=admin
+# spring.datasource.password=secret
+
+# Spring JPA - H2
+# spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+# spring.jpa.hibernate.ddl-auto=update
+
+# H2 Console
+# spring.h2.console.enabled=false
+# spring.h2.console.path=/h2-console
+# spring.h2.console.settings.trace=false
+# spring.h2.console.settings.web-allow-others=false
+
+# Default Flowable Admin Accounts - see: flowable.ldif
 flowable.idm.app.admin.user-id=flowable
-flowable.idm.app.admin.password=secret
+flowable.idm.app.admin.password=test
 flowable.idm.app.admin.first-name=
 flowable.idm.app.admin.last-name=Administrator
 flowable.idm.app.admin.email=admin@serendipity.org.au
 
 flowable.common.app.idm-admin.user=flowable
-flowable.common.app.idm-admin.password=secret
+flowable.common.app.idm-admin.password=test
 
 flowable.modeler.app.deployment-api-url=http://localhost:9999/flowable-task/app-api
 
 # LDAP
 flowable.idm.ldap.enabled=true
 flowable.idm.ldap.server=ldap://localhost
-flowable.idm.ldap.port=10389
+flowable.idm.ldap.port=389
 flowable.idm.ldap.user=cn=admin,dc=flowable,dc=org
 flowable.idm.ldap.password=secret
 flowable.idm.ldap.base-dn=dc=flowable,dc=org
@@ -226,6 +247,19 @@ java -jar flowable-admin.war
 ```
 
 Then navigate to: http://localhost:9988/flowable-admin
+
+### Database Driver
+
+The Flowable UI application wars include the H2 database driver. If you want to use a different 
+[database](https://flowable.com/open-source/docs/bpmn/ch03-Configuration/#supported-databases) then you need to update 
+each war file, for example:
+
+```
+unzip flowable-idm.war
+mv postgresql-42.2.14.jar WEB-INF/lib
+jar uf0 flowable-idm.war WEB-INF/lib/postgresql-42.2.14.jar
+```
+
 
 ### Resources
 
