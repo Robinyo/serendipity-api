@@ -34,7 +34,6 @@ spring.datasource.password=secret
 # Spring JPA - Postgres
 spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.hibernate.ddl-auto=update
-# spring.jpa.hibernate.naming.physical-strategy=com.vladmihalcea.hibernate.type.util.CamelCaseToSnakeCaseNamingStrategy
 
 # Spring Datasource - H2
 # spring.datasource.driver-class-name=org.h2.Driver
