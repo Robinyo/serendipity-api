@@ -114,17 +114,22 @@
 
     <!-- Add Flowable dependencies -->
 
+    <!-- https://flowable.com/open-source/docs/bpmn/ch05a-Spring-Boot/#flowable-starters -->
+    <!-- https://flowable.com/open-source/docs/bpmn/ch05a-Spring-Boot/#flowable-auto-configuration-classes -->
+
     <dependency>
       <groupId>org.flowable</groupId>
-      <artifactId>flowable-spring-boot-starter</artifactId>
+      <artifactId>flowable-spring-boot-starter-rest</artifactId>
       <version>${flowable.version}</version>
     </dependency>
 
+    <!--
     <dependency>
       <groupId>org.flowable</groupId>
       <artifactId>flowable-spring-boot-starter-process-rest</artifactId>
       <version>${flowable.version}</version>
     </dependency>
+    -->
 
     <dependency>
       <groupId>org.flowable</groupId>

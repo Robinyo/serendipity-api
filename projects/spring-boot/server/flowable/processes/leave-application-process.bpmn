@@ -2,10 +2,10 @@
 <definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:flowable="http://flowable.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.flowable.org/processdef">
   <process id="leave-application-process" name="Leave Application Process" isExecutable="true">
     <documentation>An employee wants to take some time off.</documentation>
-    <startEvent id="startEvent1"></startEvent>
-    <userTask id="sid-3BA1F4D1-500F-4766-89BF-519166929F2D" name="Fill in a Leave Application Form" flowable:assignee="$INITIATOR" flowable:formKey="leave-application-form">
+    <startEvent id="startEvent1" flowable:initiator="initiator"></startEvent>
+    <userTask id="sid-3BA1F4D1-500F-4766-89BF-519166929F2D" name="Fill in a Leave Application Form" flowable:assignee="${initiator}" flowable:formKey="leave-application-form">
       <extensionElements>
-        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[true]]></modeler:initiator-can-complete>
+        <modeler:activiti-idm-initiator xmlns:modeler="http://flowable.org/modeler"><![CDATA[true]]></modeler:activiti-idm-initiator>
       </extensionElements>
     </userTask>
     <sequenceFlow id="sid-B6C92A83-EFEE-4148-9D69-56D0D774A95A" sourceRef="startEvent1" targetRef="sid-3BA1F4D1-500F-4766-89BF-519166929F2D"></sequenceFlow>
