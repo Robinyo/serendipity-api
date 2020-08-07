@@ -138,4 +138,8 @@ each war file, for example:
 unzip flowable-idm.war
 mv postgresql-42.2.14.jar WEB-INF/lib
 jar uf0 flowable-idm.war WEB-INF/lib/postgresql-42.2.14.jar
+
+unzip flowable-task.war
+mv postgresql-42.2.14.jar WEB-INF/lib
+jar uf0 flowable-task.war WEB-INF/lib/postgresql-42.2.14.jar
 ```
