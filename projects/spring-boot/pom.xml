@@ -12,7 +12,7 @@
   <!-- Spring HATEOAS - Combined with Spring Data REST                                     -->
   <!-- See: https://github.com/spring-projects/spring-hateoas-examples/blob/master/pom.xml -->
 
-  <name>Serendipity REST API</name>
+  <name>Serendipity Server</name>
   <description>Use Spring HATEOAS and Spring Data REST to build Serendipity's REST API</description>
 
   <inceptionYear>2020</inceptionYear>
