@@ -260,9 +260,16 @@ mv postgresql-42.2.14.jar WEB-INF/lib
 jar uf0 flowable-idm.war WEB-INF/lib/postgresql-42.2.14.jar
 ```
 
-
 ### Resources
 
-* [Spring HATEOAS - Representation Models](https://docs.spring.io/spring-hateoas/docs/current/reference/html/#migrate-to-1.0.changes.representation-models)
-* [Spring HATEOAS Examples - Spring HATEOAS and Spring Data REST](https://github.com/spring-projects/spring-hateoas-examples/tree/master/spring-hateoas-and-spring-data-restceserver)
-* [Spring Security - OAuth 2.0 Resource Server Sample](https://github.com/spring-projects/spring-security/tree/master/samples/boot/oauth2resourceserver)
+* Spring docs: [Spring HATEOAS - Representation Models](https://docs.spring.io/spring-hateoas/docs/current/reference/html/#migrate-to-1.0.changes.representation-models)
+* Github: [Spring HATEOAS Examples - Spring HATEOAS and Spring Data REST](https://github.com/spring-projects/spring-hateoas-examples/tree/master/spring-hateoas-and-spring-data-restceserver)
+* Github: [Spring Security - OAuth 2.0 Resource Server Sample](https://github.com/spring-projects/spring-security/tree/master/samples/boot/oauth2resourceserver)
+
+### Additional Resources
+
+* Github: [Checking for existing SSH keys](https://docs.github.com/en/github/authenticating-to-github/checking-for-existing-ssh-keys)
+* Github: [Generating a new SSH key](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key)
+* Github: [Adding a new SSH key to your GitHub account](https://docs.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account)
+* Github: [Testing your SSH connection](https://docs.github.com/en/github/authenticating-to-github/testing-your-ssh-connection)
+* Github: [Switching remote URLs from HTTPS to SSH](https://docs.github.com/en/github/using-git/changing-a-remotes-url#switching-remote-urls-from-https-to-ssh)

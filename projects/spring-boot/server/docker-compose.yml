@@ -93,6 +93,7 @@ services:
     ports:
       - "3001:3001"
     environment:
+#     - TZ=Australia/Sydney
       - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=http://keycloak:8080/auth/realms/development/protocol/openid-connect/certs
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/serendipity
     volumes:
