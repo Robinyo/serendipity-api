@@ -64,7 +64,7 @@ public class DefaultSecurityConfig extends WebSecurityConfigurerAdapter {
 
     configuration.applyPermitDefaultValues();
     configuration.setAllowedOrigins(Collections.singletonList("*"));
-    configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PATCH", "DELETE"));
+    configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PATCH", "PUT", "DELETE"));
     configuration.setAllowCredentials(true);
 
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
