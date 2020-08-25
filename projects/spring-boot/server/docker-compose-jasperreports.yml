@@ -50,6 +50,41 @@ services:
     volumes:
       - .:/root/.pgadmin
 
+  jasperreports-server:
+    container_name: jasperreports-server
+    build:
+      context: ./services/jasperreports-server
+      dockerfile: Dockerfile
+    ports:
+      - "11001:8080"
+      - "11443:8443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./services/jasperreports-server/license:/usr/local/share/jasperserver/license
+      - ./services/jasperreports-server/keystore:/usr/local/share/jasperserver/keystore
+    env_file: ./services/jasperreports-server/jasperreports-server.env
+    environment:
+      - DB_HOST=postgres
+    depends_on:
+      - jasperreports-server-cmdline
+    command: ["/wait-for-container-to-exit.sh", "jasperreports-server-cmdline", "-t" , "30", "--", "/entrypoint-ce.sh", "run"]
+
+  jasperreports-server-cmdline:
+    container_name: jasperreports-server-cmdline
+    build:
+      context: ./services/jasperreports-server
+      dockerfile: Dockerfile-cmdline
+    volumes:
+      - ./services/jasperreports-server/license:/usr/local/share/jasperserver/license
+      - ./services/jasperreports-server/keystore:/usr/local/share/jasperserver/keystore
+    env_file: ./services/jasperreports-server/jasperreports-server.env
+    environment:
+      - DB_HOST=postgres
+      - JRS_LOAD_SAMPLES=false
+    depends_on:
+      - postgres
+    command: ["/wait-for-it.sh", "postgres:5432", "-t" , "30", "--", "/entrypoint-cmdline-ce.sh", "init"]
+
   serendipity-server:
     container_name: serendipity-server
     build:
@@ -65,6 +100,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - keycloak
+      - jasperreports-server-cmdline
+    command: ["/wait-for-container-to-exit.sh", "jasperreports-server-cmdline", "-t" , "30", "--", "/entrypoint.sh"]
 
 # serendipity-api:
 # volumes:
