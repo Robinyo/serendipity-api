@@ -249,6 +249,18 @@ Then the access token will contain the requested scopes:
 }
 ```
 
+### Groups
+
+Groups manage groups of users. Users that become members of a group inherit the group's permissions.
+
+#### Create Protocol Mapper
+
+To include 'groups' in the Access Token we need to create a Protocol Mapper:
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/clients-create-protocol-mapper.png">
+</p>
+
 ### User Storage Federation
 
 Serendipity uses OpenLDAP to store user credentials.
