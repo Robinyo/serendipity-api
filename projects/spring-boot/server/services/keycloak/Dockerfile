@@ -1,5 +1,5 @@
-# FROM jboss/keycloak:10.0.1
-FROM jboss/keycloak:11.0.1
+FROM jboss/keycloak:10.0.1
+# FROM jboss/keycloak:11.0.1
 
 ENV THEME_VERSION 1.0
 

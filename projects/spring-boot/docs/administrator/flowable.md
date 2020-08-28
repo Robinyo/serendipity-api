@@ -37,7 +37,11 @@ uniqueMember: uid=sean.doyle,ou=users,dc=flowable,dc=org
 uniqueMember: uid=robert.russo,ou=users,dc=flowable,dc=org
 ```
 
-**Note:** Tasks can be assigned to an individual user or to a group (of candidate users).
+Tasks can be assigned to an individual user or to a group (of candidate users):
+
+<p align="center">
+  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/assignments-candidate-groups.png">
+</p>
 
 ### Flowable UI Applications
 

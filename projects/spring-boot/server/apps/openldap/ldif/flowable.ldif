@@ -55,24 +55,37 @@ mail: sean.doyle@serendipity.org.au
 uid: sean.doyle
 userPassword: Password12
 
+dn: uid=robert.russo, ou=users,dc=flowable,dc=org
+changetype: add
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Robert
+sn: Russo
+mail: robert.russo@serendipity.org.au
+uid: robert.russo
+userPassword: Password12
+
 # Groups
 
-dn: cn=Team Leaders, ou=groups, dc=flowable,dc=org
+dn: cn=Team Leader, ou=groups, dc=flowable,dc=org
 changetype: add
 objectclass: top
 objectclass: groupOfUniqueNames
-cn: Team Leaders
+cn: Team Leader
 ou: Team Leader
 uniqueMember: uid=rob.ferguson,ou=users,dc=flowable,dc=org
 
-dn: cn=Team Members, ou=groups, dc=flowable,dc=org
+dn: cn=Team Member, ou=groups, dc=flowable,dc=org
 changetype: add
 objectclass: top
 objectclass: groupOfUniqueNames
-cn: Team Members
+cn: Team Member
 ou: Team Member
 uniqueMember: uid=rob.ferguson,ou=users,dc=flowable,dc=org
 uniqueMember: uid=sean.doyle,ou=users,dc=flowable,dc=org
+uniqueMember: uid=robert.russo,ou=users,dc=flowable,dc=org
 
 # Password12
 # UGFzc3dvcmQxMg==
