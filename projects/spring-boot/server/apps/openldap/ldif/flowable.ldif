@@ -57,20 +57,20 @@ userPassword: Password12
 
 # Groups
 
-dn: cn=team leaders, ou=groups, dc=flowable,dc=org
+dn: cn=Team Leaders, ou=groups, dc=flowable,dc=org
 changetype: add
 objectclass: top
 objectclass: groupOfUniqueNames
-cn: team leaders
-ou: team leader
+cn: Team Leaders
+ou: Team Leader
 uniqueMember: uid=rob.ferguson,ou=users,dc=flowable,dc=org
 
-dn: cn=team members, ou=groups, dc=flowable,dc=org
+dn: cn=Team Members, ou=groups, dc=flowable,dc=org
 changetype: add
 objectclass: top
 objectclass: groupOfUniqueNames
-cn: team members
-ou: team member
+cn: Team Members
+ou: Team Member
 uniqueMember: uid=rob.ferguson,ou=users,dc=flowable,dc=org
 uniqueMember: uid=sean.doyle,ou=users,dc=flowable,dc=org
 
