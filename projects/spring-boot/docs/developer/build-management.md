@@ -253,9 +253,12 @@ The Flowable UI application wars include the H2 database driver. If you want to 
 each war file, for example:
 
 ```
-unzip flowable-idm.war
-mv postgresql-42.2.14.jar WEB-INF/lib
+# mv postgresql-42.2.14.jar WEB-INF/lib
+
+jar uf0 flowable-admin.war WEB-INF/lib/postgresql-42.2.14.jar
 jar uf0 flowable-idm.war WEB-INF/lib/postgresql-42.2.14.jar
+jar uf0 flowable-modeler.war WEB-INF/lib/postgresql-42.2.14.jar
+jar uf0 flowable-task.war WEB-INF/lib/postgresql-42.2.14.jar
 ```
 
 ### Resources
