@@ -144,11 +144,7 @@ I created four realm roles:
 
 #### Default Roles
 
-New users (user registrations) will be assigned the 'Guest' role:
-
-<p align="center">
-  <img src="https://github.com/Robinyo/serendipity-api/blob/master/projects/spring-boot/docs/screen-shots/roles-default-roles.png">
-</p>
+New users (user registrations) are added to the Team Members group (which is assigned the 'User' role):
 
 ### Client Scopes
 
@@ -251,7 +247,16 @@ Then the access token will contain the requested scopes:
 
 ### Groups
 
-Groups manage groups of users. Users that become members of a group inherit the group's permissions.
+Groups manage groups of users. Serendipity has two default groups:
+
+* Team Member
+* Team Leader (Approver)
+
+**Note:** Tasks can be assigned to an individual user or to a group (of candidate users).
+
+#### Default Groups
+
+New users (user registrations) are added to the Team Member's group (which is assigned the 'User' role).
 
 #### Create Protocol Mapper
 
