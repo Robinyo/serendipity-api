@@ -15,7 +15,7 @@ Unpack the zip archive:
 [Download](https://phantomjs.org/download.html) the Linux 64-bit version of PhantomJS and place it in the `resources` 
 directory.
 
-[Download](https://jdbc.postgresql.org/download.html) the PostgreSQL JDBC driver and place it in the `resources` 
+[Download](https://jdbc.postgresql.org/download/) the PostgreSQL JDBC driver and place it in the `resources` 
 directory.
 
 ### Resources
