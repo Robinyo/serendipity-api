@@ -36,7 +36,7 @@
     "convict": "^5.0.0",
     "cors": "^2.8.5",
     "csvtojson": "^2.0.10",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "faker": "^4.1.0",
     "helmet": "^3.21.1",
     "injection-js": "^2.2.1",
