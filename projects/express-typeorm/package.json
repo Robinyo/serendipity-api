@@ -32,7 +32,7 @@
     "body-parser": "^1.19.0",
     "chalk": "^2.4.2",
     "class-transformer": "^0.2.3",
-    "class-validator": "^0.9.1",
+    "class-validator": "^0.14.0",
     "convict": "^5.0.0",
     "cors": "^2.8.5",
     "csvtojson": "^2.0.10",
